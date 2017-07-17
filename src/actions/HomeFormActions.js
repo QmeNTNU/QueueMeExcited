@@ -4,13 +4,13 @@ import { STUDENT, STUDASS } from './types';
 export const Student = () => {
   return (dispatch) => {
     dispatch({ type: STUDENT });
-    Actions.q();
+    Actions.favoriteStudentSubjectList();
   };
 };
 
 export const studentAssistant = () => {
   return (dispatch) => {
     dispatch({ type: STUDASS });
-    Actions.info();
+    Actions.favoriteAssSubjectList();
   };
 };
