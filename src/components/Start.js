@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 //import HomeForm from './HomeForm';
@@ -23,6 +23,7 @@ class Home extends Component {
         firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           //waits 2 seconds "kunstpause"
+          //NEED TO STOP????????
           setTimeout(() => { this.setState({ loggedIn: true }); }, 2000);
         } else {
           //waits 2 seconds "kunstpause"
@@ -51,7 +52,7 @@ class Home extends Component {
     renderImage() {
        /* eslint-disable global-require */
       return (
-       <Image style={{ width: 300, height: 300 }} source={require('./images/beginning2.png')} />
+       <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('./images/beginning2.png')} />
        );
       /* eslint-enable global-require */
     }
@@ -59,8 +60,16 @@ class Home extends Component {
     render() {
       return (
         <View style={{ backgroundColor: '#95CAFE', flex: 1 }}>
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
             {this.renderImage()}
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
+            <Text style={{ color: '#F58C6C', fontSize: 16 }}>
+              by
+            </Text>
+            <Text style={{ color: '#F58C6C', fontSize: 25 }}>
+              EXITED
+            </Text>
+          </View>
             {this.startUp()}
           </View>
         </View>
