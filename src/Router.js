@@ -22,6 +22,7 @@ import addSubjectStudent from './components/addSubjectStudent';
 ////////////Anders////////////////////////////
 
 const RouterComponent = () => {
+  /* eslint-disable global-require */
 
   //making more buckets makes the back-button go away
   //all scenes in same bucket will have bavkbuton automativly
@@ -33,7 +34,11 @@ const RouterComponent = () => {
     //se react-native-router-flux github in favorites
     <Router titleStyle={{ color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
 
-  <Scene key="startScreen" component={Start} />
+  <Scene
+    key="startScreen"
+    component={Start}
+    hideNavBar={true}
+  />
 
   <Scene key="auth" >
           <Scene
@@ -136,5 +141,8 @@ const RouterComponent = () => {
 
   );
 };
+//          rightButtonImage={require('./images/alarm3.png')}
+
+/* eslint-enable global-require */
 
 export default RouterComponent;

@@ -22,9 +22,11 @@ class Home extends Component {
 
         firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          this.setState({ loggedIn: true });
+          //waits 2 seconds "kunstpause"
+          setTimeout(() => { this.setState({ loggedIn: true }); }, 2000);
         } else {
-          this.setState({ loggedIn: false });
+          //waits 2 seconds "kunstpause"
+          setTimeout(() => { this.setState({ loggedIn: false }); }, 2000);
         }
       });
     }
@@ -35,6 +37,10 @@ class Home extends Component {
           Actions.homePage();
           break;
         case false:
+        //sends user to turtorial
+        //if (this.props.firstTimeOnApp){
+        //actions.modal
+        //}
           Actions.auth();
           break;
         default:
