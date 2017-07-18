@@ -51,6 +51,8 @@ const RouterComponent = () => {
             key='signup'
             component={SignUpForm}
             title="REGISTRATION"
+            hideNavBar={true}
+
           />
           <Scene
             key="forgotPassword"
