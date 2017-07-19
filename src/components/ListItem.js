@@ -25,22 +25,25 @@ class ListItem extends Component {
   }
 
   checkIfAdded() {
-  /*  for (i = 0; i < this.props.queue.length; i++) {
-      if (emnekode === 1) {
+    //only diplays a add-button if it is not already addet to the users favorite subjects
+    const { emnekode, emnenavn } = this.props.subject;
+    for (let i = 0; i < this.props.favoriteStudentSubjectList.length; i++) {
+      if (emnekode === this.props.favoriteStudentSubjectList[2].emnekode) {
         return true;
       }
     }
     return false;
-
-*/
 }
 
 renderImage() {
+  if (this.checkIfAdded()) {
   return (
     <Button onPress={this.onAddPress.bind(this)}>
       ADD
     </Button>
   );
+}
+return;
 }
 
 renderRow() {

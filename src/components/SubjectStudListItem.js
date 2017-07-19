@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import { Button, Spinner } from './common';
 import { addSubject } from '../actions';
@@ -16,6 +17,7 @@ class SubjectStudListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
+    Actions.createQueue({ subject: this.props.subject});
   }
 
   /* eslint-disable global-require */
