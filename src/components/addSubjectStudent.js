@@ -3,27 +3,48 @@ import React, { Component, } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity, ListView } from 'react-native';
-import { InputCreate } from './common';
+import { InputCreate, Spinner } from './common';
 import ListItem from './ListItem';
-import { fetchQueue, searchChanged } from '../actions';
+import { fetchQueue, searchChanged, getWidth, getHeight, fetchAddSubjectQueue } from '../actions';
 
 class addSubjectStudent extends Component {
-
-  state = { modalVisible: this.props.visible, height: '', width: '' };
+  constructor(props) {
+    const data = [];
+    const ds = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    });
+      super(props);
+      this.state = {
+        dataSource: ds.cloneWithRows(data),
+        modalVisible: this.props.visible,
+        height: '',
+        width: ''
+      };
+    }
+  //state = { modalVisible: this.props.visible, height: '', width: '' };
 
   componentWillMount() {
-    //retireves and continues to  listen(not realy nessesary) for subjects
+
+     //retireves and continues to  listen(not realy nessesary) for subjects
     const { ref } = firebase.database().ref('Subject');
     this.props.fetchQueue({ ref });
+
+    //get list for comparison in listitem.js
+    //const { compref } = firebase.database().ref('users');
+    //starts the listener for
+    //this.props.fetchAddSubjectQueue({ compref });
 
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
-
+      this.props.getWidth(width);
+      this.props.getHeight(height);
     this.createDataSource(this.props);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('nextprops', nextProps);
+
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
@@ -36,7 +57,10 @@ class addSubjectStudent extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
 
-    this.dataSource = ds.cloneWithRows(subjects);
+    this.setState({
+       dataSource: ds.cloneWithRows(subjects),
+
+     });
   }
 
   renderRow(subject) {
@@ -50,7 +74,7 @@ class addSubjectStudent extends Component {
   setModalInvisible() {
     this.setState({ modalVisible: false });
   }
-
+/*
 onSearchChange(text) {
   this.props.searchChanged(text);
 
@@ -60,21 +84,54 @@ onSearchChange(text) {
     return itemData.indexOf(textData) > -1;
   });
     console.log('filteredAssets', filteredAssets);
-    const copy = Object.assign({}, filteredAssets)
+    const newArray = this.props.subjects[1];
+    const copy = Object.assign({}, newArray);
     console.log('copy', copy);
     const subjectssss = _.map(filteredAssets, (val, uid) => {
       return { ...val, uid };
     });
     console.log('subjectssss', subjectssss);
 
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.setState({
+       dataSource: this.state.dataSource.cloneWithRows(filteredAssets),
+     });
+}
+*/
 
-    this.createDataSource({ copy });
+renderScreen() {
+  if (this.props.loading) {
+  return <Spinner size="large" />;
 }
 
-
+/* experiment marre will need
+if (this.props.subjects.length) {
+  return (
+    <Text style={{ flex: 1, alignSelf: 'center', marginTop: 100 }}>
+      No subjects availible...
+    </Text>
+  );
+}*/
+return (
+  <ListView
+    enableEmptySections
+    dataSource={this.state.dataSource}
+    renderRow={this.renderRow}
+  />
+);
+}
   /* eslint-disable global-require */
   render() {
-    console.log(this.props);
+  /*  const ar = this.props.search
+      ? this.props.subjects[1] : this.props.assets;
+      this.setState({
+         dataSource: this.state.dataSource.cloneWithRows(ar),
+       });*/
+       console.log('props', this.props);
+       console.log('subjects', this.props.subjects);
+       console.log('favorites', this.props.favorites);
     return (
       <View>
         <Modal
@@ -84,22 +141,22 @@ onSearchChange(text) {
         >
           <View style={styles.wholeScreen}>
             <View style={styles.container}>
-              <View style={{ height: 60, width: this.state.width - 40, backgroundColor: '#ffffff', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-                <InputCreate
-                  placeholder="Search among subject"
-                  keyboardType='default'
-                  maxLength={100}
-                  width={this.state.width - 40}
-                  value={this.props.search}
-                  onChangeText={this.onSearchChange.bind(this)}
+              <View style={{ height: 150, width: this.state.width - 40, backgroundColor: '#95CAFE', borderTopLeftRadius: 10, borderTopRightRadius: 10, justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                  style={styles.imageStyle}
+                  source={require('./images/abook.png')}
                 />
+
               </View>
-              <View style={{ flex: 10 }}>
-                <ListView
-                  enableEmptySections
-                  dataSource={this.dataSource}
-                  renderRow={this.renderRow}
-                />
+
+
+                <Text style={styles.textOrange}>
+                  Add your subjects
+                </Text>
+
+
+              <View style={{ flex: 10, marginBottom: 30, width: this.state.width - 40, backgroundColor: '#ffffff' }}>
+                {this.renderScreen()}
               </View>
             </View>
           </View>
@@ -110,43 +167,23 @@ onSearchChange(text) {
   }
 }
 /* eslint-enable global-require */
-
+/*
+<View style={{ height: 60, width: this.state.width - 40, backgroundColor: '#ffffff'}}>
+  <InputCreate
+    placeholder="Search among subject"
+    keyboardType='default'
+    maxLength={100}
+    width={this.state.width - 40}
+    value={this.props.search}
+    onChangeText={this.onSearchChange.bind(this)}
+  />
+</View>
+*/
 
 const styles = {
   wrapper: {
   },
-  slideWelcome: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#95CAFE',
-    paddingLeft: 50,
-    paddingRight: 50,
-    marginBottom: 20,
-    marginTop: 50
-  },
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#95CAFE',
-    paddingLeft: 50,
-    paddingRight: 50,
-    marginBottom: 20
-  },
-  slide2: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#95CAFE',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#95CAFE',
-  },
+
   text: {
     flex: 1,
     justifyContent: 'center',
@@ -156,9 +193,10 @@ const styles = {
     fontWeight: 'bold',
   },
   textOrange: {
-    color: '#254552',
-    fontSize: 30,
+    flex: 1,
+    fontSize: 20,
     fontWeight: 'bold',
+    color: '#F58C6C'
   },
   wholeScreen: {
     flex: 1,
@@ -179,7 +217,9 @@ const styles = {
       elevation: 2,
   },
   imageStyle: {
-    flex: 1,
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
     resizeMode: 'contain'
   },
   buttonView: {
@@ -198,10 +238,14 @@ const mapStateToProps = state => {
   const subjects = _.map(state.studassQueue, (val, uid) => {
     return { ...val, uid };
   });
-    const { search } = state.addSubject;
-
-  return { subjects, search };
+  const favorites = _.map(state.listFetch, (val, uid) => {
+    return { ...val, uid };
+  });
+    const { search, loading } = state.addSubject;
+    const { height } = state.dimensions;
+    const { width } = state.dimensions;
+  return { subjects, search, height, width, loading, favorites };
 };
  //kan skrive queue[0].name
 
-export default connect(mapStateToProps, { fetchQueue, searchChanged })(addSubjectStudent);
+export default connect(mapStateToProps, { fetchQueue, searchChanged, getHeight, getWidth, fetchAddSubjectQueue })(addSubjectStudent);
