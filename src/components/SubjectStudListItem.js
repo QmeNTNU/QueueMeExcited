@@ -2,20 +2,20 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 import { Button, Spinner } from './common';
 import { addSubject } from '../actions';
 
 
-class ListItem extends Component {
+class SubjectStudListItem extends Component {
 
 
   /* eslint-disable global-require */
 
 
   onAddPress() {
-    const { emnekode, emnenavn } = this.props.subject;
-
+    //const { emnekode, emnenavn } = this.props.subject;
+    console.log('PRESSED');
   }
 
   /* eslint-disable global-require */
@@ -44,6 +44,8 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
 
     return (
+      <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
+
       <View style={styles.columnStyle}>
 
         <View style={styles.thumbnailContainerStyle}>
@@ -61,6 +63,7 @@ renderRow() {
 
 
     </View>
+  </TouchableWithoutFeedback>
     );
 }
 
@@ -118,4 +121,4 @@ const mapStateToProps = state => {
   return { favorites };
 };
 
-export default connect(mapStateToProps, { addSubject })(ListItem);
+export default connect(mapStateToProps, { addSubject })(SubjectStudListItem);

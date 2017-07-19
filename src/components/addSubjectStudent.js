@@ -36,8 +36,6 @@ class addSubjectStudent extends Component {
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
-      this.props.getWidth(width);
-      this.props.getHeight(height);
     this.createDataSource(this.props);
   }
 
@@ -130,7 +128,6 @@ return (
        });*/
        console.log('props', this.props);
        console.log('subjects', this.props.subjects);
-       console.log('favorites', this.props.favorites);
     return (
       <View>
         <Modal
@@ -237,13 +234,9 @@ const mapStateToProps = state => {
   const subjects = _.map(state.studassQueue, (val, uid) => {
     return { ...val, uid };
   });
-  const favorites = _.map(state.listFetch, (val, uid) => {
-    return { ...val, uid };
-  });
+
     const { search, loading } = state.addSubject;
-    const { height } = state.dimensions;
-    const { width } = state.dimensions;
-  return { subjects, search, height, width, loading, favorites };
+  return { subjects, search, loading };
 };
  //kan skrive queue[0].name
 

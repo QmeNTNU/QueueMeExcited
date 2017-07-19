@@ -89,6 +89,12 @@ const RouterComponent = () => {
         />
 
         <Scene
+          key="addSubjectStudent"
+          component={addSubjectStudent}
+          modal={true}
+        />
+
+        <Scene
           key="studAssList"
           component={StudAssList}
           title="Student Assistants"
