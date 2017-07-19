@@ -3,10 +3,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import Swipeable from 'react-native-swipeable';
+import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
 import { addSubject } from '../actions';
 
+/* eslint-disable global-require */
+const rightButtons = [
+  <TouchableHighlight style={{ height: 60, width: 75, padding: 20, backgroundColor: 'red' }}>
+    <Image
+      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      source={require('./images/delete.png')}
+    />
+  </TouchableHighlight>
+];
 
 class SubjectAssListItem extends Component {
 
@@ -46,6 +56,7 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
 
     return (
+        <Swipeable rightButtons={rightButtons}>
       <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
 
       <View style={styles.columnStyle}>
@@ -66,6 +77,7 @@ renderRow() {
 
     </View>
   </TouchableWithoutFeedback>
+  </Swipeable>
     );
 }
 
