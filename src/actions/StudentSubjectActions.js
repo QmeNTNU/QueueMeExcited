@@ -41,3 +41,15 @@ export const favoriteStudentSubjectListFetch = () => {
       });
   };
 };
+
+export const subjectStudentDelete = ({ uid }) => {
+  const { currentUser } = firebase.auth();
+
+  return () => {
+    firebase.database().ref(`/users/${currentUser.uid}/favoriteStudentSubjectList/${uid}`)
+      .remove()
+      .then(() => {
+        Actions.favoriteStudentSubjectList({ type: 'reset' });
+      });
+  };
+};

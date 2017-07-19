@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, Text } from 'react-native';
+import { Modal, ListView, View, Text } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { favoriteStudentSubjectListFetch } from '../actions';
