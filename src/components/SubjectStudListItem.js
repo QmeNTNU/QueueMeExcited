@@ -1,79 +1,126 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import FavoriteStudentSubjectList from './FavoriteStudentSubjectList';
-import { Text, View, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { Confirm, CardSection } from './common';
-import { subjectStudentUpdate, subjectStudentDelete } from '../actions';
+import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
+import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { Button, Spinner } from './common';
+import { addSubject } from '../actions';
 
-/*
-Oppsummert hva som skjer
-Lager et listitems av typen  objekt fagStudent, som brukes i FavoriteStudentSubjectList
-onRowPress() funksjonen gjør at man kan trykke på selve faget, og kommer videre til liste
-over studasser tilgjengelig.
-*/
 
 class SubjectStudListItem extends Component {
 
-  state = { showModal: false };
 
-  //trykk på et fag og gå videre til liste over studasser i faget
-  onRowPress() {
-    Actions.studAssList({ fagStudent: this.props.fagStudent });
+  /* eslint-disable global-require */
+
+
+  onAddPress() {
+    //const { emnekode, emnenavn } = this.props.subject;
+    console.log('PRESSED');
+    Actions.createQueue({ subject: this.props.subject});
   }
 
-  onAccept() {
-    const { uid } = this.props.fagStudent;
-    this.props.subjectStudentDelete({ uid });
-  }
+  /* eslint-disable global-require */
 
-  onDecline() {
-    this.setState({ showModal: false });
-  }
-
-  render() {
-    const { subject } = this.props.fagStudent;
-
-    return (
-      //<TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-      <View>
-      <TouchableHighlight
-        onPress={this.onRowPress.bind(this)}
-        onLongPress={() => this.setState({ showModal: !this.state.showModal })}
-      >
-        <View>
-          <CardSection>
-            <Text style={styles.titleStyle}>
-              {subject}
-            </Text>
-          </CardSection>
-        </View>
-      </TouchableHighlight>
-
-      <Confirm
-        visible={this.state.showModal}
-        onAccept={this.onAccept.bind(this)}
-        onDecline={this.onDecline.bind(this)}
-      >
-        Are you sure you want to delete this subject?
-      </Confirm>
-      </View>
-    );
-  }
+renderImage() {
+  return (
+    <Image
+      style={styles.imageStyle}
+      source={require('./images/alarm3.png')}
+    />
+  );
 }
 
-const styles = {
-  titleStyle: {
-    fontSize: 18,
-    paddingLeft: 20
+renderArrowImage() {
+  return (
+    <Image
+      style={styles.imageStyle}
+      source={require('./images/arrow_blue.png')}
+    />
+  );
+}
+
+  /* eslint-enable global-require */
+
+renderRow() {
+  const { emnekode, emnenavn } = this.props.subject;
+
+    return (
+      <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
+
+      <View style={styles.columnStyle}>
+
+        <View style={styles.thumbnailContainerStyle}>
+          {this.renderImage()}
+        </View>
+
+        <View style={styles.headerContentStyle}>
+          <Text style={styles.headerTextStyle}>{emnenavn}</Text>
+          <Text>{emnekode}</Text>
+        </View>
+
+        <View style={styles.arrowStyle}>
+          {this.renderArrowImage()}
+        </View>
+
+
+    </View>
+  </TouchableWithoutFeedback>
+    );
+}
+
+  render() {
+    return (
+    this.renderRow()
+  );
   }
+}
+/* eslint-enable global-require */
+
+const styles = {
+  columnStyle: {
+    flex: 10,
+    height: 60,
+    marginLeft: 10,
+    marginRight: 10,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderTopWidth: 0.5,
+  },
+
+  thumbnailContainerStyle: {
+    flex: 2,
+    justifyContent: 'space-between',
+    alignItems: 'space-between',
+    padding: 5,
+  },
+  arrowStyle: {
+    height: 40,
+    width: 40,
+    alignSelf: 'center'
+  },
+  imageStyle: {
+    height: 60,
+    width: 60,
+    alignSelf: 'center'
+  },
+  headerContentStyle: {
+    flex: 8,
+    flexDirection: 'column',
+    justifyContent: 'center'
+  },
+  headerTextStyle: {
+    fontSize: 18
+  },
+};
+const mapStateToProps = state => {
+  //fungerer ikke å kalle på denne. vet ikke hvorfor
+  //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
+  const favorites = _.map(state.addSubjectFetch, (val, uid) => {
+    return { ...val, uid };
+  });
+
+  return { favorites };
 };
 
-const mapStateToProps = (state) => {
-  const { subject } = state.favoriteStudentSubjectList;
-
-  return { subject };
-};
-
-export default connect(mapStateToProps, {
-   subjectStudentDelete, subjectStudentUpdate })(SubjectStudListItem);
+export default connect(mapStateToProps, { addSubject })(SubjectStudListItem);

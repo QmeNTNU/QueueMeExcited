@@ -36,37 +36,80 @@ class FavoriteStudentSubjectList extends Component {
     this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
   }
 
-  renderRow(fagStudent) {
-    return <SubjectStudListItem fagStudent={fagStudent} />;
+  renderRow(subject) {
+    return <SubjectStudListItem subject={subject} />;
   }
 
   render() {
     return (
-      <Card>
-        <Text
-          style={{
-            flex: 0.5,
-            flexDirection: 'column',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-          }}
-        >
-        All your subjects
-        </Text>
-        <ListView
-          enableEmptySections
-          dataSource={this.dataSource3}
-          renderRow={this.renderRow}
-        />
-        <Button
-          onPress={() => Actions.addSubjectFormStudent()}
-        >
-          Add your subjects
-        </Button>
-      </Card>
+      <View style={styles.wholeScreen}>
+        <View style={styles.ViewOrange}>
+          <Text>
+          All your subjects
+          </Text>
+        </View>
+        <View style={{ flex: 8 }}>
+          <ListView
+            enableEmptySections
+            dataSource={this.dataSource3}
+            renderRow={this.renderRow}
+          />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+          <Button
+            onPress={() => Actions.addSubjectStudent({ modalVisible: true })}
+          >
+            Add your subjects
+          </Button>
+        </View>
+      </View>
     );
   }
 }
+const styles = {
+  text: {
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  ViewOrange: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F58C6C'
+  },
+  wholeScreen: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+    borderRadius: 10,
+    shadowRadius: 5,
+      elevation: 2,
+  },
+  imageStyle: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'contain'
+  },
+  buttonView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#254552',
+    fontSize: 30,
+    fontWeight: 'bold',
+    backgroundColor: '#95CAFE',
+  },
+};
 
 const mapStateToProps = state => {
   const favoriteStudentSubjectList = _.map(state.favoriteStudentSubjectList, (val, uid) => {

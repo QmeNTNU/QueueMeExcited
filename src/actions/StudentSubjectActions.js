@@ -32,10 +32,10 @@ export const subjectStudentCreate = ({ subject }) => {
 };
 
 export const favoriteStudentSubjectListFetch = () => {
-  const { currentUser } = firebase.auth();
+  //const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/favoriteStudentSubjectList`)
+    firebase.database().ref('Subject')
       .on('value', snapshot => {
         dispatch({ type: FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
       });

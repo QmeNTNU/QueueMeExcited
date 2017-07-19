@@ -38,7 +38,7 @@ export const makeQueue = ({ available, room, ref }) => {
     ref.push({ userEmail, available, room, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: QUEUE_CREATED }); //resets the input field
-       Actions.studassQueue({ type: 'reset' });//moved to necht scene
+       Actions.queue();//moved to necht scene
      }); //Reset means no backbutton
   };
 };

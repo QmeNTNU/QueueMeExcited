@@ -83,21 +83,32 @@ const RouterComponent = () => {
         />
 
         <Scene
+          key="favoriteAssSubjectList"
+          component={FavoriteAssSubjectList}
+          title="Subjects(ass)"
+        />
+        <Scene
+          key="studAssList"
+          component={StudAssList}
+          title="Student Assistants"
+        />
+        <Scene
+          key="createQueue"
+          component={CreateQueue}
+          title="Your Queue"
+        />
+
+
+        <Scene
           key="addSubjectFormStudent"
           component={AddSubjectFormStudent}
           title="Add subjects"
         />
 
         <Scene
-          key="studAssList"
-          component={StudAssList}
-          title="Student Assistants"
-        />
-
-        <Scene
-          key="favoriteAssSubjectList"
-          component={FavoriteAssSubjectList}
-          title="Subjects(ass)"
+          key="addSubjectStudent"
+          component={addSubjectStudent}
+          modal={true}
         />
 
         <Scene
@@ -107,18 +118,12 @@ const RouterComponent = () => {
         />
 
      </Scene>
-        <Scene key="q">
-          <Scene
-            key="createQueue"
-            component={CreateQueue}
-            title="Your Queue"
-            initial
-
-          />
+        <Scene key="queue">
           <Scene
             key="studassQueue"
             component={StudassQueue}
             title="Queue"
+            initial
           />
         </Scene>
 

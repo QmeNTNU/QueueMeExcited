@@ -47,7 +47,7 @@ export const favoriteAssSubjectListFetch = () => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/favoriteAssSubjectList`)
+    firebase.database().ref('Subject')
       .on('value', snapshot => {
         dispatch({ type: FAVORITEASSSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
       });

@@ -34,9 +34,11 @@ onButtonPress() {
     //gets the string subject from last page (listview)
     //Actions.com2 ({text: 'Hello World'})
     //this.props.text
+    const { emnekode, emnenavn } = this.props.subject;
+
     return (
       <View style={styles.infoView}>
-        <Text style={styles.textStyle}>  TDT4100 ITGK</Text>
+        <Text style={styles.textStyle}> {emnekode} {emnenavn} </Text>
       </View>
     );
   }

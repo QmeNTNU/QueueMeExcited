@@ -1,122 +1,122 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, Text } from 'react-native';
+import { Modal, ListView, View, Text } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { favoriteAssSubjectListFetch } from '../actions';
-import SubjectAssListItem from './SubjectAssListItem';
+import SubjectAssListItem from './SubjectStudListItem';
 
 /*
-Oppsumert hva som skjer
-Viser listen over favorittfag som studass ved dynamisk ListView
+Kort oppsumert
+Som student: henter liste over favorittfag fra firebase og viser som en liste med ListView
 */
+
 
 class FavoriteAssSubjectList extends Component {
 
-  // må lytte til om det kommer noen nye elementer
-  //actioncreater fetcher liste av subjects
+
   componentWillMount() {
     this.props.favoriteAssSubjectListFetch();
-
     this.createDataSource(this.props);
-
-    const ds = new ListView.DataSource({
+    const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-
-    this.dataSource = ds.cloneWithRows(this.props.favoriteAssSubjectList);
+    this.dataSource3 = dS.cloneWithRows(this.props.favoriteStudentSubjectList);
   }
 
-
   componentWillReceiveProps(nextProps) {
-    //nextProps are the next set of props that this component
-    //will be rendered with
-    //this.props is still the old set of props
     this.createDataSource(nextProps);
   }
 
-  //
-  createDataSource({ favoriteAssSubjectList }) {
-    const ds = new ListView.DataSource({
+  createDataSource({ favoriteStudentSubjectList }) {
+    const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-
-    this.dataSource = ds.cloneWithRows(favoriteAssSubjectList);
+    this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
   }
 
-  renderRow(fagAss) {
-    return <SubjectAssListItem fagAss={fagAss} />;
+  renderRow(subject) {
+    return <SubjectAssListItem subject={subject} />;
   }
 
   render() {
-    console.log(this.props);
-
     return (
-    <Card>
-
-        <Text
-        style={{
-          flex: 0.5,
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        }}
-        >
-        All your subjects </Text>
-
-        <ListView
-          enableEmptySections
-          dataSource={this.dataSource}
-          renderRow={this.renderRow}
-        />
-
-
-        <Button
-        onPress={() => Actions.addSubjectFormAss()}
-        >
+      <View style={styles.wholeScreen}>
+        <View style={styles.ViewOrange}>
+          <Text>
+          All your subjects
+          </Text>
+        </View>
+        <View style={{ flex: 8 }}>
+          <ListView
+            enableEmptySections
+            dataSource={this.dataSource3}
+            renderRow={this.renderRow}
+          />
+        </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+          <Button
+            onPress={() => Actions.addSubjectFormAss()}
+          >
             Add your subjects
-        </Button>
-
-    </Card>
+          </Button>
+        </View>
+      </View>
     );
   }
 }
-
-const mapStateToProps = state => {
-  const favoriteAssSubjectList = _.map(state.favoriteAssSubjectList, (val, uid) => {
-    return { ...val, uid }; // resultat eks {subject: 'ITGK Matlab'};
-  }); // dette skrives til subjects og map gjør det om til array
-
-  return { favoriteAssSubjectList };
+const styles = {
+  text: {
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  ViewOrange: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F58C6C'
+  },
+  wholeScreen: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+    borderRadius: 10,
+    shadowRadius: 5,
+      elevation: 2,
+  },
+  imageStyle: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'contain'
+  },
+  buttonView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#254552',
+    fontSize: 30,
+    fontWeight: 'bold',
+    backgroundColor: '#95CAFE',
+  },
 };
 
-// state.subjects er et objekt og har mange keyvalue pairs
-// for each keyvalue pair kjør funksjonen (val, uid) =>
-// funksjonen blir kalt med hver value og uid
-export default connect(mapStateToProps, { favoriteAssSubjectListFetch })(FavoriteAssSubjectList);
+const mapStateToProps = state => {
+  const favoriteStudentSubjectList = _.map(state.favoriteAssSubjectList, (val, uid) => {
+    return { ...val, uid };
+  });
+  return { favoriteStudentSubjectList };
+};
 
-
-/*
-render() {
-  console.log(this.props);
-  return (
-  <Card>
-      <ListView
-        enableEmptySections
-        dataSource={this.dataSource}
-        renderRow={this.renderRow}
-      />
-
-      <Button
-      style={{ flex: 1, height: 5 }}
-      onPress={() => Actions.addSubjectForm()}
-      >
-          Add your subjects
-      </Button>
-
-  </Card>
-  );
-}
-}
-*/
+export default connect(mapStateToProps,
+  { favoriteAssSubjectListFetch })(FavoriteAssSubjectList);
