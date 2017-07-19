@@ -52,7 +52,7 @@ class Home extends Component {
     renderImage() {
        /* eslint-disable global-require */
       return (
-       <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('./images/beginning2.png')} />
+       <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('./images/LOGO.png')} />
        );
       /* eslint-enable global-require */
     }
@@ -60,18 +60,21 @@ class Home extends Component {
     render() {
       return (
         <View style={{ backgroundColor: '#95CAFE', flex: 1 }}>
+
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#95CAFE' }} placeholder />
+
+          </View>
+          
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
             {this.renderImage()}
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
-            <Text style={{ color: '#F58C6C', fontSize: 16 }}>
-              by
-            </Text>
-            <Text style={{ color: '#F58C6C', fontSize: 25 }}>
-              EXITED
-            </Text>
+          </View>
+
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: '#95CAFE' }} placeholder />
           </View>
             {this.startUp()}
-          </View>
+
         </View>
       );
     }
