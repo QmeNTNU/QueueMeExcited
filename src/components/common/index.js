@@ -9,4 +9,6 @@ export * from './ButtonTextGreen';
 export * from './ButtonBlue';
 export * from './Button1';
 export * from './Input1';
+export * from './ButtonWhite';
+export * from './InputSignUp';
 export * from './Confirm';

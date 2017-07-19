@@ -11,7 +11,7 @@ import {
   genderUpdate,
   login,
 } from '../actions';
-import { Input1, Button1, Spinner } from './common';
+import { InputSignUp, ButtonWhite, Spinner } from './common';
 
 
 class SignUpForm extends Component {
@@ -39,9 +39,11 @@ class SignUpForm extends Component {
      return <Spinner size="large" />;
    }
    return (
-     <Button1 onPress={this.onButtonPress.bind(this)} >
-       REGISTRER
-     </Button1>
+
+       <ButtonWhite onPress={this.onButtonPress.bind(this)} >
+         REGISTRER
+       </ButtonWhite>
+
    );
  }
  renderEmailImage() {
@@ -55,7 +57,7 @@ class SignUpForm extends Component {
  renderPasswordImage() {
     /* eslint-disable global-require */
    return (
-      <Image style={styles.labelStyle} source={require('./images/key2.png')} />
+      <Image style={styles.labelStyle} source={require('./images/lock.png')} />
     );
    /* eslint-enable global-require */
  }
@@ -70,7 +72,7 @@ class SignUpForm extends Component {
  renderImage() {
     /* eslint-disable global-require */
    return (
-      <Image style={{ width: 190, height: 190 }} source={require('./images/login.png')} />
+      <Image style={styles.imageStyle} source={require('./images/lock.png')} />
     );
    /* eslint-enable global-require */
  }
@@ -79,23 +81,26 @@ class SignUpForm extends Component {
     return (
       <View style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
 
-        <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-          {this.renderImage()}
+        <View style={{ justifyContent: 'space-between', flex: 4, padding: 20 }}>
+          <View style={styles.containerStyle} />
+
+          <View style={styles.containerStyle}>
+          <Text style={{ fontSize: 30, color: '#F58C6C' }}>
+            Sign Up
+          </Text>
         </View>
-
-        <View style={{ justifyContent: 'space-between', flex: 4 }}>
-
            <View style={styles.containerStyle}>
-             <Input1
+             <InputSignUp
               label={this.renderPersonImage()}
                placeholder="Ola Nordmann"
                onChangeText={this.onFullnameChange.bind(this)}
                value={this.props.fullname} //input verdi for fullname
+               borderRadius={5}
              />
            </View>
 
           <View style={styles.containerStyle}>
-            <Input1
+            <InputSignUp
               label={this.renderEmailImage()}
               placeholder="email@stud.ntnu.no"
               onChangeText={this.onSignupEmailChange.bind(this)}
@@ -104,7 +109,7 @@ class SignUpForm extends Component {
           </View>
 
           <View style={styles.containerStyle}>
-            <Input1
+            <InputSignUp
               label={this.renderPasswordImage()}
               secureTextEntry
               placeholder="password"
@@ -114,12 +119,13 @@ class SignUpForm extends Component {
           </View>
 
           <View style={styles.containerStyle}>
-            <Input1
+            <InputSignUp
               label={this.renderPasswordImage()}
               secureTextEntry
               placeholder=" confirm password"
               onChangeText={this.onConfirmPasswordChange.bind(this)}
               value={this.props.confirmPassword}
+              borderRadius={5}
             />
           </View>
 
@@ -141,12 +147,14 @@ class SignUpForm extends Component {
 
         <TouchableOpacity
             onPress={this.onPressLogin.bind(this)}
-            style={{ alignItems: 'center', paddingBottom: 20, paddingTop: 20 }}
+            style={{ flex: 1, alignItems: 'center', paddingBottom: 20, paddingTop: 20 }}
         >
-          <Text style={{ color: '#0000ff' }}>
+          <Text style={{ color: '#ffffff', flex: 1 }}>
               ALREADY GOT AN ACCOUNT? CLICK HERE!
           </Text>
         </TouchableOpacity>
+
+
         </View>
       </View>
     );
@@ -173,9 +181,9 @@ const styles = {
     backgroundColor: '#95CAFE'
   },
   containerStyle: {
-    backgroundColor: '#95CAFE',
-    justifyContent: 'flex-start',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingBottom: 2,
     position: 'relative'
   },
   pickerStyle: {
@@ -187,10 +195,16 @@ const styles = {
   },
   labelStyle: {
     flex: 1,
-    //resizeMode: 'contain',
-    height: 133,
-    width: 150,
-  }
+    resizeMode: 'contain',
+    height: 50,
+    width: 50,
+  },
+  imageStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'contain'
+  },
 };
 
 //konstaneter vi skal ha med oss videre
