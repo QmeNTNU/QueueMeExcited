@@ -45,6 +45,8 @@ const RouterComponent = () => {
             key="login"
             component={LoginForm}
             title="QUEUE ME"
+            hideNavBar={true}
+
             initial
           />
           <Scene

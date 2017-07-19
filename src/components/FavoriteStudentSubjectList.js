@@ -68,7 +68,7 @@ class FavoriteStudentSubjectList extends Component {
 }
 const styles = {
   text: {
-    height: 60,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     color: '#fff',
@@ -76,7 +76,7 @@ const styles = {
     fontWeight: 'bold',
   },
   ViewOrange: {
-    flex: 1,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F58C6C'

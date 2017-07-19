@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableOpacity, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser, signup, forgotPasswordClick } from '../actions';
-import { Input1, Button1, Spinner } from './common';
+import { InputSignUp, ButtonWhite, Spinner } from './common';
 
 //hei karer
 
@@ -24,11 +24,11 @@ class LoginForm extends Component {
       this.props.signup();
   }
   renderImage() {
-     /* eslint-disable global-require */
-    return (
-       <Image style={{ width: 190, height: 190 }} source={require('./images/login.png')} />
-     );
-    /* eslint-enable global-require */
+    /* eslint-disable global-require */
+   return (
+    <Image style={styles.imageStyle} source={require('./images/LOGO.png')} />
+    );
+   /* eslint-enable global-require */
   }
 
   renderEmailImage() {
@@ -42,31 +42,38 @@ class LoginForm extends Component {
   renderPasswordImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={styles.labelStyle} source={require('./images/key2.png')} />
+       <Image style={styles.labelStyle} source={require('./images/lock.png')} />
      );
     /* eslint-enable global-require */
   }
+
+
   renderButton() {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
     return (
-      <Button1 onPress={this.onButtonPress.bind(this)} >
+      <ButtonWhite onPress={this.onButtonPress.bind(this)} >
         LOGIN
-      </Button1>
+      </ButtonWhite>
     );
   }
   render() {
     return (
-      <View style={{ backgroundColor: '#95CAFE', flex: 1 }}>
+      <View style={{ justifyContent: 'space-between', flex: 4, padding: 20, backgroundColor: '"95CAFE"' }}>
 
-          <View style={styles.imageStyle}>
-            {this.renderImage()}
-          </View>
+        <View style={styles.ImageViewStyle}>
+        {this.renderImage()}
+        </View>
+
+        <View style={styles.ImageViewStyle}>
+          <Text style={{ color: '#95CAFE' }} placeholder />
+        </View>
+
 
         <View style={{ flex: 2 }}>
             <View style={styles.containerStyle}>
-              <Input1
+              <InputSignUp
                 label={this.renderEmailImage()}
                 placeholder="email@stud.ntnu.no"
                 onChangeText={this.onEmailChange.bind(this)}
@@ -75,7 +82,7 @@ class LoginForm extends Component {
             </View>
 
             <View style={styles.containerStyle}>
-              <Input1
+              <InputSignUp
                 label={this.renderPasswordImage()}
                 secureTextEntry
                 placeholder="password"
@@ -90,19 +97,19 @@ class LoginForm extends Component {
 
             <TouchableOpacity
                 onPress={this.onPressPassword.bind(this)}
-                style={{ alignItems: 'center', paddingBottom: 20, paddingTop: 20 }}
+                style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
-              <Text style={{ color: '#0000ff' }}>
+              <Text style={{ color: '#ffffff' }}>
                 FORGOT YOUR PASSWORD?
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 onPress={this.onPressSignup.bind(this)}
-                style={{ alignItems: 'center', paddingBottom: 20, paddingTop: 30 }}
+                style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
               <Text style={{ color: '#F58C6C', fontSize: 20 }}>
-                NOT REGISTERED? CLICK HERE!
+                NOT REGISTERED? SIGN UP
               </Text>
             </TouchableOpacity>
         </View>
@@ -113,24 +120,31 @@ class LoginForm extends Component {
 
 const styles = {
   containerStyle: {
-    backgroundColor: '#95CAFE',
-    justifyContent: 'flex-start',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingBottom: 2,
     position: 'relative'
+  },
+  ImageViewStyle: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingBottom: 2,
   },
   imageStyle: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 300,
+
+    resizeMode: 'contain',
+    alignSelf: 'center',
     position: 'relative'
 
   },
   labelStyle: {
     flex: 1,
-    //resizeMode: 'contain',
-    height: 132,
-    width: 150,
-  }
+    resizeMode: 'contain',
+    height: 50,
+    width: 50,
+  },
 };
 
 const mapStateToProps = ({ auth }) => {
