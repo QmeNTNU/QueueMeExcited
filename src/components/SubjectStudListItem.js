@@ -3,24 +3,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { Text, View, Image, TouchableWithoutFeedback } from 'react-native';
+import Swipeable from 'react-native-swipeable';
+import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
 import { addSubject } from '../actions';
+/* eslint-disable global-require */
 
+const rightButtons = [
+  <TouchableHighlight style={{ height: 60, width: 80, padding: 20, backgroundColor: 'red' }}>
+    <Image
+      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      source={require('./images/delete.png')}
+    />
+  </TouchableHighlight>
+];
 
 class SubjectStudListItem extends Component {
-
-
-  /* eslint-disable global-require */
-
 
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    Actions.createQueue({ subject: this.props.subject});
+    Actions.createQueue({ subject: this.props.subject });
   }
 
-  /* eslint-disable global-require */
 
 renderImage() {
   return (
@@ -46,6 +51,7 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
 
     return (
+      <Swipeable rightButtons={rightButtons}>
       <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
 
       <View style={styles.columnStyle}>
@@ -66,6 +72,8 @@ renderRow() {
 
     </View>
   </TouchableWithoutFeedback>
+</Swipeable>
+
     );
 }
 
@@ -86,6 +94,10 @@ const styles = {
     justifyContent: 'flex-start',
     flexDirection: 'row',
     borderTopWidth: 0.5,
+  },
+  ButtonStyle: {
+    height: 60,
+    backgroundColor: 'red'
   },
 
   thumbnailContainerStyle: {
