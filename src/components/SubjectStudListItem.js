@@ -10,7 +10,7 @@ import { addSubject } from '../actions';
 /* eslint-disable global-require */
 
 const rightButtons = [
-  <TouchableHighlight style={{ height: 60, width: 80, padding: 20, backgroundColor: 'red' }}>
+  <TouchableHighlight style={{ height: 60, width: 75, padding: 20, backgroundColor: 'red' }}>
     <Image
       style={{ height: 20, width: 20, alignSelf: 'center' }}
       source={require('./images/delete.png')}

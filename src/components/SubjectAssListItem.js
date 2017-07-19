@@ -8,10 +8,16 @@ import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 
 import { Button, Spinner } from './common';
 import { addSubject } from '../actions';
 
+/* eslint-disable global-require */
 const rightButtons = [
-  <TouchableHighlight style={{ height: 60, backgroundColor: 'red' }}><Text>Button 1</Text></TouchableHighlight>,
-  <TouchableHighlight><Text>Button 2</Text></TouchableHighlight>
+  <TouchableHighlight style={{ height: 60, width: 75, padding: 20, backgroundColor: 'red' }}>
+    <Image
+      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      source={require('./images/delete.png')}
+    />
+  </TouchableHighlight>
 ];
+
 class SubjectAssListItem extends Component {
 
 
