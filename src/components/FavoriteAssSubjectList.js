@@ -5,7 +5,7 @@ import { Modal, ListView, View, Text } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { favoriteAssSubjectListFetch } from '../actions';
-import SubjectAssListItem from './SubjectStudListItem';
+import SubjectAssListItem from './SubjectAssListItem';
 
 /*
 Kort oppsumert

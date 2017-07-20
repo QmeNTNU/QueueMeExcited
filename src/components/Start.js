@@ -65,7 +65,7 @@ class Home extends Component {
             <Text style={{ color: '#95CAFE' }} placeholder />
 
           </View>
-          
+
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-end' }}>
             {this.renderImage()}
           </View>

@@ -33,12 +33,10 @@ export const studAssCreate = ({ studentAssistant }) => {
 };
 
 
-export const studAssListFetch = () => {
-  const { currentUser } = firebase.auth();
+export const studAssListFetch = ({ ref }) => {
 
   return (dispatch) => {
-    firebase.database().ref(`/subjects/${currentUser.uid}/studAssList`)
-    .on('value', snapshot => {
+        ref.on('value', snapshot => {
       dispatch({ type: STUDASSLIST_FETCH_SUCCESS, payload: snapshot.val() });
     });
   };

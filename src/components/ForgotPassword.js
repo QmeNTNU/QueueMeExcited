@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { resetEmailChange, resetPasswordButtonPress } from '../actions';
-import { Input1, Button1 } from './common';
+import { InputSignUp, ButtonWhite } from './common';
 
 class ForgotPassword extends Component {
   onResetEmailChange(text) {
@@ -31,14 +32,11 @@ renderImage() {
 
 render() {
     return (
-          <View style={{ backgroundColor: '#95CAFE', flex: 1 }}>
+          <View style={{ backgroundColor: '#95CAFE', flex: 1, padding: 20 }}>
 
-              <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
-                {this.renderImage()}
-              </View>
 
-              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', fontWeight: 400 }}>
-                <Text style={{ color: '#fff', fontSize: 22 }}>
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 30, color: '#F58C6C' }}>
                 Forgot your password?
                 </Text>
 
@@ -50,7 +48,7 @@ render() {
 
               <View style={{ flex: 2, justifyContent: 'center' }}>
                 <View style={styles.containerStyle}>
-                  <Input1
+                  <InputSignUp
                     label={this.renderEmailImage()}
                     placeholder="enter student-email"
                     onChangeText={this.onResetEmailChange.bind(this)}
@@ -59,11 +57,22 @@ render() {
                 </View>
 
                 <View style={styles.containerStyle}>
-                  <Button1 onPress={this.onResetPasswordButtonPress.bind(this)} >
+                  <ButtonWhite onPress={this.onResetPasswordButtonPress.bind(this)} >
                     SEND EMAIL
-                  </Button1>
+                  </ButtonWhite>
                 </View>
-              </View>
+
+              <View style={styles.loginButtonStyle}>
+              <TouchableOpacity
+                  onPress={() => Actions.login({ type: 'reset' })}
+                  style={{ alignItems: 'flex-start' }}
+              >
+                <Text style={{ color: '#ffffff', fontSize: 20 }}>
+                  LOGIN
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
           </View>
     );
@@ -75,14 +84,22 @@ const styles = {
     backgroundColor: '#95CAFE',
     justifyContent: 'flex-start',
     flexDirection: 'row',
+    paddingBottom: 2,
     position: 'relative'
   },
   labelStyle: {
     flex: 1,
-    //resizeMode: 'contain',
-    height: 132,
-    width: 150,
-  }
+    resizeMode: 'contain',
+    height: 50,
+    width: 50,
+  },
+  loginButtonStyle: {
+    backgroundColor: '#95CAFE',
+    justifyContent: 'flex-start',
+      alignItems: 'center',
+
+    paddingBottom: 2,
+  },
 };
 
 const mapStateToProps = ({ resetPassword }) => {
