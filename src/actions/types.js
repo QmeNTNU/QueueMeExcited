@@ -75,4 +75,6 @@ export const QUEUE_CREATED_FAILED = 'queue_created_failed';
 export const DELETED_MYSELF = 'deleted_myself';
 export const SUBJECT_ADDED = 'subject_added';
 export const LOADING_SUBJECTS = 'LOADING_SUBJECTS';
+export const MY_LOCATION = 'MY_LOCATION';
+export const STUD_SUBJECT = 'STUD_SUBJECT';
 //////////////////////////////////////////////////////////////////////

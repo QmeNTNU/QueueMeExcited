@@ -10,8 +10,7 @@ class StudassQueue extends Component {
 
   //want to watch for a queue the instant the scene is loaded
   componentWillMount() {
-    const { currentUser } = firebase.auth();
-    const { ref } = firebase.database().ref(`/Person/${currentUser.uid}`);
+    const ref = firebase.database().ref('Subject');
     //starts the listener for
     this.props.fetchQueue({ ref });
     this.props.getCount({ ref });
@@ -260,8 +259,8 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first } = state.createQueue;
-  return { queue, studasscount, first };
+  const { first, myLocation, studSubject } = state.createQueue;
+  return { queue, studasscount, first, myLocation, studSubject };
 };
  //kan skrive queue[0].name
 

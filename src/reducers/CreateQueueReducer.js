@@ -1,6 +1,6 @@
-import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, FIRST_CHANGED, LOADING } from '../actions/types';
+import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, FIRST_CHANGED, LOADING, MY_LOCATION, STUD_SUBJECT } from '../actions/types';
 
-const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line' };
+const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line', myLocation: '', studSubject: '' };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -22,6 +22,11 @@ export default (state = INITIAL_STATE, action) => {
     console.log(action);
         //keeps track of the first person in line to display to scrrem
         return { ...state, first: action.payload };
+    case MY_LOCATION:
+      return { ...state, myLocation: action.payload };
+    case STUD_SUBJECT:
+    console.log('subject': action);
+      return { ...state, studSubject: action.payload };
     default:
       return state;
   }

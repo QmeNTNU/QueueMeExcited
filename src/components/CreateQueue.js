@@ -19,11 +19,12 @@ class CreateQueue extends Component {
 //adds the student assistant to the queue
 onButtonPress() {
   //retireves the availible input from state
+
   const { available, room } = this.props;
   const { currentUser } = firebase.auth(); //GET FROM "SHARED PREFERANSES"
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
-  const ref = firebase.database().ref(`/Person/${currentUser.uid}`);
+  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
   this.props.makeQueue({ available, room, ref });
@@ -174,9 +175,9 @@ const styles = {
 
 //gets the updated value from the reducer
 const mapStateToProps = (state) => {
-  const { available, room, loading, error } = state.createQueue;
+  const { available, room, loading, error, studSubject } = state.createQueue;
   //createQueue is from the reducer/index and is the reucer!
-  return { available, room, loading, error };
+  return { available, room, loading, error, studSubject };
 };
 
 //have to add on the connector for redux to work
