@@ -10,7 +10,7 @@ import { addSubject } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
-  <TouchableHighlight style={{ height: 60, width: 75, padding: 20, backgroundColor: 'red' }}>
+  <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
     <Image
       style={{ height: 20, width: 20, alignSelf: 'center' }}
       source={require('./images/delete.png')}
@@ -27,7 +27,7 @@ class SubjectAssListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    Actions.studAssList({ subject: this.props.subject });
+    Actions.studAssList({ subjectSearch: this.props.subject.emnekode });
   }
 
   /* eslint-disable global-require */
@@ -36,7 +36,7 @@ renderImage() {
   return (
     <Image
       style={styles.imageStyle}
-      source={require('./images/alarm3.png')}
+      source={require('./images/abook.png')}
     />
   );
 }
@@ -92,7 +92,7 @@ renderRow() {
 const styles = {
   columnStyle: {
     flex: 10,
-    height: 60,
+    height: 80,
     marginLeft: 10,
     marginRight: 10,
     justifyContent: 'flex-start',

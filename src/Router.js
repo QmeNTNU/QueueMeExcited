@@ -37,7 +37,7 @@ const RouterComponent = () => {
   <Scene
     key="startScreen"
     component={Start}
-    hideNavBar={true}
+    hideNavBar
   />
 
   <Scene key="auth" >
@@ -45,16 +45,14 @@ const RouterComponent = () => {
             key="login"
             component={LoginForm}
             title="QUEUE ME"
-            hideNavBar={true}
-
+            hideNavBar
             initial
           />
           <Scene
             key='signup'
             component={SignUpForm}
             title="REGISTRATION"
-            hideNavBar={true}
-
+            hideNavBar
           />
           <Scene
             key="forgotPassword"
@@ -81,18 +79,18 @@ const RouterComponent = () => {
         <Scene
           key="favoriteStudentSubjectList"
           component={favoriteStudentSubjectList}
-          title="Your Subjects(stud)"
+          title="Subjects"
         />
 
         <Scene
           key="favoriteAssSubjectList"
           component={FavoriteAssSubjectList}
-          title="Subjects(ass)"
+          title="Subjects"
         />
         <Scene
           key="studAssList"
           component={StudAssList}
-          title="Student Assistants"
+          title="StuAss"
         />
         <Scene
           key="createQueue"

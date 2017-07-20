@@ -60,18 +60,16 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <View style={{ justifyContent: 'space-between', flex: 4, padding: 20, backgroundColor: '"95CAFE"' }}>
+      <View style={{ flex: 4, padding: 20, backgroundColor: '#95CAFE' }}>
 
         <View style={styles.ImageViewStyle}>
         {this.renderImage()}
         </View>
 
-        <View style={styles.ImageViewStyle}>
-          <Text style={{ color: '#95CAFE' }} placeholder />
-        </View>
 
 
-        <View style={{ flex: 2 }}>
+
+        <View style={{ flex: 2, justifyContent: 'center' }}>
             <View style={styles.containerStyle}>
               <InputSignUp
                 label={this.renderEmailImage()}
@@ -123,7 +121,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
-    position: 'relative'
   },
   ImageViewStyle: {
     flexDirection: 'row',
