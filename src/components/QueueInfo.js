@@ -23,10 +23,11 @@ this.props.getCount(ref);
 
 onButtonPress() {
   const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
+  const { myName } = this.props;
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //add user to queue and saves the push location to state
   //this location is used in next scene (in quit queue)
-  this.props.addToQueue(ref);
+  this.props.addToQueue({ ref, myName });
 }
 
 renderImage() {
@@ -135,8 +136,10 @@ const styles = {
 const mapStateToProps = (state) => {
   const { subject, studass, available, studassLocation } = state.queueInfo;
   const { studasscount } = state.count;
+  const { myName } = state.nameRed;
+
   //createQueue is from the reducer/index and is the reucer!
-  return { subject, studass, available, studasscount, studassLocation };
+  return { subject, studass, available, studasscount, studassLocation, myName };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);

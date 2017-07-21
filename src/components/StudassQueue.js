@@ -22,7 +22,7 @@ componentDidMount() {
   //AFTER COMPONENTWILMOUNT HAVE FETCHED THE LIST I WANT TO RETRIVE firstInLine
   //componentWillReceiveProps dosent get called with initial props, so i have to do it here
   if (this.props.queue.length) {
-    const text = this.props.queue[0].uid;
+    const text = this.props.queue[0].fullname;
     this.props.firstInLine(text);
   }
 
@@ -48,7 +48,7 @@ componentWillReceiveProps(nextProps) {
   //solved it by saying that it should be called if the inital queue is null
   //and the incoming queue is not.THIS STOPS THE APP FROM LOOP-RENDER
 if (!this.props.queue.length && nextProps.queue.length) {
-  const text = nextProps.queue[0].uid;
+  const text = nextProps.queue[0].fullname;
   this.props.firstInLine(text);
   return;
 }
@@ -67,7 +67,7 @@ if (!nextProps.queue.length) {
 }
 //only updates if latest prop is different
 if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
-  const text = nextProps.queue[0].uid;
+  const text = nextProps.queue[0].fullname;
   this.props.firstInLine(text);
   return;
 }

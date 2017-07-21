@@ -14,4 +14,5 @@ export * from './InQueueActions';
 export * from './CountActions';
 export * from './QueueActions';
 export * from './addSubjectActions';
+export * from './getNameActions';
 ////////////////////

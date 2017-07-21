@@ -10,8 +10,9 @@ export const setInfo = ({ prop, value }) => {
   };
 };
 
-export const addToQueue = (ref) => {
+export const addToQueue = ({ ref, myName }) => {
   //gets values on should push to the location
+  const fullname = myName;
   const userGender = 'male';
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
@@ -22,7 +23,7 @@ export const addToQueue = (ref) => {
   //sets a value to the retrieved location
   //saved the key to be used in next scene. sets other to initial_state
   return (dispatch) => {
-    newRef.set({ userEmail, userUID, userGender }) //sets the value
+    newRef.set({ fullname, userEmail, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: ADDED_TO_QUEUE, payload: key }); //resets the state field
        Actions.inQueue({ type: 'reset' });//moved to necht scene

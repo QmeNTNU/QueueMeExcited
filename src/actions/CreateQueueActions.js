@@ -24,7 +24,7 @@ export const studSubject = (text) => {
   };
 };
 
-export const makeQueue = ({ available, room, ref }) => {
+export const makeQueue = ({ myName, available, room, ref }) => {
   //MUST HAVE VALIDATION////////////////////////////////////
   if (!validateInput(available)) {
     return (dispatch) => {
@@ -33,6 +33,7 @@ export const makeQueue = ({ available, room, ref }) => {
   }
 
   //gets rest of values on should push to the location
+  const fullname = myName;
   const userGender = 'male';
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
@@ -40,7 +41,7 @@ export const makeQueue = ({ available, room, ref }) => {
   return (dispatch) => {
     dispatch({ type: LOADING });//sets spinner
 
-    ref.set({ userEmail, available, room, userUID, userGender }) //sets the value
+    ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: QUEUE_CREATED }); //resets the input field
        Actions.queue();//moved to necht scene

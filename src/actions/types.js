@@ -77,4 +77,5 @@ export const SUBJECT_ADDED = 'subject_added';
 export const LOADING_SUBJECTS = 'LOADING_SUBJECTS';
 export const MY_LOCATION = 'MY_LOCATION';
 export const STUD_SUBJECT = 'STUD_SUBJECT';
+export const GET_MY_NAME = 'GET_MY_NAME';
 //////////////////////////////////////////////////////////////////////

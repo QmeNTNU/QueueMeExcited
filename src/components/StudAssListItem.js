@@ -24,7 +24,7 @@ class SubjectAssListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    this.props.setInfo({ prop: 'studass', value: this.props.studass.userEmail });
+    this.props.setInfo({ prop: 'studass', value: this.props.studass.fullname });
     this.props.setInfo({ prop: 'available', value: this.props.studass.available });
     this.props.setInfo({ prop: 'studassLocation', value: this.props.studass.userUID });
 
@@ -55,7 +55,7 @@ renderArrowImage() {
   /* eslint-enable global-require */
 
 renderRow() {
-  const { userEmail, available } = this.props.studass;
+  const { fullname, available } = this.props.studass;
 
     return (
         <Swipeable rightButtons={rightButtons}>
@@ -70,11 +70,10 @@ renderRow() {
 
         <View style={styles.headerContentStyle}>
           <View style={{ flex: 2, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
-            <Text style={styles.headerTextStyle}>{userEmail}</Text>
+            <Text style={styles.headerTextStyle}>{fullname}</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', borderTopWidth: 0.5 }}>
-          <Text>{available}</Text>
-          <Text> Available until: 13.00 </Text>
+          <Text> Available until: {available} </Text>
         </View>
       </View>
 
