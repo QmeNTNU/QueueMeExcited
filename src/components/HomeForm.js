@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { studentAssistant, Student } from '../actions';
+import { studentAssistant, Student, getMyName } from '../actions';
 
 
 class HomeForm extends Component {
+
+  componentWillMount() {
+    this.props.getMyName();
+  }
 
   onPressStudent() {
     this.props.Student();
@@ -94,4 +98,4 @@ const styles = {
 };
 
 export default connect(null, {
-  Student, studentAssistant})(HomeForm);
+  Student, studentAssistant, getMyName })(HomeForm);

@@ -6,9 +6,9 @@ import {
 Oppsummert hva som skjer
 setter state i liste over tilgjengelige studasser
 */
-const INITIAL_STATE1 = {};
+const INITIAL_STATE = {};
 
-export default (state = INITIAL_STATE1, action) => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
 
     case STUDASSLIST_FETCH_SUCCESS:

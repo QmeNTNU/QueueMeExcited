@@ -9,7 +9,7 @@ import { fetchQueue, getCount, deleteMeFromQueue, findMyPlaceInLine } from '../a
 class InQueue extends Component {
 componentWillMount() {
   const { currentUser } = firebase.auth();
-  const { ref } = firebase.database().ref(`/Person/${currentUser.uid}`);
+  const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //starts the listener for
   this.props.fetchQueue({ ref });
   this.props.getCount({ ref });
@@ -40,10 +40,7 @@ componentWillReceiveProps(nextProps) {
 
 onQuitPress() {
 //gets ref to delete (whole node)
- const location = this.props.myLocation;
- const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
- const deleteRef = firebase.database().ref(`/Person/${currentUser.uid}`)
-                  .child(location);//TRENGER KEY!
+ const deleteRef = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue/${this.props.myLocation}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
   'Warning',
@@ -190,9 +187,9 @@ const mapStateToProps = (state) => {
   });
   //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { myLocation } = state.queueInfo;
+  const { myLocation, studassLocation, subject } = state.queueInfo;
   const { place, firstboolean } = state.inQueue;
-  return { queue, studasscount, myLocation, place, firstboolean };
+  return { queue, studasscount, myLocation, place, firstboolean, studassLocation, subject };
 };
  //kan skrive queue[0].name
 

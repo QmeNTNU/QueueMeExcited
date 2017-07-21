@@ -18,6 +18,7 @@ export const fetchQueue = ({ ref }) => {
   return (dispatch) => {
         ref.on('value', snapshot => {
           dispatch({ type: QUEUE_FETCH_SUCCESS, payload: snapshot.val() });
+          console.log('queue', snapshot.val());
       });
   };
 };
@@ -31,7 +32,7 @@ export const deleteQueue = (deleteRef) => {
       //tells reducer to reset state to initial
       dispatch({ type: DELETE_QUEUE });
       //move to another scene
-      Actions.homePage();//moved to necht scene
+      Actions.homePage({ type: 'reset' });//moved to necht scene
    });
   };
 };

@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
-import { addSubject } from '../actions';
+import { setInfo, addSubject } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
@@ -27,7 +27,9 @@ class SubjectAssListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    Actions.studAssList({ subjectSearch: this.props.subject.emnekode });
+    this.props.setInfo({ prop: 'subject', value: this.props.subject.emnekode });
+
+    Actions.studAssList();
   }
 
   /* eslint-disable global-require */
@@ -135,4 +137,4 @@ const mapStateToProps = state => {
   return { favorites };
 };
 
-export default connect(mapStateToProps, { addSubject })(SubjectAssListItem);
+export default connect(mapStateToProps, { setInfo, addSubject })(SubjectAssListItem);

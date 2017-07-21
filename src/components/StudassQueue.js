@@ -10,18 +10,19 @@ class StudassQueue extends Component {
 
   //want to watch for a queue the instant the scene is loaded
   componentWillMount() {
-    const { currentUser } = firebase.auth();
-    const { ref } = firebase.database().ref(`/Person/${currentUser.uid}`);
-    //starts the listener for
-    this.props.fetchQueue({ ref });
-    this.props.getCount({ ref });
+  //connect(props) do not get fetched properly before componenDIDmount. moved it there instead
   }
 
 componentDidMount() {
+  const userUID = firebase.auth().currentUser.uid;
+  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}/queue`);
+  //starts the listener for
+  this.props.fetchQueue({ ref });
+  this.props.getCount({ ref });
   //AFTER COMPONENTWILMOUNT HAVE FETCHED THE LIST I WANT TO RETRIVE firstInLine
   //componentWillReceiveProps dosent get called with initial props, so i have to do it here
   if (this.props.queue.length) {
-    const text = this.props.queue[0].uid;
+    const text = this.props.queue[0].fullname;
     this.props.firstInLine(text);
   }
 
@@ -47,7 +48,7 @@ componentWillReceiveProps(nextProps) {
   //solved it by saying that it should be called if the inital queue is null
   //and the incoming queue is not.THIS STOPS THE APP FROM LOOP-RENDER
 if (!this.props.queue.length && nextProps.queue.length) {
-  const text = nextProps.queue[0].uid;
+  const text = nextProps.queue[0].fullname;
   this.props.firstInLine(text);
   return;
 }
@@ -66,15 +67,16 @@ if (!nextProps.queue.length) {
 }
 //only updates if latest prop is different
 if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
-  const text = nextProps.queue[0].uid;
+  const text = nextProps.queue[0].fullname;
   this.props.firstInLine(text);
   return;
 }
 }
 //when quiting queue
 onQuitPress() {
+  const userUID = firebase.auth().currentUser.uid;
 //gets ref to delete (whole node)
-  const deleteRef = firebase.database().ref('/Person');
+const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
   'Warning',
@@ -88,6 +90,7 @@ onQuitPress() {
 
 //when goint to next in line
 onNextPress() {
+  const userUID = firebase.auth().currentUser.uid;
   //should delete index 0 from databse.
   //list would automaticly render
 //prevents app to call undefined queue[0] since empty
@@ -96,7 +99,7 @@ onNextPress() {
   }
   const firstUID = this.props.queue[0].uid;
   const { currentUser } = firebase.auth(); //SHOULD COME FROM STATE/SHARED PREFERANCES
-  const nextRef = firebase.database().ref(`/Person/${currentUser.uid}`)
+  const nextRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`)
                       .child(firstUID);
   this.props.nextDelete(nextRef);
 
@@ -260,8 +263,8 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first } = state.createQueue;
-  return { queue, studasscount, first };
+  const { first, myLocation, studSubject } = state.createQueue;
+  return { queue, studasscount, first, myLocation, studSubject };
 };
  //kan skrive queue[0].name
 

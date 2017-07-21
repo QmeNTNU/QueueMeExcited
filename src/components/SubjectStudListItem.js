@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
-import { addSubject } from '../actions';
+import { addSubject, studSubject } from '../actions';
 /* eslint-disable global-require */
 
 const rightButtons = [
@@ -23,6 +23,7 @@ class SubjectStudListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
+    this.props.studSubject(this.props.subject.emnekode);
     Actions.createQueue({ subject: this.props.subject });
   }
 
@@ -135,4 +136,4 @@ const mapStateToProps = state => {
   return { favorites };
 };
 
-export default connect(mapStateToProps, { addSubject })(SubjectStudListItem);
+export default connect(mapStateToProps, { addSubject, studSubject })(SubjectStudListItem);

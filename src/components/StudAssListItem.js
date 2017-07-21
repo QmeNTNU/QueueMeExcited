@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
-import { addSubject } from '../actions';
+import { setInfo, addSubject } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
@@ -24,7 +24,12 @@ class SubjectAssListItem extends Component {
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    Actions.info({ person: this.props.studass });
+    this.props.setInfo({ prop: 'studass', value: this.props.studass.fullname });
+    this.props.setInfo({ prop: 'available', value: this.props.studass.available });
+    this.props.setInfo({ prop: 'studassLocation', value: this.props.studass.userUID });
+
+
+    Actions.info();
   }
 
   /* eslint-disable global-require */
@@ -50,7 +55,7 @@ renderArrowImage() {
   /* eslint-enable global-require */
 
 renderRow() {
-  const { emnekode, emnenavn } = this.props.studass;
+  const { fullname, available } = this.props.studass;
 
     return (
         <Swipeable rightButtons={rightButtons}>
@@ -65,11 +70,10 @@ renderRow() {
 
         <View style={styles.headerContentStyle}>
           <View style={{ flex: 2, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
-            <Text style={styles.headerTextStyle}>{emnenavn}</Text>
+            <Text style={styles.headerTextStyle}>{fullname}</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', borderTopWidth: 0.5 }}>
-          <Text>{emnekode}</Text>
-          <Text> Available until: 13.00 </Text>
+          <Text> Available until: {available} </Text>
         </View>
       </View>
 
@@ -139,4 +143,4 @@ const mapStateToProps = state => {
   return { favorites };
 };
 
-export default connect(mapStateToProps, { addSubject })(SubjectAssListItem);
+export default connect(mapStateToProps, { setInfo, addSubject })(SubjectAssListItem);

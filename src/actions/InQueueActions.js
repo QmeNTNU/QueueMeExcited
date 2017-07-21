@@ -11,7 +11,6 @@ export const deleteMeFromQueue = (deleteRef) => {
 
       //move to another scene
       //needs to change
-      Actions.queueInfo({ type: 'reset' });
       dispatch({ type: DELETED_ME_FROM_QUEUE });
       // since i am going out of the queue, i dont need to store queue in state
       //DELETE_QUEUE sets state "queue" to initial state
@@ -49,7 +48,7 @@ return (dispatch) => {
   'Stepped out of line',
   'You have been removed from this queue. Either it has been your turn, you quit, or the student assisten has ended the queue.\n\nYou will be taken to the homescreen.',
     [
-      { text: 'OK', onPress: () => Actions.queueInfo({ type: 'reset' }) },
+      { text: 'OK', onPress: () => Actions.home({ type: 'reset' }) },
     ]
   );
   /*  dispatch({ type: FOUND_MY_PLACE, payload: -1 });

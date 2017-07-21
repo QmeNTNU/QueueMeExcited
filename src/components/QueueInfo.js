@@ -8,19 +8,14 @@ import { setInfo, getCount, addToQueue } from '../actions';
 class QueueInfo extends Component {
 componentWillMount() {
 //setter all info til state
-//sette fag til state
-const subject = 'TDT4140 ITGK';
-this.props.setInfo({ prop: 'subject', value: subject });
-//sette studass til state
-const studass = 'Geir Ove Hatt';
-this.props.setInfo({ prop: 'studass', value: studass });
-//sette availible untill til state
-const available = '16:00';
-this.props.setInfo({ prop: 'available', value: available });
+//fag settes til inqueueinfo reducer i subjectasslist
+//studas settes til inqueueinfo reducer i studaslist
+//available settes til inqueueinfo reducer i studasslist
+
 
 //setter count fra firebase til state
 const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
-const { ref } = firebase.database().ref(`/Person/${currentUser.uid}`);
+const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
 //starts the listener for
 this.props.getCount(ref);
 }
@@ -28,10 +23,11 @@ this.props.getCount(ref);
 
 onButtonPress() {
   const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
-  const { ref } = firebase.database().ref(`/Person/${currentUser.uid}`);
+  const { myName } = this.props;
+  const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //add user to queue and saves the push location to state
   //this location is used in next scene (in quit queue)
-  this.props.addToQueue(ref);
+  this.props.addToQueue({ ref, myName });
 }
 
 renderImage() {
@@ -138,10 +134,12 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { subject, studass, available } = state.queueInfo;
+  const { subject, studass, available, studassLocation } = state.queueInfo;
   const { studasscount } = state.count;
+  const { myName } = state.nameRed;
+
   //createQueue is from the reducer/index and is the reucer!
-  return { subject, studass, available, studasscount };
+  return { subject, studass, available, studasscount, studassLocation, myName };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);
