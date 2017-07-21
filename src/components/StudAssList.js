@@ -18,7 +18,7 @@ class StudAssList extends Component {
 
 
   componentWillMount() {
-    const { ref } = firebase.database().ref('Subject');
+    const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/`);
     this.props.studAssListFetch({ ref });
     //sets listview
     this.createDataSource(this.props);
@@ -119,7 +119,9 @@ const mapStateToProps = state => {
   const studAssList = _.map(state.studAssList, (val, uid) => {
     return { ...val, uid };
   });
-  return { studAssList };
+  const { subject } = state.queueInfo;
+
+  return { studAssList, subject };
 };
 
 export default connect(mapStateToProps, {

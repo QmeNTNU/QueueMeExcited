@@ -21,10 +21,10 @@ onButtonPress() {
   //retireves the availible input from state
 
   const { available, room } = this.props;
-  const { currentUser } = firebase.auth(); //GET FROM "SHARED PREFERANSES"
+  const userUID = firebase.auth().currentUser.uid;
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
-  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist`);
+  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
   this.props.makeQueue({ available, room, ref });

@@ -27,7 +27,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action);
 
   switch (action.type) {
     //her settes email (osv..) til det som skrives inn av brukeren

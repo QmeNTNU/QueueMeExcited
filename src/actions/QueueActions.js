@@ -32,7 +32,7 @@ export const deleteQueue = (deleteRef) => {
       //tells reducer to reset state to initial
       dispatch({ type: DELETE_QUEUE });
       //move to another scene
-      Actions.homePage();//moved to necht scene
+      Actions.homePage({ type: 'reset' });//moved to necht scene
    });
   };
 };

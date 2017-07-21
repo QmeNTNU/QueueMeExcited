@@ -39,20 +39,32 @@ export const makeQueue = ({ available, room, ref }) => {
 
   return (dispatch) => {
     dispatch({ type: LOADING });//sets spinner
-    const newRef = ref.push();
-    //gets  the key to this location
-    const key = newRef.key;
-    //sets a value to the retrieved location
-    //saved the key to be used in next scene. sets other to initial_state
 
-    newRef.set({ userEmail, available, room, userUID, userGender }) //sets the value
+    ref.set({ userEmail, available, room, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: QUEUE_CREATED }); //resets the input field
-      dispatch({ type: MY_LOCATION, payload: key });
        Actions.queue();//moved to necht scene
      });
   };
 };
+/*could have.. for preformans:
+but is difficult because i have to keep track of key, easier to just stay with useruid
+return (dispatch) => {
+  dispatch({ type: LOADING });//sets spinner
+  const newRef = ref.push();
+  //gets  the key to this location
+  const key = newRef.key;
+  //sets a value to the retrieved location
+  //saved the key to be used in next scene. sets other to initial_state
+
+  newRef.set({ userEmail, available, room, userUID, userGender }) //sets the value
+  .then(() => {
+    dispatch({ type: QUEUE_CREATED }); //resets the input field
+    dispatch({ type: MY_LOCATION, payload: key });
+     Actions.queue();//moved to necht scene
+   });
+};
+};*/
 
 const validateInput = (text) => {
 //gets input from the avaiable prop, and checks if it is on correct format

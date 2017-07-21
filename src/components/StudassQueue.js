@@ -14,8 +14,8 @@ class StudassQueue extends Component {
   }
 
 componentDidMount() {
-  console.log('sub', this.props.studSubject);
-  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`);
+  const userUID = firebase.auth().currentUser.uid;
+  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}/queue`);
   //starts the listener for
   this.props.fetchQueue({ ref });
   this.props.getCount({ ref });
@@ -74,8 +74,9 @@ if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
 }
 //when quiting queue
 onQuitPress() {
+  const userUID = firebase.auth().currentUser.uid;
 //gets ref to delete (whole node)
-const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`);
+const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
   'Warning',
@@ -89,6 +90,7 @@ const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/stu
 
 //when goint to next in line
 onNextPress() {
+  const userUID = firebase.auth().currentUser.uid;
   //should delete index 0 from databse.
   //list would automaticly render
 //prevents app to call undefined queue[0] since empty
@@ -97,7 +99,7 @@ onNextPress() {
   }
   const firstUID = this.props.queue[0].uid;
   const { currentUser } = firebase.auth(); //SHOULD COME FROM STATE/SHARED PREFERANCES
-  const nextRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`)
+  const nextRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`)
                       .child(firstUID);
   this.props.nextDelete(nextRef);
 
