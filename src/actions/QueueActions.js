@@ -18,6 +18,7 @@ export const fetchQueue = ({ ref }) => {
   return (dispatch) => {
         ref.on('value', snapshot => {
           dispatch({ type: QUEUE_FETCH_SUCCESS, payload: snapshot.val() });
+          console.log('queue', snapshot.val());
       });
   };
 };

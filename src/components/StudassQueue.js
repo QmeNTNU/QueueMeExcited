@@ -10,13 +10,15 @@ class StudassQueue extends Component {
 
   //want to watch for a queue the instant the scene is loaded
   componentWillMount() {
-    const ref = firebase.database().ref('Subject');
-    //starts the listener for
-    this.props.fetchQueue({ ref });
-    this.props.getCount({ ref });
+  //connect(props) do not get fetched properly before componenDIDmount. moved it there instead
   }
 
 componentDidMount() {
+  console.log('sub', this.props.studSubject);
+  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`);
+  //starts the listener for
+  this.props.fetchQueue({ ref });
+  this.props.getCount({ ref });
   //AFTER COMPONENTWILMOUNT HAVE FETCHED THE LIST I WANT TO RETRIVE firstInLine
   //componentWillReceiveProps dosent get called with initial props, so i have to do it here
   if (this.props.queue.length) {
@@ -73,7 +75,7 @@ if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
 //when quiting queue
 onQuitPress() {
 //gets ref to delete (whole node)
-  const deleteRef = firebase.database().ref('/Person');
+const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
   'Warning',
@@ -95,7 +97,7 @@ onNextPress() {
   }
   const firstUID = this.props.queue[0].uid;
   const { currentUser } = firebase.auth(); //SHOULD COME FROM STATE/SHARED PREFERANCES
-  const nextRef = firebase.database().ref(`/Person/${currentUser.uid}`)
+  const nextRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${this.props.myLocation}`)
                       .child(firstUID);
   this.props.nextDelete(nextRef);
 

@@ -17,7 +17,8 @@ export default (state = INITIAL_STATE, action) => {
       //tells scene to render spinner AND remove error message while doing so
       return { ...state, loading: true, error: '' };
     case QUEUE_CREATED:
-        return INITIAL_STATE;
+    //STUPID TO HAVE STUDSUBJECT AND MYLOCATION HERE
+        return { ...state, available: '', room: '', error: '', loading: false, first: 'There are no students in line' };
     case FIRST_CHANGED:
     console.log(action);
         //keeps track of the first person in line to display to scrrem
