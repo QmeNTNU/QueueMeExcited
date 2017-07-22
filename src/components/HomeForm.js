@@ -46,7 +46,7 @@ class HomeForm extends Component {
               </Text>
 
               <View style={containerStyle}>
-                <TouchableOpacity onPress={this.onPressStudent.bind(this)} style={buttonStyle} >
+                <TouchableOpacity onPress={this.onPressStudentAssistant.bind(this)} style={buttonStyle} >
                  <Text style={textStyle}>
                     Student
                  </Text>
@@ -54,7 +54,7 @@ class HomeForm extends Component {
               </View>
 
               <View style={containerStyle} >
-                <TouchableOpacity onPress={this.onPressStudentAssistant.bind(this)} style={buttonStyle} >
+                <TouchableOpacity onPress={this.onPressStudent.bind(this)} style={buttonStyle} >
                  <Text style={textStyle}>
                     Student Assistant
                  </Text>
