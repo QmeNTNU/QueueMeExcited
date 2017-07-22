@@ -134,8 +134,8 @@ const createUserSuccess = (dispatch, user, signupEmail, signupPassword, fullname
 
 const createUserInFireBase = (signupEmail, signupPassword, fullname, gender) => {
   const { currentUser } = firebase.auth();
-    firebase.database().ref(`/users/${currentUser.uid}/userInfo`)
-      .push({ signupEmail, signupPassword, fullname, gender })
+    firebase.database().ref(`/users/${currentUser.uid}`)
+      .set({ signupEmail, signupPassword, fullname, gender });
 };
 
 
