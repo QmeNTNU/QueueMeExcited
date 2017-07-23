@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { setInfo, addSubject } from '../actions';
+import { setInfo } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
@@ -143,4 +143,4 @@ const styles = {
   return { favorites };
 };*/
 
-export default connect(null, { setInfo, addSubject })(SubjectAssListItem);
+export default connect(null, { setInfo })(SubjectAssListItem);

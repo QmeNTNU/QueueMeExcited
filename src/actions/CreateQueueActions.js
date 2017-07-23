@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING, STUD_SUBJECT } from './types';
+import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT } from './types';
 //have to add it to types as well
 //have to add it to index.js
 //have to make reducer to handele AVAILABLE_CHANGED
@@ -39,7 +39,7 @@ export const makeQueue = ({ myName, available, room, ref }) => {
   const userEmail = firebase.auth().currentUser.email;
 
   return (dispatch) => {
-    dispatch({ type: LOADING });//sets spinner
+    dispatch({ type: LOADING_BUTTON });//sets spinner
 
     ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
     .then(() => {
@@ -72,7 +72,7 @@ const validateInput = (text) => {
 if (text.length < 5) {
   return false;
 }
-if (text.charAt(2) !== '.') {
+if (text.charAt(2) !== ',') {
   return false;
 }
 return true;
