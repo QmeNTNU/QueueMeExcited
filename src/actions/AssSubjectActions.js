@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import {
-  FAVORITEASSSUBJECTLIST_FETCH_SUCCESS
+  FAVORITEASSSUBJECTLIST_FETCH_SUCCESS,
+  LOADING
 } from './types';
 
 /*
@@ -12,6 +13,7 @@ oppdaterer, lager og henter fag i "favorittlisten" når logget inn som studass
 export const favoriteAssSubjectListFetch = () => {
   const userUID = firebase.auth().currentUser.uid;
   return (dispatch) => {
+    dispatch({ type: LOADING });
     firebase.database().ref(`/users/${userUID}/favasssubject`)
       .on('value', snapshot => {
         dispatch({ type: FAVORITEASSSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });

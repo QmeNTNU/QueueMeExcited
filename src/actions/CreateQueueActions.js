@@ -72,7 +72,7 @@ const validateInput = (text) => {
 if (text.length < 5) {
   return false;
 }
-if (text.charAt(2) !== '.') {
+if (text.charAt(2) !== ',') {
   return false;
 }
 return true;

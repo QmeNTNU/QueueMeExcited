@@ -1,6 +1,7 @@
 import { LOADING,
   FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS,
   ADDED_TO_QUEUE,
+  QUEUE_CREATED,
   STUDASSLIST_FETCH_SUCCESS,
   FAVORITEASSSUBJECTLIST_FETCH_SUCCESS
    } from '../actions/types';
@@ -21,6 +22,8 @@ export default (state = INITIAL_STATE, action) => {
       return INITIAL_STATE;
     case FAVORITEASSSUBJECTLIST_FETCH_SUCCESS:
       return INITIAL_STATE;
+      case QUEUE_CREATED:
+        return INITIAL_STATE;
     default:
       return state;
   }
