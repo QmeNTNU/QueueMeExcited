@@ -23,7 +23,7 @@ onButtonPress() {
   const userUID = firebase.auth().currentUser.uid;
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
-  const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
+  const ref = firebase.database().ref(`Subject/${this.props.studassSubject.emnekode}/studasslist/${userUID}`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
   this.props.makeQueue({ myName, available, room, ref });
@@ -34,7 +34,7 @@ onButtonPress() {
     //gets the string subject from last page (listview)
     //Actions.com2 ({text: 'Hello World'})
     //this.props.text
-    const { emnekode, emnenavn } = this.props.subject;
+    const { emnekode, emnenavn } = this.props.studassSubject;
 
     return (
       <View style={styles.infoView}>
@@ -58,7 +58,7 @@ onButtonPress() {
   }
 
   renderButton() {
-    if (this.props.loading) {
+    if (!this.props.loading) {
       return <Spinner size="large" />;
     }
     return (
@@ -70,6 +70,9 @@ onButtonPress() {
 
 
   render() {
+    console.log(this.props.loading);
+    console.log(this.props.studassSubject);
+
     return (
       <View style={styles.wholeScreen}>
 

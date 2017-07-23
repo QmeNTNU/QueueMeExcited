@@ -21,7 +21,7 @@ class SubjectAssListItem extends Component {
 
   onAddPress() {
     //wirtes subject to reducer for later scenes
-    this.props.studassSubject(this.props.subject.emnekode);
+    this.props.studassSubject(this.props.subject);
     //moves to nextscene
     Actions.createQueue({ subject: this.props.subject });
   }

@@ -56,6 +56,7 @@ class FavoriteAssSubjectList extends Component {
   }
 
   render() {
+    console.log(this.props.loading);
     return (
       <View style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
