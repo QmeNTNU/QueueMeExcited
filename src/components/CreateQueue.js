@@ -58,7 +58,7 @@ onButtonPress() {
   }
 
   renderButton() {
-    if (this.props.loading) {
+    if (this.props.loadingButton) {
       return <Spinner size="large" />;
     }
     return (
@@ -172,11 +172,11 @@ const styles = {
 
 //gets the updated value from the reducer
 const mapStateToProps = (state) => {
-  const { available, room, loading, error, studassSubject } = state.createQueue;
+  const { available, room, loadingButton, error, studassSubject } = state.createQueue;
   const { myName } = state.nameRed;
 
   //createQueue is from the reducer/index and is the reucer!
-  return { available, room, loading, error, studassSubject, myName };
+  return { available, room, loadingButton, error, studassSubject, myName };
 };
 
 //have to add on the connector for redux to work

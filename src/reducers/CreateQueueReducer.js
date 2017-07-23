@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
         return { ...state, room: action.payload };
     case QUEUE_CREATED_FAILED:
     //sets error message and clear the field with the error (available)
-      return { ...state, error: '*Unvalid input\nMake sure you write the hourmark as 00.00. ', available: '' };
+      return { ...state, error: '*Unvalid input\nMake sure you write the hourmark as 00,00. ', available: '' };
     case LOADING:
       //tells scene to render spinner AND remove error message while doing so
       return { ...state, loading: true, error: '' };

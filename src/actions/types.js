@@ -76,4 +76,5 @@ export const MY_LOCATION = 'MY_LOCATION';
 export const STUD_SUBJECT = 'STUD_SUBJECT';
 export const GET_MY_NAME = 'GET_MY_NAME';
 export const QUIT = 'QUIT';
+export const LOADING_BUTTON = 'LOADING_BUTTON';
 //////////////////////////////////////////////////////////////////////
