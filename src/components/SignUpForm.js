@@ -153,6 +153,7 @@ class SignUpForm extends Component {
           <Text style={{ color: '#ffffff', flex: 1 }}>
               ALREADY GOT AN ACCOUNT? CLICK HERE!
           </Text>
+
         </TouchableOpacity>
 
 
