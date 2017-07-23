@@ -22,7 +22,7 @@ class HomeForm extends Component {
   renderImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={{ width: 350, height: 350 }} source={require('./images/home.png')} />
+       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home.png')} />
      );
     /* eslint-enable global-require */
   }
@@ -33,11 +33,11 @@ class HomeForm extends Component {
 
         <View
           style={{
-          backgroundColor: 'rgb(149, 202, 254)',
+          backgroundColor: '#95CAFE',
           flex: 1,
         }}
         >
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1 }}>
               {this.renderImage()}
             </View>
 

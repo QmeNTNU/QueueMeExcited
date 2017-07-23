@@ -8,9 +8,10 @@ import { setInfo } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
-  <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
+  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
     <Image
-      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/delete.png')}
     />
   </TouchableHighlight>
@@ -30,7 +31,8 @@ class SubjectStudListItem extends Component {
 renderImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/abook.png')}
     />
   );
@@ -39,7 +41,8 @@ renderImage() {
 renderArrowImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/arrow_blue.png')}
     />
   );
@@ -98,12 +101,11 @@ const styles = {
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
   },
   arrowStyle: {
-    height: 40,
-    width: 40,
-    alignSelf: 'center'
+    flex: 1,
+    padding: 10
   },
   imageStyle: {
     height: 60,
@@ -116,7 +118,8 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontFamily: 'bebasNeue',
+    fontSize: 40
   },
 };
 /*const mapStateToProps = state => {

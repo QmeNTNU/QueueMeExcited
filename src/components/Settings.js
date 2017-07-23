@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { Button1 } from './common';
+import { ButtonWhite, ButtonRed } from './common';
 import {
   DeletePress,
   LogOutPress
@@ -32,24 +32,18 @@ class Settings extends Component {
 
   render() {
     return (
-        <View style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
+        <View style={{ backgroundColor: '#95CAFE', flex: 1, paddingLeft: 20, paddingRight: 20 }}>
 
             <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
 
                 <View style={styles.containerStyle}>
-                  <Button1 onPress={this.onStudPress.bind(this)} >
+                  <ButtonWhite onPress={this.onStudPress.bind(this)} >
                     Toturial Student
-                  </Button1>
+                  </ButtonWhite>
                 </View>
 
                 <View style={styles.containerStyle}>
-                  <Button1 onPress={this.onStudAssPress.bind(this)} >
-                    Toturial Student Assistant
-                  </Button1>
-                </View>
-
-                <View style={styles.containerStyle}>
-                  <Button1
+                  <ButtonWhite
                     onPress={() => Alert.alert(
                         'You are about to delete your account!',
                         'Are you sure you want to delete it?',
@@ -60,13 +54,13 @@ class Settings extends Component {
                       )}
                   >
                     Delete Account
-                  </Button1>
+                  </ButtonWhite>
                 </View>
 
                 <View style={styles.containerStyle}>
-                  <Button1 onPress={this.onUsPress.bind(this)} >
+                  <ButtonWhite onPress={this.onUsPress.bind(this)} >
                     About Us
-                  </Button1>
+                  </ButtonWhite>
                 </View>
 
             </View>
@@ -74,7 +68,7 @@ class Settings extends Component {
               <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
                   <View style={styles.containerStyle}>
-                    <TouchableOpacity
+                    <ButtonRed
                         onPress={() => Alert.alert(
                               'You are about to log out!',
                               'Are you sure you want to log out?',
@@ -85,10 +79,8 @@ class Settings extends Component {
                             )}
                         style={styles.buttonStyle}
                     >
-                      <Text style={styles.textStyle}>
                           LOG OUT
-                      </Text>
-                    </TouchableOpacity>
+                    </ButtonRed>
                   </View>
 
               </View>
@@ -99,14 +91,6 @@ class Settings extends Component {
 }
 
 const styles = {
-  textStyle: {
-    alignSelf: 'center',
-    color: '#000',
-    fontSize: 16,
-    fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 10
-  },
   buttonStyle: {
     flex: 1,
     alignSelf: 'stretch',

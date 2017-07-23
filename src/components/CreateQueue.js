@@ -23,7 +23,7 @@ onButtonPress() {
   const userUID = firebase.auth().currentUser.uid;
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
-  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
+  const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
   this.props.makeQueue({ myName, available, room, ref });
@@ -49,7 +49,8 @@ onButtonPress() {
     /* eslint-disable global-require */
     return (
       <Image
-        style={styles.imageStyle}
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
         source={require('./images/alarm3.png')}
       />
     );
@@ -129,9 +130,6 @@ const styles = {
   },
   imageView: {
     flex: 4,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   imageStyle: {
     flex: 1,
@@ -174,11 +172,11 @@ const styles = {
 
 //gets the updated value from the reducer
 const mapStateToProps = (state) => {
-  const { available, room, loading, error, studSubject } = state.createQueue;
+  const { available, room, loading, error, studassSubject } = state.createQueue;
   const { myName } = state.nameRed;
 
   //createQueue is from the reducer/index and is the reucer!
-  return { available, room, loading, error, studSubject, myName };
+  return { available, room, loading, error, studassSubject, myName };
 };
 
 //have to add on the connector for redux to work

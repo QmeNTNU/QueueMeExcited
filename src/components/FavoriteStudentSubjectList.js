@@ -54,7 +54,7 @@ class FavoriteStudentSubjectList extends Component {
     />
   );
   }
-
+//Actions.addSubjectStudent({ modalVisible: true })
   render() {
     return (
       <View style={styles.wholeScreen}>
@@ -68,9 +68,9 @@ class FavoriteStudentSubjectList extends Component {
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
-            onPress={() => Actions.addSubjectStudent({ modalVisible: true })}
+            onPress={() => console.log('pressed')}
           >
-            Add your subjects
+            ADD SUBJECTS
           </ButtonBlue>
         </View>
       </View>

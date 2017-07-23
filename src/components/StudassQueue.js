@@ -15,7 +15,7 @@ class StudassQueue extends Component {
 
 componentDidMount() {
   const userUID = firebase.auth().currentUser.uid;
-  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}/queue`);
+  const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue`);
   //starts the listener for
   this.props.fetchQueue({ ref });
   this.props.getCount({ ref });
@@ -76,7 +76,7 @@ if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
 onQuitPress() {
   const userUID = firebase.auth().currentUser.uid;
 //gets ref to delete (whole node)
-const deleteRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
+const deleteRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
   'Warning',
@@ -98,8 +98,7 @@ onNextPress() {
       return;//NOT NEEDED F BUTTON IS HIDDEN!
   }
   const firstUID = this.props.queue[0].uid;
-  const { currentUser } = firebase.auth(); //SHOULD COME FROM STATE/SHARED PREFERANCES
-  const nextRef = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`)
+  const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`)
                       .child(firstUID);
   this.props.nextDelete(nextRef);
 
@@ -263,8 +262,8 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first, myLocation, studSubject } = state.createQueue;
-  return { queue, studasscount, first, myLocation, studSubject };
+  const { first, myLocation, studassSubject } = state.createQueue;
+  return { queue, studasscount, first, myLocation, studassSubject };
 };
  //kan skrive queue[0].name
 

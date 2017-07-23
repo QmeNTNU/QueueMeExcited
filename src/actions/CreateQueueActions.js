@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
-import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING, MY_LOCATION, STUD_SUBJECT } from './types';
+import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING, STUD_SUBJECT } from './types';
 //have to add it to types as well
 //have to add it to index.js
 //have to make reducer to handele AVAILABLE_CHANGED
@@ -17,7 +17,7 @@ export const roomChanged = (text) => {
     payload: text
   };
 };
-export const studSubject = (text) => {
+export const studassSubject = (text) => {
   return {
     type: STUD_SUBJECT,
     payload: text
@@ -44,7 +44,7 @@ export const makeQueue = ({ myName, available, room, ref }) => {
     ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: QUEUE_CREATED }); //resets the input field
-       Actions.queue();//moved to necht scene
+       Actions.studassQueue({ type: 'reset' });//moved to necht scene
      });
   };
 };

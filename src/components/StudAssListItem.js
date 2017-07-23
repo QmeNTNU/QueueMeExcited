@@ -8,8 +8,12 @@ import { setInfo, addSubject } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
-  <TouchableHighlight style={{ height: 100, width: 75, padding: 20, backgroundColor: 'yellow' }}>
-    <Text style={{ color: 'ffffff' }} STAR />
+  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'yellow', padding: 30 }}>
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/delete.png')}
+    />
   </TouchableHighlight>
 ];
 
@@ -33,7 +37,8 @@ class SubjectAssListItem extends Component {
 renderImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/choosepersonstud.png')}
     />
   );
@@ -42,7 +47,8 @@ renderImage() {
 renderArrowImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/arrow_blue.png')}
     />
   );
@@ -65,12 +71,15 @@ renderRow() {
 
 
         <View style={styles.headerContentStyle}>
-          <View style={{ flex: 2, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+            <Text style={{ color: '#ffffff' }}> Available until: {available} </Text>
+          </View>
+          <View style={{ flex: 1, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
             <Text style={styles.headerTextStyle}>{fullname}</Text>
           </View>
-          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', borderTopWidth: 0.5 }}>
-          <Text> Available until: {available} </Text>
-        </View>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+            <Text> Available until: {available} </Text>
+          </View>
       </View>
 
 
@@ -101,18 +110,15 @@ const styles = {
     marginRight: 10,
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    borderTopWidth: 0.5,
   },
 
   thumbnailContainerStyle: {
     flex: 2,
-    justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
   },
   arrowStyle: {
-    height: 40,
-    width: 40,
-    alignSelf: 'center'
+    flex: 1,
+    padding: 10
   },
   imageStyle: {
     height: 60,
@@ -125,7 +131,8 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
-    fontSize: 30
+    fontSize: 40,
+    fontFamily: 'bebasNeue'
   },
 };
 /*const mapStateToProps = state => {

@@ -1,18 +1,17 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { Button, Spinner } from './common';
-import { addSubject, studSubject } from '../actions';
+import { studassSubject } from '../actions';
 /* eslint-disable global-require */
 
 const rightButtons = [
-  <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
+  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
     <Image
-      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/delete.png')}
     />
   </TouchableHighlight>
@@ -21,9 +20,9 @@ const rightButtons = [
 class SubjectAssListItem extends Component {
 
   onAddPress() {
-    //const { emnekode, emnenavn } = this.props.subject;
-    console.log('PRESSED');
-    this.props.studSubject(this.props.subject.emnekode);
+    //wirtes subject to reducer for later scenes
+    this.props.studassSubject(this.props.subject.emnekode);
+    //moves to nextscene
     Actions.createQueue({ subject: this.props.subject });
   }
 
@@ -31,7 +30,8 @@ class SubjectAssListItem extends Component {
 renderImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/abook.png')}
     />
   );
@@ -40,7 +40,8 @@ renderImage() {
 renderArrowImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/arrow_blue.png')}
     />
   );
@@ -104,12 +105,11 @@ const styles = {
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
   },
   arrowStyle: {
-    height: 40,
-    width: 40,
-    alignSelf: 'center'
+    flex: 1,
+    padding: 10
   },
   imageStyle: {
     height: 60,
@@ -122,11 +122,11 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
-    //fontFamily: 'bebasNeue',
-    fontSize: 18
+    fontFamily: 'bebasNeue',
+    fontSize: 25
   },
 };
-const mapStateToProps = state => {
+/*const mapStateToProps = state => {
   //fungerer ikke å kalle på denne. vet ikke hvorfor
   //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
   const favorites = _.map(state.addSubjectFetch, (val, uid) => {
@@ -134,6 +134,6 @@ const mapStateToProps = state => {
   });
 
   return { favorites };
-};
+};*/
 
-export default connect(mapStateToProps, { addSubject, studSubject })(SubjectAssListItem);
+export default connect(null, { studassSubject })(SubjectAssListItem);

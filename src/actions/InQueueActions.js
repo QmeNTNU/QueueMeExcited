@@ -55,7 +55,7 @@ return (dispatch) => {
   'Stepped out of line',
   'You have been removed from this queue. Either it has been your turn, you quit, or the student assisten has ended the queue.\n\nYou will be taken to the homescreen.',
     [
-      { text: 'OK', onPress: () => Actions.home({ type: 'reset' }) },
+      { text: 'OK', onPress: () => Actions.home(({ type: 'reset' })) },
     ]
   );
   /*  dispatch({ type: FOUND_MY_PLACE, payload: -1 });

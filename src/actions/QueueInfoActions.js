@@ -32,7 +32,7 @@ export const addToQueue = ({ ref, myName }) => {
     newRef.set({ fullname, userEmail, userUID, userGender }) //sets the value
     .then(() => {
       dispatch({ type: ADDED_TO_QUEUE, payload: key }); //resets the state field
-       Actions.InQ();//moved to nexht scene
+       Actions.inQueue(({ type: 'reset' }));//moved to nexht scene
      }); //Reset means no backbutton
   };
 };

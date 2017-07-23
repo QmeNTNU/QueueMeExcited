@@ -35,7 +35,7 @@ class Home extends Component {
     startUp() {
       switch (this.state.loggedIn) {
         case true:
-          Actions.homePage();
+          Actions.homePage({ type: 'reset' });
           break;
         case false:
         //sends user to turtorial
@@ -45,7 +45,7 @@ class Home extends Component {
           Actions.auth();
           break;
         default:
-          this.renderImage();
+          this.renderImage({ type: 'reset' });
       }
     }
 

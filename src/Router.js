@@ -1,5 +1,6 @@
 import React from 'react';
-import { Router, Scene, Actions, Modal } from 'react-native-router-flux';
+import { Router, Scene, Actions, Modal, ActionConst } from 'react-native-router-flux';
+import { Image } from 'react-native';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
@@ -32,117 +33,96 @@ const RouterComponent = () => {
     //have to set a padding to the top
     //onright toghettehr with righttile will set a button on top right side by default
     //se react-native-router-flux github in favorites
-    <Router titleStyle={{ color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
+<Router barButtonIconStyle={{ tintColor: 'white' }} titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
 
-  <Scene
-    key="startScreen"
-    component={Start}
-    hideNavBar
-  />
+  <Scene key="root">
 
-  <Scene key="auth" >
+    <Scene
+      key="startScreen"
+      component={Start}
+      hideNavBar
+    />
+
+    <Scene key="auth" hideNavBar>
+            <Scene
+              key="login"
+              component={LoginForm}
+              title="QUEUE ME"
+              initial
+            />
+            <Scene
+              key='signup'
+              component={SignUpForm}
+              title="REGISTRATION"
+            />
+            <Scene
+              key="forgotPassword"
+              component={ForgotPassword}
+              title="RESET PASSWORD"
+            />
+    </Scene>
+
+    <Scene key="homePage" type={ActionConst.RESET} >
           <Scene
-            key="login"
-            component={LoginForm}
-            title="QUEUE ME"
-            hideNavBar
-            initial
+            key="home"
+            component={HomeForm}
+            title="HOME"
+            inital
+            onRight={() => Actions.settings()}
+            rightButtonImage={require('./components/images/settings.png')}
+            type={ActionConst.RESET}
           />
           <Scene
-            key='signup'
-            component={SignUpForm}
-            title="REGISTRATION"
-            hideNavBar
+            key="settings"
+            component={Settings}
+            title="SETTINGS"
+          />
+
+          <Scene
+            key="favoriteStudentSubjectList"
+            component={favoriteStudentSubjectList}
+            title="Subjects"
+          />
+
+          <Scene
+            key="favoriteAssSubjectList"
+            component={FavoriteAssSubjectList}
+            title="Subjects"
           />
           <Scene
-            key="forgotPassword"
-            component={ForgotPassword}
-            title="RESET PASSWORD"
+            key="studAssList"
+            component={StudAssList}
+            title="Studasses"
           />
-  </Scene>
-
-  <Scene key="homePage">
-        <Scene
-          key="home"
-          component={HomeForm}
-          title="HOME"
-          inital
-          onRight={() => Actions.settings()}
-          rightTitle="settings"
-        />
-        <Scene
-          key="settings"
-          component={Settings}
-          title="SETTINGS"
-        />
-
-        <Scene
-          key="favoriteStudentSubjectList"
-          component={favoriteStudentSubjectList}
-          title="Subjects"
-        />
-
-        <Scene
-          key="favoriteAssSubjectList"
-          component={FavoriteAssSubjectList}
-          title="Subjects"
-        />
-        <Scene
-          key="studAssList"
-          component={StudAssList}
-          title="StuAss"
-        />
-        <Scene
-          key="queueInfo"
-          component={QueueInfo}
-          title="Queue info"
-        />
-        <Scene
-          key="createQueue"
-          component={CreateQueue}
-          title="Your Queue"
-        />
-
-
-        <Scene
-          key="addSubjectFormStudent"
-          component={AddSubjectFormStudent}
-          title="Add subjects"
-        />
-
-        <Scene
-          key="addSubjectStudent"
-          component={addSubjectStudent}
-          modal
-        />
-
-        <Scene
-          key="addSubjectFormAss"
-          component={AddSubjectFormAss}
-          title="Add subjects"
-        />
-
-     </Scene>
-        <Scene key="queue">
+          <Scene
+            key="queueInfo"
+            component={QueueInfo}
+            title="Queue info"
+          />
+          <Scene
+            key="createQueue"
+            component={CreateQueue}
+            title="Your Queue"
+          />
+          <Scene
+            key="addSubjectStudent"
+            component={addSubjectStudent}
+            modal
+          />
           <Scene
             key="studassQueue"
             component={StudassQueue}
             title="Queue"
-            initial
           />
-        </Scene>
-
-        <Scene key="InQ">
           <Scene
             key="inQueue"
             component={InQueue}
             title="In Queue"
-            initial
           />
-        </Scene>
+    </Scene>
 
-
-  </Router>
+  </Scene>
+</Router>
 
   );
 };

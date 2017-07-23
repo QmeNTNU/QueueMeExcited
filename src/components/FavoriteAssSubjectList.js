@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, ListView, View, Text } from 'react-native';
-import { Card, CardSection, Input, Button, Spinner } from './common';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux';
+import { ListView, View, Text } from 'react-native';
+import { ButtonBlue, Spinner } from './common';
 import { favoriteAssSubjectListFetch } from '../actions';
 import SubjectAssListItem from './SubjectAssListItem';
 
@@ -40,27 +40,38 @@ class FavoriteAssSubjectList extends Component {
     return <SubjectAssListItem subject={subject} />;
   }
 
+  renderScreen() {
+    //shows either a spinner while loading or hte listview when the date is retireved
+    if (this.props.loading) {
+    return <Spinner size="large" />;
+  }
+
+  return (
+    <ListView
+      enableEmptySections
+      dataSource={this.dataSource3}
+      renderRow={this.renderRow}
+    />
+  );
+  }
+
   render() {
     return (
       <View style={styles.wholeScreen}>
-        <View style={styles.ViewOrange}>
+        <View style={styles.ViewBlue}>
           <Text>
-          All your subjects
+          *All your choosen subjects as a student assistant
           </Text>
         </View>
         <View style={{ flex: 8 }}>
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource3}
-            renderRow={this.renderRow}
-          />
+          {this.renderScreen()}
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-          <Button
-            onPress={() => Actions.addSubjectFormAss()}
+          <ButtonBlue
+            onPress={() => console.log('pressed')}
           >
             Add your subjects
-          </Button>
+          </ButtonBlue>
         </View>
       </View>
     );
@@ -75,11 +86,11 @@ const styles = {
     fontSize: 30,
     fontWeight: 'bold',
   },
-  ViewOrange: {
+  ViewBlue: {
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F58C6C'
+    backgroundColor: '#A8D3FE'
   },
   wholeScreen: {
     flex: 1,
@@ -101,7 +112,7 @@ const styles = {
     alignItems: 'center',
     resizeMode: 'contain'
   },
-  buttonView: {
+  ButtonBlueView: {
     justifyContent: 'center',
     alignItems: 'center',
     color: '#254552',
@@ -115,7 +126,9 @@ const mapStateToProps = state => {
   const favoriteStudentSubjectList = _.map(state.favoriteAssSubjectList, (val, uid) => {
     return { ...val, uid };
   });
-  return { favoriteStudentSubjectList };
+  const { loading } = state.loading;
+
+  return { favoriteStudentSubjectList, loading };
 };
 
 export default connect(mapStateToProps,
