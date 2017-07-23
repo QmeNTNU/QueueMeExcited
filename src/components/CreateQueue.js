@@ -23,7 +23,7 @@ onButtonPress() {
   const userUID = firebase.auth().currentUser.uid;
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
-  const ref = firebase.database().ref(`Subject/${this.props.studSubject}/studasslist/${userUID}`);
+  const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
   this.props.makeQueue({ myName, available, room, ref });
@@ -174,11 +174,11 @@ const styles = {
 
 //gets the updated value from the reducer
 const mapStateToProps = (state) => {
-  const { available, room, loading, error, studSubject } = state.createQueue;
+  const { available, room, loading, error, studassSubject } = state.createQueue;
   const { myName } = state.nameRed;
 
   //createQueue is from the reducer/index and is the reucer!
-  return { available, room, loading, error, studSubject, myName };
+  return { available, room, loading, error, studassSubject, myName };
 };
 
 //have to add on the connector for redux to work

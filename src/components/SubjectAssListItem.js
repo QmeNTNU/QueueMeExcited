@@ -1,12 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { Button, Spinner } from './common';
-import { addSubject, studSubject } from '../actions';
+import { studassSubject } from '../actions';
 /* eslint-disable global-require */
 
 const rightButtons = [
@@ -21,9 +19,9 @@ const rightButtons = [
 class SubjectAssListItem extends Component {
 
   onAddPress() {
-    //const { emnekode, emnenavn } = this.props.subject;
-    console.log('PRESSED');
-    this.props.studSubject(this.props.subject.emnekode);
+    //wirtes subject to reducer for later scenes
+    this.props.studassSubject(this.props.subject.emnekode);
+    //moves to nextscene
     Actions.createQueue({ subject: this.props.subject });
   }
 
@@ -126,7 +124,7 @@ const styles = {
     fontSize: 18
   },
 };
-const mapStateToProps = state => {
+/*const mapStateToProps = state => {
   //fungerer ikke å kalle på denne. vet ikke hvorfor
   //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
   const favorites = _.map(state.addSubjectFetch, (val, uid) => {
@@ -134,6 +132,6 @@ const mapStateToProps = state => {
   });
 
   return { favorites };
-};
+};*/
 
-export default connect(mapStateToProps, { addSubject, studSubject })(SubjectAssListItem);
+export default connect(null, { studassSubject })(SubjectAssListItem);

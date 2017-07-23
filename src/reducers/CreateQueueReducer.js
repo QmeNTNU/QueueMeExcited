@@ -1,6 +1,6 @@
 import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, FIRST_CHANGED, LOADING, MY_LOCATION, STUD_SUBJECT, DELETE_QUEUE } from '../actions/types';
 
-const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line', myLocation: '', studSubject: '' };
+const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line', myLocation: '', studassSubject: '' };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, myLocation: action.payload };
     case STUD_SUBJECT:
     console.log('subject': action);
-      return { ...state, studSubject: action.payload };
+      return { ...state, studassSubject: action.payload };
       case DELETE_QUEUE:
         return INITIAL_STATE;
     default:

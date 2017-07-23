@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { QUEUE_FETCH_SUCCESS,
 DELETE_QUEUE, FIRST_CHANGED } from './types';
@@ -31,8 +30,8 @@ export const deleteQueue = (deleteRef) => {
     .then(() => {
       //tells reducer to reset state to initial
       dispatch({ type: DELETE_QUEUE });
-      //move to another scene
-      Actions.homePage({ type: 'reset' });//moved to necht scene
+      //move to home creen
+      Actions.home({ type: 'reset' });
    });
   };
 };

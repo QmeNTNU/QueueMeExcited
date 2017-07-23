@@ -1,8 +1,5 @@
 import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import {
-  SUBJECTASS_UPDATE,
-  SUBJECTASS_CREATE,
   FAVORITEASSSUBJECTLIST_FETCH_SUCCESS
 } from './types';
 
@@ -10,6 +7,17 @@ import {
 Oppsumert hva som skjer
 oppdaterer, lager og henter fag i "favorittlisten" når logget inn som studass
 */
+
+
+export const favoriteAssSubjectListFetch = () => {
+  return (dispatch) => {
+    firebase.database().ref('Subject')
+      .on('value', snapshot => {
+        dispatch({ type: FAVORITEASSSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
+      });
+  };
+};
+/*
 
 export const subjectAssUpdate = ({ prop, value }) => {
   return {
@@ -40,16 +48,4 @@ export const subjectAssCreate = ({ subject }) => {
   };
 };
 
-//henter data fra databasen
-//bruker samme referanse, men henter ut data denne gangen
-export const favoriteAssSubjectListFetch = () => {
-  //henter aksess til currentUser
-  const { currentUser } = firebase.auth();
-
-  return (dispatch) => {
-    firebase.database().ref('Subject')
-      .on('value', snapshot => {
-        dispatch({ type: FAVORITEASSSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
-      });
-  };
-};
+*/
