@@ -32,7 +32,7 @@ const RouterComponent = () => {
     //have to set a padding to the top
     //onright toghettehr with righttile will set a button on top right side by default
     //se react-native-router-flux github in favorites
-<Router titleStyle={{ color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
+<Router titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
 
   <Scene key="root">
 
@@ -91,7 +91,7 @@ const RouterComponent = () => {
           <Scene
             key="studAssList"
             component={StudAssList}
-            title="StuAss"
+            title="Studasses"
           />
           <Scene
             key="queueInfo"

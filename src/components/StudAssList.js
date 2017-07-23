@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { ListView, View, Text } from 'react-native';
-import { Button, Spinner } from './common';
+import { ButtonBlue, Spinner } from './common';
 import { studAssListFetch } from '../actions';
 import StudAssListItem from './StudAssListItem';
 
@@ -48,7 +48,15 @@ class StudAssList extends Component {
     if (this.props.loading) {
     return <Spinner size="large" />;
   }
-
+  if (!this.props.studAssList.length) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>
+            There are available student assistants at the moment...
+        </Text>
+      </View>
+    );
+  }
   return (
     <ListView
       enableEmptySections
@@ -61,20 +69,13 @@ class StudAssList extends Component {
   render() {
     return (
       <View style={styles.wholeScreen}>
-        <View style={styles.ViewOrange}>
+        <View style={styles.ViewBlue}>
           <Text>
-          All your subjects
+          *All available studant assistant in this subject
           </Text>
         </View>
         <View style={{ flex: 8 }}>
           {this.renderScreen()}
-        </View>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-          <Button
-            onPress={() => Actions.addSubjectFormAss()}
-          >
-            Add your subjects
-          </Button>
         </View>
       </View>
     );
@@ -89,11 +90,11 @@ const styles = {
     fontSize: 30,
     fontWeight: 'bold',
   },
-  ViewOrange: {
+  ViewBlue: {
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F58C6C'
+    backgroundColor: '#A8D3FE'
   },
   wholeScreen: {
     flex: 1,
