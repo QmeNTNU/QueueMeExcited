@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Image } from 'react-native';
-import { Button, Spinner } from './common';
+import { ButtonBlue, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
 
 class QueueInfo extends Component {
@@ -14,7 +14,7 @@ this.props.getCount(ref);
 }
 
 
-onButtonPress() {
+onButtonBluePress() {
   //gets user name from props (value is retireved and sat to reducer in home-scene)
   const { myName } = this.props;
   //makes ref from where we want to retrieve data
@@ -29,21 +29,47 @@ renderImage() {
   /* eslint-disable global-require */
   return (
     <Image
-    style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
     source={require('./images/signqueue.png')}
     />
   );
 /* eslint-enable global-require */
 }
 
-renderButton() {
+renderView() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+    source={require('./images/arrowdown.png')}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderClockImage() {
+  /* eslint-disable global-require */
+  return (
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+    source={require('./images/alarm3.png')}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderButtonBlue() {
   if (this.props.loading) {
     return <Spinner size="large" />;
   }
   return (
-    <Button onPress={this.onButtonPress.bind(this)}>
+    <ButtonBlue onPress={this.onButtonBluePress.bind(this)}>
       ADD TO QUEUE
-    </Button>
+    </ButtonBlue>
   );
 }
 
@@ -54,33 +80,68 @@ renderButton() {
         {this.renderImage()}
       </View>
 
+      <View style={{ flex: 3, borderRadius: 5, backgroundColor: '#495261', marginLeft: 20, marginRight: 20, justifyContent: 'space-between' }} >
+      <View style={styles.arrowdown}>
+          {this.renderView()}
+      </View>
 
-      <View style={styles.containerStyle}>
+      <View style={styles.ContainerView}>
+
         <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Subject</Text>
-          <Text style={styles.textStyle}>{this.props.subject}</Text>
+          <View style={{ flex: 1 }}>
+            {this.renderClockImage()}
+          </View>
+          <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textStyle2}>Subject</Text>
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textStyle}>{this.props.subject}</Text>
+          </View>
         </View>
 
         <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Student Assistent</Text>
+          <View style={{ flex: 1 }}>
+            {this.renderClockImage()}
+          </View>
+          <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textStyle2}>Student Assistent</Text>
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.textStyle}>{this.props.studass}</Text>
+          </View>
         </View>
 
         <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>People in line</Text>
+          <View style={{ flex: 1 }}>
+            {this.renderClockImage()}
+          </View>
+          <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textStyle2}>People in line</Text>
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.textStyle}>{this.props.studasscount}</Text>
+          </View>
         </View>
 
         <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Available until</Text>
+          <View style={{ flex: 1 }}>
+            {this.renderClockImage()}
+          </View>
+          <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={styles.textStyle2}>Available until</Text>
+          </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
+          </View>
+
         </View>
 
       </View>
+    </View>
 
 
-      <View style={styles.buttonView}>
-        {this.renderButton()}
+      <View style={styles.ButtonBlueView}>
+        {this.renderButtonBlue()}
       </View>
 
 
@@ -93,33 +154,38 @@ const styles = {
   wholeScreen: {
     flex: 1,
     flexDirection: 'column',
-  },
+    backgroundColor: '#ffffff'
+    },
   imageView: {
-    flex: 5,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 2,
   },
-  imageStyle: {
-    flex: 1,
-    resizeMode: 'contain'
+  arrowdown: {
+  flex: 1,
+  height: 10,
+  borderTopRightRadius: 5,
+  borderTopLeftRadius: 5,
+  marginLeft: 20,
+  marginRight: 20
+
 
   },
   ContainerView: {
-    flex: 5,
+    flex: 9,
     flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'center',
+
   },
   infoView: {
-    flexDirection: 'column',
+    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
-    marginLeft: 30,
-    marginRight: 30,
+    alignItems: 'flex-start',
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 5,
     marginBottom: 5
   },
-  buttonView: {
+  ButtonBlueView: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -131,7 +197,10 @@ const styles = {
     fontSize: 25
   },
   textStyle2: {
-    color: '#F58C6C'
+    color: '#F58C6C',
+    fontSize: 25,
+    fontFamily: 'bebasNeue'
+
   }
 };
 
