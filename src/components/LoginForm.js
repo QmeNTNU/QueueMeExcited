@@ -118,6 +118,7 @@ class LoginForm extends Component {
 
 const styles = {
   containerStyle: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,

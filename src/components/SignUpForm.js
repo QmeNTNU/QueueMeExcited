@@ -130,16 +130,17 @@ class SignUpForm extends Component {
           </View>
 
           <View style={styles.sectionStyle}>
-            <Picker
-            style={styles.pickerStyle}
-            selectedValue={this.props.gender}
-            onValueChange={gender => this.props.genderUpdate({ prop: 'gender', value: gender })}
-            >
-              <Picker.Item label="                             -select a gender-" value="" />
-              <Picker.Item label="                                       male" value="male" />
-              <Picker.Item label="                                      female" value="female" />
-            </Picker>
-          </View>
+                      <Picker
+                      style={{ height: 60 }}
+                      selectedValue={this.props.gender}
+                      onValueChange={gender =>
+                        this.props.genderUpdate({ prop: 'gender', value: gender })}
+                      >
+                        <Picker.Item label="-select a gender-" value="" />
+                        <Picker.Item label="male" value="male" />
+                        <Picker.Item label="female" value="female" />
+                      </Picker>
+                    </View>
 
           <View style={styles.containerStyle}>
               {this.renderButton()}
@@ -172,15 +173,16 @@ const styles = {
     textAlign: 'center'
   },
   sectionStyle: {
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 10,
-    flex: 1,
-    flexDirection: 'row', //ordnes horisontalt
-    alignItems: 'flex-start',
-    backgroundColor: '#95CAFE'
+    sectionStyle: {
+  paddingLeft: 30,
+  paddingRight: 30,
+  paddingTop: 10,
+  flex: 1,
+  backgroundColor: '#95CAFE'
+},
   },
   containerStyle: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
