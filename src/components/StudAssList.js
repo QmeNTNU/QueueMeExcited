@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
 import { ListView, View, Text } from 'react-native';
-import { Card, CardSection, Input, Button, Spinner } from './common';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { Button, Spinner } from './common';
 import { studAssListFetch } from '../actions';
 import StudAssListItem from './StudAssListItem';
 
@@ -43,6 +43,21 @@ class StudAssList extends Component {
     return <StudAssListItem studass={studass} />;
   }
 
+  renderScreen() {
+    //shows either a spinner while loading or hte listview when the date is retireved
+    if (this.props.loading) {
+    return <Spinner size="large" />;
+  }
+
+  return (
+    <ListView
+      enableEmptySections
+      dataSource={this.dataSource3}
+      renderRow={this.renderRow}
+    />
+  );
+  }
+
   render() {
     return (
       <View style={styles.wholeScreen}>
@@ -52,11 +67,7 @@ class StudAssList extends Component {
           </Text>
         </View>
         <View style={{ flex: 8 }}>
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource3}
-            renderRow={this.renderRow}
-          />
+          {this.renderScreen()}
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <Button
@@ -119,9 +130,9 @@ const mapStateToProps = state => {
   const studAssList = _.map(state.studAssList, (val, uid) => {
     return { ...val, uid };
   });
-  const { subject } = state.queueInfo;
-
-  return { studAssList, subject };
+  const { subject } = state.queueInfo; //to know where to fetch data from
+  const { loading } = state.loading; //to know when to show spinner
+  return { studAssList, subject, loading };
 };
 
 export default connect(mapStateToProps, {

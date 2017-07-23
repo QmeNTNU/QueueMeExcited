@@ -40,20 +40,31 @@ class FavoriteStudentSubjectList extends Component {
     return <SubjectStudListItem subject={subject} />;
   }
 
+  renderScreen() {
+    //shows either a spinner while loading or hte listview when the date is retireved
+    if (this.props.loading) {
+    return <Spinner size="large" />;
+  }
+
+  return (
+    <ListView
+      enableEmptySections
+      dataSource={this.dataSource3}
+      renderRow={this.renderRow}
+    />
+  );
+  }
+
   render() {
     return (
       <View style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
           <Text>
-          All your subjects
+          *All your choosen subjects as a student
           </Text>
         </View>
         <View style={{ flex: 8 }}>
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource3}
-            renderRow={this.renderRow}
-          />
+          {this.renderScreen()}
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
@@ -115,7 +126,9 @@ const mapStateToProps = state => {
   const favoriteStudentSubjectList = _.map(state.favoriteStudentSubjectList, (val, uid) => {
     return { ...val, uid };
   });
-  return { favoriteStudentSubjectList };
+  const { loading } = state.loading;
+
+  return { favoriteStudentSubjectList, loading };
 };
 
 export default connect(mapStateToProps,

@@ -93,6 +93,11 @@ const RouterComponent = () => {
           title="StuAss"
         />
         <Scene
+          key="queueInfo"
+          component={QueueInfo}
+          title="Queue info"
+        />
+        <Scene
           key="createQueue"
           component={CreateQueue}
           title="Your Queue"
@@ -108,7 +113,7 @@ const RouterComponent = () => {
         <Scene
           key="addSubjectStudent"
           component={addSubjectStudent}
-          modal={true}
+          modal
         />
 
         <Scene
@@ -127,20 +132,13 @@ const RouterComponent = () => {
           />
         </Scene>
 
-        <Scene key="info">
-        <Scene
-          key="queueInfo"
-          component={QueueInfo}
-          title="Queue info"
-          initial
-
-        />
-        <Scene
-          key="inQueue"
-          component={InQueue}
-          title="In Queue"
-        />
-
+        <Scene key="InQ">
+          <Scene
+            key="inQueue"
+            component={InQueue}
+            title="In Queue"
+            initial
+          />
         </Scene>
 
 

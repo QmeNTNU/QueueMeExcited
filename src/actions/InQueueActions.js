@@ -1,9 +1,14 @@
 import { Actions } from 'react-native-router-flux';
 import { Alert } from 'react-native';
-import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, DELETE_QUEUE, DELETE_COUNT } from './types';
+import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, DELETE_QUEUE, DELETE_COUNT, QUIT } from './types';
+
 
 export const deleteMeFromQueue = (deleteRef) => {
+
   return (dispatch) => {
+    //to prevent WillRecieveProps to cal firstInline, and show alert!
+    dispatch({ type: QUIT });
+
     //removed value
     deleteRef.remove()
     .then(() => {
@@ -15,6 +20,8 @@ export const deleteMeFromQueue = (deleteRef) => {
       // since i am going out of the queue, i dont need to store queue in state
       //DELETE_QUEUE sets state "queue" to initial state
       dispatch({ type: DELETE_QUEUE });
+      //go to homescreen
+      Actions.home({ type: 'reset' });
    });
   };
 };

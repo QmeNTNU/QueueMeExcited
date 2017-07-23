@@ -2,19 +2,12 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Image } from 'react-native';
-import { Button } from './common';
+import { Button, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
 
 class QueueInfo extends Component {
 componentWillMount() {
-//setter all info til state
-//fag settes til inqueueinfo reducer i subjectasslist
-//studas settes til inqueueinfo reducer i studaslist
-//available settes til inqueueinfo reducer i studasslist
-
-
-//setter count fra firebase til state
-const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
+  //makes ref from where we want to retrieve data
 const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
 //starts the listener for
 this.props.getCount(ref);
@@ -22,8 +15,9 @@ this.props.getCount(ref);
 
 
 onButtonPress() {
-  const { currentUser } = firebase.auth();//SHOULD COME FROM STATE/SHARED PREF
+  //gets user name from props (value is retireved and sat to reducer in home-scene)
   const { myName } = this.props;
+  //makes ref from where we want to retrieve data
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //add user to queue and saves the push location to state
   //this location is used in next scene (in quit queue)
@@ -42,8 +36,18 @@ renderImage() {
 /* eslint-enable global-require */
 }
 
+renderButton() {
+  if (this.props.loading) {
+    return <Spinner size="large" />;
+  }
+  return (
+    <Button onPress={this.onButtonPress.bind(this)}>
+      ADD TO QUEUE
+    </Button>
+  );
+}
+
   render() {
-      console.log(this.props);
     return (
     <View style={styles.wholeScreen}>
       <View style={styles.imageView}>
@@ -76,9 +80,7 @@ renderImage() {
 
 
       <View style={styles.buttonView}>
-        <Button onPress={this.onButtonPress.bind(this)}>
-          ADD TO QUEUE
-        </Button>
+        {this.renderButton()}
       </View>
 
 
@@ -134,12 +136,13 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  //retireves info to display
   const { subject, studass, available, studassLocation } = state.queueInfo;
   const { studasscount } = state.count;
   const { myName } = state.nameRed;
+  const { loading } = state.loading;//to know when to show spinner
 
-  //createQueue is from the reducer/index and is the reucer!
-  return { subject, studass, available, studasscount, studassLocation, myName };
+  return { subject, studass, available, studasscount, studassLocation, myName, loading };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);

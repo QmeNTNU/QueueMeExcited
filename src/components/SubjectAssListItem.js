@@ -6,9 +6,9 @@ import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
 import { Button, Spinner } from './common';
-import { setInfo, addSubject } from '../actions';
-
+import { addSubject, studSubject } from '../actions';
 /* eslint-disable global-require */
+
 const rightButtons = [
   <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
     <Image
@@ -20,19 +20,13 @@ const rightButtons = [
 
 class SubjectAssListItem extends Component {
 
-
-  /* eslint-disable global-require */
-
-
   onAddPress() {
     //const { emnekode, emnenavn } = this.props.subject;
     console.log('PRESSED');
-    this.props.setInfo({ prop: 'subject', value: this.props.subject.emnekode });
-
-    Actions.studAssList();
+    this.props.studSubject(this.props.subject.emnekode);
+    Actions.createQueue({ subject: this.props.subject });
   }
 
-  /* eslint-disable global-require */
 
 renderImage() {
   return (
@@ -58,7 +52,7 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
 
     return (
-        <Swipeable rightButtons={rightButtons}>
+      <Swipeable rightButtons={rightButtons}>
       <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
 
       <View style={styles.columnStyle}>
@@ -79,7 +73,8 @@ renderRow() {
 
     </View>
   </TouchableWithoutFeedback>
-  </Swipeable>
+</Swipeable>
+
     );
 }
 
@@ -101,11 +96,14 @@ const styles = {
     flexDirection: 'row',
     borderTopWidth: 0.5,
   },
+  ButtonStyle: {
+    height: 60,
+    backgroundColor: 'red'
+  },
 
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    alignItems: 'space-between',
     padding: 5,
   },
   arrowStyle: {
@@ -124,6 +122,7 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
+    //fontFamily: 'bebasNeue',
     fontSize: 18
   },
 };
@@ -137,4 +136,4 @@ const mapStateToProps = state => {
   return { favorites };
 };
 
-export default connect(mapStateToProps, { setInfo, addSubject })(SubjectAssListItem);
+export default connect(mapStateToProps, { addSubject, studSubject })(SubjectAssListItem);
