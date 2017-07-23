@@ -29,7 +29,8 @@ class SubjectAssListItem extends Component {
 renderImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/abook.png')}
     />
   );
@@ -38,7 +39,8 @@ renderImage() {
 renderArrowImage() {
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/arrow_blue.png')}
     />
   );
@@ -102,12 +104,11 @@ const styles = {
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
   },
   arrowStyle: {
-    height: 40,
-    width: 40,
-    alignSelf: 'center'
+    flex: 1,
+    padding: 10
   },
   imageStyle: {
     height: 60,

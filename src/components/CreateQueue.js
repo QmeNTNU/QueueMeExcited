@@ -49,7 +49,8 @@ onButtonPress() {
     /* eslint-disable global-require */
     return (
       <Image
-        style={styles.imageStyle}
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
         source={require('./images/alarm3.png')}
       />
     );
@@ -129,9 +130,6 @@ const styles = {
   },
   imageView: {
     flex: 4,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   imageStyle: {
     flex: 1,

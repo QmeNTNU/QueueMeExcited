@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Scene, Actions, Modal, ActionConst } from 'react-native-router-flux';
+import { Image } from 'react-native';
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 
@@ -32,7 +33,7 @@ const RouterComponent = () => {
     //have to set a padding to the top
     //onright toghettehr with righttile will set a button on top right side by default
     //se react-native-router-flux github in favorites
-<Router titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
+<Router barButtonIconStyle={{ tintColor: 'white' }} titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE' }} sceneStyle={{ paddingTop: 55, backgroundColor: '#95CAFE' }}>
 
   <Scene key="root">
 
@@ -68,7 +69,7 @@ const RouterComponent = () => {
             title="HOME"
             inital
             onRight={() => Actions.settings()}
-            rightTitle="settings"
+            rightButtonImage={require('./components/images/settings.png')}
             type={ActionConst.RESET}
           />
           <Scene
