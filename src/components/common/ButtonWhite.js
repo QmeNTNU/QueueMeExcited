@@ -1,22 +1,22 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 const ButtonWhite = ({ onPress, children }) => { //onPress fra AlbumDetail
   const { buttonStyle, textStyle } = styles;
 
   return (
     <TouchableOpacity onPress={onPress} style={buttonStyle}>
-     <Text style={textStyle}>
-        {children}
-     </Text>
+      <View style={styles.containerStyle}>
+        <Text style={textStyle}>
+            {children}
+         </Text>
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = {
   textStyle: {
-    alignSelf: 'center',
-    justifyContent: 'center',
     color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
@@ -28,9 +28,13 @@ const styles = {
     alignSelf: 'stretch',
     backgroundColor: '#F58C6C',
     borderRadius: 5,
-
-
-  }
+  },
+  containerStyle: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 };
 
 export { ButtonWhite };

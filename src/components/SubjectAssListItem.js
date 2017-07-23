@@ -8,9 +8,10 @@ import { studassSubject } from '../actions';
 /* eslint-disable global-require */
 
 const rightButtons = [
-  <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
+  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
     <Image
-      style={{ height: 20, width: 20, alignSelf: 'center' }}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={require('./images/delete.png')}
     />
   </TouchableHighlight>
@@ -121,8 +122,8 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
-    //fontFamily: 'bebasNeue',
-    fontSize: 18
+    fontFamily: 'bebasNeue',
+    fontSize: 25
   },
 };
 /*const mapStateToProps = state => {

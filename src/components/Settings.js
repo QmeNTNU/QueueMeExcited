@@ -91,14 +91,6 @@ class Settings extends Component {
 }
 
 const styles = {
-  textStyle: {
-    alignSelf: 'center',
-    color: '#000',
-    fontSize: 16,
-    fontWeight: '600',
-    paddingTop: 10,
-    paddingBottom: 10
-  },
   buttonStyle: {
     flex: 1,
     alignSelf: 'stretch',

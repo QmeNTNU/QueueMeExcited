@@ -33,7 +33,7 @@ class HomeForm extends Component {
 
         <View
           style={{
-          backgroundColor: 'rgb(149, 202, 254)',
+          backgroundColor: '#95CAFE',
           flex: 1,
         }}
         >

@@ -70,7 +70,7 @@ class FavoriteStudentSubjectList extends Component {
           <ButtonBlue
             onPress={() => console.log('pressed')}
           >
-            Add your subjects
+            ADD SUBJECTS
           </ButtonBlue>
         </View>
       </View>

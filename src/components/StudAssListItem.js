@@ -8,8 +8,12 @@ import { setInfo, addSubject } from '../actions';
 
 /* eslint-disable global-require */
 const rightButtons = [
-  <TouchableHighlight style={{ height: 100, width: 75, padding: 20, backgroundColor: 'yellow' }}>
-    <Text style={{ color: 'ffffff' }} STAR />
+  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'yellow', padding: 30 }}>
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/delete.png')}
+    />
   </TouchableHighlight>
 ];
 
