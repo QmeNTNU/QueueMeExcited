@@ -123,6 +123,7 @@ const styles = {
     justifyContent: 'center'
   },
   headerTextStyle: {
+    //fontFamily: 'bebasNeue',
     fontSize: 18
   },
 };

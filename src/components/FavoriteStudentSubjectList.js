@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, ListView, View, Text } from 'react-native';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Input, ButtonBlue, Spinner } from './common';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import { favoriteStudentSubjectListFetch } from '../actions';
 import SubjectStudListItem from './SubjectStudListItem';
@@ -43,7 +43,7 @@ class FavoriteStudentSubjectList extends Component {
   render() {
     return (
       <View style={styles.wholeScreen}>
-        <View style={styles.ViewOrange}>
+        <View style={styles.ViewBlue}>
           <Text>
           All your subjects
           </Text>
@@ -56,11 +56,11 @@ class FavoriteStudentSubjectList extends Component {
           />
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-          <Button
+          <ButtonBlue
             onPress={() => Actions.addSubjectStudent({ modalVisible: true })}
           >
             Add your subjects
-          </Button>
+          </ButtonBlue>
         </View>
       </View>
     );
@@ -75,11 +75,11 @@ const styles = {
     fontSize: 30,
     fontWeight: 'bold',
   },
-  ViewOrange: {
+  ViewBlue: {
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F58C6C'
+    backgroundColor: '#A8D3FE'
   },
   wholeScreen: {
     flex: 1,
@@ -101,7 +101,7 @@ const styles = {
     alignItems: 'center',
     resizeMode: 'contain'
   },
-  buttonView: {
+  ButtonBlueView: {
     justifyContent: 'center',
     alignItems: 'center',
     color: '#254552',

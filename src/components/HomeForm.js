@@ -66,7 +66,7 @@ class HomeForm extends Component {
     );
   }
 }
-
+//fontFamily: 'bebasNeue'
 const styles = {
   textStyle: {
     alignSelf: 'center',
