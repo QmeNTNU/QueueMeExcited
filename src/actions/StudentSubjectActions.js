@@ -1,9 +1,7 @@
 import firebase from 'firebase';
-import { Actions } from 'react-native-router-flux';
 import {
-  SUBJECTSTUDENT_UPDATE,
-  SUBJECTSTUDENT_CREATE,
-  FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS
+  FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS,
+  LOADING
 } from './types';
 
 /*
@@ -11,13 +9,25 @@ Oppsumert hva som skjer
 oppdaterer, lager og henter fag i favorittlisten når logget inn som student
 */
 
+export const favoriteStudentSubjectListFetch = () => {
+  return (dispatch) => {
+    dispatch({ type: LOADING });
+
+    firebase.database().ref('Subject')
+      .on('value', snapshot => {
+        dispatch({ type: FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
+      });
+  };
+};
+/*
+
 export const subjectStudentUpdate = ({ prop, value }) => {
   return {
     type: SUBJECTSTUDENT_UPDATE,
     payload: { prop, value }
   };
 };
-
+/
 export const subjectStudentCreate = ({ subject }) => {
   const { currentUser } = firebase.auth();
 
@@ -31,16 +41,6 @@ export const subjectStudentCreate = ({ subject }) => {
   };
 };
 
-export const favoriteStudentSubjectListFetch = () => {
-  //const { currentUser } = firebase.auth();
-
-  return (dispatch) => {
-    firebase.database().ref('Subject')
-      .on('value', snapshot => {
-        dispatch({ type: FAVORITESTUDENTSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
-      });
-  };
-};
 
 export const subjectStudentDelete = ({ uid }) => {
   const { currentUser } = firebase.auth();
@@ -53,3 +53,4 @@ export const subjectStudentDelete = ({ uid }) => {
       });
   };
 };
+*/

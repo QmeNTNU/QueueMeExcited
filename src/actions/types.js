@@ -45,9 +45,6 @@ export const LOGOUT = 'logout';
 export const DELETE_USER = 'delete_user';
 export const CANCEL = 'cancel';
 
-export const STUDENT = 'student';
-export const STUDASS = 'studass';
-
 export const RESET_EMAIL_CHANGE = 'reset_email_change';
 export const RESET_PASSWORD_PRESS = 'reset_password_press';
 export const RESET_PASSWORD_SUCCESS = 'reset_password_success';
@@ -78,4 +75,5 @@ export const LOADING_SUBJECTS = 'LOADING_SUBJECTS';
 export const MY_LOCATION = 'MY_LOCATION';
 export const STUD_SUBJECT = 'STUD_SUBJECT';
 export const GET_MY_NAME = 'GET_MY_NAME';
+export const QUIT = 'QUIT';
 //////////////////////////////////////////////////////////////////////

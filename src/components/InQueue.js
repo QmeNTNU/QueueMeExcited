@@ -8,30 +8,31 @@ import { fetchQueue, getCount, deleteMeFromQueue, findMyPlaceInLine } from '../a
 
 class InQueue extends Component {
 componentWillMount() {
-  const { currentUser } = firebase.auth();
+  //makes ref from where we want to retrieve data
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //starts the listener for
   this.props.fetchQueue({ ref });
   this.props.getCount({ ref });
-
   //keep tract on nr user is in line.
   //if this numer is index 0 send notification
 }
 
 componentWillReceiveProps(nextProps) {
-  //if the queue is deleted, one cant call findIndex because of undefined
-  //when we get th eprops from compWillMont we want to get the place
-  //but to prevent this to be called in a cycle(every time we update props)
-  //we have to add a boolean so it only runds one time
-  if (this.props.firstboolean === true) {
-    this.props.findMyPlaceInLine(nextProps.queue, this.props.myLocation);
-  }
-  //after the initial place fetch, we will call once and stop if the next count
-  //is equal to the last one.
-  if (nextProps.queue.length < this.props.queue.length) {
-    //DID NOT WORK IF I USER PROPS.STUDASSCOUNT BECOUSE THEN IT CALLS --
-    //-- THE findMyPlaceInLine BEFORE IT GETS THE LIST.
-    this.props.findMyPlaceInLine(nextProps.queue, this.props.myLocation);
+  if (!this.props.quit) {
+    //if the queue is deleted, one cant call findIndex because of undefined
+    //when we get th eprops from compWillMont we want to get the place
+    //but to prevent this to be called in a cycle(every time we update props)
+    //we have to add a boolean so it only runds one time
+    if (this.props.firstboolean === true) {
+      this.props.findMyPlaceInLine(nextProps.queue, this.props.myLocation);
+    }
+    //after the initial place fetch, we will call once and stop if the next count
+    //is equal to the last one.
+    if (nextProps.queue.length < this.props.queue.length) {
+      //DID NOT WORK IF I USER PROPS.STUDASSCOUNT BECOUSE THEN IT CALLS --
+      //-- THE findMyPlaceInLine BEFORE IT GETS THE LIST.
+      this.props.findMyPlaceInLine(nextProps.queue, this.props.myLocation);
+    }
   }
 }
 
@@ -39,7 +40,7 @@ componentWillReceiveProps(nextProps) {
 
 
 onQuitPress() {
-//gets ref to delete (whole node)
+//gets ref to delete
  const deleteRef = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue/${this.props.myLocation}`);
 //popup dialog to make sure if user wants to quit
   Alert.alert(
@@ -77,7 +78,6 @@ renderImage() {
 }
 
   render() {
-      console.log(this.props);
     return (
       <View style={styles.wholeScreen}>
 
@@ -188,8 +188,8 @@ const mapStateToProps = (state) => {
   //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
   const { myLocation, studassLocation, subject } = state.queueInfo;
-  const { place, firstboolean } = state.inQueue;
-  return { queue, studasscount, myLocation, place, firstboolean, studassLocation, subject };
+  const { place, firstboolean, quit } = state.inQueue;
+  return { queue, studasscount, myLocation, place, firstboolean, studassLocation, subject, quit };
 };
  //kan skrive queue[0].name
 

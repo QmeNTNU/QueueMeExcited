@@ -17,6 +17,7 @@ import QueueInfoReducer from './QueueInfoReducer';
 import InQueueReducer from './InQueueReducer';
 import addSubjectReducer from './addSubjectReducer';
 import getNameReducer from './getNameReducer';
+import loadingReducer from './loadingReducer';
 ////////////////////////////////
 
 export default combineReducers({
@@ -37,6 +38,7 @@ export default combineReducers({
     queueInfo: QueueInfoReducer,
     inQueue: InQueueReducer,
     addSubject: addSubjectReducer,
-    nameRed: getNameReducer
+    nameRed: getNameReducer,
+    loading: loadingReducer
     //////////////////////////////////////////
 });

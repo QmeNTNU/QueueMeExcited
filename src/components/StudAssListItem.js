@@ -1,11 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { Button, Spinner } from './common';
 import { setInfo, addSubject } from '../actions';
 
 /* eslint-disable global-require */
@@ -22,14 +20,12 @@ class SubjectAssListItem extends Component {
 
 
   onAddPress() {
-    //const { emnekode, emnenavn } = this.props.subject;
-    console.log('PRESSED');
+    //sets info to queueInfo-reducer to show in next screen
     this.props.setInfo({ prop: 'studass', value: this.props.studass.fullname });
     this.props.setInfo({ prop: 'available', value: this.props.studass.available });
     this.props.setInfo({ prop: 'studassLocation', value: this.props.studass.userUID });
-
-
-    Actions.info();
+    //goes to next scene
+    Actions.queueInfo();
   }
 
   /* eslint-disable global-require */
@@ -111,7 +107,6 @@ const styles = {
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    alignItems: 'space-between',
     padding: 5,
   },
   arrowStyle: {
@@ -133,14 +128,12 @@ const styles = {
     fontSize: 30
   },
 };
-const mapStateToProps = state => {
-  //fungerer ikke å kalle på denne. vet ikke hvorfor
-  //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
+/*const mapStateToProps = state => {
   const favorites = _.map(state.addSubjectFetch, (val, uid) => {
     return { ...val, uid };
   });
 
   return { favorites };
-};
+};*/
 
-export default connect(mapStateToProps, { setInfo, addSubject })(SubjectAssListItem);
+export default connect(null, { setInfo, addSubject })(SubjectAssListItem);

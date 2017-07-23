@@ -1,14 +1,12 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { Button, Spinner } from './common';
-import { addSubject, studSubject } from '../actions';
-/* eslint-disable global-require */
+import { setInfo } from '../actions';
 
+/* eslint-disable global-require */
 const rightButtons = [
   <TouchableHighlight style={{ height: 80, width: 75, padding: 20, backgroundColor: 'red' }}>
     <Image
@@ -21,12 +19,13 @@ const rightButtons = [
 class SubjectStudListItem extends Component {
 
   onAddPress() {
-    //const { emnekode, emnenavn } = this.props.subject;
-    console.log('PRESSED');
-    this.props.studSubject(this.props.subject.emnekode);
-    Actions.createQueue({ subject: this.props.subject });
+    //wirtes subject to reducer for later scenes
+    this.props.setInfo({ prop: 'subject', value: this.props.subject.emnekode });
+    //moves to studasslist
+    Actions.studAssList();
   }
 
+  /* eslint-disable global-require */
 
 renderImage() {
   return (
@@ -52,7 +51,7 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
 
     return (
-      <Swipeable rightButtons={rightButtons}>
+        <Swipeable rightButtons={rightButtons}>
       <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
 
       <View style={styles.columnStyle}>
@@ -73,8 +72,7 @@ renderRow() {
 
     </View>
   </TouchableWithoutFeedback>
-</Swipeable>
-
+  </Swipeable>
     );
 }
 
@@ -96,15 +94,10 @@ const styles = {
     flexDirection: 'row',
     borderTopWidth: 0.5,
   },
-  ButtonStyle: {
-    height: 60,
-    backgroundColor: 'red'
-  },
 
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    alignItems: 'space-between',
     padding: 5,
   },
   arrowStyle: {
@@ -126,14 +119,13 @@ const styles = {
     fontSize: 18
   },
 };
-const mapStateToProps = state => {
-  //fungerer ikke å kalle på denne. vet ikke hvorfor
-  //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
+/*const mapStateToProps = state => {
+  //retireves favorite subject as a student
   const favorites = _.map(state.addSubjectFetch, (val, uid) => {
     return { ...val, uid };
   });
 
   return { favorites };
-};
+};*/
 
-export default connect(mapStateToProps, { addSubject, studSubject })(SubjectStudListItem);
+export default connect(null, { setInfo })(SubjectStudListItem);

@@ -1,16 +1,13 @@
 import { Actions } from 'react-native-router-flux';
-import { STUDENT, STUDASS } from './types';
 
 export const Student = () => {
-  return (dispatch) => {
-    dispatch({ type: STUDENT });
+  return () => {
     Actions.favoriteStudentSubjectList();
   };
 };
 
 export const studentAssistant = () => {
-  return (dispatch) => {
-    dispatch({ type: STUDASS });
+  return () => {
     Actions.favoriteAssSubjectList();
   };
 };
