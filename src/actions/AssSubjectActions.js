@@ -10,8 +10,9 @@ oppdaterer, lager og henter fag i "favorittlisten" når logget inn som studass
 
 
 export const favoriteAssSubjectListFetch = () => {
+  const userUID = firebase.auth().currentUser.uid;
   return (dispatch) => {
-    firebase.database().ref('Subject')
+    firebase.database().ref(`/users/${userUID}/favasssubject`)
       .on('value', snapshot => {
         dispatch({ type: FAVORITEASSSUBJECTLIST_FETCH_SUCCESS, payload: snapshot.val() });
       });

@@ -68,7 +68,7 @@ class FavoriteAssSubjectList extends Component {
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
-            onPress={() => Actions.addSubjectStudent({ modalVisible: true })}
+            onPress={() => console.log('pressed')}
           >
             Add your subjects
           </ButtonBlue>

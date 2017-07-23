@@ -133,9 +133,19 @@ const createUserSuccess = (dispatch, user, signupEmail, signupPassword, fullname
 
 
 const createUserInFireBase = (signupEmail, signupPassword, fullname, gender) => {
+  const emnekode = 'TDT4105';
+  const emnenavn = 'ITGK Matlab';
   const { currentUser } = firebase.auth();
     firebase.database().ref(`/users/${currentUser.uid}`)
-      .set({ signupEmail, signupPassword, fullname, gender });
+      .set({ signupEmail, signupPassword, fullname, gender })
+      .then(() => {
+        firebase.database().ref(`/users/${currentUser.uid}/favstudsubject`)
+          .push({ emnekode, emnenavn });
+      })
+      .then(() => {
+        firebase.database().ref(`/users/${currentUser.uid}/favasssubject`)
+          .push({ emnekode, emnenavn });
+      });
 };
 
 
