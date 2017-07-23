@@ -1,4 +1,4 @@
-package com.QueueMeExcited;
+package com.manager;
 
 import com.facebook.react.ReactActivity;
 
