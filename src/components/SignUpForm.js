@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, Picker, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import CheckBox from 'react-native-check-box'
 //import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import {
@@ -49,7 +50,11 @@ class SignUpForm extends Component {
  renderEmailImage() {
     /* eslint-disable global-require */
    return (
-      <Image style={styles.labelStyle} source={require('./images/mail.png')} />
+     <Image
+       style={{ flex: 1, height: undefined, width: undefined }}
+       resizeMode="contain"
+       source={require('./images/mail.png')}
+     />
     );
    /* eslint-enable global-require */
  }
@@ -57,7 +62,11 @@ class SignUpForm extends Component {
  renderPasswordImage() {
     /* eslint-disable global-require */
    return (
-      <Image style={styles.labelStyle} source={require('./images/lock.png')} />
+     <Image
+       style={{ flex: 1, height: undefined, width: undefined }}
+       resizeMode="contain"
+       source={require('./images/lock.png')}
+     />
     );
    /* eslint-enable global-require */
  }
@@ -65,7 +74,11 @@ class SignUpForm extends Component {
   renderPersonImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={styles.labelStyle} source={require('./images/name2.png')} />
+      <Image
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
+        source={require('./images/name2.png')}
+      />
      );
     /* eslint-enable global-require */
   }
@@ -75,6 +88,19 @@ class SignUpForm extends Component {
       <Image style={styles.imageStyle} source={require('./images/lock.png')} />
     );
    /* eslint-enable global-require */
+ }
+
+ checkMale() {
+   if (this.props.gender === 'male') {
+     this.props.genderUpdate({ prop: 'gender', value: '' });
+   }
+   this.props.genderUpdate({ prop: 'gender', value: 'male' });
+ }
+ checkFemale() {
+   if (this.props.gender === 'female') {
+     this.props.genderUpdate({ prop: 'gender', value: '' });
+   }
+   this.props.genderUpdate({ prop: 'gender', value: 'female' });
  }
 
   render() {
@@ -130,15 +156,18 @@ class SignUpForm extends Component {
           </View>
 
           <View style={styles.sectionStyle}>
-            <Picker
-            style={styles.pickerStyle}
-            selectedValue={this.props.gender}
-            onValueChange={gender => this.props.genderUpdate({ prop: 'gender', value: gender })}
-            >
-              <Picker.Item label="                             -select a gender-" value="" />
-              <Picker.Item label="                                       male" value="male" />
-              <Picker.Item label="                                      female" value="female" />
-            </Picker>
+            <CheckBox
+                style={{ flex: 1, padding: 10 }}
+                onClick={this.checkMale.bind(this)}
+                isChecked={this.props.gender === 'male'}
+                leftText='Male'
+            />
+            <CheckBox
+                style={{ flex: 1, padding: 10 }}
+                onClick={this.checkFemale.bind(this)}
+                isChecked={this.props.gender === 'female'}
+                leftText='Female'
+            />
           </View>
 
           <View style={styles.containerStyle}>
@@ -172,15 +201,16 @@ const styles = {
     textAlign: 'center'
   },
   sectionStyle: {
-    paddingLeft: 30,
-    paddingRight: 30,
-    paddingTop: 10,
     flex: 1,
-    flexDirection: 'row', //ordnes horisontalt
-    alignItems: 'flex-start',
-    backgroundColor: '#95CAFE'
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingBottom: 2,
+    position: 'relative',
+    marginLeft: 40,
+    marginRight: 40
   },
   containerStyle: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,

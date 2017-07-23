@@ -48,10 +48,8 @@ const styles = {
 
   labelStyle: {
   flex: 1,
-  padding: 2,
+  padding: 10,
   backgroundColor: '#F58C6C',
-  justifyContent: 'center',
-   alignItems: 'center'
   }
 };
 

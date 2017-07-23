@@ -26,7 +26,12 @@ class LoginForm extends Component {
   renderImage() {
     /* eslint-disable global-require */
    return (
-    <Image style={styles.imageStyle} source={require('./images/LOGO.png')} />
+
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/LOGO.png')}
+    />
     );
    /* eslint-enable global-require */
   }
@@ -34,7 +39,11 @@ class LoginForm extends Component {
   renderEmailImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={styles.labelStyle} source={require('./images/mail.png')} />
+       <Image
+         style={{ flex: 1, height: undefined, width: undefined }}
+         resizeMode="contain"
+         source={require('./images/mail.png')}
+       />
      );
     /* eslint-enable global-require */
   }
@@ -42,7 +51,11 @@ class LoginForm extends Component {
   renderPasswordImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={styles.labelStyle} source={require('./images/lock.png')} />
+      <Image
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
+        source={require('./images/lock.png')}
+      />
      );
     /* eslint-enable global-require */
   }
@@ -118,14 +131,14 @@ class LoginForm extends Component {
 
 const styles = {
   containerStyle: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
   },
   ImageViewStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    paddingBottom: 2,
+    flex: 3,
+
   },
   imageStyle: {
     flex: 1,
@@ -133,7 +146,6 @@ const styles = {
 
     resizeMode: 'contain',
     alignSelf: 'center',
-    position: 'relative'
 
   },
   labelStyle: {
