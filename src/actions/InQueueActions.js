@@ -1,15 +1,17 @@
+import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { Alert } from 'react-native';
-import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, DELETE_QUEUE, DELETE_COUNT, QUIT } from './types';
+import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT } from './types';
 
 
-export const deleteMeFromQueue = (deleteRef) => {
+export const deleteMeFromQueue = ({ deleteRef, ref }) => {
 
   return (dispatch) => {
     //to prevent WillRecieveProps to cal firstInline, and show alert!
     dispatch({ type: QUIT });
 
     //removed value
+    ref.off();
     deleteRef.remove()
     .then(() => {
       //SHOULD SHOW SPINNER??
@@ -17,52 +19,49 @@ export const deleteMeFromQueue = (deleteRef) => {
       //move to another scene
       //needs to change
       dispatch({ type: DELETED_ME_FROM_QUEUE });
-      // since i am going out of the queue, i dont need to store queue in state
-      //DELETE_QUEUE sets state "queue" to initial state
-      dispatch({ type: DELETE_QUEUE });
       //go to homescreen
       Actions.home({ type: 'reset' });
-   });
+    });
   };
 };
 
-export const findMyPlaceInLine = (queue, myLocation) => {
+
+export const findMyPlaceInLine = ({ ref }) => {
   //takes in the queue as an array
-  //me as an object should be stored in memory so i can use it as a whole object
-  //or get just name, uid ect
-
-  /*return (dispatch) => {
-  const userEmail1 = firebase.auth().currentUser.email;
-  const userGender1 = 'male';
-  const userUID1 = firebase.auth().currentUser.uid;
-  //making me a object
-  const Me = { userEmail: userEmail1, userUID: userUID1, userGender: userGender1 };
-
-    const place = queue.indexOf(Me);
-    dispatch({ type: FOUND_MY_PLACE, payload: place });
-  };*/
 
 return (dispatch) => {
-  for (let i = 0; i < queue.length; i++) {
-      if (queue[i].uid === myLocation) {
-          dispatch({ type: FOUND_MY_PLACE, payload: i + 1 });
-          return;
-      }
+  const userUID = firebase.auth().currentUser.uid;
+
+  let count = 0;
+    ref.on('value', snapshot => {
+  // The callback function should be called for every update in database
+  console.log(snapshot.val() === null);
+  if (snapshot.val() === null) {
+    ref.off();
+    isDeleted();
+    return true;
   }
-  console.log(queue);
-  //to handle the case where the value doesn't exist
+  snapshot.forEach(childSnapshot => {
+    count += 1;
+    console.log('minUID', userUID);
+    console.log(childSnapshot.val());
+    console.log(count);
+  if (userUID === childSnapshot.val().userUID) {
+    dispatch({ type: FOUND_MY_PLACE, payload: count });
+    count = 0;
+    return true;
+  }
+  });
+});
+
+
+const isDeleted = () => {
+//Getscalled when it tries to retrieve data but doesent fint it
   Alert.alert(
   'Stepped out of line',
-  'You have been removed from this queue. Either it has been your turn, you quit, or the student assisten has ended the queue.\n\nYou will be taken to the homescreen.',
+  'You have been removed from this queue. Either it has been your turn, or the student assisten has ended the queue.\n\nYou will be taken to the homescreen.',
     [
       { text: 'OK', onPress: () => Actions.home(({ type: 'reset' })) },
     ]
   );
-  /*  dispatch({ type: FOUND_MY_PLACE, payload: -1 });
-    // since i am going out of the queue, i dont need to store queue nor count in state
-    //DELETE_QUEUE sets state "queue" to initial state
-    dispatch({ type: DELETE_QUEUE });
-    //delete count sets state "count" to initial state
-    dispatch({ type: DELETE_COUNT });*/
-  };
 };
