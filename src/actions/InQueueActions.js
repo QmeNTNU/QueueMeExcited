@@ -64,4 +64,4 @@ const isDeleted = () => {
       { text: 'OK', onPress: () => Actions.home(({ type: 'reset' })) },
     ]
   );
-};
+}
