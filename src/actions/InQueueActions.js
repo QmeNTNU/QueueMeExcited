@@ -33,9 +33,11 @@ return (dispatch) => {
   const userUID = firebase.auth().currentUser.uid;
 
   let count = 0;
+  let bool = false;
     ref.on('value', snapshot => {
   // The callback function should be called for every update in database
   console.log(snapshot.val() === null);
+  //if the queue is empty ( in case studass deletes it)
   if (snapshot.val() === null) {
     ref.off();
     isDeleted();
@@ -49,11 +51,20 @@ return (dispatch) => {
   if (userUID === childSnapshot.val().userUID) {
     dispatch({ type: FOUND_MY_PLACE, payload: count });
     count = 0;
+    bool = true;
     return true;
   }
   });
+  //makes sure it is deletes if it studass swipes him and there is someone behind
+  //is run if it cant find him in th equeue
+  if (!bool) {
+    isDeleted();
+  }
+  //setting back to initial
+  bool = false;
 });
-
+};
+};
 
 const isDeleted = () => {
 //Getscalled when it tries to retrieve data but doesent fint it
@@ -64,4 +75,4 @@ const isDeleted = () => {
       { text: 'OK', onPress: () => Actions.home(({ type: 'reset' })) },
     ]
   );
-}
+};
