@@ -77,4 +77,5 @@ export const STUD_SUBJECT = 'STUD_SUBJECT';
 export const GET_MY_NAME = 'GET_MY_NAME';
 export const QUIT = 'QUIT';
 export const LOADING_BUTTON = 'LOADING_BUTTON';
+export const FIRST_KEY = 'FIRST_KEY';
 //////////////////////////////////////////////////////////////////////
