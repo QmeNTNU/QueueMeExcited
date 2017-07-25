@@ -17,14 +17,8 @@ componentDidMount() {
   const userUID = firebase.auth().currentUser.uid;
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue`);
   //starts the listener for
-  this.props.fetchQueue({ ref });
+  this.props.firstInLine({ ref });
   this.props.getCount({ ref });
-  //AFTER COMPONENTWILMOUNT HAVE FETCHED THE LIST I WANT TO RETRIVE firstInLine
-  //componentWillReceiveProps dosent get called with initial props, so i have to do it here
-  if (this.props.queue.length) {
-    const text = this.props.queue[0].fullname;
-    this.props.firstInLine(text);
-  }
 
   //on timeout the queue will be deleted
   //KAN VURDERE OG SETTE EN STATE "TOUCHED" TIL Å SE HVOR LENGE SIDEN DET ER STUDASS VAR AKTIV
@@ -40,7 +34,7 @@ componentDidMount() {
       );
    }, 10000);*/
 }
-componentWillReceiveProps(nextProps) {
+/*componentWillReceiveProps(nextProps) {
   //keeps track of the first person in line to display to scrrem
 
   //porblem with getting firstInLine called on the initial fetch if there where
@@ -71,7 +65,7 @@ if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
   this.props.firstInLine(text);
   return;
 }
-}
+}*/
 //when quiting queue
 onQuitPress() {
   const userUID = firebase.auth().currentUser.uid;
@@ -91,18 +85,10 @@ const deleteRef = firebase.database().ref(`Subject/${this.props.studassSubject}/
 //when goint to next in line
 onNextPress() {
   const userUID = firebase.auth().currentUser.uid;
-  //should delete index 0 from databse.
-  //list would automaticly render
-//prevents app to call undefined queue[0] since empty
-  if (!this.props.queue.length) {
-      return;//NOT NEEDED F BUTTON IS HIDDEN!
-  }
-  const firstUID = this.props.queue[0].uid;
-  const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`)
-                      .child(firstUID);
+  const firstUID = this.props.firstKey;
+  console.log('firstKey', firstUID);
+  const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue/${firstUID}`);
   this.props.nextDelete(nextRef);
-
-console.log(this.props);
 }
 
 renderImage() {
@@ -262,8 +248,8 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first, myLocation, studassSubject } = state.createQueue;
-  return { queue, studasscount, first, myLocation, studassSubject };
+  const { first, myLocation, studassSubject, firstKey } = state.createQueue;
+  return { queue, studasscount, first, myLocation, studassSubject, firstKey };
 };
  //kan skrive queue[0].name
 
