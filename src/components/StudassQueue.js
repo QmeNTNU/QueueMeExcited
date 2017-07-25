@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, View, Alert, Image } from 'react-native';
+import { Text, View, Alert, Image, AsyncStorage } from 'react-native';
 import { Button, ButtonTextGreen } from './common';
 import { fetchQueue, getCount, deleteQueue, nextDelete, firstInLine } from '../actions';
 
@@ -19,6 +19,7 @@ componentDidMount() {
   //starts the listener for
   this.props.firstInLine({ ref });
   this.props.getCount({ ref });
+  this.setRecover();
 
   //on timeout the queue will be deleted
   //KAN VURDERE OG SETTE EN STATE "TOUCHED" TIL Å SE HVOR LENGE SIDEN DET ER STUDASS VAR AKTIV
@@ -34,38 +35,7 @@ componentDidMount() {
       );
    }, 10000);*/
 }
-/*componentWillReceiveProps(nextProps) {
-  //keeps track of the first person in line to display to scrrem
 
-  //porblem with getting firstInLine called on the initial fetch if there where
-  //peaple in line from before
-  //solved it by saying that it should be called if the inital queue is null
-  //and the incoming queue is not.THIS STOPS THE APP FROM LOOP-RENDER
-if (!this.props.queue.length && nextProps.queue.length) {
-  const text = nextProps.queue[0].fullname;
-  this.props.firstInLine(text);
-  return;
-}
-
-//if we press next and there is noone lefts
-//->nextProp will be empty and we can not call on queueu[0]
-if (!nextProps.queue.length) {
-  // STOPS IT FROM A RENDER-LOOP
-  if (this.props.first === 'There are no students in line') {
-    console.log('RETURN FIRST UNCHANGED');
-    return;
-  }
-  const text = 'There are no students in line';
-  this.props.firstInLine(text);
-  return;
-}
-//only updates if latest prop is different
-if (this.props.queue[0].uid !== nextProps.queue[0].uid) {
-  const text = nextProps.queue[0].fullname;
-  this.props.firstInLine(text);
-  return;
-}
-}*/
 //when quiting queue
 onQuitPress() {
   const userUID = firebase.auth().currentUser.uid;
@@ -90,6 +60,16 @@ onNextPress() {
   const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue/${firstUID}`);
   this.props.nextDelete(nextRef);
 }
+
+
+async setRecover() {
+  try {
+    await AsyncStorage.setItem('asyncStudassSubject', this.props.studassSubject);
+  } catch (error) {
+    console.log('--------------ERROR ASYNC SETITEM------------------');
+  }
+}
+
 
 renderImage() {
   //gets gender to display either girl or boy

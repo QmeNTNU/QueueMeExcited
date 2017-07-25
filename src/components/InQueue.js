@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, Alert, View, Image } from 'react-native';
+import { Text, Alert, View, Image, AsyncStorage } from 'react-native';
 import { Button } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine } from '../actions';
 
@@ -12,9 +12,11 @@ componentWillMount() {
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
     //starts the listener for
   this.props.getCount({ ref });
+  console.log('-----------');
   this.props.findMyPlaceInLine({ ref });
   //keep tract on nr user is in line.
   //if this numer is index 0 send notification
+  this.setRecover();
 }
 
 //NEED A ONBACKPRESS
@@ -36,6 +38,18 @@ onQuitPress() {
     ]
   );
 }
+
+
+async setRecover() {
+  try {
+    await AsyncStorage.setItem('asyncStudentSubject', this.props.subject);
+    await AsyncStorage.setItem('asyncStudentstudassLocation', this.props.studassLocation);
+    await AsyncStorage.setItem('asyncStudentmyLocation', this.props.myLocation);
+  } catch (error) {
+    console.log('--------------ERROR ASYNC SETITEM------------------');
+  }
+}
+
 
 getGender() {
   //GETGENDER FROM STATE/ ASYNC STORAGE. SHOULD RETRIVE THIS IN COMPONENTWILLMOUNT

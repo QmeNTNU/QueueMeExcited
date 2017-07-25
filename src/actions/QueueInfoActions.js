@@ -10,7 +10,14 @@ export const setInfo = ({ prop, value }) => {
     payload: { prop, value }
   };
 };
-
+export const setMyLocation = (key) => {
+  //sets info from different student-scenes in reducer.
+  //a combined way of writhing one actioncreater for different instances.
+  return {
+    type: ADDED_TO_QUEUE,
+    payload: key
+  };
+};
 export const addToQueue = ({ ref, myName }) => {
   //OPS! COULD USE REGULAR SET TO EASILY KNOW THE NODE-ID, BUT PUSH GIVES BETTER PERFORMANCE
   //AND PUTS/FETCHES CHILDREN IN CHRONOLOGICAL ORDER

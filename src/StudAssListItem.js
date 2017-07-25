@@ -139,6 +139,7 @@ const styles = {
   const favorites = _.map(state.addSubjectFetch, (val, uid) => {
     return { ...val, uid };
   });
+
   return { favorites };
 };*/
 
