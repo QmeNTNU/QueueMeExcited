@@ -65,7 +65,6 @@ onNextPress() {
 async setRecover() {
   try {
     await AsyncStorage.setItem('asyncStudassSubject', this.props.studassSubject);
-    await AsyncStorage.setItem('asyncStudassFirstKey', this.props.firstKey);
   } catch (error) {
     console.log('--------------ERROR ASYNC SETITEM------------------');
   }

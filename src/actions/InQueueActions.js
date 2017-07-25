@@ -36,7 +36,7 @@ return (dispatch) => {
   let bool = false;
     ref.on('value', snapshot => {
   // The callback function should be called for every update in database
-  console.log(snapshot.val() === null);
+  console.log('findMyPlaceInLine', snapshot.val() === null);
   //if the queue is empty ( in case studass deletes it)
   if (snapshot.val() === null) {
     ref.off();

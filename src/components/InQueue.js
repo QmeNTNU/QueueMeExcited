@@ -12,9 +12,11 @@ componentWillMount() {
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
     //starts the listener for
   this.props.getCount({ ref });
+  console.log('-----------');
   this.props.findMyPlaceInLine({ ref });
   //keep tract on nr user is in line.
   //if this numer is index 0 send notification
+  this.setRecover();
 }
 
 //NEED A ONBACKPRESS
