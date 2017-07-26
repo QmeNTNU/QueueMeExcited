@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Alert, Image, AsyncStorage } from 'react-native';
-import { Button, ButtonTextGreen } from './common';
+import { ButtonBlue, ButtonTextGreen } from './common';
 import { fetchQueue, getCount, deleteQueue, nextDelete, firstInLine } from '../actions';
 
 class StudassQueue extends Component {
@@ -112,9 +112,9 @@ renderScreen() {
         <View style={{ flex: 1 }} />
 
         <View style={styles.buttonView}>
-          <Button onPress={this.onQuitPress.bind(this)}>
+          <ButtonBlue onPress={this.onQuitPress.bind(this)}>
             QUIT
-          </Button>
+          </ButtonBlue>
           <ButtonTextGreen disabled onPress={this.onNextPress.bind(this)}>
             NEXT
           </ButtonTextGreen>
@@ -150,9 +150,9 @@ renderScreen() {
         </View>
 
         <View style={styles.buttonView}>
-          <Button onPress={this.onQuitPress.bind(this)}>
+          <ButtonBlue onPress={this.onQuitPress.bind(this)}>
             QUIT
-          </Button>
+          </ButtonBlue>
           <ButtonTextGreen onPress={this.onNextPress.bind(this)}>
             NEXT
           </ButtonTextGreen>
@@ -213,7 +213,8 @@ renderScreen() {
     },
     textStyle: {
       color: '#ffffff',
-      fontSize: 25
+      fontSize: 25,
+      fontFamily: 'bebasNeue'
     },
     textStyle2: {
       fontSize: 18

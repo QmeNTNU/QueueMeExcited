@@ -19,7 +19,7 @@ const InputCreate = ({ value, onChangeText, placeholder, secureTextEntry, keyboa
         width={width}
         value={value}
         onChangeText={onChangeText}
-        underlineColorAndroid='black'//få vekk dritt underline
+        underlineColorAndroid='#F58C6C' //få vekk dritt underline
       />
     </View>
   );
@@ -42,6 +42,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ffffff'
   }
 };
 

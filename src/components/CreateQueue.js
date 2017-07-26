@@ -57,6 +57,18 @@ onButtonPress() {
   /* eslint-enable global-require */
   }
 
+  renderArrowDownImage() {
+    //eslint comments lets us retrieve image!!!
+    /* eslint-disable global-require */
+    return (
+      <Image
+      style={styles.imageStyle}
+      source={require('./images/arrowdown.png')}
+      />
+    );
+  /* eslint-enable global-require */
+  }
+
   renderButton() {
     if (this.props.loadingButton) {
       return <Spinner size="large" />;
@@ -80,23 +92,27 @@ onButtonPress() {
         <View style={styles.imageView}>
           {this.renderImage()}
         </View>
+  <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 20 }}>
+    <View style={{ height: 10, alignItems: 'center' }}>
+      {this.renderArrowDownImage()}
+    </View>
 
         <View style={styles.infoView}>
-        <Text style={styles.textStyle}>I will be available from now to</Text>
+        <Text style={styles.textStyle3}>I will be available from now to</Text>
         </View>
 
         <View style={styles.ContainerView}>
             <InputCreate
               placeholder="00.00"
-              keyboardType='numeric'
+              keyboardType='default'
               maxLength={5}
               width={60}
               value={this.props.available}
               onChangeText={this.onAvailableChange.bind(this)}
             />
           <View style={styles.infoView}>
-            <Text style={styles.textStyle}>Oclock</Text>
-            <Text style={styles.textStyle}> in</Text>
+            <Text style={styles.textStyle3}> Oclock </Text>
+            <Text style={styles.textStyle3  }>in </Text>
           </View>
             <InputCreate
               placeholder="room.nr"
@@ -107,10 +123,16 @@ onButtonPress() {
               onChangeText={this.onRoomChange.bind(this)}
             />
         </View>
+    </View>
 
 
         <Text style={styles.errorTextStyle}>{this.props.error}</Text>
 
+        <View style={{ flex: 1 }}>
+          <Text style={{ color: '#ffffff' }}>
+            PLACEHOLDER
+          </Text>
+        </View>
 
         <View style={styles.buttonView}>
           {this.renderButton()}
@@ -129,7 +151,7 @@ const styles = {
     backgroundColor: '#ffffff'
   },
   imageView: {
-    flex: 4,
+    flex: 5,
   },
   imageStyle: {
     flex: 1,
@@ -140,8 +162,8 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 60,
-    paddingRight: 60
+    paddingLeft: 50,
+    paddingRight: 50
   },
   infoView: {
     flex: 1,
@@ -159,7 +181,19 @@ const styles = {
     backgroundColor: '#95CAFE'
   },
   textStyle: {
-    fontSize: 20
+    fontSize: 20,
+  },
+  textStyle2: {
+    color: '#F58C6C',
+    fontFamily: 'bebasNeue',
+    fontSize: 20,
+
+  },
+  textStyle3: {
+    color: '#ffffff',
+    fontSize: 20,
+    fontFamily: 'bebasNeue',
+
   },
   errorTextStyle: {
     fontSize: 20,

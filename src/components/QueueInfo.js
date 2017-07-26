@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Image } from 'react-native';
-import { Button, Spinner } from './common';
+import { ButtonBlue, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
 
 class QueueInfo extends Component {
@@ -14,7 +14,7 @@ this.props.getCount(ref);
 }
 
 
-onButtonPress() {
+onButtonBluePress() {
   //gets user name from props (value is retireved and sat to reducer in home-scene)
   const { myName } = this.props;
   //makes ref from where we want to retrieve data
@@ -30,20 +30,32 @@ renderImage() {
   return (
     <Image
     style={styles.imageStyle}
-    source={require('./images/signqueue.png')}
+    source={require('./images/choosepersonstud.png')}
     />
   );
 /* eslint-enable global-require */
 }
 
-renderButton() {
+renderArrowDownImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/arrowdown.png')}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderButtonBlue() {
   if (this.props.loading) {
     return <Spinner size="large" />;
   }
   return (
-    <Button onPress={this.onButtonPress.bind(this)}>
+    <ButtonBlue onPress={this.onButtonBluePress.bind(this)}>
       ADD TO QUEUE
-    </Button>
+    </ButtonBlue>
   );
 }
 
@@ -55,32 +67,46 @@ renderButton() {
       </View>
 
 
-      <View style={styles.containerStyle}>
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Subject</Text>
-          <Text style={styles.textStyle}>{this.props.subject}</Text>
+      <View style={{ flex: 3, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40 }}>
+
+        <View style={{ height: 10, alignItems: 'center' }}>
+          {this.renderArrowDownImage()}
         </View>
 
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Student Assistent</Text>
-          <Text style={styles.textStyle}>{this.props.studass}</Text>
-        </View>
+        <View style={styles.ContainerView}>
 
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>People in line</Text>
-          <Text style={styles.textStyle}>{this.props.studasscount}</Text>
-        </View>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderColor: '#ffffff' }}>
+            <Text style={styles.textStyle}>{this.props.studass}</Text>
+          </View>
 
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle2}>Available until</Text>
-          <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
-        </View>
+          <View style={styles.infoView}>
+            <Text style={styles.textStyle2}>People in line: </Text>
+            <Text style={styles.textStyle}>{this.props.studasscount}</Text>
+          </View>
 
+
+          <View style={styles.infoView}>
+            <Text style={styles.textStyle2}>Subject: </Text>
+            <Text style={styles.textStyle}>{this.props.subject}</Text>
+          </View>
+
+
+          <View style={styles.infoView}>
+            <Text style={styles.textStyle2}>Available until: </Text>
+            <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
+          </View>
+
+        </View>
+    </View>
+
+      <View style={{ flex: 1 }}>
+        <Text style={{ color: '#ffffff' }}>
+          PLACEHOLDER
+        </Text>
       </View>
 
-
-      <View style={styles.buttonView}>
-        {this.renderButton()}
+      <View style={styles.ButtonBlueView}>
+        {this.renderButtonBlue()}
       </View>
 
 
@@ -93,6 +119,7 @@ const styles = {
   wholeScreen: {
     flex: 1,
     flexDirection: 'column',
+    backgroundColor: '#ffffff'
   },
   imageView: {
     flex: 5,
@@ -106,20 +133,21 @@ const styles = {
 
   },
   ContainerView: {
-    flex: 5,
+    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 20,
+
   },
   infoView: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: 30,
-    marginRight: 30,
-    marginTop: 5,
-    marginBottom: 5
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+
   },
-  buttonView: {
+  ButtonBlueView: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -128,10 +156,14 @@ const styles = {
   },
   textStyle: {
     color: '#ffffff',
-    fontSize: 25
+    fontSize: 25,
+    fontFamily: 'bebasNeue'
   },
   textStyle2: {
-    color: '#F58C6C'
+    color: '#F58C6C',
+    fontFamily: 'bebasNeue',
+    fontSize: 25,
+
   }
 };
 

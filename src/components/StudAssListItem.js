@@ -54,6 +54,16 @@ renderArrowImage() {
   );
 }
 
+renderStarImage() {
+  return (
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/starred.png')}
+    />
+  );
+}
+
   /* eslint-enable global-require */
 
 renderRow() {
@@ -78,7 +88,10 @@ renderRow() {
             <Text style={styles.headerTextStyle}>{fullname}</Text>
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
-            <Text> Available until: {available} </Text>
+            <View style={{ flex: 1 }}>
+                <Text> Available until: {available} </Text>
+            </View>
+
           </View>
       </View>
 
@@ -105,16 +118,18 @@ renderRow() {
 const styles = {
   columnStyle: {
     flex: 10,
-    height: 100,
+    height: 80,
     marginLeft: 10,
     marginRight: 10,
     justifyContent: 'flex-start',
     flexDirection: 'row',
+    borderTopWidth: 0.5,
   },
 
   thumbnailContainerStyle: {
     flex: 2,
-    padding: 10,
+    justifyContent: 'space-between',
+    padding: 3,
   },
   arrowStyle: {
     flex: 1,
