@@ -1,9 +1,11 @@
 import {
-GET_MY_NAME
+GET_MY_NAME,
+GET_MY_GENDER
 } from '../actions/types';
 
 const INITIAL_STATE = {
-    myName: ''
+    myName: '',
+    myGender: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -11,7 +13,9 @@ export default (state = INITIAL_STATE, action) => {
       case GET_MY_NAME:
       console.log('My name', action);
         return { ...state, myName: action.payload };
-
+      case GET_MY_GENDER:
+        console.log('My name', action);
+          return { ...state, myGender: action.payload };
       default:
         return state;
     }

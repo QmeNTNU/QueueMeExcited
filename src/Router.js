@@ -113,6 +113,7 @@ const RouterComponent = () => {
             key="studassQueue"
             component={StudassQueue}
             title="Queue"
+            hideNavBar
           />
           <Scene
             key="inQueue"

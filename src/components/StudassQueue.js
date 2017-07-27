@@ -76,11 +76,23 @@ renderImage() {
   const gender = 'male';
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = gender === 'female' ? require('./images/girlstud.png') : require('./images/astudquestion.png');
+  const icon = gender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue.png');
   return (
     <Image
       style={styles.imageStyle}
       source={icon}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderArrowDownImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/arrowdownblue.png')}
     />
   );
 /* eslint-enable global-require */
@@ -134,12 +146,18 @@ renderScreen() {
           {this.renderImage()}
         </View>
 
+        <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
+
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
+
         <View style={styles.infoView}>
           <Text style={styles.textStyle}>{this.props.first}</Text>
         </View>
 
         <View style={styles.ContainerView}>
-        <View>
+            <View>
               <Text style={styles.textStyle2}>Students in line: </Text>
             </View>
             <View>
@@ -148,6 +166,7 @@ renderScreen() {
               </Text>
             </View>
         </View>
+      </View>
 
         <View style={styles.buttonView}>
           <ButtonBlue onPress={this.onQuitPress.bind(this)}>
@@ -190,14 +209,16 @@ renderScreen() {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'flex-start',
+      alignItems: 'center',
     },
     infoView: {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 5,
-      marginBottom: 5
+      marginLeft: 40,
+      marginRight: 40,
+      borderBottomWidth: 1,
+      borderColor: '#ffffff'
     },
     nextView: {
       flexDirection: 'column',
@@ -217,7 +238,10 @@ renderScreen() {
       fontFamily: 'bebasNeue'
     },
     textStyle2: {
-      fontSize: 18
+      color: '#F58C6C',
+      fontFamily: 'bebasNeue',
+      fontSize: 25,
+
     }
 
   };
