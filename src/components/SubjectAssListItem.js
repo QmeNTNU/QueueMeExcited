@@ -119,7 +119,9 @@ const styles = {
   },
   headerTextStyle: {
     fontFamily: 'bebasNeue',
-    fontSize: 40
+    fontSize: 40,
+    color: '#213140'
+
   },
 };
 /*const mapStateToProps = state => {

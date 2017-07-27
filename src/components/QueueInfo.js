@@ -42,7 +42,7 @@ renderArrowDownImage() {
   return (
     <Image
     style={styles.imageStyle}
-    source={require('./images/arrowdown.png')}
+    source={require('./images/arrowdownblue.png')}
     />
   );
 /* eslint-enable global-require */
@@ -62,12 +62,15 @@ renderButtonBlue() {
   render() {
     return (
     <View style={styles.wholeScreen}>
-      <View style={styles.imageView}>
-        {this.renderImage()}
+
+      <View style={{ flex: 1 }}>
+        <Text style={{ color: '#95CAFE' }}>
+          PLACEHOLDER
+        </Text>
       </View>
 
 
-      <View style={{ flex: 3, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40 }}>
+      <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40 }}>
 
         <View style={{ height: 10, alignItems: 'center' }}>
           {this.renderArrowDownImage()}
@@ -75,8 +78,9 @@ renderButtonBlue() {
 
         <View style={styles.ContainerView}>
 
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderColor: '#ffffff' }}>
-            <Text style={styles.textStyle}>{this.props.studass}</Text>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderColor: '#ffffff', marginTop: 10 }}>
+
+            <Text style={styles.textStyleBig}>{this.props.studass}</Text>
           </View>
 
           <View style={styles.infoView}>
@@ -96,18 +100,24 @@ renderButtonBlue() {
             <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
           </View>
 
+          <View style={styles.infoView}>
+            <Text style={styles.textStyle2}>Room: </Text>
+            <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
+          </View>
         </View>
     </View>
 
+    <View style={styles.ButtonBlueView}>
+      {this.renderButtonBlue()}
+    </View>
+
       <View style={{ flex: 1 }}>
-        <Text style={{ color: '#ffffff' }}>
+        <Text style={{ color: '#95CAFE' }}>
           PLACEHOLDER
         </Text>
       </View>
 
-      <View style={styles.ButtonBlueView}>
-        {this.renderButtonBlue()}
-      </View>
+
 
 
     </View>
@@ -119,7 +129,6 @@ const styles = {
   wholeScreen: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#ffffff'
   },
   imageView: {
     flex: 5,
@@ -164,7 +173,13 @@ const styles = {
     fontFamily: 'bebasNeue',
     fontSize: 25,
 
-  }
+  },
+  textStyleBig: {
+    color: '#ffffff',
+    fontFamily: 'bebasNeue',
+    fontSize: 40,
+
+  },
 };
 
 const mapStateToProps = (state) => {

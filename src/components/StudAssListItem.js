@@ -39,7 +39,7 @@ renderImage() {
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
       resizeMode="contain"
-      source={require('./images/choosepersonstud.png')}
+      source={require('./images/choosepersonstud2.png')}
     />
   );
 }
@@ -147,7 +147,8 @@ const styles = {
   },
   headerTextStyle: {
     fontSize: 40,
-    fontFamily: 'bebasNeue'
+    fontFamily: 'bebasNeue',
+    color: '#213140'
   },
 };
 /*const mapStateToProps = state => {

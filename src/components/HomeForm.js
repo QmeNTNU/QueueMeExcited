@@ -152,10 +152,11 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 20,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    fontFamily: 'bebasNeue',
+
   },
   buttonStyle: {
     flex: 1,
