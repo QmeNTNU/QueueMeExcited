@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, Alert, View, Image, AsyncStorage } from 'react-native';
-import { Button } from './common';
+import { ButtonBlue } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine } from '../actions';
 
 class InQueue extends Component {
@@ -65,11 +65,24 @@ renderImage() {
   const gender = this.getGender();
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = gender === 'female' ? require('./images/coffeegirl2.png') : require('./images/coffee3.png');
+  const icon = gender === 'female' ? require('./images/inqueuewoman.png') : require('./images/inqueue.png');
   return (
     <Image
-      style={styles.imageStyle}
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
       source={icon}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderArrowDownImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/arrowdownblue.png')}
     />
   );
 /* eslint-enable global-require */
@@ -79,35 +92,36 @@ renderImage() {
     return (
       <View style={styles.wholeScreen}>
 
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle}>You are queued</Text>
-          <Text style={styles.textStyle2}>Relax and do your thing</Text>
-        </View>
 
         <View style={styles.imageView}>
           {this.renderImage()}
         </View>
 
-        <View style={styles.ContainerView}>
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle4}>You are nr: </Text>
-        </View>
-        <View style={styles.infoView2}>
-          <View style={styles.infoView}>
-            <Text style={styles.textStyle3}> {this.props.place}</Text>
-          </View>
-          <View style={styles.infoViewRight}>
-            <Text style={styles.textStyle4}>/{this.props.studasscount}</Text>
-          </View>
-        </View>
-        </View>
+        <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, marginTop: -50, paddingBottom: 10 }}>
 
-        <View style={styles.buttonView}>
-          <Button onPress={this.onQuitPress.bind(this)}>
-            QUIT
-          </Button>
-        </View>
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
 
+          <View style={styles.ContainerView}>
+            <View style={styles.infoView}>
+              <Text style={styles.textStyle}>You are nr: </Text>
+            </View>
+            <View style={styles.infoView2}>
+              <View style={styles.infoVie2}>
+                <Text style={styles.textStyle2}> {this.props.place}/{this.props.studasscount}</Text>
+              </View>
+            </View>
+          </View>
+
+          </View>
+
+          <View style={styles.buttonView}>
+            <ButtonBlue onPress={this.onQuitPress.bind(this)}>
+              QUIT
+            </ButtonBlue>
+
+        </View>
 
       </View>
       );
@@ -121,9 +135,7 @@ renderImage() {
     },
     imageView: {
       flex: 5,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
+
     },
     imageStyle: {
       flex: 1,
@@ -131,28 +143,25 @@ renderImage() {
     },
     ContainerView: {
       flex: 2,
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
     },
     infoView: {
-      flexDirection: 'column',
+      flex: 1,
+      flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 5,
-      marginBottom: 5
+      borderBottomWidth: 1,
+      borderColor: '#ffffff'
     },
     infoView2: {
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center'
     },
-    infoViewRight: {
-      flexDirection: 'column',
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end',
-      marginTop: 30
-    },
+
     buttonView: {
       flex: 1,
       flexDirection: 'column',
@@ -162,11 +171,13 @@ renderImage() {
     },
     textStyle: {
       color: '#ffffff',
-      fontSize: 18
+      fontSize: 25,
+      fontFamily: 'bebasNeue'
     },
     textStyle2: {
       color: '#ffffff',
-      fontSize: 25
+      fontSize: 40,
+      fontFamily: 'bebasNeue'
     },
     textStyle3: {
       fontSize: 50

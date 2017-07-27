@@ -118,6 +118,7 @@ const RouterComponent = () => {
             key="inQueue"
             component={InQueue}
             title="In Queue"
+            hideNavBar
           />
     </Scene>
 
