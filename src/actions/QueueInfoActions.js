@@ -18,13 +18,13 @@ export const setMyLocation = (key) => {
     payload: key
   };
 };
-export const addToQueue = ({ ref, myName }) => {
+export const addToQueue = ({ ref, myName, myGender }) => {
   //OPS! COULD USE REGULAR SET TO EASILY KNOW THE NODE-ID, BUT PUSH GIVES BETTER PERFORMANCE
   //AND PUTS/FETCHES CHILDREN IN CHRONOLOGICAL ORDER
 
   //gets values on should push to the location
   const fullname = myName;
-  const userGender = 'male';
+  const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
   //retrieves a ref to a push location

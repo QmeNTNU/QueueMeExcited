@@ -62,10 +62,10 @@ sendNotification() {
 
 renderImage() {
   //gets gender to display either girl or boy
-  const gender = this.getGender();
+  //const gender = this.getGender();
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = gender === 'female' ? require('./images/inqueuewoman.png') : require('./images/inqueue.png');
+  const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman.png') : require('./images/inqueue.png');
   return (
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
@@ -192,9 +192,10 @@ renderArrowDownImage() {
 const mapStateToProps = (state) => {
   //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
+  const { myGender } = state.nameRed;
   const { myLocation, studassLocation, subject } = state.queueInfo;
   const { place, firstboolean, quit } = state.inQueue;
-  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit };
+  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender };
 };
  //kan skrive queue[0].name
 

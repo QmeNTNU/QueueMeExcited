@@ -86,6 +86,18 @@ renderImage() {
 /* eslint-enable global-require */
 }
 
+renderEmptyImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/emptyLine2.png')}
+    />
+  );
+/* eslint-enable global-require */
+}
+
 renderArrowDownImage() {
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
@@ -106,31 +118,36 @@ renderScreen() {
     return (
       <View style={styles.wholeScreen}>
 
-      <View style={styles.nextView}>
-        <Text style={styles.textStyle}>Next in line:</Text>
-      </View>
-
-        <View style={styles.imageView}>
-          <Image
-            style={styles.imageStyle}
-            source={require('./images/emptyLine.png')}
-          />
+        <View style={styles.nextView}>
+          <Text style={styles.textStyle}>Next in line:</Text>
         </View>
 
-        <View style={styles.infoView}>
+        <View style={styles.imageView}>
+          {this.renderEmptyImage()}
+        </View>
+
+        <View style={{ flex: 1, backgroundColor: '#95CAFE', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
+
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
+
+        <View style={styles.infoView2}>
           <Text style={styles.textStyle}>{this.props.first}</Text>
         </View>
 
-        <View style={{ flex: 1 }} />
+      </View>
 
         <View style={styles.buttonView}>
           <ButtonBlue onPress={this.onQuitPress.bind(this)}>
             QUIT
           </ButtonBlue>
-          <ButtonTextGreen disabled onPress={this.onNextPress.bind(this)}>
+          <ButtonTextGreen onPress={this.onNextPress.bind(this)}>
             NEXT
           </ButtonTextGreen>
         </View>
+
+
       </View>
       );
   }
@@ -218,6 +235,15 @@ renderScreen() {
       marginLeft: 40,
       marginRight: 40,
       borderBottomWidth: 1,
+      borderColor: '#ffffff'
+    },
+    infoView2: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 40,
+      marginRight: 40,
+
       borderColor: '#ffffff'
     },
     nextView: {

@@ -34,14 +34,21 @@ class SubjectAssListItem extends Component {
 
   /* eslint-disable global-require */
 
+
 renderImage() {
+  //gets gender to display either girl or boy
+
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  const icon = this.props.studass.userGender === 'female' ? require('./images/choosegirlstud2.png') : require('./images/choosepersonstud2.png');
   return (
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
       resizeMode="contain"
-      source={require('./images/choosepersonstud2.png')}
+      source={icon}
     />
   );
+/* eslint-enable global-require */
 }
 
 renderArrowImage() {

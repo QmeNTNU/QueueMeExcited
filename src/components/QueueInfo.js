@@ -16,12 +16,12 @@ this.props.getCount(ref);
 
 onButtonBluePress() {
   //gets user name from props (value is retireved and sat to reducer in home-scene)
-  const { myName } = this.props;
+  const { myName, myGender } = this.props;
   //makes ref from where we want to retrieve data
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //add user to queue and saves the push location to state
   //this location is used in next scene (in quit queue)
-  this.props.addToQueue({ ref, myName });
+  this.props.addToQueue({ ref, myName, myGender });
 }
 
 renderImage() {
@@ -118,8 +118,6 @@ renderButtonBlue() {
       </View>
 
 
-
-
     </View>
     );
   }
@@ -186,10 +184,10 @@ const mapStateToProps = (state) => {
   //retireves info to display
   const { subject, studass, available, studassLocation } = state.queueInfo;
   const { studasscount } = state.count;
-  const { myName } = state.nameRed;
+  const { myName, myGender } = state.nameRed;
   const { loading } = state.loading;//to know when to show spinner
 
-  return { subject, studass, available, studasscount, studassLocation, myName, loading };
+  return { subject, studass, available, studasscount, studassLocation, myName, loading, myGender };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);
