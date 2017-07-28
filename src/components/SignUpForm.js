@@ -111,7 +111,7 @@ class SignUpForm extends Component {
           <View style={styles.containerStyle} />
 
           <View style={styles.containerStyle}>
-          <Text style={{ fontSize: 30, color: '#F58C6C' }}>
+          <Text style={{ fontSize: 50, color: '#F58C6C', fontFamily: 'bebasNeue' }}>
             Sign Up
           </Text>
         </View>
