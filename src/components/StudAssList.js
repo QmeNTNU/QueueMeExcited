@@ -49,7 +49,7 @@ class StudAssList extends Component {
     return (
       <Image
       style={styles.imageStyle}
-      source={require('./images/nostudass2.png')}
+      source={require('./images/nostudass3.png')}
       />
     );
   /* eslint-enable global-require */
@@ -66,7 +66,7 @@ class StudAssList extends Component {
         <View style={{ height: 100 }}>
           {this.renderEmptyImage()}
         </View>
-        <Text>
+        <Text style={{ color: '#213140' }}>
           No available studasses...
         </Text>
       </View>

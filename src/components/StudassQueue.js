@@ -73,10 +73,9 @@ async setRecover() {
 
 renderImage() {
   //gets gender to display either girl or boy
-  const gender = 'male';
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = gender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue.png');
+  const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue.png');
   return (
     <Image
       style={styles.imageStyle}
@@ -279,8 +278,8 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first, myLocation, studassSubject, firstKey } = state.createQueue;
-  return { queue, studasscount, first, myLocation, studassSubject, firstKey };
+  const { first, myLocation, studassSubject, firstKey, firstGender } = state.createQueue;
+  return { queue, studasscount, first, myLocation, studassSubject, firstKey, firstGender };
 };
  //kan skrive queue[0].name
 
