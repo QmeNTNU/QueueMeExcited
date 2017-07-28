@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT } from './types';
 //have to add it to types as well
@@ -29,6 +30,7 @@ export const makeQueue = ({ myName, available, room, ref }) => {
   if (!validateInput(available)) {
     return (dispatch) => {
     dispatch({ type: QUEUE_CREATED_FAILED });
+    errorAlert();
     };
   }
 
@@ -76,6 +78,17 @@ if (text.charAt(2) !== ',') {
   return false;
 }
 return true;
+};
+
+const errorAlert = () => {
+//Getscalled when it tries to retrieve data but doesent fint it
+  Alert.alert(
+    'Unvalid input',
+    'Make sure you write the hourmark as 00,00.',
+      [
+        { text: 'OK', onPress: () => Actions.createQueue() },
+      ]
+  );
 };
 
 
