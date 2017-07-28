@@ -1,7 +1,7 @@
 import { INFO_RETIREVED, ADDED_TO_QUEUE, DELETE_QUEUE } from '../actions/types';
 
 
-const INITIAL_STATE = { subject: '', studass: '', available: '', studassLocation: '', count: '', myLocation: '' };
+const INITIAL_STATE = { subject: '', studass: '', available: '', room: '', studassLocation: '', count: '', myLocation: '' };
 
 //compact way of taking in a parameter and adding it to varieble states above
 export default (state = INITIAL_STATE, action) => {

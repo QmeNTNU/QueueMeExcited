@@ -97,12 +97,12 @@ renderButtonBlue() {
 
           <View style={styles.infoView}>
             <Text style={styles.textStyle2}>Available until: </Text>
-            <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
+            <Text style={styles.textStyle}>{this.props.available}</Text>
           </View>
 
           <View style={styles.infoView}>
             <Text style={styles.textStyle2}>Room: </Text>
-            <Text style={styles.textStyle}>{this.props.available} Oclock </Text>
+            <Text style={styles.textStyle}>{this.props.room}</Text>
           </View>
         </View>
     </View>
@@ -182,12 +182,12 @@ const styles = {
 
 const mapStateToProps = (state) => {
   //retireves info to display
-  const { subject, studass, available, studassLocation } = state.queueInfo;
+  const { subject, studass, available, studassLocation, room } = state.queueInfo;
   const { studasscount } = state.count;
   const { myName, myGender } = state.nameRed;
   const { loading } = state.loading;//to know when to show spinner
 
-  return { subject, studass, available, studasscount, studassLocation, myName, loading, myGender };
+  return { subject, studass, available, studasscount, studassLocation, myName, loading, myGender, room };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);

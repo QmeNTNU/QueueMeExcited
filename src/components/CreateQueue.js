@@ -111,8 +111,7 @@ onButtonPress() {
               onChangeText={this.onAvailableChange.bind(this)}
             />
           <View style={styles.infoView}>
-            <Text style={styles.textStyle3}> Oclock </Text>
-            <Text style={styles.textStyle3  }>in </Text>
+            <Text style={styles.textStyle3}> Oclock in </Text>
           </View>
             <InputCreate
               placeholder="room.nr"

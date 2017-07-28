@@ -28,6 +28,8 @@ class SubjectAssListItem extends Component {
     this.props.setInfo({ prop: 'studass', value: this.props.studass.fullname });
     this.props.setInfo({ prop: 'available', value: this.props.studass.available });
     this.props.setInfo({ prop: 'studassLocation', value: this.props.studass.userUID });
+    this.props.setInfo({ prop: 'room', value: this.props.studass.room });
+
     //goes to next scene
     Actions.queueInfo();
   }
