@@ -68,7 +68,7 @@ render() {
                   style={{ alignItems: 'flex-start' }}
               >
                 <Text style={{ color: '#ffffff', fontSize: 20 }}>
-                  LOGIN
+                  Back to login
                 </Text>
               </TouchableOpacity>
             </View>
