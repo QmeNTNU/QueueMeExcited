@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Alert, Image, AsyncStorage } from 'react-native';
-import { Button, ButtonTextGreen } from './common';
+import { ButtonBlue, ButtonTextGreen } from './common';
 import { fetchQueue, getCount, deleteQueue, nextDelete, firstInLine } from '../actions';
 
 class StudassQueue extends Component {
@@ -76,11 +76,35 @@ renderImage() {
   const gender = 'male';
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = gender === 'female' ? require('./images/girlstud.png') : require('./images/astudquestion.png');
+  const icon = gender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue.png');
   return (
     <Image
       style={styles.imageStyle}
       source={icon}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderEmptyImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/emptyLine2.png')}
+    />
+  );
+/* eslint-enable global-require */
+}
+
+renderArrowDownImage() {
+  //eslint comments lets us retrieve image!!!
+  /* eslint-disable global-require */
+  return (
+    <Image
+    style={styles.imageStyle}
+    source={require('./images/arrowdownblue.png')}
     />
   );
 /* eslint-enable global-require */
@@ -94,31 +118,36 @@ renderScreen() {
     return (
       <View style={styles.wholeScreen}>
 
-      <View style={styles.nextView}>
-        <Text style={styles.textStyle}>Next in line:</Text>
-      </View>
-
-        <View style={styles.imageView}>
-          <Image
-            style={styles.imageStyle}
-            source={require('./images/emptyLine.png')}
-          />
+        <View style={styles.nextView}>
+          <Text style={styles.textStyle}>Next in line:</Text>
         </View>
 
-        <View style={styles.infoView}>
+        <View style={styles.imageView}>
+          {this.renderEmptyImage()}
+        </View>
+
+        <View style={{ flex: 1, backgroundColor: '#95CAFE', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
+
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
+
+        <View style={styles.infoView2}>
           <Text style={styles.textStyle}>{this.props.first}</Text>
         </View>
 
-        <View style={{ flex: 1 }} />
+      </View>
 
         <View style={styles.buttonView}>
-          <Button onPress={this.onQuitPress.bind(this)}>
+          <ButtonBlue onPress={this.onQuitPress.bind(this)}>
             QUIT
-          </Button>
-          <ButtonTextGreen disabled onPress={this.onNextPress.bind(this)}>
+          </ButtonBlue>
+          <ButtonTextGreen onPress={this.onNextPress.bind(this)}>
             NEXT
           </ButtonTextGreen>
         </View>
+
+
       </View>
       );
   }
@@ -134,12 +163,18 @@ renderScreen() {
           {this.renderImage()}
         </View>
 
+        <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
+
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
+
         <View style={styles.infoView}>
           <Text style={styles.textStyle}>{this.props.first}</Text>
         </View>
 
         <View style={styles.ContainerView}>
-        <View>
+            <View>
               <Text style={styles.textStyle2}>Students in line: </Text>
             </View>
             <View>
@@ -148,11 +183,12 @@ renderScreen() {
               </Text>
             </View>
         </View>
+      </View>
 
         <View style={styles.buttonView}>
-          <Button onPress={this.onQuitPress.bind(this)}>
+          <ButtonBlue onPress={this.onQuitPress.bind(this)}>
             QUIT
-          </Button>
+          </ButtonBlue>
           <ButtonTextGreen onPress={this.onNextPress.bind(this)}>
             NEXT
           </ButtonTextGreen>
@@ -190,14 +226,25 @@ renderScreen() {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'flex-start',
+      alignItems: 'center',
     },
     infoView: {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 5,
-      marginBottom: 5
+      marginLeft: 40,
+      marginRight: 40,
+      borderBottomWidth: 1,
+      borderColor: '#ffffff'
+    },
+    infoView2: {
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: 40,
+      marginRight: 40,
+
+      borderColor: '#ffffff'
     },
     nextView: {
       flexDirection: 'column',
@@ -213,10 +260,14 @@ renderScreen() {
     },
     textStyle: {
       color: '#ffffff',
-      fontSize: 25
+      fontSize: 25,
+      fontFamily: 'bebasNeue'
     },
     textStyle2: {
-      fontSize: 18
+      color: '#F58C6C',
+      fontFamily: 'bebasNeue',
+      fontSize: 25,
+
     }
 
   };

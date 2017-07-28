@@ -59,7 +59,7 @@ class FavoriteStudentSubjectList extends Component {
     return (
       <View style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
-          <Text>
+          <Text style={{ alignSelf: 'center' }}>
           *All your choosen subjects as a student
           </Text>
         </View>

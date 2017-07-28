@@ -97,10 +97,6 @@ const styles = {
     flexDirection: 'row',
     borderTopWidth: 0.5,
   },
-  ButtonStyle: {
-    height: 60,
-    backgroundColor: 'red'
-  },
 
   thumbnailContainerStyle: {
     flex: 2,
@@ -123,7 +119,9 @@ const styles = {
   },
   headerTextStyle: {
     fontFamily: 'bebasNeue',
-    fontSize: 25
+    fontSize: 40,
+    color: '#213140'
+
   },
 };
 /*const mapStateToProps = state => {

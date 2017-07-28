@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT } from './types';
 //have to add it to types as well
@@ -24,17 +25,18 @@ export const studassSubject = (text) => {
   };
 };
 
-export const makeQueue = ({ myName, available, room, ref }) => {
+export const makeQueue = ({ myName, myGender, available, room, ref }) => {
   //MUST HAVE VALIDATION////////////////////////////////////
   if (!validateInput(available)) {
     return (dispatch) => {
     dispatch({ type: QUEUE_CREATED_FAILED });
+    errorAlert();
     };
   }
 
   //gets rest of values on should push to the location
   const fullname = myName;
-  const userGender = 'male';
+  const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
 
@@ -76,6 +78,17 @@ if (text.charAt(2) !== ',') {
   return false;
 }
 return true;
+};
+
+const errorAlert = () => {
+//Getscalled when it tries to retrieve data but doesent fint it
+  Alert.alert(
+    'Unvalid input',
+    'Make sure you write the hourmark as 00,00.',
+      [
+        { text: 'OK', onPress: () => Actions.createQueue() },
+      ]
+  );
 };
 
 

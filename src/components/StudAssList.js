@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { ListView, View, Text } from 'react-native';
+import { ListView, View, Text, Image } from 'react-native';
 import { ButtonBlue, Spinner } from './common';
 import { studAssListFetch } from '../actions';
 import StudAssListItem from './StudAssListItem';
@@ -43,6 +43,18 @@ class StudAssList extends Component {
     return <StudAssListItem studass={studass} />;
   }
 
+  renderEmptyImage() {
+    //eslint comments lets us retrieve image!!!
+    /* eslint-disable global-require */
+    return (
+      <Image
+      style={styles.imageStyle}
+      source={require('./images/nostudass2.png')}
+      />
+    );
+  /* eslint-enable global-require */
+  }
+
   renderScreen() {
     //shows either a spinner while loading or hte listview when the date is retireved
     if (this.props.loading) {
@@ -51,8 +63,11 @@ class StudAssList extends Component {
   if (!this.props.studAssList.length) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ height: 100 }}>
+          {this.renderEmptyImage()}
+        </View>
         <Text>
-            There are available student assistants at the moment...
+          No available studasses...
         </Text>
       </View>
     );

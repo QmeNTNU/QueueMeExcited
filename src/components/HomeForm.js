@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
-import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation } from '../actions';
+import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender } from '../actions';
 
 
 class HomeForm extends Component {
@@ -92,6 +92,7 @@ async checkRecover() {
       //have to get my name, cant do it before because then the obove function wouldnt run
       //gets users name to NameReducer for later use
       this.props.getMyName();
+      this.props.getMyGender();
       }
     } catch (error) {
       // Error retrieving data
@@ -152,10 +153,11 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 20,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    fontFamily: 'bebasNeue',
+
   },
   buttonStyle: {
     flex: 1,
@@ -182,4 +184,4 @@ const mapStateToProps = state => {
   return { myName };
 };
 export default connect(mapStateToProps, {
-  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation })(HomeForm);
+  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender })(HomeForm);
