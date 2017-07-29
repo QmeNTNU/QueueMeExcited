@@ -128,7 +128,7 @@ renderScreen() {
         <View style={{ flex: 1, backgroundColor: '#95CAFE', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
 
           <View style={{ height: 10, alignItems: 'center' }}>
-            {this.renderArrowDownImage()}
+              <Text style={{ color: '#ffffff' }} placeholder />
           </View>
 
         <View style={styles.infoView2}>
@@ -165,23 +165,16 @@ renderScreen() {
         <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
 
           <View style={{ height: 10, alignItems: 'center' }}>
-            {this.renderArrowDownImage()}
+              <Text style={{ color: '#ffffff' }} placeholder />
           </View>
 
         <View style={styles.infoView}>
           <Text style={styles.textStyle}>{this.props.first}</Text>
         </View>
-
-        <View style={styles.ContainerView}>
-            <View>
-              <Text style={styles.textStyle2}>Students in line: </Text>
-            </View>
-            <View>
-              <Text style={styles.textStyle2}>
-                {this.props.studasscount}
-              </Text>
-            </View>
+        <View style={styles.infoView2}>
+          <Text style={styles.textStyle}>Students in line: {this.props.studasscount}</Text>
         </View>
+
       </View>
 
         <View style={styles.buttonView}>
@@ -228,6 +221,7 @@ renderScreen() {
       alignItems: 'center',
     },
     infoView: {
+      flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
@@ -237,6 +231,7 @@ renderScreen() {
       borderColor: '#ffffff'
     },
     infoView2: {
+      flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',

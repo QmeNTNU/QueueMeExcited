@@ -74,7 +74,7 @@ const validateInput = (text) => {
 if (text.length < 5) {
   return false;
 }
-if (text.charAt(2) !== ',') {
+if (text.charAt(2) !== ':') {
   return false;
 }
 return true;
@@ -84,7 +84,7 @@ const errorAlert = () => {
 //Getscalled when it tries to retrieve data but doesent fint it
   Alert.alert(
     'Unvalid input',
-    'Make sure you write the hourmark as 00,00.',
+    'Make sure you write the hourmark as 00:00.',
       [
         { text: 'OK', onPress: () => Actions.createQueue() },
       ]

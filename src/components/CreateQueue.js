@@ -104,7 +104,7 @@ onButtonPress() {
         <View style={styles.ContainerView}>
             <View style={{ flex: 1 }}>
               <InputCreate
-                placeholder="00.00"
+                placeholder="00:00"
                 keyboardType='default'
                 maxLength={5}
                 width={60}
