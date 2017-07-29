@@ -81,6 +81,7 @@ render() {
 
 const styles = {
   containerStyle: {
+    flex: 1, 
     backgroundColor: '#95CAFE',
     justifyContent: 'flex-start',
     flexDirection: 'row',

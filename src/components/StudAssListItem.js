@@ -138,7 +138,7 @@ const styles = {
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    padding: 0,
+    padding: 1,
   },
   arrowStyle: {
     flex: 1,
