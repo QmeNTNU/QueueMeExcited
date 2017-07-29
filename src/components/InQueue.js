@@ -107,11 +107,9 @@ renderArrowDownImage() {
             <View style={styles.infoView}>
               <Text style={styles.textStyle}>You are nr: </Text>
             </View>
-            <View style={styles.infoView2}>
-              <View style={styles.infoVie2}>
+              <View style={styles.infoView3}>
                 <Text style={styles.textStyle2}> {this.props.place}/{this.props.studasscount}</Text>
               </View>
-            </View>
           </View>
 
           </View>
@@ -156,6 +154,12 @@ renderArrowDownImage() {
       borderColor: '#ffffff'
     },
     infoView2: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    infoView3: {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',

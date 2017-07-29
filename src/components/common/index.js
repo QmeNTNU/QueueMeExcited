@@ -11,5 +11,6 @@ export * from './Button1';
 export * from './Input1';
 export * from './ButtonWhite';
 export * from './ButtonRed';
+export * from './ButtonDark';
 export * from './InputSignUp';
 export * from './Confirm';

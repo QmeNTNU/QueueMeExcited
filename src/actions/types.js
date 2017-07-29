@@ -79,4 +79,5 @@ export const QUIT = 'QUIT';
 export const LOADING_BUTTON = 'LOADING_BUTTON';
 export const FIRST_KEY = 'FIRST_KEY';
 export const GET_MY_GENDER = 'GET_MY_GENDER';
+export const FIRST_GENDER = 'FIRST_GENDER';
 //////////////////////////////////////////////////////////////////////

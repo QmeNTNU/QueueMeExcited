@@ -1,7 +1,8 @@
 import { Actions } from 'react-native-router-flux';
 import { QUEUE_FETCH_SUCCESS,
 DELETE_QUEUE, FIRST_CHANGED,
-FIRST_KEY } from './types';
+FIRST_KEY,
+FIRST_GENDER } from './types';
 
 //brukes til å hente ut (og vise) navn i StudasList
 //KAN, MEN BRUKES IKKE:  til å hente ut (og sammenligne) uid på første i INQUEUE
@@ -25,6 +26,7 @@ export const firstInLine = ({ ref }) => {
       console.log('firstKey', childSnapshot.key);
       dispatch({ type: FIRST_CHANGED, payload: childSnapshot.val().fullname });
       dispatch({ type: FIRST_KEY, payload: childSnapshot.key });
+      dispatch({ type: FIRST_GENDER, payload: childSnapshot.val().userGender });
 
       return true;
     });
