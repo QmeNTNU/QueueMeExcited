@@ -92,7 +92,7 @@ onButtonPress() {
         <View style={styles.imageView}>
           {this.renderImage()}
         </View>
-  <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 20 }}>
+  <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 }}>
     <View style={{ height: 10, alignItems: 'center' }}>
       {this.renderArrowDownImage()}
     </View>
@@ -102,25 +102,31 @@ onButtonPress() {
         </View>
 
         <View style={styles.ContainerView}>
-            <InputCreate
-              placeholder="00.00"
-              keyboardType='default'
-              maxLength={5}
-              width={60}
-              value={this.props.available}
-              onChangeText={this.onAvailableChange.bind(this)}
-            />
-          <View style={styles.infoView}>
-            <Text style={styles.textStyle3}> Oclock in </Text>
-          </View>
-            <InputCreate
-              placeholder="room.nr"
-              keyboardType='default'
-              maxLength={10}
-              width={100}
-              value={this.props.room}
-              onChangeText={this.onRoomChange.bind(this)}
-            />
+            <View style={{ flex: 1 }}>
+              <InputCreate
+                placeholder="00.00"
+                keyboardType='default'
+                maxLength={5}
+                width={60}
+                value={this.props.available}
+                onChangeText={this.onAvailableChange.bind(this)}
+              />
+            </View>
+
+            <View style={styles.infoView}>
+              <Text style={styles.textStyle3}> Oclock in </Text>
+            </View>
+
+            <View style={{ flex: 1 }}>
+              <InputCreate
+                placeholder="room.nr"
+                keyboardType='default'
+                maxLength={10}
+                width={100}
+                value={this.props.room}
+                onChangeText={this.onRoomChange.bind(this)}
+              />
+            </View>
         </View>
     </View>
 
@@ -161,8 +167,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: 50,
-    paddingRight: 50
   },
   infoView: {
     flex: 1,

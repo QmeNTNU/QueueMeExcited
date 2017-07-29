@@ -32,8 +32,7 @@ const styles = {
     paddingLeft: 5,
     fontSize: 18,
     lineHeight: 23,
-    flex: 1,
-    width: 70
+    flex: 1
     //Flex er hvor mye plass som skal gå til inputStyle og labelStyle
   },
   containerStyle: {
@@ -41,8 +40,10 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+    alignSelf: 'stretch',
     alignItems: 'center',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
   }
 };
 
