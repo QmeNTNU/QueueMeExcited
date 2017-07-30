@@ -37,9 +37,9 @@ onButtonPress() {
     const { emnekode, emnenavn } = this.props.subject;
 
     return (
-      <View style={styles.infoView}>
-        <Text style={styles.textStyle}> {emnekode} {emnenavn} </Text>
-      </View>
+
+        <Text style={{ fontSize: 30 }}> {emnekode} {emnenavn} </Text>
+
     );
   }
 
@@ -84,10 +84,12 @@ onButtonPress() {
   render() {
     return (
       <View style={styles.wholeScreen}>
-
-        <View style={styles.infoView}>
+        <View style={styles.ViewBlue}>
+          <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           {this.getSubject()}
+          </Text>
         </View>
+
 
         <View style={styles.imageView}>
           {this.renderImage()}
@@ -98,7 +100,7 @@ onButtonPress() {
     </View>
 
         <View style={styles.infoView}>
-        <Text style={styles.textStyle3}>I will be available from now to</Text>
+        <Text style={styles.textStyle3}>I will be available until</Text>
         </View>
 
         <View style={styles.ContainerView}>
@@ -154,6 +156,12 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#ffffff'
+  },
+  ViewBlue: {
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F58C6C'
   },
   imageView: {
     flex: 5,

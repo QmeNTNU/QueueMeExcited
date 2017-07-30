@@ -59,8 +59,8 @@ class FavoriteAssSubjectList extends Component {
     return (
       <View style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
-          <Text style={{ alignSelf: 'center' }}>
-          *All your choosen subjects as a student assistant
+          <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
+          Your studass subjects
           </Text>
         </View>
         <View style={{ flex: 8 }}>
@@ -70,7 +70,7 @@ class FavoriteAssSubjectList extends Component {
           <ButtonBlue
             onPress={() => console.log('pressed')}
           >
-            Add your subjects
+            ADD SUBJECTS
           </ButtonBlue>
         </View>
       </View>
@@ -87,10 +87,10 @@ const styles = {
     fontWeight: 'bold',
   },
   ViewBlue: {
-    height: 30,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#A8D3FE'
+    backgroundColor: '#F58C6C'
   },
   wholeScreen: {
     flex: 1,

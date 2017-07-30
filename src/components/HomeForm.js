@@ -102,7 +102,7 @@ async checkRecover() {
   renderImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home.png')} />
+       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home3.png')} />
      );
     /* eslint-enable global-require */
   }
