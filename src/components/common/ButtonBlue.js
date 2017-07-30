@@ -20,8 +20,7 @@ const styles = {
     justifyContent: 'center',
     alignSelf: 'center',
     color: '#ffffff',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 25,
     paddingTop: 10,
     paddingBottom: 10,
     fontFamily: 'bebasNeue'

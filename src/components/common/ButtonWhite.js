@@ -17,7 +17,7 @@ const ButtonWhite = ({ onPress, children }) => { //onPress fra AlbumDetail
 
 const styles = {
   textStyle: {
-    alignSelf: 'center',
+    textAlign: 'center',
     color: '#ffffff',
     fontSize: 25,
     paddingTop: 10,

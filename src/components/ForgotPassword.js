@@ -18,35 +18,39 @@ onResetPasswordButtonPress() {
 renderEmailImage() {
    /* eslint-disable global-require */
   return (
-     <Image style={styles.labelStyle} source={require('./images/mail.png')} />
+     <Image style={styles.labelStyle} source={require('./images/mail2.png')} />
    );
   /* eslint-enable global-require */
 }
 renderImage() {
    /* eslint-disable global-require */
   return (
-     <Image style={{ width: 190, height: 190 }} source={require('./images/question.jpg')} />
+     <Image
+       style={{ flex: 1, height: undefined, width: undefined }}
+       resizeMode="contain"
+       source={require('./images/mail2.png')}
+     />
    );
   /* eslint-enable global-require */
 }
 
 render() {
     return (
-          <View style={{ backgroundColor: '#95CAFE', flex: 1, padding: 20 }}>
+          <View style={{ backgroundColor: '#95CAFE', flex: 5, alignItems: 'center', justifyContent: 'center', paddingBottom: 20, paddingLeft: 60, paddingRight: 60 }}>
 
+            <View style={{ flex: 1 }} />
 
-              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text style={{ fontSize: 30, color: '#F58C6C' }}>
-                Forgot your password?
-                </Text>
+                <View style={{ flex: 2 }}>
 
-                <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center' }}>
-                        Enter your registered student-email and follow the given instructions to
-                        take back controll of your account!
-                </Text>
-              </View>
+                  <Text style={{ fontSize: 40, color: '#F58C6C', textAlign: 'center', fontFamily: 'bebasNeue' }}>
+                  Forgot password?
+                  </Text>
 
-              <View style={{ flex: 2, justifyContent: 'center' }}>
+                  <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center', marginTop: 20 }}>
+                          Enter your registered student-email
+                  </Text>
+
+              <View style={{ flex: 1, marginTop: 20 }}>
                 <View style={styles.containerStyle}>
                   <InputSignUp
                     label={this.renderEmailImage()}
@@ -62,12 +66,12 @@ render() {
                   </ButtonWhite>
                 </View>
 
-              <View style={styles.loginButtonStyle}>
+              <View style={styles.textButtonStyle}>
               <TouchableOpacity
                   onPress={() => Actions.login({ type: 'reset' })}
-                  style={{ alignItems: 'flex-start' }}
+                  style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
               >
-                <Text style={{ color: '#ffffff', fontSize: 20 }}>
+                <Text style={{ color: '#ffffff' }}>
                   Back to login
                 </Text>
               </TouchableOpacity>
@@ -75,13 +79,17 @@ render() {
           </View>
 
           </View>
+
+          <View style={{ flex: 1 }} />
+
+        </View>
     );
   }
 }
 
 const styles = {
   containerStyle: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: '#95CAFE',
     justifyContent: 'flex-start',
     flexDirection: 'row',
@@ -94,11 +102,11 @@ const styles = {
     height: 50,
     width: 50,
   },
-  loginButtonStyle: {
-    backgroundColor: '#95CAFE',
-    justifyContent: 'flex-start',
-      alignItems: 'center',
-
+  textButtonStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
     paddingBottom: 2,
   },
 };

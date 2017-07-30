@@ -42,7 +42,7 @@ class LoginForm extends Component {
        <Image
          style={{ flex: 1, height: undefined, width: undefined }}
          resizeMode="contain"
-         source={require('./images/mail.png')}
+         source={require('./images/mail2.png')}
        />
      );
     /* eslint-enable global-require */
@@ -54,7 +54,7 @@ class LoginForm extends Component {
       <Image
         style={{ flex: 1, height: undefined, width: undefined }}
         resizeMode="contain"
-        source={require('./images/lock.png')}
+        source={require('./images/lock2.png')}
       />
      );
     /* eslint-enable global-require */
@@ -73,7 +73,7 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 4, padding: 20, backgroundColor: '#95CAFE' }}>
+      <View style={{ flex: 4, paddingRight: 60, paddingLeft: 60, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
 
         <View style={styles.ImageViewStyle}>
         {this.renderImage()}
@@ -106,23 +106,25 @@ class LoginForm extends Component {
               {this.renderButton()}
           </View>
 
+          <View style={styles.textButtonStyle}>
+            <TouchableOpacity
+                onPress={this.onPressSignup.bind(this)}
+                style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
+            >
+              <Text style={{ color: '#ffffff' }}>
+                Sign in
+              </Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
                 onPress={this.onPressPassword.bind(this)}
                 style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
               <Text style={{ color: '#ffffff' }}>
-                FORGOT YOUR PASSWORD?
+                Forgot your password?
               </Text>
             </TouchableOpacity>
-
-            <TouchableOpacity
-                onPress={this.onPressSignup.bind(this)}
-                style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
-            >
-              <Text style={{ color: '#F58C6C', fontSize: 20 }}>
-                NOT REGISTERED? SIGN UP
-              </Text>
-            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -134,6 +136,13 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
+    paddingBottom: 2,
+  },
+  textButtonStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
     paddingBottom: 2,
   },
   ImageViewStyle: {
