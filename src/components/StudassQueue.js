@@ -58,7 +58,17 @@ onNextPress() {
   const firstUID = this.props.firstKey;
   console.log('firstKey', firstUID);
   const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue/${firstUID}`);
-  this.props.nextDelete(nextRef);
+if (this.props.first !== 'There are no students in line') {
+  Alert.alert(
+  'Are you sure?',
+  'You will now proceed to the next student in line.',
+    [
+      { text: 'Cancel', onPress: () => console.log('Cancel pressed') },
+      { text: 'Yes', onPress: () => this.props.nextDelete(nextRef) },
+    ]
+  );
+}
+
 }
 
 
