@@ -139,7 +139,7 @@ return (
         >
           <View style={styles.wholeScreen}>
             <View style={styles.container}>
-              <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderTopLeftRadius: 5, borderTopRightRadius: 5, backgroundColor: '#F58C6C' }}>
+              <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderTopLeftRadius: 5, borderTopRightRadius: 5, backgroundColor: '#95CAFE' }}>
                 <Text style={styles.textOrange}>
                   Add subjects
                 </Text>
@@ -149,7 +149,7 @@ return (
                 {this.renderScreen()}
               </View>
 
-              <View style={{ flex: 1, borderTopWidth: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#F58C6C' }}>
+              <View style={{ flex: 1, borderTopWidth: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#95CAFE' }}>
                 <TouchableOpacity onPress={() => Actions.pop()} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
                     <Text style={{ fontSize: 30, color: '#213140', fontFamily: 'bebasNeue', alignSelf: 'center' }}>

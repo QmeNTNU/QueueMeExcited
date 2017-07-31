@@ -84,11 +84,11 @@ renderName() {
 renderRow() {
   const { available } = this.props.studass;
   const rightButtons = [
-    <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'yellow', padding: 30 }}>
+    <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: '#F58C6C', padding: 20 }}>
       <Image
         style={{ flex: 1, height: undefined, width: undefined }}
         resizeMode="contain"
-        source={require('./images/delete.png')}
+        source={require('./images/starred.png')}
       />
     </TouchableHighlight>
   ];
