@@ -73,7 +73,7 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 4, paddingRight: 60, paddingLeft: 60, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
+      <View style={{ flex: 1, paddingRight: 60, paddingLeft: 60, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
 
         <View style={styles.ImageViewStyle}>
         {this.renderImage()}
@@ -133,12 +133,13 @@ class LoginForm extends Component {
 
 const styles = {
   containerStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    height: 60,
     paddingBottom: 2,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
   textButtonStyle: {
+    height: 60,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',

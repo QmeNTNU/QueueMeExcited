@@ -107,14 +107,14 @@ class SignUpForm extends Component {
     return (
       <View style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
 
-        <View style={{ justifyContent: 'space-between', flex: 4, paddingBottom: 20, paddingRight: 60, paddingLeft: 60 }}>
-          <View style={styles.containerStyle} />
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 4, paddingBottom: 20, paddingRight: 60, paddingLeft: 60 }}>
 
-          <View style={styles.containerStyle}>
-          <Text style={{ fontSize: 50, color: '#F58C6C', fontFamily: 'bebasNeue' }}>
-            Sign Up
-          </Text>
-        </View>
+          <View style={{ height: 60 }}>
+            <Text style={{ fontSize: 50, color: '#F58C6C', fontFamily: 'bebasNeue' }}>
+              Sign Up
+            </Text>
+          </View>
+
            <View style={styles.containerStyle}>
              <InputSignUp
               label={this.renderPersonImage()}
@@ -201,7 +201,7 @@ const styles = {
     textAlign: 'center'
   },
   sectionStyle: {
-    flex: 1,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
@@ -210,24 +210,11 @@ const styles = {
     marginRight: 40
   },
   containerStyle: {
-    flex: 1,
+    height: 60,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
     position: 'relative'
-  },
-  pickerStyle: {
-     flex: 1,
-     backgroundColor: '#fff',
-     borderRadius: 5,
-     borderWidth: 1,
-     borderColor: '#007aff'
-  },
-  labelStyle: {
-    flex: 1,
-    resizeMode: 'contain',
-    height: 50,
-    width: 50,
   },
   imageStyle: {
     flex: 1,
