@@ -68,7 +68,6 @@ const RouterComponent = () => {
 
     <Scene key="homePage" type={ActionConst.RESET} >
           <Scene
-            sceneStyle={{ paddingTop: 65 }}
             key="home"
             component={HomeForm}
             title="HOME"
@@ -137,6 +136,12 @@ const RouterComponent = () => {
   <Scene
     key="addSubjectStudent"
     component={addSubjectStudent}
+    modal
+    sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
+  />
+  <Scene
+    key="welcome"
+    component={modal}
     modal
     sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
   />

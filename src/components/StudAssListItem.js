@@ -7,15 +7,6 @@ import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 
 import { setInfo } from '../actions';
 
 /* eslint-disable global-require */
-const rightButtons = [
-  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'yellow', padding: 30 }}>
-    <Image
-      style={{ flex: 1, height: undefined, width: undefined }}
-      resizeMode="contain"
-      source={require('./images/delete.png')}
-    />
-  </TouchableHighlight>
-];
 
 class SubjectAssListItem extends Component {
 
@@ -91,7 +82,16 @@ renderName() {
   /* eslint-enable global-require */
 
 renderRow() {
-  const { fullname, available } = this.props.studass;
+  const { available } = this.props.studass;
+  const rightButtons = [
+    <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'yellow', padding: 30 }}>
+      <Image
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
+        source={require('./images/delete.png')}
+      />
+    </TouchableHighlight>
+  ];
 
     return (
         <Swipeable rightButtons={rightButtons}>

@@ -15,7 +15,7 @@ class ListItem extends Component {
 
   onAddPress() {
     //checks if subject is already added. could skip this if used set, and not push when regisering
-    
+
     const { emnekode, emnenavn } = this.props.subject;
 
     //gets user uid
@@ -42,22 +42,23 @@ class ListItem extends Component {
 renderImage() {
   if (this.checkIfAdded()) {
   return (
-
+      <TouchableOpacity onPress={this.onAddPress.bind(this)} style={{ flex: 1 }}>
       <Image
       style={{ flex: 1, height: undefined, width: undefined }}
       resizeMode="contain"
-      source={require('./images/dontadd.png')}
+      source={require('./images/remove.png')}
       />
-
+      </TouchableOpacity>
   );
 }
 return (
-
+    <TouchableOpacity onPress={this.onAddPress.bind(this)} style={{ flex: 1 }}>
     <Image
     style={{ flex: 1, height: undefined, width: undefined }}
     resizeMode="contain"
     source={require('./images/add.png')}
     />
+    </TouchableOpacity>
 
 );
 
@@ -75,9 +76,9 @@ renderRow() {
         </View>
 
         <View style={styles.arrowStyle}>
-          <TouchableOpacity onPress={this.onAddPress.bind(this)} style={{ flex: 1 }}>
+
           {this.renderImage()}
-          </TouchableOpacity>
+
         </View>
 
 

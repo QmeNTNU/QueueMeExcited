@@ -139,20 +139,20 @@ return (
         >
           <View style={styles.wholeScreen}>
             <View style={styles.container}>
-              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderTopLeftRadius: 5, borderTopRightRadius: 5, backgroundColor: '#F58C6C' }}>
+              <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderTopLeftRadius: 5, borderTopRightRadius: 5, backgroundColor: '#F58C6C' }}>
                 <Text style={styles.textOrange}>
                   Add subjects
                 </Text>
               </View>
 
-              <View style={{ flex: 6, width: this.state.width - 40, backgroundColor: '#ffffff' }}>
+              <View style={{ flex: 7, width: this.state.width - 40, backgroundColor: '#ffffff' }}>
                 {this.renderScreen()}
               </View>
 
-              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#ffffff' }}>
+              <View style={{ flex: 1, borderTopWidth: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#F58C6C' }}>
                 <TouchableOpacity onPress={() => Actions.pop()} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
-                    <Text style={{ fontSize: 30, fontFamily: 'bebasNeue', alignSelf: 'center' }}>
+                    <Text style={{ fontSize: 30, color: '#213140', fontFamily: 'bebasNeue', alignSelf: 'center' }}>
                         finish
                      </Text>
 
