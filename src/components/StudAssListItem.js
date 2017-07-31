@@ -73,6 +73,21 @@ renderStarImage() {
   );
 }
 
+renderName() {
+  //if name is to long, we want to display firstname initial and lastname
+  if (this.props.studass.fullname.length >= 13) {
+    const splitArray = this.props.studass.fullname.split(' ');
+    const firstname = splitArray[0].charAt(0);
+    const lastname = splitArray[1];
+    return (
+      <Text style={styles.headerTextStyle}>{firstname}. {lastname}</Text>
+    );
+  }
+  return (
+    <Text style={styles.headerTextStyle}>{this.props.studass.fullname}</Text>
+  );
+}
+
   /* eslint-enable global-require */
 
 renderRow() {
@@ -94,7 +109,7 @@ renderRow() {
             <Text style={{ color: '#ffffff' }}> Available until: {available} </Text>
           </View>
           <View style={{ flex: 1, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
-            <Text style={styles.headerTextStyle}>{fullname}</Text>
+            {this.renderName()}
           </View>
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
             <View style={{ flex: 1 }}>
