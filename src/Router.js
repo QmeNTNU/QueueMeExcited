@@ -33,14 +33,15 @@ const RouterComponent = () => {
     //have to set a padding to the top
     //onright toghettehr with righttile will set a button on top right side by default
     //se react-native-router-flux github in favorites
-<Router barButtonIconStyle={{ tintColor: 'white' }} titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE', height: 65 }} sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}>
-
-  <Scene key="root">
+<Router barButtonIconStyle={{ tintColor: 'white' }} titleStyle={{ fontFamily: 'bebasNeue', color: '#ffffff', fontSize: 30 }} navigationBarStyle={{ backgroundColor: '#95CAFE', height: 65 }} sceneStyle={{ backgroundColor: '#95CAFE' }}>
+<Scene key="modal" component={Modal} modal >
+  <Scene key="root" >
 
     <Scene
       key="startScreen"
       component={Start}
       hideNavBar
+      sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
     />
 
     <Scene key="auth" hideNavBar>
@@ -49,21 +50,25 @@ const RouterComponent = () => {
               component={LoginForm}
               title="QUEUE ME"
               initial
+              sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
             />
             <Scene
               key='signup'
               component={SignUpForm}
               title="REGISTRATION"
+              sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
             />
             <Scene
               key="forgotPassword"
               component={ForgotPassword}
               title="RESET PASSWORD"
+              sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
             />
     </Scene>
 
     <Scene key="homePage" type={ActionConst.RESET} >
           <Scene
+            sceneStyle={{ paddingTop: 65 }}
             key="home"
             component={HomeForm}
             title="HOME"
@@ -71,59 +76,72 @@ const RouterComponent = () => {
             onRight={() => Actions.settings()}
             rightButtonImage={require('./components/images/settings.png')}
             type={ActionConst.RESET}
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="settings"
             component={Settings}
             title="SETTINGS"
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
 
           <Scene
             key="favoriteStudentSubjectList"
             component={favoriteStudentSubjectList}
             title="Subjects"
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
 
           <Scene
             key="favoriteAssSubjectList"
             component={FavoriteAssSubjectList}
             title="Subjects"
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="studAssList"
             component={StudAssList}
             title="Studasses"
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="queueInfo"
             component={QueueInfo}
             title="Queue info"
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="createQueue"
             component={CreateQueue}
             title="Your Queue"
-          />
-          <Scene
-            key="addSubjectStudent"
-            component={addSubjectStudent}
-            modal
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="studassQueue"
             component={StudassQueue}
             title="Queue"
             hideNavBar
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
           <Scene
             key="inQueue"
             component={InQueue}
             title="In Queue"
             hideNavBar
+            sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
           />
     </Scene>
 
   </Scene>
+
+  <Scene
+    key="addSubjectStudent"
+    component={addSubjectStudent}
+    modal
+    sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
+  />
+
+</Scene>
 </Router>
 
   );

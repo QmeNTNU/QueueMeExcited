@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { Button } from './common';
 import { addSubject } from '../actions';
 
@@ -14,21 +14,25 @@ class ListItem extends Component {
 
 
   onAddPress() {
+    //checks if subject is already added. could skip this if used set, and not push when regisering
+    
     const { emnekode, emnenavn } = this.props.subject;
-    const { ref } = firebase.database().ref('Subject');
+
+    //gets user uid
+    const userUID = firebase.auth().currentUser.uid;
+    //makes a ref for favstudsubject
+    const { ref } = firebase.database().ref(`users/${userUID}/favstudsubject/${emnekode}`);
+    //adds subject to subjectlist
     this.props.addSubject({ ref, emnekode, emnenavn });
-    this.setModalInvisible();
+
   }
 
-  setModalInvisible() {
-    this.setState({ modalVisible: false });
-  }
 
   checkIfAdded() {
     //only diplays a add-button if it is not already addet to the users favorite subjects
-    const { emnekode, emnenavn } = this.props.subject;
+    const { emnekode } = this.props.subject;
     for (let i = 0; i < this.props.favoriteStudentSubjectList.length; i++) {
-      if (emnekode === this.props.favoriteStudentSubjectList[2].emnekode) {
+      if (emnekode === this.props.favoriteStudentSubjectList[i].emnekode) {
         return true;
       }
     }
@@ -38,12 +42,25 @@ class ListItem extends Component {
 renderImage() {
   if (this.checkIfAdded()) {
   return (
-    <Button onPress={this.onAddPress.bind(this)}>
-      ADD
-    </Button>
+
+      <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/dontadd.png')}
+      />
+
   );
 }
-return;
+return (
+
+    <Image
+    style={{ flex: 1, height: undefined, width: undefined }}
+    resizeMode="contain"
+    source={require('./images/add.png')}
+    />
+
+);
+
 }
 
 renderRow() {
@@ -56,9 +73,13 @@ renderRow() {
           <Text style={styles.headerTextStyle}>{emnenavn}</Text>
           <Text>{emnekode}</Text>
         </View>
-        <View style={styles.thumbnailContainerStyle}>
+
+        <View style={styles.arrowStyle}>
+          <TouchableOpacity onPress={this.onAddPress.bind(this)} style={{ flex: 1 }}>
           {this.renderImage()}
+          </TouchableOpacity>
         </View>
+
 
     </View>
     );
@@ -75,31 +96,38 @@ renderRow() {
 const styles = {
   columnStyle: {
     flex: 10,
-    height: 60,
+    height: 80,
     marginLeft: 10,
     marginRight: 10,
     justifyContent: 'flex-start',
     flexDirection: 'row',
     borderTopWidth: 0.5,
-
   },
 
   thumbnailContainerStyle: {
     flex: 2,
     justifyContent: 'space-between',
-    padding: 5,
+    padding: 10,
   },
-  thumbnailStyle: {
-    height: 50,
-    width: 50
+  arrowStyle: {
+    flex: 1,
+    padding: 0
+  },
+  imageStyle: {
+    height: 60,
+    width: 60,
+    alignSelf: 'center'
   },
   headerContentStyle: {
     flex: 8,
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'center'
   },
   headerTextStyle: {
-    fontSize: 18
+    fontFamily: 'bebasNeue',
+    fontSize: 30,
+    color: '#213140'
+
   },
 };
 const mapStateToProps = state => {

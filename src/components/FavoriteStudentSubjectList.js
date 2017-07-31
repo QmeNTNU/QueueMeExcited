@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal, ListView, View, Text } from 'react-native';
-import { Card, CardSection, Input, ButtonBlue, Spinner } from './common';
-import { Router, Scene, Actions } from 'react-native-router-flux';
+import { ButtonBlue, Spinner } from './common';
+import { Actions } from 'react-native-router-flux';
 import { favoriteStudentSubjectListFetch } from '../actions';
 import SubjectStudListItem from './SubjectStudListItem';
 
@@ -68,7 +68,7 @@ class FavoriteStudentSubjectList extends Component {
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
-            onPress={() => console.log('pressed')}
+            onPress={() => Actions.addSubjectStudent()}
           >
             ADD SUBJECTS
           </ButtonBlue>

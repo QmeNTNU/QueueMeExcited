@@ -2,7 +2,8 @@ import _ from 'lodash';
 import React, { Component, } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-import { Modal, Text, View, Image, Dimensions, ListView } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Modal, Text, View, Image, Dimensions, ListView, TouchableOpacity } from 'react-native';
 import { Spinner } from './common';
 import ListItem from './ListItem';
 import { fetchQueue, searchChanged, getWidth, getHeight, fetchAddSubjectQueue } from '../actions';
@@ -132,27 +133,30 @@ return (
       <View>
         <Modal
           animationType={'slide'}
-          transparent={true}
+          transparent
           visible={this.state.modalVisible}
+          onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
           <View style={styles.wholeScreen}>
             <View style={styles.container}>
-              <View style={{ height: 150, width: this.state.width - 40, backgroundColor: '#95CAFE', borderTopLeftRadius: 10, borderTopRightRadius: 10, justifyContent: 'center', alignItems: 'center', }}>
-                <Image
-                  style={styles.imageStyle}
-                  source={require('./images/abook.png')}
-                />
-
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderTopLeftRadius: 5, borderTopRightRadius: 5, backgroundColor: '#F58C6C' }}>
+                <Text style={styles.textOrange}>
+                  Add subjects
+                </Text>
               </View>
 
-
-                <Text style={styles.textOrange}>
-                  Add your subjects
-                </Text>
-
-
-              <View style={{ flex: 10, marginBottom: 30, width: this.state.width - 40, backgroundColor: '#ffffff' }}>
+              <View style={{ flex: 6, width: this.state.width - 40, backgroundColor: '#ffffff' }}>
                 {this.renderScreen()}
+              </View>
+
+              <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width: this.state.width - 40, borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: '#ffffff' }}>
+                <TouchableOpacity onPress={() => Actions.pop()} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
+                    <Text style={{ fontSize: 30, fontFamily: 'bebasNeue', alignSelf: 'center' }}>
+                        finish
+                     </Text>
+
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -189,28 +193,25 @@ const styles = {
     fontWeight: 'bold',
   },
   textOrange: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#F58C6C'
+    fontSize: 30,
+    color: '#213140',
+    fontFamily: 'bebasNeue'
   },
   wholeScreen: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 5,
-    paddingBottom: 40
+    paddingTop: 65,
+    paddingBottom: 65
   },
   container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#95CAFE',
-    borderRadius: 10,
-    shadowRadius: 5,
-      elevation: 2,
+    backgroundColor: '#F58C6C',
+    borderRadius: 5,
   },
   imageStyle: {
     flex: 4,
