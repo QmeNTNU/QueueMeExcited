@@ -10,9 +10,13 @@ import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLoc
 class HomeForm extends Component {
 
   componentWillMount() {
+    //checks if user was engaged in activity before closing app, and restores it
     this.checkRecover();
   }
-
+  componentDidMount() {
+    //checks if it should display welcomeslides
+    this.checkWelcomeSlides();
+  }
   onPressStudent() {
     this.props.Student();
   }
@@ -20,27 +24,74 @@ class HomeForm extends Component {
   onPressStudentAssistant() {
     this.props.studentAssistant();
   }
-async checkRecover() {
-  console.log('Checkrecover');
 
-  if (this.props.myName === '') { //only suppose to run fuction if it is the first open after app-restart
-    try {
-      //retireves values last recordetbefore evt crash stored to async storadge
-  const asyncStudentSubject = await AsyncStorage.getItem('asyncStudentSubject');
-  const asyncStudentstudassLocation = await AsyncStorage.getItem('asyncStudentstudassLocation');
-  const asyncStudentmyLocation = await AsyncStorage.getItem('asyncStudentmyLocation');
-  const asyncStudassSubject = await AsyncStorage.getItem('asyncStudassSubject');
+async checkWelcomeSlides() {
+ try {
+    const value = await AsyncStorage.getItem('displaySlides');
+    if (value === null) {
+      //sets displaySlides to NOT so it doesent show welcomeslides again
+      this.setWelcomeSlides();
+      console.log('COMDIDMOUNT', value);
+      Actions.welcome();
+    }
+  } catch (error) {
+    // Error retrieving data
+  }
+}
 
-      if (asyncStudentSubject !== null) {
-        // We have data!!
-        console.log('ASYNCDATA: ', asyncStudentSubject);
-        console.log('ASYNCDATA: ', asyncStudentstudassLocation);
-        console.log('ASYNCDATA: ', asyncStudentmyLocation);
-        console.log('ASYNCDATA: ', asyncStudassSubject);
-  ///////////////////////CHECKS IF EXIST AS STUDENT assistant//////////////////////////////////
-        const userUID = firebase.auth().currentUser.uid;
-        const ref = firebase.database().ref(`Subject/${asyncStudassSubject}/studasslist`);
-              ref.once('value', snapshot => { // only called once
+async setWelcomeSlides() {
+  try {
+        await AsyncStorage.setItem('displaySlides', 'NOT');
+      } catch (error) {
+        // Error saving data
+      }
+}
+
+  async checkRecover() {
+    console.log('Checkrecover');
+
+    if (this.props.myName === '') { //only suppose to run fuction if it is the first open after app-restart
+      try {
+        //retireves values last recordetbefore evt crash stored to async storadge
+    const asyncStudentSubject = await AsyncStorage.getItem('asyncStudentSubject');
+    const asyncStudentstudassLocation = await AsyncStorage.getItem('asyncStudentstudassLocation');
+    const asyncStudentmyLocation = await AsyncStorage.getItem('asyncStudentmyLocation');
+    const asyncStudassSubject = await AsyncStorage.getItem('asyncStudassSubject');
+
+        if (asyncStudentSubject !== null) {
+          // We have data!!
+          console.log('ASYNCDATA: ', asyncStudentSubject);
+          console.log('ASYNCDATA: ', asyncStudentstudassLocation);
+          console.log('ASYNCDATA: ', asyncStudentmyLocation);
+          console.log('ASYNCDATA: ', asyncStudassSubject);
+    ///////////////////////CHECKS IF EXIST AS STUDENT assistant//////////////////////////////////
+          const userUID = firebase.auth().currentUser.uid;
+          const ref = firebase.database().ref(`Subject/${asyncStudassSubject}/studasslist`);
+                ref.once('value', snapshot => { // only called once
+              console.log(snapshot.val() === null);
+              //if the queue is empty ( in case studass deletes it)
+              //we jump over iterating becouse we know we are not there
+              if (snapshot.val() === null) {
+                return true;
+              }
+              snapshot.forEach(childSnapshot => {
+                //should recover studasqueue if userid existst at location
+                console.log('CHILD_UID', childSnapshot.val().userUID);
+                console.log('MY_UID', userUID);
+
+                if (userUID === childSnapshot.val().userUID) {
+                  //sets needed values to state
+                  this.props.studassSubject(asyncStudassSubject);
+                  //continues queue
+                  Actions.studassQueue({ type: 'reset' });
+                }
+                //if it doesent find anything, it is all good
+              });
+            });
+        ///////////////////////////////////////////////////////////////////////////////////////
+        ////////////////CHECKS IF ADDED TO A LINE/////////////////////////////////////////////
+        const studRef = firebase.database().ref(`Subject/${asyncStudentSubject}/studasslist/${asyncStudentstudassLocation}/queue`);
+              studRef.once('value', snapshot => { // only called once
             console.log(snapshot.val() === null);
             //if the queue is empty ( in case studass deletes it)
             //we jump over iterating becouse we know we are not there
@@ -54,58 +105,34 @@ async checkRecover() {
 
               if (userUID === childSnapshot.val().userUID) {
                 //sets needed values to state
-                this.props.studassSubject(asyncStudassSubject);
+                this.props.setInfo({ prop: 'studassLocation', value: asyncStudentstudassLocation });
+                this.props.setInfo({ prop: 'subject', value: asyncStudentSubject });
+                this.props.setMyLocation(asyncStudentmyLocation);
+
                 //continues queue
-                Actions.studassQueue({ type: 'reset' });
+                Actions.inQueue({ type: 'reset' });
               }
               //if it doesent find anything, it is all good
             });
           });
-      ///////////////////////////////////////////////////////////////////////////////////////
-      ////////////////CHECKS IF ADDED TO A LINE/////////////////////////////////////////////
-      const studRef = firebase.database().ref(`Subject/${asyncStudentSubject}/studasslist/${asyncStudentstudassLocation}/queue`);
-            studRef.once('value', snapshot => { // only called once
-          console.log(snapshot.val() === null);
-          //if the queue is empty ( in case studass deletes it)
-          //we jump over iterating becouse we know we are not there
-          if (snapshot.val() === null) {
-            return true;
-          }
-          snapshot.forEach(childSnapshot => {
-            //should recover studasqueue if userid existst at location
-            console.log('CHILD_UID', childSnapshot.val().userUID);
-            console.log('MY_UID', userUID);
-
-            if (userUID === childSnapshot.val().userUID) {
-              //sets needed values to state
-              this.props.setInfo({ prop: 'studassLocation', value: asyncStudentstudassLocation });
-              this.props.setInfo({ prop: 'subject', value: asyncStudentSubject });
-              this.props.setMyLocation(asyncStudentmyLocation);
-
-              //continues queue
-              Actions.inQueue({ type: 'reset' });
-            }
-            //if it doesent find anything, it is all good
-          });
-        });
-      ///////////////////////////////////////////////////////////////////////////////
-      //have to get my name, cant do it before because then the obove function wouldnt run
-      //gets users name to NameReducer for later use
-      this.props.getMyName();
-      this.props.getMyGender();
+        ///////////////////////////////////////////////////////////////////////////////
+        //have to get my name, cant do it before because then the obove function wouldnt run
+        //gets users name to NameReducer for later use
+        this.props.getMyName();
+        this.props.getMyGender();
+        }
+      } catch (error) {
+        // Error retrieving data
       }
-    } catch (error) {
-      // Error retrieving data
     }
   }
-}
-  renderImage() {
-     /* eslint-disable global-require */
-    return (
-       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home3.png')} />
-     );
-    /* eslint-enable global-require */
-  }
+    renderImage() {
+       /* eslint-disable global-require */
+      return (
+         <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home3.png')} />
+       );
+      /* eslint-enable global-require */
+    }
 
   render() {
     const { buttonStyle, textStyle, containerStyle } = styles;

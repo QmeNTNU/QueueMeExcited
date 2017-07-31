@@ -10,10 +10,17 @@ export const addSubject = ({ ref, emnekode, emnenavn }) => {
 
 console.log(ref, emnekode, emnenavn);
   return (dispatch) => {
-    ref.child(emnekode).push({ emnekode, emnenavn }) //sets the value
+    ref.set({ emnekode, emnenavn }) //sets the value
     .then(() => {
       dispatch({ type: SUBJECT_ADDED }); //resets the input field
-       Actions.auth({ type: 'reset' });//moved to necht scene
+     }); //Reset means no backbutton
+  };
+};
+export const deleteSubject = ({ ref }) => {
+  return () => {
+    ref.remove() //removes the value
+    .then(() => {
+    console.log('RMEMOVED SUBJECT');
      }); //Reset means no backbutton
   };
 };

@@ -139,12 +139,12 @@ const createUserInFireBase = (signupEmail, signupPassword, fullname, gender) => 
     firebase.database().ref(`/users/${currentUser.uid}`)
       .set({ signupEmail, signupPassword, fullname, gender })
       .then(() => {
-        firebase.database().ref(`/users/${currentUser.uid}/favstudsubject`)
-          .push({ emnekode, emnenavn });
+        firebase.database().ref(`/users/${currentUser.uid}/favstudsubject/${emnekode}`)
+          .set({ emnekode, emnenavn });
       })
       .then(() => {
-        firebase.database().ref(`/users/${currentUser.uid}/favasssubject`)
-          .push({ emnekode, emnenavn });
+        firebase.database().ref(`/users/${currentUser.uid}/favasssubject/${emnekode}`)
+          .set({ emnekode, emnenavn });
       });
 };
 

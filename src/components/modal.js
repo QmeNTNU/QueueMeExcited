@@ -1,4 +1,5 @@
 import React, { Component, } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Button } from './common';
@@ -28,8 +29,9 @@ class modal extends Component {
       <View>
         <Modal
           animationType={'slide'}
-          transparent={true}
+          transparent
           visible={this.state.modalVisible}
+          onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
           <View style={styles.wholeScreen}>
             <View style={styles.container}>
@@ -102,7 +104,7 @@ class modal extends Component {
 
                       <Text style={styles.textOrange}>That is it!</Text>
                       <View style={{ height: 50, width: 200, borderRadius: 10 }}>
-                        <Button onPress={this.setModalInvisible.bind(this)}>
+                        <Button onPress={() => Actions.pop()}>
                         Get started
                         </Button>
                       </View>
@@ -161,21 +163,21 @@ const styles = {
     alignItems: 'center',
     color: '#fff',
     fontSize: 30,
-    fontWeight: 'bold',
     fontFamily: 'bebasNeue'
   },
   textOrange: {
     color: '#254552',
-    fontSize: 30,
+    fontSize: 40,
     fontFamily: 'bebasNeue'
   },
   wholeScreen: {
     flex: 1,
-    backgroundColor: '#95CAFE',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 5,
-    paddingBottom: 40
+    paddingBottom: 40,
+
   },
   container: {
     flex: 1,
@@ -183,6 +185,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
+    borderRadius: 5
   },
   imageStyle: {
     flex: 1,
@@ -197,7 +200,6 @@ const styles = {
     backgroundColor: '#95CAFE',
   },
 };
-//////   backgroundColor: 'rgba(0, 0, 0, 0.5)', gived tansparent!
 
 
 /*
