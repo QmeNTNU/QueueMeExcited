@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Text, View, Image } from 'react-native';
-import { ButtonBlue, Spinner } from './common';
+import { ButtonWhite, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
 
 class QueueInfo extends Component {
@@ -53,24 +53,23 @@ renderButtonBlue() {
     return <Spinner size="large" />;
   }
   return (
-    <ButtonBlue onPress={this.onButtonBluePress.bind(this)}>
+    <ButtonWhite onPress={this.onButtonBluePress.bind(this)}>
       ADD TO QUEUE
-    </ButtonBlue>
+    </ButtonWhite>
   );
 }
 
   render() {
     return (
     <View style={styles.wholeScreen}>
-
-      <View style={{ flex: 1 }}>
-        <Text style={{ color: '#95CAFE' }}>
-          PLACEHOLDER
+      <View style={styles.ViewBlue}>
+        <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
+        You'r about to enter a queue:
         </Text>
       </View>
 
 
-      <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40 }}>
+      <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginTop: 40, marginLeft: 40, marginRight: 40 }}>
 
         <View style={{ height: 10, alignItems: 'center' }}>
           {this.renderArrowDownImage()}
@@ -107,7 +106,7 @@ renderButtonBlue() {
         </View>
     </View>
 
-    <View style={styles.ButtonBlueView}>
+    <View style={{ height: 60, marginTop: 5, marginLeft: 40, marginRight: 40 }}>
       {this.renderButtonBlue()}
     </View>
 
@@ -127,6 +126,12 @@ const styles = {
   wholeScreen: {
     flex: 1,
     flexDirection: 'column',
+  },
+  ViewBlue: {
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F58C6C'
   },
   imageView: {
     flex: 5,
@@ -175,7 +180,7 @@ const styles = {
   textStyleBig: {
     color: '#ffffff',
     fontFamily: 'bebasNeue',
-    fontSize: 40,
+    fontSize: 30,
 
   },
 };

@@ -102,7 +102,7 @@ async checkRecover() {
   renderImage() {
      /* eslint-disable global-require */
     return (
-       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home.png')} />
+       <Image style={{ flex: 1, height: undefined, width: undefined }} resizeMode="contain" source={require('./images/home3.png')} />
      );
     /* eslint-enable global-require */
   }
@@ -121,7 +121,7 @@ async checkRecover() {
               {this.renderImage()}
             </View>
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={textStyle} >
                 Interrract as either student or student assistant
               </Text>
@@ -173,7 +173,7 @@ const styles = {
   },
   containerStyle: {
     backgroundColor: '#95CAFE',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexDirection: 'row',
     position: 'relative'
   }

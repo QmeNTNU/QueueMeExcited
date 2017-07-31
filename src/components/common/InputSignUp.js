@@ -12,7 +12,7 @@ const InputSignUp = ({ value, onChangeText, placeholder, secureTextEntry, label,
       <TextInput
         secureTextEntry={secureTextEntry}
         placeholder={placeholder}
-        placeholderTextColor="white"
+        placeholderTextColor='rgba(255, 255, 255, .5)'
         autoCorrect={false} //ta av autocorrect
         style={inputStyle}
         value={value}
@@ -27,7 +27,7 @@ const InputSignUp = ({ value, onChangeText, placeholder, secureTextEntry, label,
 const styles = {
   //text style
   inputStyle: {
-    flex: 4,
+    flex: 6,
     textAlign: 'left',
     marginLeft: 20,
     color: '#ffffff',
@@ -48,7 +48,7 @@ const styles = {
 
   labelStyle: {
   flex: 1,
-  padding: 10,
+  padding: 15,
   backgroundColor: '#F58C6C',
   }
 };

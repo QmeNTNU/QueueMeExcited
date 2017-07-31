@@ -107,7 +107,7 @@ class SignUpForm extends Component {
     return (
       <View style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
 
-        <View style={{ justifyContent: 'space-between', flex: 4, padding: 20 }}>
+        <View style={{ justifyContent: 'space-between', flex: 4, paddingBottom: 20, paddingRight: 60, paddingLeft: 60 }}>
           <View style={styles.containerStyle} />
 
           <View style={styles.containerStyle}>
@@ -176,10 +176,10 @@ class SignUpForm extends Component {
 
         <TouchableOpacity
             onPress={this.onPressLogin.bind(this)}
-            style={{ flex: 1, alignItems: 'center', paddingBottom: 20, paddingTop: 20 }}
+            style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5}}
         >
-          <Text style={{ color: '#ffffff', flex: 1 }}>
-              ALREADY GOT AN ACCOUNT? CLICK HERE!
+          <Text style={{ color: '#ffffff' }}>
+              Back to login
           </Text>
         </TouchableOpacity>
 

@@ -162,11 +162,12 @@ const styles = {
     color: '#fff',
     fontSize: 30,
     fontWeight: 'bold',
+    fontFamily: 'bebasNeue'
   },
   textOrange: {
     color: '#254552',
     fontSize: 30,
-    fontWeight: 'bold',
+    fontFamily: 'bebasNeue'
   },
   wholeScreen: {
     flex: 1,
@@ -182,9 +183,6 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
-    borderRadius: 10,
-    shadowRadius: 5,
-      elevation: 2,
   },
   imageStyle: {
     flex: 1,

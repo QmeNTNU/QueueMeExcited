@@ -58,7 +58,17 @@ onNextPress() {
   const firstUID = this.props.firstKey;
   console.log('firstKey', firstUID);
   const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue/${firstUID}`);
-  this.props.nextDelete(nextRef);
+if (this.props.first !== 'There are no students in line') {
+  Alert.alert(
+  'Are you sure?',
+  'You will now proceed to the next student in line.',
+    [
+      { text: 'Cancel', onPress: () => console.log('Cancel pressed') },
+      { text: 'Yes', onPress: () => this.props.nextDelete(nextRef) },
+    ]
+  );
+}
+
 }
 
 
@@ -75,7 +85,7 @@ renderImage() {
   //gets gender to display either girl or boy
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue.png');
+  const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue3.png');
   return (
     <Image
       style={styles.imageStyle}
@@ -162,18 +172,17 @@ renderScreen() {
           {this.renderImage()}
         </View>
 
-        <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
+        <View style={{ flex: 1, backgroundColor: '#95CAFE', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 10, marginBottom: 20 }}>
 
           <View style={{ height: 10, alignItems: 'center' }}>
               <Text style={{ color: '#ffffff' }} placeholder />
           </View>
 
-        <View style={styles.infoView}>
-          <Text style={styles.textStyle}>{this.props.first}</Text>
-        </View>
         <View style={styles.infoView2}>
-          <Text style={styles.textStyle}>Students in line: {this.props.studasscount}</Text>
+          <Text style={styles.textStyle2}>{this.props.first} </Text>
+          <Text style={styles.textStyle}>Students in line: {this.props.studasscount} </Text>
         </View>
+
 
       </View>
 
@@ -215,10 +224,12 @@ renderScreen() {
       resizeMode: 'contain'
     },
     ContainerView: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginLeft: 40,
+        marginRight: 40,
     },
     infoView: {
       flex: 1,
@@ -258,9 +269,9 @@ renderScreen() {
       fontFamily: 'bebasNeue'
     },
     textStyle2: {
-      color: '#F58C6C',
+      color: '#ffffff',
       fontFamily: 'bebasNeue',
-      fontSize: 25,
+      fontSize: 40,
 
     }
 

@@ -65,7 +65,7 @@ renderImage() {
   //const gender = this.getGender();
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman.png') : require('./images/inqueue.png');
+  const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman.png') : require('./images/inqueue3.png');
   return (
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
