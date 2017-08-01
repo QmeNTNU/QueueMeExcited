@@ -20,6 +20,8 @@ import QueueInfo from './components/QueueInfo';
 import InQueue from './components/InQueue';
 import modal from './components/modal';//HUSK OG IMPORTER REACT-NATIVE-SWIPE
 import addSubjectStudent from './components/addSubjectStudent';
+import addSubjectAss from './components/addSubjectAss';
+
 ////////////Anders////////////////////////////
 
 const RouterComponent = () => {
@@ -136,6 +138,12 @@ const RouterComponent = () => {
   <Scene
     key="addSubjectStudent"
     component={addSubjectStudent}
+    modal
+    sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
+  />
+  <Scene
+    key="addSubjectAss"
+    component={addSubjectAss}
     modal
     sceneStyle={{ paddingTop: 65, backgroundColor: '#95CAFE' }}
   />

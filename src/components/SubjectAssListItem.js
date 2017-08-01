@@ -1,21 +1,13 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
 import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
-import { studassSubject } from '../actions';
+import { studassSubject, deleteSubject } from '../actions';
 /* eslint-disable global-require */
 
-const rightButtons = [
-  <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
-    <Image
-      style={{ flex: 1, height: undefined, width: undefined }}
-      resizeMode="contain"
-      source={require('./images/delete.png')}
-    />
-  </TouchableHighlight>
-];
 
 class SubjectAssListItem extends Component {
 
@@ -26,6 +18,14 @@ class SubjectAssListItem extends Component {
     Actions.createQueue({ subject: this.props.subject });
   }
 
+  onDeletePress() {
+    //retireves uid and emnekode to delete the pressed subject
+    const { emnekode } = this.props.subject;
+    const userUID = firebase.auth().currentUser.uid;
+    //makes a ref for favstudsubject
+    const { ref } = firebase.database().ref(`users/${userUID}/favasssubject/${emnekode}`);
+    this.props.deleteSubject({ ref });
+  }
 
 renderImage() {
   return (
@@ -51,6 +51,15 @@ renderArrowImage() {
 
 renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
+  const rightButtons = [
+    <TouchableHighlight onPress={this.onDeletePress.bind(this)} style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
+      <Image
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
+        source={require('./images/delete.png')}
+      />
+    </TouchableHighlight>
+  ];
 
     return (
       <Swipeable rightButtons={rightButtons}>
@@ -134,4 +143,4 @@ const styles = {
   return { favorites };
 };*/
 
-export default connect(null, { studassSubject })(SubjectAssListItem);
+export default connect(null, { studassSubject, deleteSubject })(SubjectAssListItem);
