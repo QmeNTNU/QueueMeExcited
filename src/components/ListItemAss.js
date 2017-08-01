@@ -6,7 +6,7 @@ import { Text, View, TouchableOpacity, Image } from 'react-native';
 import { addSubject } from '../actions';
 
 
-class ListItem extends Component {
+class ListItemAss extends Component {
 
 
   /* eslint-disable global-require */
@@ -20,7 +20,7 @@ class ListItem extends Component {
     //gets user uid
     const userUID = firebase.auth().currentUser.uid;
     //makes a ref for favstudsubject
-    const { ref } = firebase.database().ref(`users/${userUID}/favstudsubject/${emnekode}`);
+    const { ref } = firebase.database().ref(`users/${userUID}/favasssubject/${emnekode}`);
     //adds subject to subjectlist
     this.props.addSubject({ ref, emnekode, emnenavn });
 
@@ -29,9 +29,10 @@ class ListItem extends Component {
 
   checkIfAdded() {
     //only diplays a add-button if it is not already addet to the users favorite subjects
+    console.log('favor', this.props.favoriteAssSubjectList);
     const { emnekode } = this.props.subject;
-    for (let i = 0; i < this.props.favoriteStudentSubjectList.length; i++) {
-      if (emnekode === this.props.favoriteStudentSubjectList[i].emnekode) {
+    for (let i = 0; i < this.props.favoriteAssSubjectList.length; i++) {
+      if (emnekode === this.props.favoriteAssSubjectList[i].emnekode) {
         return true;
       }
     }
@@ -132,10 +133,10 @@ const styles = {
 const mapStateToProps = state => {
   //fungerer ikke å kalle på denne. vet ikke hvorfor
   //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
-  const favoriteStudentSubjectList = _.map(state.favoriteStudentSubjectList, (val, uid) => {
+  const favoriteAssSubjectList = _.map(state.favoriteAssSubjectList, (val, uid) => {
     return { ...val, uid };
   });
-  return { favoriteStudentSubjectList };
+  return { favoriteAssSubjectList };
 };
 
-export default connect(mapStateToProps, { addSubject })(ListItem);
+export default connect(mapStateToProps, { addSubject })(ListItemAss);

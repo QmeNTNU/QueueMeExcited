@@ -68,7 +68,7 @@ class FavoriteAssSubjectList extends Component {
         </View>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
-            onPress={() => console.log('pressed')}
+            onPress={() => Actions.addSubjectAss()}
           >
             ADD SUBJECTS
           </ButtonBlue>
