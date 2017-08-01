@@ -48,7 +48,7 @@ class deleteSlide extends Component {
                     Got it
                   </ButtonWhite>
                 </View>
-            </View>
+              </View>
             </View>
           </View>
         </Modal>
@@ -66,10 +66,11 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#95CAFE',
-    paddingLeft: 50,
-    paddingRight: 50,
+    marginLeft: 60,
+    marginRight: 60,
     marginBottom: 20,
-    marginTop: 50
+    marginTop: 50,
+
   },
 
   text: {
@@ -87,8 +88,7 @@ const styles = {
   wholeScreen: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
-    paddingLeft: 60,
-    paddingRight: 60,
+
     paddingTop: 80,
     paddingBottom: 80,
 
@@ -99,7 +99,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
-    borderRadius: 5
+    borderRadius: 5,
+    marginRight: 60,
+    marginLeft: 60
   },
   imageStyle: {
     flex: 1,

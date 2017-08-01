@@ -73,7 +73,7 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding' style={{ flex: 4, paddingRight: 60, paddingLeft: 60, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
+      <KeyboardAvoidingView behavior='padding' style={{ flex: 4, paddingRight: 50, paddingLeft: 50, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
 
         <View style={styles.ImageViewStyle}>
         {this.renderImage()}

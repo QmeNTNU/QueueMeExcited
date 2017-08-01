@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity } from 'react-native';
+import { Text, View, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { resetEmailChange, resetPasswordButtonPress } from '../actions';
@@ -36,7 +36,7 @@ renderImage() {
 
 render() {
     return (
-          <View style={{ backgroundColor: '#95CAFE', flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingLeft: 60, paddingRight: 60 }}>
+          <KeyboardAvoidingView behavior='padding'  style={{ backgroundColor: '#95CAFE', flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingLeft: 50, paddingRight: 50 }}>
 
                   <Text style={{ fontSize: 40, color: '#F58C6C', textAlign: 'center', fontFamily: 'bebasNeue' }}>
                   Forgot password?
@@ -73,7 +73,7 @@ render() {
             </View>
 
 
-        </View>
+        </KeyboardAvoidingView>
     );
   }
 }
@@ -81,7 +81,7 @@ render() {
 const styles = {
   containerStyle: {
 
-    height: 60,
+    height: 50,
     backgroundColor: '#95CAFE',
     justifyContent: 'flex-start',
     flexDirection: 'row',

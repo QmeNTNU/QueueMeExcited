@@ -132,8 +132,11 @@ const styles = {
     backgroundColor: '#95CAFE',
     paddingLeft: 50,
     paddingRight: 50,
+    marginLeft: 20,
+    marginRight: 20,
     marginBottom: 20,
-    marginTop: 50
+    paddingTop: 50,
+    borderRadius: 5
   },
   slide1: {
     flex: 1,
@@ -142,6 +145,8 @@ const styles = {
     backgroundColor: '#95CAFE',
     paddingLeft: 50,
     paddingRight: 50,
+    marginLeft: 20,
+    marginRight: 20,
     marginBottom: 20
   },
   slide2: {
@@ -175,7 +180,6 @@ const styles = {
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 5,
     paddingBottom: 40,
 
   },
@@ -185,6 +189,10 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginLeft: 20,
+    marginRight: 20,
     borderRadius: 5
   },
   imageStyle: {

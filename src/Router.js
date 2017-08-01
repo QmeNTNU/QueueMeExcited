@@ -160,6 +160,7 @@ const RouterComponent = () => {
     component={deleteSlide}
     modal
     sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
+    initial
   />
 
 </Scene>

@@ -86,7 +86,7 @@ class StudAssList extends Component {
       <View style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
         <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
-          available studasses in this subject
+          available studasses
           </Text>
         </View>
         <View style={{ flex: 8 }}>
