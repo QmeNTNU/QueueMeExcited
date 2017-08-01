@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { ButtonWhite, ButtonRed } from './common';
@@ -18,7 +19,7 @@ class Settings extends Component {
   }
 
   onStudPress() {
-
+    Actions.welcome();
   }
   onStudAssPress() {
 
@@ -38,7 +39,7 @@ class Settings extends Component {
 
                 <View style={styles.containerStyle}>
                   <ButtonWhite onPress={this.onStudPress.bind(this)} >
-                    Toturial Student
+                    Toturial
                   </ButtonWhite>
                 </View>
 
