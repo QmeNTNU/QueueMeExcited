@@ -85,7 +85,7 @@ renderImage() {
   //gets gender to display either girl or boy
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
-  const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman.png') : require('./images/studassqueue3.png');
+  const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman3.png') : require('./images/studassqueue3.png');
   return (
     <Image
       style={styles.imageStyle}
