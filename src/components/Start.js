@@ -42,7 +42,7 @@ class Home extends Component {
         //if (this.props.firstTimeOnApp){
         //actions.modal
         //}
-          Actions.auth();
+          Actions.auth({ type: 'reset' });
           break;
         default:
           this.renderImage({ type: 'reset' });
