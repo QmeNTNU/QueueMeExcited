@@ -64,7 +64,7 @@ renderButtonBlue() {
     <View style={styles.wholeScreen}>
       <View style={styles.ViewBlue}>
         <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
-        You'r about to enter a queue:
+        You're about to enter a queue:
         </Text>
       </View>
 

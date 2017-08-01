@@ -164,7 +164,7 @@ async setWelcomeSlides() {
 
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={textStyle} >
-                Interrract as either student or student assistant
+                Interract as either student or student assistant
               </Text>
 
               <View style={containerStyle}>

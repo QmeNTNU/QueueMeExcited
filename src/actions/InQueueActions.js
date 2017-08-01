@@ -70,7 +70,7 @@ const isDeleted = () => {
 //Getscalled when it tries to retrieve data but doesent fint it
   Alert.alert(
   'Stepped out of line',
-  'You have been removed from this queue. Either it has been your turn, or the student assisten has ended the queue.\n\nYou will be taken to the homescreen.',
+  'You have been removed from this queue. Either it has been your turn, or the student assistant has ended the queue.\n\nYou will be taken to the homescreen.',
     [
       { text: 'OK', onPress: () => Actions.home(({ type: 'reset' })) },
     ]
