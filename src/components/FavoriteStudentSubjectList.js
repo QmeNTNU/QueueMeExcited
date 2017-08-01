@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, ListView, View, Text } from 'react-native';
-import { ButtonBlue, Spinner } from './common';
 import { Actions } from 'react-native-router-flux';
+import { ListView, View, Text, AsyncStorage } from 'react-native';
+import { ButtonBlue, Spinner } from './common';
 import { favoriteStudentSubjectListFetch } from '../actions';
 import SubjectStudListItem from './SubjectStudListItem';
 
@@ -24,6 +24,10 @@ class FavoriteStudentSubjectList extends Component {
     });
     this.dataSource3 = dS.cloneWithRows(this.props.favoriteStudentSubjectList);
   }
+  componentDidMount() {
+    //checks if it should display welcomeslides
+    this.checkWelcomeSlides();
+  }
 
   componentWillReceiveProps(nextProps) {
     this.createDataSource(nextProps);
@@ -35,6 +39,30 @@ class FavoriteStudentSubjectList extends Component {
     });
     this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
   }
+
+///Asnc storadge functions////////////
+  async checkWelcomeSlides() {
+   try {
+      const value = await AsyncStorage.getItem('displayDeleteSlide');
+      if (value === null) {
+        //sets displaySlides to NOT so it doesent show welcomeslides again
+        this.setWelcomeSlides();
+        console.log('COMDIDMOUNT', value);
+        Actions.deleteSlide();
+      }
+    } catch (error) {
+      // Error retrieving data
+    }
+  }
+
+  async setWelcomeSlides() {
+    try {
+          await AsyncStorage.setItem('displayDeleteSlide', 'NOT');
+        } catch (error) {
+          // Error saving data
+        }
+  }
+//////////////////////////////////
 
   renderRow(subject) {
     return <SubjectStudListItem subject={subject} />;

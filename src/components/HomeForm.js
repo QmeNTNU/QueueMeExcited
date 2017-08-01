@@ -12,6 +12,7 @@ class HomeForm extends Component {
   componentWillMount() {
     //checks if user was engaged in activity before closing app, and restores it
     this.checkRecover();
+    Actions.refresh({ renderRightButton: this.renderRightButton });
   }
   componentDidMount() {
     //checks if it should display welcomeslides
@@ -126,6 +127,19 @@ async setWelcomeSlides() {
       }
     }
   }
+  renderRightButton = () => {
+    /* eslint-disable global-require */
+    return (
+        <TouchableOpacity onPress={() => Actions.settings()}>
+          <Image
+            style={{ height: 20, width: 20 }}
+            resizeMode="contain"
+            source={require('./images/settings.png')}
+          />
+        </TouchableOpacity>
+    );
+    /* eslint-enable global-require */
+};
     renderImage() {
        /* eslint-disable global-require */
       return (
