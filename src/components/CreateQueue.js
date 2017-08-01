@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
 import { connect } from 'react-redux'; //to get acces to the actioncreater
 import { availableChanged, roomChanged, makeQueue } from '../actions'; //all the actions in the actioncreator
 import { InputCreate, ButtonBlue, Spinner } from './common';
@@ -83,7 +83,7 @@ onButtonPress() {
 
   render() {
     return (
-      <View style={styles.wholeScreen}>
+      <KeyboardAvoidingView behavior='padding'  style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
           <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           {this.getSubject()}
@@ -145,7 +145,7 @@ onButtonPress() {
           {this.renderButton()}
         </View>
 
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

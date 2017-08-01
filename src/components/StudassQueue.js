@@ -271,7 +271,7 @@ renderScreen() {
     textStyle2: {
       color: '#ffffff',
       fontFamily: 'bebasNeue',
-      fontSize: 40,
+      fontSize: 30,
 
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 import CheckBox from 'react-native-check-box'
 //import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -105,9 +105,9 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <View style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
+      <KeyboardAvoidingView behavior='padding' style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
 
-        <View style={{ justifyContent: 'space-between', flex: 4, paddingBottom: 20, paddingRight: 60, paddingLeft: 60 }}>
+        <View style={{ justifyContent: 'space-between', flex: 4, paddingBottom: 20, paddingRight: 50, paddingLeft: 50 }}>
           <View style={styles.containerStyle} />
 
           <View style={styles.containerStyle}>
@@ -185,7 +185,7 @@ class SignUpForm extends Component {
 
 
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
