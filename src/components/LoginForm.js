@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, View, Image, KeyboardAvoidingView  } from 'react-native';
+import { Text, TouchableOpacity, View, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser, signup, forgotPasswordClick } from '../actions';
 import { InputSignUp, ButtonWhite, Spinner } from './common';
@@ -73,7 +73,7 @@ class LoginForm extends Component {
   }
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding' style={{ flex: 4, paddingRight: 50, paddingLeft: 50, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
+      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={{ flex: 1, paddingRight: 50, paddingLeft: 50, paddingBottom: 20, backgroundColor: '#95CAFE' }}>
 
         <View style={styles.ImageViewStyle}>
         {this.renderImage()}
@@ -133,12 +133,13 @@ class LoginForm extends Component {
 
 const styles = {
   containerStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
+    height: 50,
     paddingBottom: 2,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
   textButtonStyle: {
+    height: 50,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',

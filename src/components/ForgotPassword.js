@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Text, View, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { resetEmailChange, resetPasswordButtonPress } from '../actions';
@@ -18,7 +18,11 @@ onResetPasswordButtonPress() {
 renderEmailImage() {
    /* eslint-disable global-require */
   return (
-     <Image style={styles.labelStyle} source={require('./images/mail2.png')} />
+    <Image
+      style={{ flex: 1, height: undefined, width: undefined }}
+      resizeMode="contain"
+      source={require('./images/mail2.png')}
+    />
    );
   /* eslint-enable global-require */
 }
@@ -36,7 +40,7 @@ renderImage() {
 
 render() {
     return (
-          <KeyboardAvoidingView behavior='padding'  style={{ backgroundColor: '#95CAFE', flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingLeft: 50, paddingRight: 50 }}>
+          <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={{ backgroundColor: '#95CAFE', flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingLeft: 50, paddingRight: 50 }}>
 
                   <Text style={{ fontSize: 40, color: '#F58C6C', textAlign: 'center', fontFamily: 'bebasNeue' }}>
                   Forgot password?

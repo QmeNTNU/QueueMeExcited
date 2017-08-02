@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-import { View, Text, Image, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { connect } from 'react-redux'; //to get acces to the actioncreater
 import { availableChanged, roomChanged, makeQueue } from '../actions'; //all the actions in the actioncreator
 import { InputCreate, ButtonBlue, Spinner } from './common';
@@ -83,7 +83,7 @@ onButtonPress() {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding'  style={styles.wholeScreen}>
+      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
         <View style={styles.ViewBlue}>
           <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           {this.getSubject()}
@@ -104,7 +104,7 @@ onButtonPress() {
         </View>
 
         <View style={styles.ContainerView}>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, height: 45 }}>
               <InputCreate
                 placeholder="00:00"
                 keyboardType='default'
@@ -119,7 +119,7 @@ onButtonPress() {
               <Text style={styles.textStyle3}> Oclock in </Text>
             </View>
 
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, height: 45 }}>
               <InputCreate
                 placeholder="room.nr"
                 keyboardType='default'
