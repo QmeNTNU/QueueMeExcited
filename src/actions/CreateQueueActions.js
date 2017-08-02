@@ -25,7 +25,7 @@ export const studassSubject = (text) => {
   };
 };
 
-export const makeQueue = ({ myName, myGender, available, room, ref }) => {
+export const makeQueue = ({ myGender, available, room, ref }) => {
   //MUST HAVE VALIDATION////////////////////////////////////
   if (!validateInput(available)) {
     return (dispatch) => {
@@ -35,7 +35,7 @@ export const makeQueue = ({ myName, myGender, available, room, ref }) => {
   }
 
   //gets rest of values on should push to the location
-  const fullname = myName;
+  const fullname = firebase.auth().currentUser.displayName;
   const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;

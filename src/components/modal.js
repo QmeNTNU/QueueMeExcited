@@ -34,7 +34,6 @@ class modal extends Component {
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
           <View style={styles.wholeScreen}>
-            <View style={styles.container}>
             <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
 
                 <View style={styles.slideWelcome}>
@@ -111,7 +110,6 @@ class modal extends Component {
 
                   </View>
             </Swiper>
-            </View>
           </View>
         </Modal>
 
@@ -147,7 +145,8 @@ const styles = {
     paddingRight: 50,
     marginLeft: 20,
     marginRight: 20,
-    marginBottom: 20
+    marginBottom: 20,
+    borderRadius: 5
   },
   slide2: {
     flex: 1,
@@ -177,6 +176,8 @@ const styles = {
   },
   wholeScreen: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
     paddingLeft: 20,
     paddingRight: 20,
