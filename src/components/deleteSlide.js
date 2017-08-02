@@ -33,22 +33,20 @@ class deleteSlide extends Component {
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
           <View style={styles.wholeScreen}>
-
-            <View style={styles.container}>
-              <View style={styles.slideWelcome}>
+            <View style={styles.slideWelcome} height={this.state.height - 80} width={this.state.width - 80}>
                 <Image
-                  style={styles.imageStyle}
+                  style={{ flex: 1, resizeMode: 'contain' }}
+                  width={this.state.width - 80}
                   source={require('./images/turtorialdelete.png')}
                 />
 
                 <Text style={styles.textOrange}>TIP</Text>
                 <Text style={styles.text}>Slide to delete subjects</Text>
-                <View style={{ marginLeft: 70, marginRight: 70, height: 60 }}>
+                <View style={{ height: 60 }} width={this.state.width - 80}>
                   <ButtonWhite onPress={() => Actions.pop()}>
                     Got it
                   </ButtonWhite>
                 </View>
-              </View>
             </View>
           </View>
         </Modal>
@@ -65,11 +63,9 @@ const styles = {
   slideWelcome: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#95CAFE',
-    marginLeft: 60,
-    marginRight: 60,
-    marginBottom: 20,
-    marginTop: 50,
+    borderRadius: 5,
 
   },
 
@@ -77,7 +73,8 @@ const styles = {
     textAlign: 'center',
     color: '#fff',
     fontSize: 30,
-    fontFamily: 'bebasNeue'
+    fontFamily: 'bebasNeue',
+    marginBottom: 20
   },
   textOrange: {
     color: '#254552',
@@ -87,34 +84,18 @@ const styles = {
   },
   wholeScreen: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
-
-    paddingTop: 80,
-    paddingBottom: 80,
-
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#95CAFE',
-    borderRadius: 5,
-    marginRight: 60,
-    marginLeft: 60
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
+    paddingBottom: 60,
   },
+
   imageStyle: {
     flex: 1,
+    width: 200,
     resizeMode: 'contain'
   },
-  buttonView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: '#254552',
-    fontSize: 30,
-    fontWeight: 'bold',
-    backgroundColor: '#95CAFE',
-  },
+
 };
 
 

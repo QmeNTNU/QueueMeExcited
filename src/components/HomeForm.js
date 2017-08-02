@@ -16,7 +16,10 @@ class HomeForm extends Component {
   }
   componentDidMount() {
     //checks if it should display welcomeslides
+    this.props.getMyGender();
     this.checkWelcomeSlides();
+    const user = firebase.auth().currentUser.displayName;
+    console.log('FIREBASE USER NAME', user);
   }
   onPressStudent() {
     this.props.Student();
@@ -120,7 +123,6 @@ async setWelcomeSlides() {
         //have to get my name, cant do it before because then the obove function wouldnt run
         //gets users name to NameReducer for later use
         this.props.getMyName();
-        this.props.getMyGender();
         }
       } catch (error) {
         // Error retrieving data

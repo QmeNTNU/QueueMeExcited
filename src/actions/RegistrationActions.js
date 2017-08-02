@@ -117,9 +117,12 @@ const emailValidation =
 const userValidation = ({ dispatch, signupEmail, signupPassword, fullname, gender }) => {
   //dispatch er en metode (funksjon)
     firebase.auth().createUserWithEmailAndPassword(signupEmail, signupPassword)
+    .then(user =>
+      //sets name to firebase user
+        user.updateProfile({ displayName: fullname }))
       .then(user =>
         createUserSuccess(dispatch, user, signupEmail, signupPassword, fullname, gender))
-      .catch(() => createUserFail(dispatch));
+        .catch(() => createUserFail(dispatch));
 };
 
 const createUserSuccess = (dispatch, user, signupEmail, signupPassword, fullname, gender) => {
