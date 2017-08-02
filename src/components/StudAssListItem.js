@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Swipeable from 'react-native-swipeable';
-import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight } from 'react-native';
+import { Text, View, Image, TouchableWithoutFeedback, TouchableHighlight, StyleSheet } from 'react-native';
 import { setInfo } from '../actions';
 
 /* eslint-disable global-require */
@@ -147,7 +147,7 @@ const styles = {
     marginRight: 10,
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
 
   thumbnailContainerStyle: {
