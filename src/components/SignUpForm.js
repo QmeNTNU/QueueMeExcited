@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import CheckBox from 'react-native-check-box'
 //import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
@@ -53,7 +53,7 @@ class SignUpForm extends Component {
      <Image
        style={{ flex: 1, height: undefined, width: undefined }}
        resizeMode="contain"
-       source={require('./images/mail.png')}
+       source={require('./images/mail2.png')}
      />
     );
    /* eslint-enable global-require */
@@ -65,7 +65,7 @@ class SignUpForm extends Component {
      <Image
        style={{ flex: 1, height: undefined, width: undefined }}
        resizeMode="contain"
-       source={require('./images/lock.png')}
+       source={require('./images/lock2.png')}
      />
     );
    /* eslint-enable global-require */
@@ -77,7 +77,7 @@ class SignUpForm extends Component {
       <Image
         style={{ flex: 1, height: undefined, width: undefined }}
         resizeMode="contain"
-        source={require('./images/name2.png')}
+        source={require('./images/name3.png')}
       />
      );
     /* eslint-enable global-require */
@@ -105,16 +105,16 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior='padding' style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
+      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={{ backgroundColor: 'rgb(149, 202, 254)', flex: 1 }}>
 
-        <View style={{ justifyContent: 'space-between', flex: 4, paddingBottom: 20, paddingRight: 50, paddingLeft: 50 }}>
-          <View style={styles.containerStyle} />
+        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 4, paddingBottom: 20, paddingRight: 50, paddingLeft: 50 }}>
 
-          <View style={styles.containerStyle}>
-          <Text style={{ fontSize: 50, color: '#F58C6C', fontFamily: 'bebasNeue' }}>
-            Sign Up
-          </Text>
-        </View>
+          <View style={{ height: 60 }}>
+            <Text style={{ fontSize: 50, color: '#F58C6C', fontFamily: 'bebasNeue' }}>
+              Sign Up
+            </Text>
+          </View>
+
            <View style={styles.containerStyle}>
              <InputSignUp
               label={this.renderPersonImage()}
@@ -157,13 +157,13 @@ class SignUpForm extends Component {
 
           <View style={styles.sectionStyle}>
             <CheckBox
-                style={{ flex: 1, padding: 10 }}
+                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end'}}
                 onClick={this.checkMale.bind(this)}
                 isChecked={this.props.gender === 'male'}
                 leftText='Male'
             />
             <CheckBox
-                style={{ flex: 1, padding: 10 }}
+                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end' }}
                 onClick={this.checkFemale.bind(this)}
                 isChecked={this.props.gender === 'female'}
                 leftText='Female'
@@ -201,33 +201,18 @@ const styles = {
     textAlign: 'center'
   },
   sectionStyle: {
-    flex: 1,
+    height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
     position: 'relative',
-    marginLeft: 40,
-    marginRight: 40
   },
   containerStyle: {
-    flex: 1,
+    height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-start',
     paddingBottom: 2,
     position: 'relative'
-  },
-  pickerStyle: {
-     flex: 1,
-     backgroundColor: '#fff',
-     borderRadius: 5,
-     borderWidth: 1,
-     borderColor: '#007aff'
-  },
-  labelStyle: {
-    flex: 1,
-    resizeMode: 'contain',
-    height: 50,
-    width: 50,
   },
   imageStyle: {
     flex: 1,
