@@ -39,7 +39,7 @@ class Settings extends Component {
 
                 <View style={styles.containerStyle}>
                   <ButtonWhite onPress={this.onStudPress.bind(this)} >
-                    Toturial
+                    Tutorial
                   </ButtonWhite>
                 </View>
 
@@ -58,11 +58,6 @@ class Settings extends Component {
                   </ButtonWhite>
                 </View>
 
-                <View style={styles.containerStyle}>
-                  <ButtonWhite onPress={this.onUsPress.bind(this)} >
-                    About Us
-                  </ButtonWhite>
-                </View>
 
             </View>
 
