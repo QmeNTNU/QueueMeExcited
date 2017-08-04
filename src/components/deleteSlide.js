@@ -37,7 +37,7 @@ class deleteSlide extends Component {
                 <Image
                   style={{ flex: 1, resizeMode: 'contain' }}
                   width={this.state.width - 80}
-                  source={require('./images/turtorialdelete.png')}
+                  source={require('./images/turtorialdeleteiphone.png')}
                 />
 
                 <Text style={styles.textOrange}>TIP</Text>

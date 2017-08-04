@@ -53,21 +53,21 @@ class modal extends Component {
                   <View style={styles.slide2}>
                   <Image
                     style={styles.imageStyle}
-                    source={require('./images/welcomeslide3.png')}
+                    source={require('./images/welcomeslide3iphone.png')}
                   />
                     <Text style={styles.text}>Choose subject</Text>
                   </View>
                   <View style={styles.slide2}>
                   <Image
                     style={styles.imageStyle}
-                    source={require('./images/welcomeslide2.png')}
+                    source={require('./images/welcomeslide2iphone.png')}
                   />
                     <Text style={styles.text}>Create a queue</Text>
                   </View>
                   <View style={styles.slide2}>
                   <Image
                     style={styles.imageStyle}
-                    source={require('./images/welcomeslide1.png')}
+                    source={require('./images/welcomeslide1iphone.png')}
                   />
                     <Text style={styles.text}>Wait for students</Text>
                   </View>
@@ -79,21 +79,21 @@ class modal extends Component {
                     <View style={styles.slide2}>
                     <Image
                       style={styles.imageStyle}
-                      source={require('./images/welcomeslide3.png')}
+                      source={require('./images/welcomeslide3iphone.png')}
                     />
                       <Text style={styles.text}>Choose subject</Text>
                     </View>
                     <View style={styles.slide2}>
                     <Image
                       style={styles.imageStyle}
-                      source={require('./images/welcomeslide4.png')}
+                      source={require('./images/welcomeslide4iphone.png')}
                     />
                       <Text style={styles.text}>Choose a studass</Text>
                     </View>
                     <View style={styles.slide2}>
                     <Image
                       style={styles.imageStyle}
-                      source={require('./images/welcomeslide5.png')}
+                      source={require('./images/welcomeslide5iphone.png')}
                     />
                       <Text style={styles.text}>Get in line</Text>
                     </View>
