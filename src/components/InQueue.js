@@ -2,9 +2,12 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, Alert, View, Image, AsyncStorage } from 'react-native';
+import { Text, Alert, View, Image, AsyncStorage, AppState } from 'react-native';
+import PushNotification from 'react-native-push-notification';
+import Toast from 'react-native-simple-toast';
 import { ButtonBlue } from './common';
-import { getCount, deleteMeFromQueue, findMyPlaceInLine } from '../actions';
+import { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification } from '../actions';
+import PushController from './PushController';
 
 class InQueue extends Component {
 componentWillMount() {
@@ -14,9 +17,48 @@ componentWillMount() {
   this.props.getCount({ ref });
   console.log('-----------');
   this.props.findMyPlaceInLine({ ref });
+  console.log('Show Notification (willMount) status:');
+  console.log(this.props.showNotification);
   //keep tract on nr user is in line.
   //if this numer is index 0 send notification
   this.setRecover();
+  }
+
+// componentDidMount() {
+//   console.log('Show Notification (didMount) status:');
+//   console.log(this.props.showNotification);
+//   if (this.props.showNotification === 'show') {
+//       if (AppState.currentState === 'active') {
+//           Toast.show('You are first in line \nYour student assistant is waiting for you!',
+//           Toast.LONG);
+//     }
+//     PushNotification.localNotification({
+//           /* iOS and Android properties */
+//           title: 'You are first in line',
+//           message: 'Your student assistant is waiting for you!', // (required)
+//           soundName: 'default'
+//         });
+//       this.props.showNotification = '';
+//     }
+// }
+
+componentWillReceiveProps(nextProps) {
+  console.log('Show Notification (WillRecieveProps) status:');
+  console.log(nextProps.showNotification);
+  if (nextProps.showNotification === 'show') {
+      if (AppState.currentState === 'active') {
+          Toast.show('You are first in line \nYour student assistant is waiting for you!',
+          Toast.LONG);
+    }
+    PushNotification.localNotification({
+          /* iOS and Android properties */
+          title: 'You are first in line',
+          message: 'Your student assistant is waiting for you!', // (required)
+          soundName: 'default'
+        });
+        this.props.changeNotification();
+        console.log(this.props.showNotification);
+    }
 }
 
 //NEED A ONBACKPRESS
@@ -120,7 +162,7 @@ renderArrowDownImage() {
             </ButtonBlue>
 
         </View>
-
+        <PushController />
       </View>
       );
     }
@@ -198,9 +240,9 @@ const mapStateToProps = (state) => {
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
   const { myLocation, studassLocation, subject } = state.queueInfo;
-  const { place, firstboolean, quit } = state.inQueue;
-  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender };
+  const { place, firstboolean, quit, showNotification } = state.inQueue;
+  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification };
 };
  //kan skrive queue[0].name
 
-export default connect(mapStateToProps, { getCount, deleteMeFromQueue, findMyPlaceInLine })(InQueue);
+export default connect(mapStateToProps, { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification })(InQueue);

@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { Alert } from 'react-native';
-import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT } from './types';
+import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT, SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './types';
 
 
 export const deleteMeFromQueue = ({ deleteRef, ref }) => {
@@ -25,6 +25,11 @@ export const deleteMeFromQueue = ({ deleteRef, ref }) => {
   };
 };
 
+export const changeNotification = () => {
+  return (dispatch) => {
+    dispatch({ type: HIDE_NOTIFICATION });
+  };
+};
 
 export const findMyPlaceInLine = ({ ref }) => {
   //takes in the queue as an array
@@ -48,8 +53,12 @@ return (dispatch) => {
     console.log('minUID', userUID);
     console.log(childSnapshot.val());
     console.log(count);
+
   if (userUID === childSnapshot.val().userUID) {
     dispatch({ type: FOUND_MY_PLACE, payload: count });
+    if (count === 1) {
+      dispatch({ type: SHOW_NOTIFICATION });
+    }
     count = 0;
     bool = true;
     return true;
