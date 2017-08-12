@@ -19,6 +19,7 @@ componentWillMount() {
   this.props.findMyPlaceInLine({ ref });
   console.log('Show Notification (willMount) status:');
   console.log(this.props.showNotification);
+  console.log(this.props.showNotification2);
   //keep tract on nr user is in line.
   //if this numer is index 0 send notification
   this.setRecover();
@@ -45,6 +46,7 @@ componentWillMount() {
 componentWillReceiveProps(nextProps) {
   console.log('Show Notification (WillRecieveProps) status:');
   console.log(nextProps.showNotification);
+  console.log(nextProps.showNotification2);
   if (nextProps.showNotification === 'show') {
       if (AppState.currentState === 'active') {
           Toast.show('You are first in line \nYour student assistant is waiting for you!',
@@ -54,10 +56,26 @@ componentWillReceiveProps(nextProps) {
           /* iOS and Android properties */
           title: 'You are first in line',
           message: 'Your student assistant is waiting for you!', // (required)
-          soundName: 'default'
+          soundName: 'default',
+          smallIcon: null,
         });
         this.props.changeNotification();
         console.log(this.props.showNotification);
+    }
+  if (nextProps.showNotification2 === 'show') {
+      if (AppState.currentState === 'active') {
+          Toast.show('You are second in line \nIt will soon be your turn!',
+          Toast.LONG);
+    }
+    PushNotification.localNotification({
+          /* iOS and Android properties */
+          title: 'You are second in line',
+          message: 'It will soon be your turn!', // (required)
+          soundName: 'default',
+          smallIcon: null,
+        });
+        this.props.changeNotification();
+        console.log(this.props.showNotification2);
     }
 }
 
@@ -240,8 +258,8 @@ const mapStateToProps = (state) => {
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
   const { myLocation, studassLocation, subject } = state.queueInfo;
-  const { place, firstboolean, quit, showNotification } = state.inQueue;
-  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification };
+  const { place, firstboolean, quit, showNotification, showNotification2 } = state.inQueue;
+  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2 };
 };
  //kan skrive queue[0].name
 

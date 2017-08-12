@@ -18,7 +18,9 @@ class Home extends Component {
           messagingSenderId: '278836475143'
         };
 
-        firebase.initializeApp(config);
+        if (!firebase.apps.length) {
+          firebase.initializeApp(config);
+        }
 
         firebase.auth().onAuthStateChanged((user) => {
         if (user) {

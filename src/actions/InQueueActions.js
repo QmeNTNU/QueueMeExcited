@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import { Alert } from 'react-native';
-import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT, SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './types';
+import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT, SHOW_NOTIFICATION, HIDE_NOTIFICATION, SHOW_NOTIFICATION_2 } from './types';
 
 
 export const deleteMeFromQueue = ({ deleteRef, ref }) => {
@@ -58,6 +58,9 @@ return (dispatch) => {
     dispatch({ type: FOUND_MY_PLACE, payload: count });
     if (count === 1) {
       dispatch({ type: SHOW_NOTIFICATION });
+    }
+    if (count === 2) {
+      dispatch({ type: SHOW_NOTIFICATION_2 });
     }
     count = 0;
     bool = true;

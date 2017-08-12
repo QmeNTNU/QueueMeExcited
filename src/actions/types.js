@@ -83,5 +83,6 @@ export const FIRST_GENDER = 'FIRST_GENDER';
 export const FIRST_TIME = 'FIRST_TIME';
 
 export const SHOW_NOTIFICATION = 'show_notification';
+export const SHOW_NOTIFICATION_2 = 'show_notification_2';
 export const HIDE_NOTIFICATION = 'hide_notification';
 //////////////////////////////////////////////////////////////////////
