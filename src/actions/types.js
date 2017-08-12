@@ -81,4 +81,7 @@ export const FIRST_KEY = 'FIRST_KEY';
 export const GET_MY_GENDER = 'GET_MY_GENDER';
 export const FIRST_GENDER = 'FIRST_GENDER';
 export const FIRST_TIME = 'FIRST_TIME';
+
+export const SHOW_NOTIFICATION = 'show_notification';
+export const HIDE_NOTIFICATION = 'hide_notification';
 //////////////////////////////////////////////////////////////////////
