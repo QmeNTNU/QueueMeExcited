@@ -1,6 +1,5 @@
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import OneSignal from 'react-native-onesignal';
 import { INFO_RETIREVED, ADDED_TO_QUEUE, LOADING, SET_PLAYERID } from './types';
 
 export const setInfo = ({ prop, value }) => {
