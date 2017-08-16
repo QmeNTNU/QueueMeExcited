@@ -18,6 +18,7 @@ import InQueueReducer from './InQueueReducer';
 import addSubjectReducer from './addSubjectReducer';
 import getNameReducer from './getNameReducer';
 import loadingReducer from './loadingReducer';
+import StudassLockUpReducer from './StudassLockUpReducer';
 ////////////////////////////////
 
 export default combineReducers({
@@ -39,6 +40,7 @@ export default combineReducers({
     inQueue: InQueueReducer,
     addSubject: addSubjectReducer,
     nameRed: getNameReducer,
-    loading: loadingReducer
+    loading: loadingReducer,
+    lock: StudassLockUpReducer,
     //////////////////////////////////////////
 });

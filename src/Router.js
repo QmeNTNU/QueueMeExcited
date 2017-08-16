@@ -22,6 +22,8 @@ import modal from './components/modal';//HUSK OG IMPORTER REACT-NATIVE-SWIPE
 import addSubjectStudent from './components/addSubjectStudent';
 import addSubjectAss from './components/addSubjectAss';
 import deleteSlide from './components/deleteSlide';
+import lock from './components/lock';
+import aboutUs from './components/aboutUs';
 
 
 ////////////Anders////////////////////////////
@@ -152,6 +154,18 @@ const RouterComponent = () => {
   <Scene
     key="welcome"
     component={modal}
+    modal
+    sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
+  />
+  <Scene
+    key="lock"
+    component={lock}
+    modal
+    sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
+  />
+  <Scene
+    key="aboutUs"
+    component={aboutUs}
     modal
     sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
   />

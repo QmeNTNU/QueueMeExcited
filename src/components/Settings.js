@@ -19,7 +19,7 @@ class Settings extends Component {
   }
 
   onStudPress() {
-    Actions.welcome();
+    Actions.aboutUs();
   }
   onStudAssPress() {
 

@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
-import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender } from '../actions';
+import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode } from '../actions';
 
 
 class HomeForm extends Component {
@@ -16,6 +16,7 @@ class HomeForm extends Component {
   }
   componentDidMount() {
     //checks if it should display welcomeslides
+    this.props.fetchCode();
     this.props.getMyGender();
     this.checkWelcomeSlides();
     const user = firebase.auth().currentUser.displayName;
@@ -26,7 +27,11 @@ class HomeForm extends Component {
   }
 
   onPressStudentAssistant() {
-    this.props.studentAssistant();
+    if (this.props.retrievedCode !== '8825') {
+      Actions.lock();
+    } else {
+      this.props.studentAssistant();
+    }
   }
 
 async checkWelcomeSlides() {
@@ -224,7 +229,9 @@ const styles = {
 const mapStateToProps = state => {
   //fetches name to check if it is null (first time after closing app totally)
   const { myName } = state.nameRed;
-  return { myName };
+  const { retrievedCode } = state.lock;
+
+  return { myName, retrievedCode };
 };
 export default connect(mapStateToProps, {
-  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender })(HomeForm);
+  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode })(HomeForm);
