@@ -19,7 +19,8 @@ export const firstInLine = ({ ref }) => {
       dispatch({ type: FIRST_CHANGED, payload: emptyText });
       empty = true;
       return true;
-    }
+    }  
+
     snapshot.forEach(childSnapshot => {
       console.log('emptyboolean', empty);
 

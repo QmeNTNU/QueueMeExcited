@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import firebase from 'firebase';
+import OneSignal from 'react-native-onesignal';
 import { Actions } from 'react-native-router-flux';
 //import HomeForm from './HomeForm';
 
@@ -34,6 +35,10 @@ class Home extends Component {
       });
     }
 
+    componentDidMount() {
+        OneSignal.configure({});
+    }
+    
     startUp() {
       switch (this.state.loggedIn) {
         case true:
