@@ -14,6 +14,10 @@ class Settings extends Component {
     this.props.LogOutPress();
   }
 
+  onTutorialPress() {
+    Actions.welcome();
+  }
+
   onCancelPress() {
     this.props.cancel();
   }
@@ -38,8 +42,14 @@ class Settings extends Component {
             <View style={{ flex: 2, alignItems: 'center', justifyContent: 'center' }}>
 
                 <View style={styles.containerStyle}>
-                  <ButtonWhite onPress={this.onStudPress.bind(this)} >
+                  <ButtonWhite onPress={this.onTutorialPress.bind(this)} >
                     Tutorial
+                  </ButtonWhite>
+                </View>
+
+                <View style={styles.containerStyle}>
+                  <ButtonWhite onPress={this.onStudPress.bind(this)} >
+                    About us
                   </ButtonWhite>
                 </View>
 

@@ -10,7 +10,7 @@ FIRST_GENDER } from './types';
 
 export const firstInLine = ({ ref }) => {
   const emptyText = 'There are no students in line';
-
+  let count = 0;
   return (dispatch) => {
     let empty = false;
       ref.on('value', snapshot => {
@@ -25,12 +25,14 @@ export const firstInLine = ({ ref }) => {
 
     snapshot.forEach(childSnapshot => {
       console.log('emptyboolean', empty);
-
+      count += 1;
+      console.log('COUNT', count);
+      if (count === 1) {
       console.log('firstKey', childSnapshot.key);
       dispatch({ type: FIRST_CHANGED, payload: childSnapshot.val().fullname });
       dispatch({ type: FIRST_KEY, payload: childSnapshot.key });
       dispatch({ type: FIRST_GENDER, payload: childSnapshot.val().userGender });
-      const playerId = childSnapshot.val().id;
+      let playerId = childSnapshot.val().id;
       const firstBoolean = childSnapshot.val().firstBoolean;
       const data = {};
 
@@ -50,11 +52,28 @@ export const firstInLine = ({ ref }) => {
       ref.child(childSnapshot.key).child('firstBoolean').set('true');
     }
   }
+} else {
+  const playerId = childSnapshot.val().id;
+  const SecondBoolean = childSnapshot.val().SecondBoolean;
+  const data = {};
+  if (typeof playerId !== 'undefined') {
+    if (typeof SecondBoolean === 'undefined') {
+  const contents = {
+  'en': 'You are second in line!'
+};
+
+  OneSignal.postNotification(contents, data, playerId);
+
+  ref.child(childSnapshot.key).child('SecondBoolean').set('true');
+    }
+  }
+  count = 0;
+  return true;
+}
     //send notifikasjon
       // const contents = 'You are first in line';
       // OneSignal.postNotification(contents, data, playerId);
     ////
-      return true;
     });
   });
   };
