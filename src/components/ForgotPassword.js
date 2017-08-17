@@ -53,7 +53,7 @@ render() {
                 <View style={styles.containerStyle}>
                   <InputSignUp
                     label={this.renderEmailImage()}
-                    placeholder="enter student-email"
+                    placeholder="email@stud.ntnu.no"
                     onChangeText={this.onResetEmailChange.bind(this)}
                     value={this.props.resetEmail} //input verdi for email
                   />
