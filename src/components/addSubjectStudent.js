@@ -153,7 +153,7 @@ return (
                 <TouchableOpacity onPress={() => Actions.pop()} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
                     <Text style={{ fontSize: 30, color: '#213140', fontFamily: 'bebasNeue', alignSelf: 'center' }}>
-                        finish
+                        finished
                      </Text>
 
                 </TouchableOpacity>

@@ -112,7 +112,7 @@ class LoginForm extends Component {
                 style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
               <Text style={{ color: '#ffffff' }}>
-                Sign in
+                Sign up
               </Text>
             </TouchableOpacity>
 

@@ -68,8 +68,17 @@ renderName() {
   //if name is to long, we want to display firstname initial and lastname
   if (this.props.studass.fullname.length >= 13) {
     const splitArray = this.props.studass.fullname.split(' ');
-    const firstname = splitArray[0].charAt(0);
-    const lastname = splitArray[1];
+    let firstname = '';
+    let lastname = '';
+
+    if (typeof splitArray[2] !== 'undefined' && splitArray[2] !== '') {
+      firstname = splitArray[0].charAt(0);
+      lastname = splitArray[2];
+    } else {
+      firstname = splitArray[0].charAt(0);
+      lastname = splitArray[1];
+    }
+
     return (
       <Text style={styles.headerTextStyle}>{firstname}. {lastname}</Text>
     );

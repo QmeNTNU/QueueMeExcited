@@ -157,7 +157,7 @@ class SignUpForm extends Component {
 
           <View style={styles.sectionStyle}>
             <CheckBox
-                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end'}}
+                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end' }}
                 onClick={this.checkMale.bind(this)}
                 isChecked={this.props.gender === 'male'}
                 leftText='Male'
