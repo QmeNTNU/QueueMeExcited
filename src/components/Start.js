@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import firebase from 'firebase';
+import OneSignal from 'react-native-onesignal';
 import { Actions } from 'react-native-router-flux';
 //import HomeForm from './HomeForm';
 
@@ -32,6 +33,13 @@ class Home extends Component {
           setTimeout(() => { this.setState({ loggedIn: false }); }, 2000);
         }
       });
+    }
+
+    componentDidMount() {
+        //OneSignal.postNotification(("{'contents': {'en':'Test Message'}, 'include_player_ids': ['2d3eadd8-8a23-457d-a373-341943b08dbd']}"), null);
+        OneSignal.configure({
+
+        });
     }
 
     startUp() {

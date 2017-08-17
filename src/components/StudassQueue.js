@@ -16,8 +16,9 @@ class StudassQueue extends Component {
 componentDidMount() {
   const userUID = firebase.auth().currentUser.uid;
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue`);
+  const name = this.props.first; //tar med navn slik at notifikasjon ikke blir sendt hver gang. kun når gammeltnavn ikke er lik nyttnavn
   //starts the listener for
-  this.props.firstInLine({ ref });
+  this.props.firstInLine({ ref, name });
   this.props.getCount({ ref });
   this.setRecover();
 
@@ -68,7 +69,6 @@ if (this.props.first !== 'There are no students in line') {
     ]
   );
 }
-
 }
 
 
@@ -284,7 +284,7 @@ const mapStateToProps = state => {
   });
 //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
-  const { first, myLocation, studassSubject, firstKey, firstGender } = state.createQueue;
+  const { firstname, myLocation, studassSubject, firstKey, firstGender } = state.createQueue;
   return { queue, studasscount, first, myLocation, studassSubject, firstKey, firstGender };
 };
  //kan skrive queue[0].name

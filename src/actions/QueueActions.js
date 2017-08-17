@@ -1,4 +1,5 @@
 import { Actions } from 'react-native-router-flux';
+import OneSignal from 'react-native-onesignal';
 import { QUEUE_FETCH_SUCCESS,
 DELETE_QUEUE, FIRST_CHANGED,
 FIRST_KEY,
@@ -6,7 +7,7 @@ FIRST_GENDER } from './types';
 
 //brukes til å hente ut (og vise) navn i StudasList
 //KAN, MEN BRUKES IKKE:  til å hente ut (og sammenligne) uid på første i INQUEUE
-export const firstInLine = ({ ref }) => {
+export const firstInLine = ({ ref, name }) => {
   const emptyText = 'There are no students in line';
 
   return (dispatch) => {
@@ -20,6 +21,7 @@ export const firstInLine = ({ ref }) => {
       empty = true;
       return true;
     }
+
     snapshot.forEach(childSnapshot => {
       console.log('emptyboolean', empty);
 
@@ -27,7 +29,19 @@ export const firstInLine = ({ ref }) => {
       dispatch({ type: FIRST_CHANGED, payload: childSnapshot.val().fullname });
       dispatch({ type: FIRST_KEY, payload: childSnapshot.key });
       dispatch({ type: FIRST_GENDER, payload: childSnapshot.val().userGender });
+      const playerId = childSnapshot.val().id;
 
+
+      const contents = {
+      'en': 'You are first in line!'
+    };
+    if (childSnapshot.val().fullname !== name) {
+      OneSignal.postNotification(contents, null, playerId);
+    }
+    //send notifikasjon
+      // const contents = 'You are first in line';
+      // OneSignal.postNotification(contents, data, playerId);
+    ////
       return true;
     });
   });
