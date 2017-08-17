@@ -36,9 +36,12 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        OneSignal.configure({});
+        //OneSignal.postNotification(("{'contents': {'en':'Test Message'}, 'include_player_ids': ['2d3eadd8-8a23-457d-a373-341943b08dbd']}"), null);
+        OneSignal.configure({
+
+        });
     }
-    
+
     startUp() {
       switch (this.state.loggedIn) {
         case true:

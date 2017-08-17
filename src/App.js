@@ -62,11 +62,8 @@ class App extends Component {
         const { ref } = firebase.database().ref(`users/${userUID}/playerId`);
 
         ref.set({ playerid });
-      } else {
-
       }
     });
-
   }
 
   render() {

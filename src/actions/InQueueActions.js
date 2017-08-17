@@ -56,12 +56,7 @@ return (dispatch) => {
 
   if (userUID === childSnapshot.val().userUID) {
     dispatch({ type: FOUND_MY_PLACE, payload: count });
-    if (count === 1) {
-      dispatch({ type: SHOW_NOTIFICATION });
-    }
-    if (count === 2) {
-      dispatch({ type: SHOW_NOTIFICATION_2 });
-    }
+    
     count = 0;
     bool = true;
     return true;
