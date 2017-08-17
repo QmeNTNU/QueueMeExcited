@@ -4,7 +4,9 @@ import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
-import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode } from '../actions';
+
+import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode } from '../actions';
+
 
 
 class HomeForm extends Component {
@@ -18,6 +20,7 @@ class HomeForm extends Component {
     //checks if it should display welcomeslides
     this.props.fetchCode();
     this.props.getMyGender();
+    this.props.fetchPlayerId();
     this.checkWelcomeSlides();
     const user = firebase.auth().currentUser.displayName;
     console.log('FIREBASE USER NAME', user);
@@ -234,4 +237,5 @@ const mapStateToProps = state => {
   return { myName, retrievedCode };
 };
 export default connect(mapStateToProps, {
-  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode })(HomeForm);
+
+Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode })(HomeForm);

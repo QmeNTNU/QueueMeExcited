@@ -16,6 +16,7 @@ class StudassQueue extends Component {
 componentDidMount() {
   const userUID = firebase.auth().currentUser.uid;
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue`);
+  const name = this.props.first; //tar med navn slik at notifikasjon ikke blir sendt hver gang. kun når gammeltnavn ikke er lik nyttnavn
   //starts the listener for
   this.props.firstInLine({ ref });
   this.props.getCount({ ref });
@@ -68,7 +69,6 @@ if (this.props.first !== 'There are no students in line') {
     ]
   );
 }
-
 }
 
 

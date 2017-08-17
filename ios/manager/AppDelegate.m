@@ -13,9 +13,21 @@
 #import <React/RCTRootView.h>
 
 @implementation AppDelegate
+@synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  //kode for Onesignal start
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:@"0ae12c5d-b2f9-483a-acbf-dfcf4cf0ef25"];
+  
+  // For requiring push notification permissions manually.
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+                                                         appId:@"0ae12c5d-b2f9-483a-acbf-dfcf4cf0ef25"
+                                                      settings:@{kOSSettingsKeyAutoPrompt: @false}];
+  //Kode for Onesignal slutt
+  
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];

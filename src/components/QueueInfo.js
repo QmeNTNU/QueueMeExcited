@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
+import OneSignal from 'react-native-onesignal';
 import { Text, View, Image } from 'react-native';
 import { ButtonWhite, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
@@ -16,12 +17,13 @@ this.props.getCount(ref);
 
 onButtonBluePress() {
   //gets user name from props (value is retireved and sat to reducer in home-scene)
-  const { myGender } = this.props;
+  const { myGender, playerId } = this.props;
+  console.log('PLAYER ID', playerId);
   //makes ref from where we want to retrieve data
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   //add user to queue and saves the push location to state
   //this location is used in next scene (in quit queue)
-  this.props.addToQueue({ ref, myGender });
+  this.props.addToQueue({ ref, myGender, playerId });
 }
 
 renderImage() {
@@ -187,12 +189,12 @@ const styles = {
 
 const mapStateToProps = (state) => {
   //retireves info to display
-  const { subject, studass, available, studassLocation, room } = state.queueInfo;
+  const { subject, studass, available, studassLocation, room, playerId } = state.queueInfo;
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
   const { loading } = state.loading;//to know when to show spinner
 
-  return { subject, studass, available, studasscount, studassLocation, loading, myGender, room };
+  return { subject, studass, available, studasscount, studassLocation, loading, myGender, room, playerId };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);
