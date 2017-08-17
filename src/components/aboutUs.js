@@ -41,7 +41,7 @@ class aboutUs extends Component {
                     <View style={{ height: 200 }} />
 
                   <Text style={styles.textOrange}>About us</Text>
-                  <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kamenes, Joakim Hegg Johansen, and Marius Aleksander Løken</Text>
+                  <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, and Marius Alexander Løken</Text>
                   </View>
                 </View>
 
@@ -135,8 +135,7 @@ const styles = {
   },
   text: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    textAlign: 'center',
     color: '#fff',
     fontSize: 20,
     fontFamily: 'bebasNeue'
