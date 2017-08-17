@@ -30,7 +30,7 @@ class LoginForm extends Component {
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
       resizeMode="contain"
-      source={require('./images/LOGO.png')}
+      source={require('./images/LOGO2.png')}
     />
     );
    /* eslint-enable global-require */

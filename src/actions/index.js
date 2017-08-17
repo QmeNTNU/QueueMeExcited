@@ -15,4 +15,5 @@ export * from './CountActions';
 export * from './QueueActions';
 export * from './addSubjectActions';
 export * from './getNameActions';
+export * from './StudassLockUpActions';
 ////////////////////
