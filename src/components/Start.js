@@ -52,7 +52,7 @@ class Home extends Component {
     renderImage() {
        /* eslint-disable global-require */
       return (
-       <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('./images/LOGO2.png')} />
+       <Image style={{ flex: 1, resizeMode: 'contain' }} source={require('./images/LOGO.png')} />
        );
       /* eslint-enable global-require */
     }

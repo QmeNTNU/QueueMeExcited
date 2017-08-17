@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
-import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode } from '../actions';
+import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId } from '../actions';
 
 
 class HomeForm extends Component {
@@ -16,8 +16,8 @@ class HomeForm extends Component {
   }
   componentDidMount() {
     //checks if it should display welcomeslides
-    this.props.fetchCode();
     this.props.getMyGender();
+    this.props.fetchPlayerId();
     this.checkWelcomeSlides();
     const user = firebase.auth().currentUser.displayName;
     console.log('FIREBASE USER NAME', user);
@@ -27,11 +27,7 @@ class HomeForm extends Component {
   }
 
   onPressStudentAssistant() {
-    if (this.props.retrievedCode !== '8825') {
-      Actions.lock();
-    } else {
-      this.props.studentAssistant();
-    }
+    this.props.studentAssistant();
   }
 
 async checkWelcomeSlides() {
@@ -75,7 +71,7 @@ async setWelcomeSlides() {
           console.log('ASYNCDATA: ', asyncStudassSubject);
     ///////////////////////CHECKS IF EXIST AS STUDENT assistant//////////////////////////////////
           const userUID = firebase.auth().currentUser.uid;
-          const ref = firebase.database().ref(`Subject/${asyncStudassSubject}/studasslist`);
+          const ref = firebase.database().ref(Subject/${asyncStudassSubject}/studasslist);
                 ref.once('value', snapshot => { // only called once
               console.log(snapshot.val() === null);
               //if the queue is empty ( in case studass deletes it)
@@ -99,7 +95,7 @@ async setWelcomeSlides() {
             });
         ///////////////////////////////////////////////////////////////////////////////////////
         ////////////////CHECKS IF ADDED TO A LINE/////////////////////////////////////////////
-        const studRef = firebase.database().ref(`Subject/${asyncStudentSubject}/studasslist/${asyncStudentstudassLocation}/queue`);
+        const studRef = firebase.database().ref(Subject/${asyncStudentSubject}/studasslist/${asyncStudentstudassLocation}/queue);
               studRef.once('value', snapshot => { // only called once
             console.log(snapshot.val() === null);
             //if the queue is empty ( in case studass deletes it)
@@ -229,9 +225,7 @@ const styles = {
 const mapStateToProps = state => {
   //fetches name to check if it is null (first time after closing app totally)
   const { myName } = state.nameRed;
-  const { retrievedCode } = state.lock;
-
-  return { myName, retrievedCode };
+  return { myName };
 };
 export default connect(mapStateToProps, {
-  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchCode })(HomeForm);
+  Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId })(HomeForm);
