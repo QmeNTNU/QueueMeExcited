@@ -7,7 +7,8 @@ FIRST_GENDER } from './types';
 
 //brukes til å hente ut (og vise) navn i StudasList
 //KAN, MEN BRUKES IKKE:  til å hente ut (og sammenligne) uid på første i INQUEUE
-export const firstInLine = ({ ref, name }) => {
+
+export const firstInLine = ({ ref }) => {
   const emptyText = 'There are no students in line';
 
   return (dispatch) => {
@@ -30,14 +31,25 @@ export const firstInLine = ({ ref, name }) => {
       dispatch({ type: FIRST_KEY, payload: childSnapshot.key });
       dispatch({ type: FIRST_GENDER, payload: childSnapshot.val().userGender });
       const playerId = childSnapshot.val().id;
+      const firstBoolean = childSnapshot.val().firstBoolean;
+      const data = {};
 
+      /*if (playerId === null) {
+        playerId = 'edfc360f-75b6-43db-a0c3-6dd3fd866947';
+      }*/
+      console.log(playerId, 'hei tjolla hopp');
 
+      if (typeof playerId !== 'undefined') {
+        if (typeof firstBoolean === 'undefined') {
       const contents = {
       'en': 'You are first in line!'
     };
-    if (childSnapshot.val().fullname !== name) {
-      OneSignal.postNotification(contents, null, playerId);
+
+      OneSignal.postNotification(contents, data, playerId);
+
+      ref.child(childSnapshot.key).child('firstBoolean').set('true');
     }
+  }
     //send notifikasjon
       // const contents = 'You are first in line';
       // OneSignal.postNotification(contents, data, playerId);
