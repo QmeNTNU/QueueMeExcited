@@ -61,7 +61,7 @@ class lock extends Component {
                 <View style={styles.slideWelcome}>
                 <Image
                   style={styles.imageStyle}
-                  source={require('./images/code.png')}
+                  source={require('./images/code3.png')}
                 />
                   <View style={styles.slide3}>
                   <Text style={styles.textOrange}>Enter studass code</Text>
@@ -183,7 +183,6 @@ const styles = {
   },
   imageStyle: {
     flex: 1,
-    padding: 5,
     resizeMode: 'contain'
   },
   buttonView: {

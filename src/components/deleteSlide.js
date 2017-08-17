@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { Modal, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { Modal, Text, View, Image, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { ButtonWhite } from './common';
 
@@ -32,32 +32,41 @@ class deleteSlide extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
-          <View style={styles.wholeScreen}>
-            <View style={styles.slideWelcome} height={this.state.height - 80} width={this.state.width - 80}>
+
+          <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
+            <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
+
+                <View style={styles.slideWelcome}>
                 <Image
-                  style={{ flex: 1, resizeMode: 'contain' }}
-                  width={this.state.width - 80}
+                  style={styles.imageStyle}
                   source={require('./images/turtorialdeleteiphone.png')}
                 />
+                  <View style={styles.slide3}>
+                  <Text style={styles.textOrange}>swipe to delete</Text>
 
-                <Text style={styles.textOrange}>TIP</Text>
-                <Text style={styles.text}>Slide to delete subjects</Text>
-                <View style={{ height: 60 }} width={this.state.width - 80}>
-                  <ButtonWhite onPress={() => Actions.pop()}>
-                    Got it
-                  </ButtonWhite>
+                <TouchableOpacity
+                    onPress={() => Actions.pop()}
+                    style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5 }}
+                >
+                  <Text style={{ color: '#ffffff' }}>
+                      Thanks, got it!
+                  </Text>
+                </TouchableOpacity>
+                  </View>
                 </View>
-            </View>
-          </View>
+
+            </Swiper>
+          </KeyboardAvoidingView>
         </Modal>
 
     </View>
     );
   }
-}
-/* eslint-enable global-require */
+  }
+  /* eslint-enable global-require */
 
-const styles = {
+
+  const styles = {
   wrapper: {
   },
   slideWelcome: {
@@ -65,38 +74,88 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
-    borderRadius: 5,
-
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+    paddingTop: 50,
+    borderRadius: 5
   },
-
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+    borderRadius: 5
+  },
+  slide2: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+  },
   text: {
-    textAlign: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     color: '#fff',
     fontSize: 30,
-    fontFamily: 'bebasNeue',
-    marginBottom: 20
+    fontFamily: 'bebasNeue'
   },
   textOrange: {
     color: '#254552',
-    fontSize: 30,
-    fontFamily: 'bebasNeue',
-    textAlign: 'center'
+    fontSize: 40,
+    fontFamily: 'bebasNeue'
   },
   wholeScreen: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
-    paddingBottom: 60,
-  },
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingTop: 20
 
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#95CAFE',
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 5
+  },
   imageStyle: {
     flex: 1,
-    width: 200,
     resizeMode: 'contain'
   },
-
-};
+  buttonView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#254552',
+    fontSize: 30,
+    fontWeight: 'bold',
+    backgroundColor: '#95CAFE',
+  },
+  };
 
 
 /*
