@@ -64,7 +64,7 @@ class lock extends Component {
                   source={require('./images/code3.png')}
                 />
                   <View style={styles.slide3}>
-                  <Text style={styles.textOrange}>Enter studass code</Text>
+                  <Text style={styles.textOrange}>Enter code</Text>
                   <View style={{ width: 250 }}>
                     <View style={{ height: 50, marginBottom: 5 }}>
                     <InputSignUp
@@ -84,7 +84,7 @@ class lock extends Component {
                 </View>
                 <TouchableOpacity
                     onPress={() => Actions.pop()}
-                    style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5 }}
+                    style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5, marginBottom: 5 }}
                 >
                   <Text style={{ color: '#ffffff' }}>
                       Back to homescreen

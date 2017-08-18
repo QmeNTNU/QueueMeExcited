@@ -41,7 +41,7 @@ class aboutUs extends Component {
                     <View style={{ height: 200 }} />
 
                   <Text style={styles.textOrange}>About us</Text>
-                  <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, and Marius Alexander Løken</Text>
+                  <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, Marius Alexander Løken and Magnus Knædal</Text>
                   </View>
                 </View>
 
@@ -51,22 +51,22 @@ class aboutUs extends Component {
                   <Text style={styles.textOrange}>TEAM MEMBERS:</Text>
                   </View>
                   <View style={styles.slide3}>
-                  <Text style={styles.textOrange2}>ANDER B. Kampenes</Text>
-                  <Text style={styles.text}>Third year student at NTNU, I&IKT </Text>
+                  <Text style={styles.textOrange2}>Anders Kampenes</Text>
+                  <Text style={styles.text}>NTNU, I&IKT </Text>
                   </View>
                   <View style={styles.slide3}>
-                  <Text style={styles.textOrange2}>Joakim H. Johansen</Text>
-                  <Text style={styles.text}>Third year student at NTNU, I&IKT </Text>
+                  <Text style={styles.textOrange2}>Joakim Johansen</Text>
+                  <Text style={styles.text}>NTNU, I&IKT </Text>
 
                   </View>
                   <View style={styles.slide3}>
-                  <Text style={styles.textOrange2}>Marius A. Løken</Text>
-                  <Text style={styles.text}>Third year student at NTNU, I&IKT </Text>
+                  <Text style={styles.textOrange2}>Marius Løken</Text>
+                  <Text style={styles.text}>NTNU, I&IKT </Text>
                   </View>
 
                 <View style={styles.slide3}>
                 <Text style={styles.textOrange2}>Magnus Knædal</Text>
-                <Text style={styles.text}>Third year student at NTNU, I&IKT </Text>
+                <Text style={styles.text}>NTNU, I&IKT </Text>
                 </View>
                 </View>
 

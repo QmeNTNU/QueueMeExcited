@@ -26,6 +26,19 @@ onButtonBluePress() {
   this.props.addToQueue({ ref, myGender, playerId });
 }
 
+renderName() {
+  //if name is to long, we want to display firstname initial and lastname
+  if (this.props.studass.length > 16) {
+    //smaller text
+    return (
+      <Text style={styles.textStyleSmall}>{this.props.studass}</Text>
+    );
+  }
+  return (
+    <Text style={styles.textStyleBig}>{this.props.studass}</Text>
+  );
+}
+
 renderImage() {
   //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
@@ -81,7 +94,7 @@ renderButtonBlue() {
 
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderColor: '#ffffff', marginTop: 10 }}>
 
-            <Text style={styles.textStyleBig}>{this.props.studass}</Text>
+            {this.renderName()}
           </View>
 
           <View style={styles.infoView}>
@@ -183,6 +196,12 @@ const styles = {
     color: '#ffffff',
     fontFamily: 'bebasNeue',
     fontSize: 30,
+
+  },
+  textStyleSmall: {
+    color: '#ffffff',
+    fontFamily: 'bebasNeue',
+    fontSize: 22,
 
   },
 };
