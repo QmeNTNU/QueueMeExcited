@@ -100,12 +100,13 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
-    paddingLeft: 50,
-    paddingRight: 50,
+    paddingLeft: 40,
+    paddingRight: 40,
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 20,
     paddingTop: 50,
+    paddingBottom: 10,
     borderRadius: 5
   },
   slide1: {
@@ -132,6 +133,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#95CAFE',
+    marginBottom: 10
   },
   text: {
     flex: 1,
@@ -142,7 +144,7 @@ const styles = {
   },
   textOrange: {
     color: '#254552',
-    fontSize: 40,
+    fontSize: 35,
     fontFamily: 'bebasNeue'
   },
   textOrange2: {

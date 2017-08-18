@@ -71,6 +71,7 @@ class lock extends Component {
                       style={{ marginBottom: 10 }}
                      label={this.renderImage()}
                       placeholder="Studass code"
+                      secureTextEntry
                       onChangeText={this.onCodeChange.bind(this)}
                       value={this.props.code} //input verdi for fullname
                       borderRadius={5}
