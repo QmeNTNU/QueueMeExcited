@@ -157,7 +157,7 @@ const fullnameError = (dispatch) => {
     type: FULLNAME_WRONG
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Please enter both your firstname and lastname',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -169,7 +169,7 @@ const emptyPasswordError = (dispatch) => {
       type: EMPTY_PASSWORD
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Please enter a password',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -181,7 +181,7 @@ const shortPassword = (dispatch) => {
       type: SHORT_PASSWORD
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Your password must be longer than, or equal to, 6 charcters',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -193,7 +193,7 @@ const passwordError = (dispatch) => {
     type: PASSWORD_WRONG
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Make sure your passwords are equal',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -206,7 +206,7 @@ const genderError = (dispatch) => {
       type: SELECT_GENDER
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Please select a gender',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -219,7 +219,7 @@ const createUserFail = (dispatch) => {
     type: CREATE_USER_FAIL
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Your entered email are already in use',
       [
         { text: 'OK', onPress: () => Actions.signup() },
@@ -232,7 +232,7 @@ const emailError = (dispatch) => {
     type: EMAIL_WRONG
   });
   Alert.alert(
-      'REGISRTATION FAILED',
+      'REGISTRATION FAILED',
       'Your email must contain "stud.ntnu.no"',
       [
         { text: 'OK', onPress: () => Actions.signup() },

@@ -77,6 +77,15 @@ if (text.length < 5) {
 if (text.charAt(2) !== ':') {
   return false;
 }
+if (text.charAt(0) > 2) {
+  return false;
+}
+if (text.charAt(0) > 1 && text.charAt(1) > 3) {
+  return false;
+}
+if (text.charAt(3) > 5) {
+  return false;
+}
 return true;
 };
 
