@@ -47,7 +47,7 @@ render() {
                   </Text>
 
                   <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center', marginTop: 5 }}>
-                          Enter your registered student-email
+                          Enter your registered student email
                   </Text>
 
                 <View style={styles.containerStyle}>

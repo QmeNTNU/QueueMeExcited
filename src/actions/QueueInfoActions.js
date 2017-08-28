@@ -1,6 +1,6 @@
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { INFO_RETIREVED, ADDED_TO_QUEUE, LOADING, SET_PLAYERID } from './types';
+import { INFO_RETIREVED, ADDED_TO_QUEUE, LOADING, SET_PLAYERID, LOAD_ADD } from './types';
 
 export const setInfo = ({ prop, value }) => {
   //sets info from different student-scenes in reducer.
@@ -72,7 +72,7 @@ export const addToQueue = ({ ref, myGender, playerId }) => {
   //sets a value to the retrieved location
   //saved the key to be used in next scene. sets other to initial_state
   return (dispatch) => {
-    dispatch({ type: LOADING }); //Starts loading
+    dispatch({ type: LOAD_ADD }); //Starts loading
 
     newRef.set({ fullname, userEmail, userUID, userGender, id }) //sets the value
     .then(() => {

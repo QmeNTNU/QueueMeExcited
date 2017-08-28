@@ -148,27 +148,32 @@ class SignUpForm extends Component {
             <InputSignUp
               label={this.renderPasswordImage()}
               secureTextEntry
-              placeholder=" confirm password"
+              placeholder="confirm password"
               onChangeText={this.onConfirmPasswordChange.bind(this)}
               value={this.props.confirmPassword}
               borderRadius={5}
             />
           </View>
+          <View style={styles.sectionStyleContainer}>
 
           <View style={styles.sectionStyle}>
             <CheckBox
-                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end' }}
+                style={{ flex: 1, alignSelf: 'center', justifyContent: 'center' }}
                 onClick={this.checkMale.bind(this)}
                 isChecked={this.props.gender === 'male'}
                 leftText='Male'
             />
+          </View>
+            <View style={styles.sectionStyle}>
+
             <CheckBox
-                style={{ flex: 1, alignSelf: 'center', justifyContent: 'flex-end' }}
+                style={{ flex: 1, alignSelf: 'center', justifyContent: 'center' }}
                 onClick={this.checkFemale.bind(this)}
                 isChecked={this.props.gender === 'female'}
                 leftText='Female'
             />
           </View>
+        </View>
 
           <View style={styles.containerStyle}>
               {this.renderButton()}
@@ -200,10 +205,20 @@ const styles = {
     paddingTop: 5,
     textAlign: 'center'
   },
+  sectionStyleContainer: {
+    height: 50,
+    width: 200,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 2,
+    position: 'relative',
+  },
   sectionStyle: {
     height: 50,
+    width: 73,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
+    textAlign: 'center',
     paddingBottom: 2,
     position: 'relative',
   },
