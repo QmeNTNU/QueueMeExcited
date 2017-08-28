@@ -64,7 +64,7 @@ renderArrowDownImage() {
 }
 
 renderButtonBlue() {
-  if (this.props.loading) {
+  if (this.props.loadAdd) {
     return <Spinner size="large" />;
   }
   return (
@@ -208,12 +208,11 @@ const styles = {
 
 const mapStateToProps = (state) => {
   //retireves info to display
-  const { subject, studass, available, studassLocation, room, playerId } = state.queueInfo;
+  const { subject, studass, available, studassLocation, room, playerId, loadAdd } = state.queueInfo;
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
-  const { loading } = state.loading;//to know when to show spinner
 
-  return { subject, studass, available, studasscount, studassLocation, loading, myGender, room, playerId };
+  return { subject, studass, available, studasscount, studassLocation, loadAdd, myGender, room, playerId };
 };
 
 export default connect(mapStateToProps, { setInfo, getCount, addToQueue })(QueueInfo);
