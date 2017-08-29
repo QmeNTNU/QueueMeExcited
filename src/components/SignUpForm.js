@@ -42,7 +42,7 @@ class SignUpForm extends Component {
    return (
 
        <ButtonWhite onPress={this.onButtonPress.bind(this)} >
-         REGISTRER
+         REGISTER
        </ButtonWhite>
 
    );
@@ -93,14 +93,16 @@ class SignUpForm extends Component {
  checkMale() {
    if (this.props.gender === 'male') {
      this.props.genderUpdate({ prop: 'gender', value: '' });
-   }
+   } else {
    this.props.genderUpdate({ prop: 'gender', value: 'male' });
+  }
  }
  checkFemale() {
    if (this.props.gender === 'female') {
      this.props.genderUpdate({ prop: 'gender', value: '' });
-   }
+   } else {
    this.props.genderUpdate({ prop: 'gender', value: 'female' });
+  }
  }
 
   render() {
@@ -154,6 +156,8 @@ class SignUpForm extends Component {
               borderRadius={5}
             />
           </View>
+
+          <Text > Gender (optional): </Text>
           <View style={styles.sectionStyleContainer}>
 
           <View style={styles.sectionStyle}>

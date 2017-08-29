@@ -41,7 +41,7 @@ const sendResetPasswordSuccess = (dispatch) => {
   Alert.alert(
       'EMAIL SENT',
       'If not recieved within a couple' +
-      'of minutes, make sure you enterd the correct email and try again',
+      ' of minutes, make sure you entered the correct email and try again',
       [
         { text: 'OK', onPress: () => Actions.login() },
       ]
