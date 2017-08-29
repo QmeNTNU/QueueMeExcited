@@ -100,8 +100,8 @@ const selectedGenderValidation =
   ({ dispatch, signupEmail, signupPassword, fullname, gender }) => {
       if (gender === 'male' || gender === 'female') {
         emailValidation({ dispatch, signupEmail, signupPassword, fullname, gender });
-      } else {
-        genderError(dispatch);
+      } else if (gender === '') {
+        genderError({ dispatch, signupEmail, signupPassword, fullname, gender });
       }
   };
 
@@ -110,7 +110,7 @@ const emailValidation =
     if (signupEmail.includes('stud.ntnu.no')) {
       userValidation({ dispatch, signupEmail, signupPassword, fullname, gender });
     } else {
-      emailError(dispatch);
+      emailError({ dispatch, signupEmail, signupPassword, fullname, gender });
     }
 };
 
@@ -201,15 +201,17 @@ const passwordError = (dispatch) => {
     );
 };
 
-const genderError = (dispatch) => {
+const genderError = ({ dispatch, signupEmail, signupPassword, fullname, gender }) => {
   dispatch({
       type: SELECT_GENDER
   });
   Alert.alert(
-      'REGISTRATION FAILED',
-      'Please select a gender',
+      'GENDER RECOMMENDED!',
+      'Are you sure want to register without your gender? If you add gender, the studass can more easily recognize you!',
       [
-        { text: 'OK', onPress: () => Actions.signup() },
+
+        { text: 'Back', onPress: () => Actions.signup() },
+          { text: 'Register without gender', onPress: () => emailValidation({ dispatch, signupEmail, signupPassword, fullname, gender }) }
       ]
     );
 };
@@ -235,7 +237,7 @@ const emailError = (dispatch) => {
       'REGISTRATION FAILED',
       'Your email must contain "stud.ntnu.no"',
       [
-        { text: 'OK', onPress: () => Actions.signup() },
+        { text: 'Continue', onPress: () => Actions.signup() },
       ]
     );
 };
