@@ -207,13 +207,18 @@ const genderError = ({ dispatch, signupEmail, signupPassword, fullname, gender }
   });
   Alert.alert(
       'GENDER RECOMMENDED!',
-      'Are you sure want to register without your gender? If you add gender, the studass can more easily recognize you!',
+      'Are you sure want to register without your gender? If you add gender, the studass/students can more easily recognize you!',
       [
 
         { text: 'Back', onPress: () => Actions.signup() },
-          { text: 'Register without gender', onPress: () => emailValidation({ dispatch, signupEmail, signupPassword, fullname, gender }) }
+          { text: 'Register without gender', onPress: () => RegisterWithoutGender({ dispatch, signupEmail, signupPassword, fullname, gender }) }
       ]
     );
+};
+const RegisterWithoutGender = ({ dispatch, signupEmail, signupPassword, fullname, gender }) => {
+
+  dispatch({ type: CREATE_USER });
+  emailValidation({ dispatch, signupEmail, signupPassword, fullname, gender });
 };
 
 const createUserFail = (dispatch) => {
