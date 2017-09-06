@@ -18,6 +18,12 @@ export const setMyLocation = (key) => {
     payload: key
   };
 };
+export const fetchLocalPlayerId = (playerid) => {
+  return (dispatch) => {
+          dispatch({ type: SET_PLAYERID, payload: playerid });
+      };
+  };
+
 export const fetchPlayerId = () => {
   const userUID = firebase.auth().currentUser.uid;
   const { ref } = firebase.database().ref(`users/${userUID}/playerId/playerid`);
