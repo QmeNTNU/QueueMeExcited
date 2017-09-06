@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 
-import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode } from '../actions';
+import { studentAssistant, Student, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode, fetchLocalPlayerId } from '../actions';
 
 
 
@@ -20,7 +20,7 @@ class HomeForm extends Component {
     //checks if it should display welcomeslides
     this.props.fetchCode();
     this.props.getMyGender();
-    this.props.fetchPlayerId();
+    this.getPlayerId();
     this.checkWelcomeSlides();
     const user = firebase.auth().currentUser.displayName;
     console.log('FIREBASE USER NAME', user);
@@ -35,6 +35,23 @@ class HomeForm extends Component {
     } else {
       this.props.studentAssistant();
     }
+  }
+
+  async getPlayerId() {
+    try {
+        const playerid = await AsyncStorage.getItem('LocalPlayerId');
+        if (playerid !== null) {
+          // We have data!!
+          console.log('LOCALPLAYERIDFETCHED', playerid);
+          this.props.fetchLocalPlayerId(playerid);
+        } else {
+          //get data another way
+          console.log('SHOULD NOT HAPPEN');
+          this.props.fetchPlayerId();
+        }
+      } catch (error) {
+        // Error retrieving data
+      }
   }
 
 async checkWelcomeSlides() {
@@ -238,4 +255,4 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
 
-Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode })(HomeForm);
+Student, studentAssistant, getMyName, setInfo, studassSubject, setMyLocation, getMyGender, fetchPlayerId, fetchCode, fetchLocalPlayerId })(HomeForm);

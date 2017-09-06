@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import OneSignal from 'react-native-onesignal';
 import ReduxThunk from 'redux-thunk';
+import { AsyncStorage } from 'react-native';
+
 import reducers from './reducers';
 import Router from './Router';
 import firebase from 'firebase';
@@ -15,7 +17,7 @@ class App extends Component {
   OneSignal.addEventListener('received', this.onReceived);
    OneSignal.addEventListener('opened', this.onOpened);
    OneSignal.addEventListener('registered', this.onRegistered);
-   OneSignal.addEventListener('ids', this.onIds);
+   OneSignal.addEventListener('ids', this.onIds.bind(this));
    const config = {
      apiKey: 'AIzaSyAySL_xKeFMEzkSahvW84e4m0Y9ASk8QVg',
      authDomain: 'queuemeapp-10df5.firebaseapp.com',
@@ -64,6 +66,18 @@ class App extends Component {
         ref.set({ playerid });
       }
     });
+    const playerid = device.userId;
+    this.setLocalPlayerId(playerid);
+  }
+
+  async setLocalPlayerId(playerid) {
+    
+    try {
+console.log('LOCALPLAYERID', playerid);
+      await AsyncStorage.setItem('LocalPlayerId', playerid);
+    } catch (error) {
+      console.log('--------------ERROR ASYNC SETITEM------------------');
+    }
   }
 
   render() {
