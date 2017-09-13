@@ -34,6 +34,6 @@ const DeleteUser = (dispatch) => {
     type: DELETE_USER
   });
   currentUser.delete();
-  firebase.database().ref(`/users/${currentUser.uid}/userInfo`).remove();
+  firebase.database().ref(`/users/${currentUser.uid}`).remove();
   Actions.auth({ type: 'reset' });
 };

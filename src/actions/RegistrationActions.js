@@ -140,7 +140,7 @@ const createUserInFireBase = (signupEmail, signupPassword, fullname, gender) => 
   const emnenavn = 'ITGK Matlab';
   const { currentUser } = firebase.auth();
     firebase.database().ref(`/users/${currentUser.uid}`)
-      .set({ signupEmail, signupPassword, fullname, gender })
+      .set({ fullname, gender })
       .then(() => {
         firebase.database().ref(`/users/${currentUser.uid}/favstudsubject/${emnekode}`)
           .set({ emnekode, emnenavn });
