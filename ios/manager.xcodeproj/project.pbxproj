@@ -492,6 +492,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		294AB6501FB0E03A00BC26EF /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				F0DDAFAD92A640C395206D95 /* libLRDRCTSimpleToast.a */,
+				0EF442255E47430AB528BA57 /* libRCTOneSignal.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		296107091F45B5E1006FF9AF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +591,7 @@
 				00E356EF1AD99517003FC87E /* managerTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				10CC4E1122E046BFB22C167B /* Resources */,
+				294AB6501FB0E03A00BC26EF /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
