@@ -21,11 +21,47 @@ class deleteSlide extends Component {
   setModalInvisible() {
     this.setState({ modalVisible: false });
   }
+  renderScreen() {
+    if (Platform.OS === 'android') {
+      return (
 
-  /* eslint-disable global-require */
-  render() {
-    return (
-      <View>
+          <Modal
+            animationType={'slide'}
+            transparent
+            visible={this.state.modalVisible}
+            onRequestClose={() => { console.log('MODAL CLOSED'); }}
+          >
+
+            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
+
+                  <View style={styles.slideWelcome}>
+                  <Image
+                    style={styles.imageStyle}
+                    source={require('./images/turtorialdeleteiphone.png')}
+                  />
+                    <View style={styles.slide3}>
+                    <Text style={styles.textOrange}>swipe to delete</Text>
+
+                  <TouchableOpacity
+                      onPress={() => Actions.pop()}
+                      style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5 }}
+                  >
+                    <Text style={{ color: '#ffffff' }}>
+                        Thanks, got it!
+                    </Text>
+                  </TouchableOpacity>
+                    </View>
+                  </View>
+
+
+            </KeyboardAvoidingView>
+          </Modal>
+
+
+      );
+    } else if (Platform.OS === 'ios') {
+      return (
+
         <Modal
           animationType={'slide'}
           transparent
@@ -34,6 +70,7 @@ class deleteSlide extends Component {
         >
 
           <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
+            <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
 
                 <View style={styles.slideWelcome}>
                 <Image
@@ -54,10 +91,19 @@ class deleteSlide extends Component {
                   </View>
                 </View>
 
-
+            </Swiper>
           </KeyboardAvoidingView>
         </Modal>
 
+
+    );
+    }
+  }
+  /* eslint-disable global-require */
+  render() {
+    return (
+      <View>
+        {this.renderScreen()}
     </View>
     );
   }
