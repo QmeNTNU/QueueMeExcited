@@ -104,11 +104,7 @@ onPressInfo(){
   const message = 'Studass: '.concat(studass, '\nSubject: ', subject, '\nAvailable until: ', available, '\nRoom: ', room);
   Alert.alert(
   'Queue Info',
-   message,
-    [
-      { text: 'done', onPress: () => console.log('done') },
-
-    ]
+   message
   );
 }
 
@@ -177,7 +173,6 @@ renderInfoImage() {
   render() {
     return (
       <View style={styles.wholeScreen}>
-            {this.renderInfoImage()}
 
         <View style={styles.imageView}>
           {this.renderImage()}
