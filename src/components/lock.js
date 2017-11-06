@@ -2,7 +2,6 @@ import React, { Component, } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
-import Swiper from 'react-native-swiper';
 import { ButtonWhite, InputSignUp } from './common';
 import { addCode, codeChanged } from '../actions';
 
@@ -56,7 +55,6 @@ class lock extends Component {
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
           <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
-            <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
 
                 <View style={styles.slideWelcome}>
                 <Image
@@ -94,7 +92,7 @@ class lock extends Component {
                   </View>
                 </View>
 
-            </Swiper>
+
           </KeyboardAvoidingView>
         </Modal>
 
@@ -161,13 +159,9 @@ const styles = {
   },
   wholeScreen: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
-    paddingTop: 20
+
 
   },
   container: {

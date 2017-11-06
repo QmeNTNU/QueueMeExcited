@@ -110,7 +110,8 @@ const emailValidation =
     if (signupEmail.includes('stud.ntnu.no')) {
       userValidation({ dispatch, signupEmail, signupPassword, fullname, gender });
     } else {
-      emailError({ dispatch, signupEmail, signupPassword, fullname, gender });
+      // CAN NOT HAVE ({}) IF EMAILERROR USES DISPATCH DIRECTLY APPERANTLY!!!!
+      emailError(dispatch, signupEmail, signupPassword, fullname, gender);
     }
 };
 
@@ -136,19 +137,11 @@ const createUserSuccess = (dispatch, user, signupEmail, signupPassword, fullname
 
 
 const createUserInFireBase = (signupEmail, signupPassword, fullname, gender) => {
-  const emnekode = 'TDT4105';
-  const emnenavn = 'ITGK Matlab';
+  // const emnekode = 'TDT4105'; HIOA DOES NOT NEED MATLAB OR ANY SUBJECTS
+  // const emnenavn = 'ITGK Matlab';
   const { currentUser } = firebase.auth();
     firebase.database().ref(`/users/${currentUser.uid}`)
-      .set({ fullname, gender })
-      .then(() => {
-        firebase.database().ref(`/users/${currentUser.uid}/favstudsubject/${emnekode}`)
-          .set({ emnekode, emnenavn });
-      })
-      .then(() => {
-        firebase.database().ref(`/users/${currentUser.uid}/favasssubject/${emnekode}`)
-          .set({ emnekode, emnenavn });
-      });
+      .set({ fullname, gender });
 };
 
 
@@ -227,7 +220,7 @@ const createUserFail = (dispatch) => {
   });
   Alert.alert(
       'REGISTRATION FAILED',
-      'Your entered email are already in use',
+      'Your entered email may already be in use, or the connection was lost',
       [
         { text: 'OK', onPress: () => Actions.signup() },
       ]

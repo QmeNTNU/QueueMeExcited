@@ -86,8 +86,8 @@ async setWelcomeSlides() {
     const asyncStudentstudassLocation = await AsyncStorage.getItem('asyncStudentstudassLocation');
     const asyncStudentmyLocation = await AsyncStorage.getItem('asyncStudentmyLocation');
     const asyncStudassSubject = await AsyncStorage.getItem('asyncStudassSubject');
-
-        if (asyncStudentSubject !== null) {
+    //IF ONE IS NOT NULL, IT CHECKS BOTH IF IT
+        if (asyncStudentSubject !== null || asyncStudassSubject !== null) {
           // We have data!!
           console.log('ASYNCDATA: ', asyncStudentSubject);
           console.log('ASYNCDATA: ', asyncStudentstudassLocation);

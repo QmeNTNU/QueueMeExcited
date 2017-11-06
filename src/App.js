@@ -71,7 +71,7 @@ class App extends Component {
   }
 
   async setLocalPlayerId(playerid) {
-    
+
     try {
 console.log('LOCALPLAYERID', playerid);
       await AsyncStorage.setItem('LocalPlayerId', playerid);

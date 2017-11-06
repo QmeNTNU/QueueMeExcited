@@ -1,6 +1,6 @@
-import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, FIRST_CHANGED, LOADING, MY_LOCATION, STUD_SUBJECT, DELETE_QUEUE, FIRST_KEY, FIRST_GENDER } from '../actions/types';
+import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, FIRST_CHANGED, LOADING, MY_LOCATION, STUD_SUBJECT, DELETE_QUEUE, FIRST_KEY, FIRST_GENDER, CHECK_IF_EXIST } from '../actions/types';
 
-const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line', firstKey: '', firstGender: '', myLocation: '', studassSubject: '' };
+const INITIAL_STATE = { available: '', room: '', error: '', loading: false, first: 'There are no students in line', firstKey: '', firstGender: '', myLocation: '', studassSubject: '', exist: '' };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -33,6 +33,9 @@ export default (state = INITIAL_STATE, action) => {
     case FIRST_GENDER:
       console.log('gender': action);
       return { ...state, firstGender: action.payload };
+    case CHECK_IF_EXIST:
+        //oppdaterer hele tiden room input
+        return { ...state, exist: action.payload };
       case DELETE_QUEUE:
         return INITIAL_STATE;
     default:

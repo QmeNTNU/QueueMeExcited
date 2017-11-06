@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT } from './types';
+import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT, CHECK_IF_EXIST } from './types';
 //have to add it to types as well
 //have to add it to index.js
 //have to make reducer to handele AVAILABLE_CHANGED
@@ -25,7 +25,17 @@ export const studassSubject = (text) => {
   };
 };
 
-export const makeQueue = ({ myGender, available, room, ref }) => {
+export const checkIfExists = (ref) => {
+// checks if the queue exists from before
+  return (dispatch) => {
+    ref.once('value', snapshot => {
+      dispatch({ type: CHECK_IF_EXIST, payload: snapshot.val() });
+
+    });
+  };
+};
+
+export const makeQueue = ({ myGender, available, room, ref, exist }) => {
   //MUST HAVE VALIDATION////////////////////////////////////
   if (!validateInput(available)) {
     return (dispatch) => {
@@ -39,6 +49,30 @@ export const makeQueue = ({ myGender, available, room, ref }) => {
   const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
+  // check if the existing queue already excists
+
+  if (exist !== '' && exist !== null && exist !== undefined) {
+    return (dispatch) => {
+
+    Alert.alert(
+      'Queue already exists',
+      'Do you want to go to the existing queue or override it with the new?',
+        [
+          { text: 'Override', onPress: () => {
+                                                dispatch({ type: LOADING_BUTTON });//sets spinner
+
+                                                ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
+                                                .then(() => {
+                                                  dispatch({ type: QUEUE_CREATED }); //resets the input field
+                                                   Actions.studassQueue({ type: 'reset' });//moved to necht scene
+                                                 });
+                                              } },
+          { text: 'Go to existing', onPress: () =>  Actions.studassQueue({ type: 'reset' }) }
+        ]
+    );
+  };
+  }
+
 
   return (dispatch) => {
     dispatch({ type: LOADING_BUTTON });//sets spinner
@@ -59,7 +93,6 @@ return (dispatch) => {
   const key = newRef.key;
   //sets a value to the retrieved location
   //saved the key to be used in next scene. sets other to initial_state
-
   newRef.set({ userEmail, available, room, userUID, userGender }) //sets the value
   .then(() => {
     dispatch({ type: QUEUE_CREATED }); //resets the input field
@@ -112,12 +145,10 @@ export const childAdded = () => {
     });
   };
 };
-
 */
 
 /*export const fetchQueue = () => {
   const itemsRef = firebase.database().ref('/Person');
-
   return (dispatch) => {
     itemsRef.on('value', (snap) => {
       snap.forEach((child) => {

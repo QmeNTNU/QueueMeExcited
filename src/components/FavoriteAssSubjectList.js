@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { ListView, View, Text, AsyncStorage } from 'react-native';
+import { ListView, View, Text, AsyncStorage, Image } from 'react-native';
 import { ButtonBlue, Spinner } from './common';
 import { favoriteAssSubjectListFetch } from '../actions';
 import SubjectAssListItem from './SubjectAssListItem';
@@ -64,6 +64,17 @@ class FavoriteAssSubjectList extends Component {
         }
   }
   //////////////////////////////////
+  renderEmptyImage() {
+    //eslint comments lets us retrieve image!!!
+    /* eslint-disable global-require */
+    return (
+      <Image
+      style={styles.imageStyle}
+      source={require('./images/arrowdown_listview.png')}
+      />
+    );
+  /* eslint-enable global-require */
+  }
 
   renderRow(subject) {
     return <SubjectAssListItem subject={subject} />;
@@ -73,6 +84,21 @@ class FavoriteAssSubjectList extends Component {
     //shows either a spinner while loading or hte listview when the date is retireved
     if (this.props.loading) {
     return <Spinner size="large" />;
+  }
+  if(!this.props.favoriteStudentSubjectList.length){
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
+          You have no added subjcts.
+        </Text>
+        <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
+          Add subjects below.
+        </Text>
+        <View style={{ height: 100 }}>
+          {this.renderEmptyImage()}
+        </View>
+      </View>
+    );
   }
 
   return (

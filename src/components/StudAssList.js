@@ -66,7 +66,7 @@ class StudAssList extends Component {
         <View style={{ height: 100 }}>
           {this.renderEmptyImage()}
         </View>
-        <Text style={{ color: '#213140' }}>
+        <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
           No available studasses...
         </Text>
       </View>

@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
-import Swiper from 'react-native-swiper';
+import SwipeALot from 'react-native-swipe-a-lot'
 import { Button } from './common';
 
 
@@ -32,10 +32,10 @@ class modal extends Component {
           transparent
           visible={this.state.modalVisible}
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
-        >
-          <View style={styles.wholeScreen}>
-            <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
 
+        >
+            <SwipeALot  height={this.state.height - 80} circleDefaultStyle ={styles.InactiveDot} circleActiveStyle={styles.activeDot} >
+<View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                 <View style={styles.slideWelcome}>
                 <Image
                   style={styles.imageStyle}
@@ -46,7 +46,10 @@ class modal extends Component {
                   <Text style={styles.text}>Stay tuned for a quick walkthrough</Text>
                   </View>
                 </View>
+              </View>
 
+
+  <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                 <View style={styles.slide1}>
                 <Text style={styles.textOrange}>STUDASS:</Text>
@@ -72,7 +75,10 @@ class modal extends Component {
                     <Text style={styles.text}>Wait for students</Text>
                   </View>
                 </View>
+      </View>
 
+
+      <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                   <View style={styles.slide1}>
                   <Text style={styles.textOrange}>Student:</Text>
@@ -98,6 +104,8 @@ class modal extends Component {
                       <Text style={styles.text}>Get in line</Text>
                     </View>
                   </View>
+      </View>
+      <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                   <View style={styles.slide1}>
 
@@ -109,8 +117,9 @@ class modal extends Component {
                       </View>
 
                   </View>
-            </Swiper>
-          </View>
+      </View>
+
+            </SwipeALot>
         </Modal>
 
     </View>
@@ -122,6 +131,16 @@ class modal extends Component {
 
 const styles = {
   wrapper: {
+  },
+  activeDot:{
+    backgroundColor: '#254552',
+  },
+  InactiveDot:{
+     width: 10,
+     height: 10,
+     margin: 10,
+     backgroundColor: '#ffffff',
+     borderRadius: 5
   },
   slideWelcome: {
     flex: 1,
