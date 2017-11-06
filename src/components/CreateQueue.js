@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { View, Text, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { connect } from 'react-redux'; //to get acces to the actioncreater
-import { availableChanged, roomChanged, makeQueue } from '../actions'; //all the actions in the actioncreator
+import { availableChanged, roomChanged, makeQueue, checkIfExists } from '../actions'; //all the actions in the actioncreator
 import { InputCreate, ButtonBlue, Spinner } from './common';
 
 class CreateQueue extends Component {
-
+  componentWillMount(){
+    // checks if the queue exists from before
+    const { available, room, myGender } = this.props;
+    const userUID = firebase.auth().currentUser.uid;
+    const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
+    this.props.checkIfExists(ref);
+  }
 //calls the reducer to update the state every time the text is changed
   onAvailableChange(text) {
     this.props.availableChanged(text);
@@ -19,14 +25,14 @@ class CreateQueue extends Component {
 //adds the student assistant to the queue
 onButtonPress() {
   //retireves the availible input from state
-  const { available, room, myGender } = this.props;
+  const { available, room, myGender, exist } = this.props;
   const userUID = firebase.auth().currentUser.uid;
   //NOT RETTRIEVE EVERY TIME
   //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
 //calls actioncreater makeQueue with the attribute availible
 //MUST VALIDATE
-  this.props.makeQueue({ myGender, available, room, ref });
+  this.props.makeQueue({ myGender, available, room, ref, exist });
 }
 
   getSubject() {
@@ -217,13 +223,13 @@ const styles = {
 
 //gets the updated value from the reducer
 const mapStateToProps = (state) => {
-  const { available, room, loadingButton, error, studassSubject } = state.createQueue;
+  const { available, room, loadingButton, error, studassSubject, exist } = state.createQueue;
   const { myGender } = state.nameRed;
 
   //createQueue is from the reducer/index and is the reucer!
-  return { available, room, loadingButton, error, studassSubject, myGender };
+  return { available, room, loadingButton, error, studassSubject, myGender, exist };
 };
 
 //have to add on the connector for redux to work
 //allows me to get the state from the reducer
-export default connect(mapStateToProps, { availableChanged, roomChanged, makeQueue })(CreateQueue);
+export default connect(mapStateToProps, { availableChanged, roomChanged, makeQueue, checkIfExists })(CreateQueue);

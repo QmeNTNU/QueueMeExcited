@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
-import Swiper from 'react-native-swiper';
+import SwipeALot from 'react-native-swipe-a-lot'
 import { Button } from './common';
 
 
@@ -33,9 +33,8 @@ class aboutUs extends Component {
           visible={this.state.modalVisible}
           onRequestClose={() => { console.log('MODAL CLOSED'); }}
         >
-          <View style={styles.wholeScreen}>
-            <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
-
+          <SwipeALot  height={this.state.height - 80} circleDefaultStyle ={styles.InactiveDot} circleActiveStyle={styles.activeDot} >
+<View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                 <View style={styles.slideWelcome}>
                   <View style={styles.slide3}>
                     <View style={{ height: 200 }} />
@@ -44,8 +43,9 @@ class aboutUs extends Component {
                   <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, Marius Alexander Løken and Magnus Knædal</Text>
                   </View>
                 </View>
+    </View>
 
-
+<View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                 <View style={styles.slideWelcome}>
                   <View style={styles.slide3}>
                   <Text style={styles.textOrange}>TEAM MEMBERS:</Text>
@@ -69,7 +69,9 @@ class aboutUs extends Component {
                 <Text style={styles.text}>NTNU, I&IKT </Text>
                 </View>
                 </View>
+    </View>
 
+<View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                 <View style={styles.slide1}>
 
 
@@ -80,9 +82,9 @@ class aboutUs extends Component {
                     </View>
 
                 </View>
+    </View>
 
-            </Swiper>
-          </View>
+            </SwipeALot>
         </Modal>
 
     </View>
@@ -94,6 +96,16 @@ class aboutUs extends Component {
 
 const styles = {
   wrapper: {
+  },
+  activeDot:{
+    backgroundColor: '#254552',
+  },
+  InactiveDot:{
+     width: 10,
+     height: 10,
+     margin: 10,
+     backgroundColor: '#ffffff',
+     borderRadius: 5
   },
   slideWelcome: {
     flex: 1,
