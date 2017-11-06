@@ -56,7 +56,7 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
 
     Alert.alert(
       'Queue already exists',
-      'Do you want to go to the existing queue or override it with the new?',
+      'You already have a queue in this subject. Do you want to go to the existing queue or override it with the new?',
         [
           { text: 'Override', onPress: () => {
                                                 dispatch({ type: LOADING_BUTTON });//sets spinner
