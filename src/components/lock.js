@@ -2,6 +2,7 @@ import React, { Component, } from 'react';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Modal, Text, View, Image, Dimensions, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
+import Swiper from 'react-native-swiper';
 import { ButtonWhite, InputSignUp } from './common';
 import { addCode, codeChanged } from '../actions';
 
@@ -43,59 +44,119 @@ class lock extends Component {
      );
     /* eslint-enable global-require */
   }
+  renderScreen() {
+      if (Platform.OS === 'android') {
+        return (
 
+          <Modal
+            animationType={'slide'}
+            transparent
+            visible={this.state.modalVisible}
+            onRequestClose={() => { console.log('MODAL CLOSED'); }}
+          >
+            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
+
+                  <View style={styles.slideWelcome}>
+                  <Image
+                    style={styles.imageStyle}
+                    source={require('./images/code3.png')}
+                  />
+                    <View style={styles.slide3}>
+                    <Text style={styles.textOrange}>Enter code</Text>
+                    <View style={{ width: 250 }}>
+                      <View style={{ height: 50, marginBottom: 5 }}>
+                      <InputSignUp
+                        style={{ marginBottom: 10 }}
+                       label={this.renderImage()}
+                        placeholder="Studass code"
+                        secureTextEntry
+                        onChangeText={this.onCodeChange.bind(this)}
+                        value={this.props.code} //input verdi for fullname
+                        borderRadius={5}
+                      />
+                    </View>
+                    <View style={{ height: 50 }}>
+                      <ButtonWhite onPress={this.onButtonPress.bind(this)} >
+                        Continue
+                      </ButtonWhite>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                      onPress={() => Actions.pop()}
+                      style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5, marginBottom: 5 }}
+                  >
+                    <Text style={{ color: '#ffffff' }}>
+                        Back to homescreen
+                    </Text>
+                  </TouchableOpacity>
+                    </View>
+                  </View>
+
+
+            </KeyboardAvoidingView>
+          </Modal>
+
+        );
+      } else if (Platform.OS === 'ios') {
+        return (
+
+          <Modal
+            animationType={'slide'}
+            transparent
+            visible={this.state.modalVisible}
+            onRequestClose={() => { console.log('MODAL CLOSED'); }}
+          >
+            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen1}>
+              <Swiper style={styles.wrapper} height={this.state.height - 80} loop={false} activeDotColor='#254552' dotColor='#ffffff'>
+
+                  <View style={styles.slideWelcome}>
+                  <Image
+                    style={styles.imageStyle}
+                    source={require('./images/code3.png')}
+                  />
+                    <View style={styles.slide3}>
+                    <Text style={styles.textOrange}>Enter code</Text>
+                    <View style={{ width: 250 }}>
+                      <View style={{ height: 50, marginBottom: 5 }}>
+                      <InputSignUp
+                        style={{ marginBottom: 10 }}
+                       label={this.renderImage()}
+                        placeholder="Studass code"
+                        secureTextEntry
+                        onChangeText={this.onCodeChange.bind(this)}
+                        value={this.props.code} //input verdi for fullname
+                        borderRadius={5}
+                      />
+                    </View>
+                    <View style={{ height: 50 }}>
+                      <ButtonWhite onPress={this.onButtonPress.bind(this)} >
+                        Continue
+                      </ButtonWhite>
+                    </View>
+                  </View>
+                  <TouchableOpacity
+                      onPress={() => Actions.pop()}
+                      style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5, marginBottom: 5 }}
+                  >
+                    <Text style={{ color: '#ffffff' }}>
+                        Back to homescreen
+                    </Text>
+                  </TouchableOpacity>
+                    </View>
+                  </View>
+
+              </Swiper>
+            </KeyboardAvoidingView>
+          </Modal>
+
+   );
+      }
+  }
   /* eslint-disable global-require */
   render() {
     return (
       <View>
-        <Modal
-          animationType={'slide'}
-          transparent
-          visible={this.state.modalVisible}
-          onRequestClose={() => { console.log('MODAL CLOSED'); }}
-        >
-          <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={Platform.select({ ios: () => 0, android: () => -250 })()} style={styles.wholeScreen}>
-
-                <View style={styles.slideWelcome}>
-                <Image
-                  style={styles.imageStyle}
-                  source={require('./images/code3.png')}
-                />
-                  <View style={styles.slide3}>
-                  <Text style={styles.textOrange}>Enter code</Text>
-                  <View style={{ width: 250 }}>
-                    <View style={{ height: 50, marginBottom: 5 }}>
-                    <InputSignUp
-                      style={{ marginBottom: 10 }}
-                     label={this.renderImage()}
-                      placeholder="Studass code"
-                      secureTextEntry
-                      onChangeText={this.onCodeChange.bind(this)}
-                      value={this.props.code} //input verdi for fullname
-                      borderRadius={5}
-                    />
-                  </View>
-                  <View style={{ height: 50 }}>
-                    <ButtonWhite onPress={this.onButtonPress.bind(this)} >
-                      Continue
-                    </ButtonWhite>
-                  </View>
-                </View>
-                <TouchableOpacity
-                    onPress={() => Actions.pop()}
-                    style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5, marginBottom: 5 }}
-                >
-                  <Text style={{ color: '#ffffff' }}>
-                      Back to homescreen
-                  </Text>
-                </TouchableOpacity>
-                  </View>
-                </View>
-
-
-          </KeyboardAvoidingView>
-        </Modal>
-
+      {this.renderScreen()}
     </View>
     );
   }
@@ -162,6 +223,17 @@ const styles = {
 
     backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
 
+
+  },
+  wholeScreen1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', //gived tansparent!
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingTop: 20
 
   },
   container: {
