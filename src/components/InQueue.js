@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity, Alert, View, Image, AsyncStorage, AppState } from 'react-native';
+import { Text, Alert, View, Image, AsyncStorage, AppState } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import Toast from 'react-native-simple-toast';
 import { ButtonBlue } from './common';
@@ -99,15 +99,6 @@ onQuitPress() {
   );
 }
 
-onPressInfo(){
-  const { subject, room, available, studass } = this.props;
-  const message = 'Studass: '.concat(studass, '\nSubject: ', subject, '\nAvailable until: ', available, '\nRoom: ', room);
-  Alert.alert(
-  'Queue Info',
-   message
-  );
-}
-
 
 async setRecover() {
   try {
@@ -156,27 +147,16 @@ renderArrowDownImage() {
   );
 /* eslint-enable global-require */
 }
-renderInfoImage() {
-  //eslint comments lets us retrieve image!!!
-  /* eslint-disable global-require */
-  return (
-    <TouchableOpacity onPress={this.onPressInfo.bind(this)} style={{ marginLeft: 60 }}>
-    <Image
-    style={{ height: 35, width: 35 }}
-    source={require('./images/infobutton.png')}
-    />
-  </TouchableOpacity>
-  );
-/* eslint-enable global-require */
-}
 
   render() {
     return (
       <View style={styles.wholeScreen}>
 
+
         <View style={styles.imageView}>
           {this.renderImage()}
         </View>
+
         <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, marginTop: -50, paddingBottom: 10 }}>
 
           <View style={{ height: 10, alignItems: 'center' }}>
@@ -277,9 +257,9 @@ const mapStateToProps = (state) => {
   //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
-  const { myLocation, studassLocation, subject, room, available, studass } = state.queueInfo;
+  const { myLocation, studassLocation, subject } = state.queueInfo;
   const { place, firstboolean, quit, showNotification, showNotification2 } = state.inQueue;
-  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2, room, available, studass };
+  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2 };
 };
  //kan skrive queue[0].name
 
