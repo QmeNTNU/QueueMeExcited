@@ -377,4 +377,3 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
   { favoriteStudentSubjectListFetch })(FavoriteStudentSubjectList);
->>>>>>> 9d15bdfe28ecb088671175fdd98ec9905732c8ca
