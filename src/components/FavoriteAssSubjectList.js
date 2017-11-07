@@ -188,7 +188,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps,
   { favoriteAssSubjectListFetch })(FavoriteAssSubjectList);
-=======
+
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
