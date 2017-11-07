@@ -49,7 +49,7 @@ class FavoriteAssSubjectList extends Component {
         //sets displaySlides to NOT so it doesent show welcomeslides again
         this.setWelcomeSlides();
         console.log('COMDIDMOUNT', value);
-        Actions.deleteSlide();
+        // Actions.deleteSlide();
       }
     } catch (error) {
       // Error retrieving data
@@ -92,7 +92,7 @@ class FavoriteAssSubjectList extends Component {
           You have no added subjcts.
         </Text>
         <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
-          Add subjects below.
+          Add subjects below. Swipe to delete.
         </Text>
         <View style={{ height: 100 }}>
           {this.renderEmptyImage()}
