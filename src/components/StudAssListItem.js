@@ -20,9 +20,9 @@ class SubjectAssListItem extends Component {
     this.props.setInfo({ prop: 'available', value: this.props.studass.available });
     this.props.setInfo({ prop: 'studassLocation', value: this.props.studass.userUID });
     this.props.setInfo({ prop: 'room', value: this.props.studass.room });
+    //
 
-    //goes to next scene
-    Actions.queueInfo();
+    Actions.queueInfo(); //goes to next scene
   }
 
   /* eslint-disable global-require */
@@ -41,7 +41,7 @@ renderImage() {
       source={icon}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
 renderArrowImage() {
@@ -94,11 +94,13 @@ renderRow() {
   const { available } = this.props.studass;
   const rightButtons = [
     <TouchableHighlight style={{ flex: 1, width: 75, backgroundColor: '#F58C6C', padding: 20 }}>
+
       <Image
         style={{ flex: 1, height: undefined, width: undefined }}
         resizeMode="contain"
         source={require('./images/starred.png')}
       />
+
     </TouchableHighlight>
   ];
 
@@ -114,20 +116,22 @@ renderRow() {
 
 
         <View style={styles.headerContentStyle}>
+
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
             <Text style={{ color: '#ffffff' }}> Available until: {available} </Text>
           </View>
+
           <View style={{ flex: 1, alignSelf: 'flex-start', justifyContent: 'flex-end' }}>
             {this.renderName()}
           </View>
+
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
             <View style={{ flex: 1 }}>
                 <Text> Available until: {available} </Text>
             </View>
-
           </View>
-      </View>
 
+        </View>
 
         <View style={styles.arrowStyle}>
           {this.renderArrowImage()}
@@ -184,11 +188,5 @@ const styles = {
     color: '#213140'
   },
 };
-/*const mapStateToProps = state => {
-  const favorites = _.map(state.addSubjectFetch, (val, uid) => {
-    return { ...val, uid };
-  });
-  return { favorites };
-};*/
 
 export default connect(null, { setInfo })(SubjectAssListItem);

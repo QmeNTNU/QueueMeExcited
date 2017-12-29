@@ -14,6 +14,7 @@ class modal extends Component {
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
+    //
   }
 
   setModalVisible() {
@@ -25,7 +26,7 @@ class modal extends Component {
 renderScreen() {
   if (Platform.OS === 'android') {
     return (
-      
+
         <Modal
           animationType={'slide'}
           transparent
@@ -34,7 +35,7 @@ renderScreen() {
 
         >
             <SwipeALot  height={this.state.height - 80} circleDefaultStyle ={styles.InactiveDot} circleActiveStyle={styles.activeDot} >
-<View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+              <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                 <View style={styles.slideWelcome}>
                 <Image
                   style={styles.imageStyle}
@@ -48,7 +49,7 @@ renderScreen() {
               </View>
 
 
-  <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+              <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                 <View style={styles.slide1}>
                 <Text style={styles.textOrange}>STUDASS:</Text>
@@ -74,10 +75,10 @@ renderScreen() {
                     <Text style={styles.text}>Wait for students</Text>
                   </View>
                 </View>
-      </View>
+              </View>
 
 
-      <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+              <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                   <View style={styles.slide1}>
                   <Text style={styles.textOrange}>Student:</Text>
@@ -103,8 +104,9 @@ renderScreen() {
                       <Text style={styles.text}>Get in line</Text>
                     </View>
                   </View>
-      </View>
-      <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+                </View>
+
+                <View style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
 
                   <View style={styles.slide1}>
 
@@ -116,7 +118,7 @@ renderScreen() {
                       </View>
 
                   </View>
-      </View>
+                </View>
 
             </SwipeALot>
         </Modal>
@@ -234,10 +236,10 @@ renderScreen() {
 const styles = {
   wrapper: {
   },
-  activeDot:{
+  activeDot: {
     backgroundColor: '#254552',
   },
-  InactiveDot:{
+  InactiveDot: {
      width: 10,
      height: 10,
      margin: 10,
@@ -331,12 +333,4 @@ const styles = {
   },
 };
 
-
-/*
-const mapStateToProps = ({ auth }) => {
-
-};
-
-export default connect(mapStateToProps, {  })(modal);
-*/
 export default modal;

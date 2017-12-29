@@ -2,94 +2,29 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, Alert, View, Image, AsyncStorage, AppState } from 'react-native';
-import PushNotification from 'react-native-push-notification';
-import Toast from 'react-native-simple-toast';
+import { Text, Alert, View, Image, AsyncStorage } from 'react-native';
 import { ButtonBlue } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification } from '../actions';
 import PushController from './PushController';
 
 class InQueue extends Component {
 componentWillMount() {
-  //makes ref from where we want to retrieve data
+    //calls action (CountAction.js) to retireve count in line
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
-    //starts the listener for
   this.props.getCount({ ref });
-  console.log('-----------');
-  this.props.findMyPlaceInLine({ ref });
-  console.log('Show Notification (willMount) status:');
-  console.log(this.props.showNotification);
-  console.log(this.props.showNotification2);
-  //keep tract on nr user is in line.
-  //if this numer is index 0 send notification
-  this.setRecover();
+  //
+
+  this.props.findMyPlaceInLine({ ref }); //calls action (inQueueAction.js) to find users place in line
+  this.setRecover(); //calls function below to save variables to asynStoradge in case of crash
   }
 
-// componentDidMount() {
-//   console.log('Show Notification (didMount) status:');
-//   console.log(this.props.showNotification);
-//   if (this.props.showNotification === 'show') {
-//       if (AppState.currentState === 'active') {
-//           Toast.show('You are first in line \nYour student assistant is waiting for you!',
-//           Toast.LONG);
-//     }
-//     PushNotification.localNotification({
-//           /* iOS and Android properties */
-//           title: 'You are first in line',
-//           message: 'Your student assistant is waiting for you!', // (required)
-//           soundName: 'default'
-//         });
-//       this.props.showNotification = '';
-//     }
-// }
-
-componentWillReceiveProps(nextProps) {
-  console.log('Show Notification (WillRecieveProps) status:');
-  console.log(nextProps.showNotification);
-  console.log(nextProps.showNotification2);
-  if (nextProps.showNotification === 'show') {
-      if (AppState.currentState === 'active') {
-          Toast.show('You are first in line \nYour student assistant is waiting for you!',
-          Toast.LONG);
-    }
-    PushNotification.localNotification({
-          /* iOS and Android properties */
-          title: 'You are first in line',
-          message: 'Your student assistant is waiting for you!', // (required)
-          soundName: 'default',
-          smallIcon: null,
-        });
-        this.props.changeNotification();
-        console.log(this.props.showNotification);
-    }
-  if (nextProps.showNotification2 === 'show') {
-      if (AppState.currentState === 'active') {
-          Toast.show('You are second in line \nIt will soon be your turn!',
-          Toast.LONG);
-    }
-    PushNotification.localNotification({
-          /* iOS and Android properties */
-          title: 'You are second in line',
-          message: 'It will soon be your turn!', // (required)
-          soundName: 'default',
-          smallIcon: null,
-        });
-        this.props.changeNotification();
-        console.log(this.props.showNotification2);
-    }
-}
-
-//NEED A ONBACKPRESS
-
-
 onQuitPress() {
-//gets ref to delete
+//gets ref to users location (to know where to delete)
  const deleteRef = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue/${this.props.myLocation}`);
- //gets ref to unlisten to before deleting so popup wont show
+ //gets ref to the queue (to know where to unlisten to before deleting so popup wont show)
  const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
 
-//popup dialog to make sure if user wants to quit
-  Alert.alert(
+  Alert.alert(//popup dialog to make sure if user wants to quit
   'Warning',
   'You are about to step out of this queue, are you sure you want to do so?',
     [
@@ -100,7 +35,7 @@ onQuitPress() {
 }
 
 
-async setRecover() {
+async setRecover() { //function that saves queue info to asyncstoradge in case of chrash
   try {
     await AsyncStorage.setItem('asyncStudentSubject', this.props.subject);
     await AsyncStorage.setItem('asyncStudentstudassLocation', this.props.studassLocation);
@@ -110,20 +45,7 @@ async setRecover() {
   }
 }
 
-
-getGender() {
-  //GETGENDER FROM STATE/ ASYNC STORAGE. SHOULD RETRIVE THIS IN COMPONENTWILLMOUNT
-  return 'male';
-}
-
-sendNotification() {
-  //make sure this is recived even if app is not running in background.
-}
-
-renderImage() {
-  //gets gender to display either girl or boy
-  //const gender = this.getGender();
-  //eslint comments lets us retrieve image!!!
+renderImage() { //gets gender to display either girl or boy image
   /* eslint-disable global-require */
   const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman3.png') : require('./images/inqueue3.png');
   return (
@@ -133,11 +55,10 @@ renderImage() {
       source={icon}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
 renderArrowDownImage() {
-  //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
   return (
     <Image
@@ -145,7 +66,7 @@ renderArrowDownImage() {
     source={require('./images/arrowdownblue.png')}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
   render() {
@@ -254,13 +175,11 @@ renderArrowDownImage() {
 
 
 const mapStateToProps = (state) => {
-  //henter ut studascount fra reduceren count
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
   const { myLocation, studassLocation, subject } = state.queueInfo;
   const { place, firstboolean, quit, showNotification, showNotification2 } = state.inQueue;
   return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2 };
 };
- //kan skrive queue[0].name
 
 export default connect(mapStateToProps, { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification })(InQueue);

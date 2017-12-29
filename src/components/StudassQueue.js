@@ -8,42 +8,24 @@ import { fetchQueue, getCount, deleteQueue, nextDelete, firstInLine } from '../a
 
 class StudassQueue extends Component {
 
-  //want to watch for a queue the instant the scene is loaded
-  componentWillMount() {
-  //connect(props) do not get fetched properly before componenDIDmount. moved it there instead
-  }
-
 componentDidMount() {
+  //creates ref to retrieve info from
   const userUID = firebase.auth().currentUser.uid;
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue`);
-  const name = this.props.first; //tar med navn slik at notifikasjon ikke blir sendt hver gang. kun når gammeltnavn ikke er lik nyttnavn
-  //starts the listener for
-  this.props.firstInLine({ ref });
-  this.props.getCount({ ref });
-  this.setRecover();
-
-  //on timeout the queue will be deleted
-  //KAN VURDERE OG SETTE EN STATE "TOUCHED" TIL Å SE HVOR LENGE SIDEN DET ER STUDASS VAR AKTIV
-/*  const deleteRef = firebase.database().ref('/Person');
-  setTimeout(() => {
-    //popup dialog to tell user timeout deleted the queue
-      Alert.alert(
-      'Timeout',
-      'Your queue had reached its maximum of 6 hours. To protect against inactive queues you are taken to the home screen',
-        [
-          { text: 'OK', onPress: () => this.props.deleteQueue(deleteRef) },
-        ]
-      );
-   }, 10000);*/
+  //
+  this.props.firstInLine({ ref });//calls action (QueueActions.js) to retrieve firs user in line
+  this.props.getCount({ ref }); //calls action (CountAction.js) to retireve queue count
+  this.setRecover();//calls function below to save variables to asynStoradge in case of crash
 }
 
-//when quiting queue
+
 onQuitPress() {
+  //gets ref to delete
   const userUID = firebase.auth().currentUser.uid;
-//gets ref to delete (whole node)
-const deleteRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
-//popup dialog to make sure if user wants to quit
-  Alert.alert(
+  const deleteRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
+  //
+
+  Alert.alert(   //popup dialog to make sure if user wants to quit
   'Warning',
   'You are about to delete this queue, are you sure you want to do so?',
     [
@@ -53,26 +35,30 @@ const deleteRef = firebase.database().ref(`Subject/${this.props.studassSubject}/
   );
 }
 
-//when goint to next in line
-onNextPress() {
+
+onNextPress() { //function that deletes first in line and moves to next
+  //gets ref anf first in line
   const userUID = firebase.auth().currentUser.uid;
   const firstUID = this.props.firstKey;
-  console.log('firstKey', firstUID);
   const nextRef = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}/queue/${firstUID}`);
-if (this.props.first !== 'There are no students in line') {
-  Alert.alert(
-  'Are you sure?',
-  'You will now proceed to the next student in line.',
-    [
-      { text: 'Cancel', onPress: () => console.log('Cancel pressed') },
-      { text: 'Yes', onPress: () => this.props.nextDelete(nextRef) },
-    ]
-  );
-}
+  //
+
+  //alert to make sure studass wants to preceed to next
+  if (this.props.first !== 'There are no students in line') {
+    Alert.alert(
+    'Are you sure?',
+    'You will now proceed to the next student in line.',
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel pressed') },
+        { text: 'Yes', onPress: () => this.props.nextDelete(nextRef) },
+      ]
+    );
+  }
+  //
 }
 
 
-async setRecover() {
+async setRecover() { //function that saves queue info to asyncstoradge in case of chrash
   try {
     await AsyncStorage.setItem('asyncStudassSubject', this.props.studassSubject);
   } catch (error) {
@@ -81,9 +67,7 @@ async setRecover() {
 }
 
 
-renderImage() {
-  //gets gender to display either girl or boy
-  //eslint comments lets us retrieve image!!!
+renderImage() { //gets gender to display either girl or boy
   /* eslint-disable global-require */
   const icon = this.props.firstGender === 'female' ? require('./images/studassqueuewoman3.png') : require('./images/studassqueue3.png');
   return (
@@ -92,11 +76,10 @@ renderImage() {
       source={icon}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
 renderEmptyImage() {
-  //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
   return (
     <Image
@@ -104,11 +87,10 @@ renderEmptyImage() {
     source={require('./images/emptyLine2.png')}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
 renderArrowDownImage() {
-  //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
   return (
     <Image
@@ -116,14 +98,14 @@ renderArrowDownImage() {
     source={require('./images/arrowdownblue.png')}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
 //depeding if the queue is empty, and depending on the first persons gender,
 //we want to render the screen differently
 renderScreen() {
     /* eslint-disable global-require */
-  if (this.props.studasscount === 0) {
+  if (this.props.studasscount === 0) { //no one in queue
     return (
       <View style={styles.wholeScreen}>
 
@@ -201,7 +183,6 @@ renderScreen() {
 }
 
   render() {
-      console.log(this.props);
     return (
       this.renderScreen()
       );
@@ -278,15 +259,12 @@ renderScreen() {
   };
 
 const mapStateToProps = state => {
-  //henter ut listen fra reduceren studassqueue
   const queue = _.map(state.studassQueue, (val, uid) => {
     return { ...val, uid };
   });
-//henter ut studascount fra reduceren count
   const { studasscount } = state.count;
   const { first, myLocation, studassSubject, firstKey, firstGender } = state.createQueue;
   return { queue, studasscount, first, myLocation, studassSubject, firstKey, firstGender };
 };
- //kan skrive queue[0].name
 
 export default connect(mapStateToProps, { fetchQueue, getCount, deleteQueue, nextDelete, firstInLine })(StudassQueue);

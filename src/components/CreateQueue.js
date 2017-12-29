@@ -1,47 +1,44 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { View, Text, Image, KeyboardAvoidingView, Platform } from 'react-native';
-import { connect } from 'react-redux'; //to get acces to the actioncreater
-import { availableChanged, roomChanged, makeQueue, checkIfExists } from '../actions'; //all the actions in the actioncreator
+import { connect } from 'react-redux';
+import { availableChanged, roomChanged, makeQueue, checkIfExists } from '../actions';
 import { InputCreate, ButtonBlue, Spinner } from './common';
 
 class CreateQueue extends Component {
-  componentWillMount(){
+
+  componentWillMount() {
     // checks if the queue exists from before
     const { available, room, myGender } = this.props;
     const userUID = firebase.auth().currentUser.uid;
     const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
-    this.props.checkIfExists(ref);
-  }
-//calls the reducer to update the state every time the text is changed
-  onAvailableChange(text) {
-    this.props.availableChanged(text);
+    this.props.checkIfExists(ref); //calls action to see if the queue already exist
+    //
   }
 
-  onRoomChange(text) {
-    this.props.roomChanged(text);
+  onAvailableChange(text) { //function that is called for every change in input
+    this.props.availableChanged(text); //calls action (createQueueAction.js) to update the state every time the text is changed
   }
 
-//adds the student assistant to the queue
-onButtonPress() {
-  //retireves the availible input from state
+  onRoomChange(text) { //function that is called for every change in input
+    this.props.roomChanged(text); //calls action (createQueueAction.js) to update the state every time the text is changed
+  }
+
+
+onButtonPress() { //creates/adds the student assistant to the choosen queue
+  //retireves the relevant input from state
   const { available, room, myGender, exist } = this.props;
   const userUID = firebase.auth().currentUser.uid;
-  //NOT RETTRIEVE EVERY TIME
-  //WHEN I WANT TO TAKE IN VARIABLES, I NEED TO WRITE IT AS .CHILD
+  //
+
+  //calls action (CreateQueueAction.js) with ref to create/add studass to the queue
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
-//calls actioncreater makeQueue with the attribute availible
-//MUST VALIDATE
   this.props.makeQueue({ myGender, available, room, ref, exist });
+  //
 }
 
   getSubject() {
-    //Shows the subject stud.ass is about to create a queue in
-    //gets the string subject from last page (listview)
-    //Actions.com2 ({text: 'Hello World'})
-    //this.props.text
-    const { emnekode, emnenavn } = this.props.subject;
-
+    const { emnekode, emnenavn } = this.props.subject; //retireves choosen subject info
     return (
 
         <Text style={{ fontSize: 30 }}> {emnekode} {emnenavn} </Text>
@@ -50,8 +47,6 @@ onButtonPress() {
   }
 
   renderImage() {
-    //gets gender to display either girl or boy
-    //eslint comments lets us retrieve image!!!
     /* eslint-disable global-require */
     return (
       <Image
@@ -60,11 +55,10 @@ onButtonPress() {
         source={require('./images/alarm3.png')}
       />
     );
-  /* eslint-enable global-require */
+    /* eslint-enable global-require */
   }
 
   renderArrowDownImage() {
-    //eslint comments lets us retrieve image!!!
     /* eslint-disable global-require */
     return (
       <Image
@@ -72,14 +66,14 @@ onButtonPress() {
       source={require('./images/arrowdown.png')}
       />
     );
-  /* eslint-enable global-require */
+    /* eslint-enable global-require */
   }
 
   renderButton() {
-    if (this.props.loadingButton) {
+    if (this.props.loadingButton) { //shows spinner on loading
       return <Spinner size="large" />;
     }
-    return (
+    return ( //shows button when not loading
       <ButtonBlue onPress={this.onButtonPress.bind(this)}>
         START QUEUE
       </ButtonBlue>
@@ -100,43 +94,44 @@ onButtonPress() {
         <View style={styles.imageView}>
           {this.renderImage()}
         </View>
-  <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 }}>
-    <View style={{ height: 10, alignItems: 'center' }}>
-      {this.renderArrowDownImage()}
-    </View>
 
-        <View style={styles.infoView}>
-        <Text style={styles.textStyle3}>I will be available until</Text>
-        </View>
+        <View style={{ flex: 2, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, paddingBottom: 20, paddingLeft: 20, paddingRight: 20 }}>
+          <View style={{ height: 10, alignItems: 'center' }}>
+            {this.renderArrowDownImage()}
+          </View>
 
-        <View style={styles.ContainerView}>
-            <View style={{ flex: 1, height: 45 }}>
-              <InputCreate
-                placeholder="00:00"
-                keyboardType='default'
-                maxLength={5}
-                width={60}
-                value={this.props.available}
-                onChangeText={this.onAvailableChange.bind(this)}
-              />
-            </View>
+              <View style={styles.infoView}>
+              <Text style={styles.textStyle3}>I will be available until</Text>
+              </View>
 
-            <View style={styles.infoView}>
-              <Text style={styles.textStyle3}> Oclock in </Text>
-            </View>
+              <View style={styles.ContainerView}>
+                  <View style={{ flex: 1, height: 45 }}>
+                    <InputCreate
+                      placeholder="00:00"
+                      keyboardType='default'
+                      maxLength={5}
+                      width={60}
+                      value={this.props.available}
+                      onChangeText={this.onAvailableChange.bind(this)}
+                    />
+                  </View>
 
-            <View style={{ flex: 1, height: 45 }}>
-              <InputCreate
-                placeholder="room.nr"
-                keyboardType='default'
-                maxLength={10}
-                width={100}
-                value={this.props.room}
-                onChangeText={this.onRoomChange.bind(this)}
-              />
-            </View>
-        </View>
-    </View>
+                  <View style={styles.infoView}>
+                    <Text style={styles.textStyle3}> Oclock in </Text>
+                  </View>
+
+                  <View style={{ flex: 1, height: 45 }}>
+                    <InputCreate
+                      placeholder="room.nr"
+                      keyboardType='default'
+                      maxLength={10}
+                      width={100}
+                      value={this.props.room}
+                      onChangeText={this.onRoomChange.bind(this)}
+                    />
+                  </View>
+              </View>
+          </View>
 
 
         <Text style={styles.errorTextStyle}>{this.props.error}</Text>
@@ -156,7 +151,6 @@ onButtonPress() {
   }
 }
 
-//my styles
 const styles = {
   wholeScreen: {
     flex: 1,
@@ -221,15 +215,11 @@ const styles = {
 
 };
 
-//gets the updated value from the reducer
 const mapStateToProps = (state) => {
   const { available, room, loadingButton, error, studassSubject, exist } = state.createQueue;
   const { myGender } = state.nameRed;
 
-  //createQueue is from the reducer/index and is the reucer!
   return { available, room, loadingButton, error, studassSubject, myGender, exist };
 };
 
-//have to add on the connector for redux to work
-//allows me to get the state from the reducer
 export default connect(mapStateToProps, { availableChanged, roomChanged, makeQueue, checkIfExists })(CreateQueue);

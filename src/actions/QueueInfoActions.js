@@ -10,21 +10,20 @@ export const setInfo = ({ prop, value }) => {
     payload: { prop, value }
   };
 };
-export const setMyLocation = (key) => {
-  //sets info from different student-scenes in reducer.
-  //a combined way of writhing one actioncreater for different instances.
+export const setMyLocation = (key) => { //saves users location to state
   return {
     type: ADDED_TO_QUEUE,
     payload: key
   };
 };
-export const fetchLocalPlayerId = (playerid) => {
+
+export const fetchLocalPlayerId = (playerid) => { //saves local playerid to state
   return (dispatch) => {
           dispatch({ type: SET_PLAYERID, payload: playerid });
       };
   };
 
-export const fetchPlayerId = () => {
+export const fetchPlayerId = () => { //retireves and saves firebase playerid to state
   const userUID = firebase.auth().currentUser.uid;
   const { ref } = firebase.database().ref(`users/${userUID}/playerId/playerid`);
   return (dispatch) => {
@@ -34,7 +33,7 @@ export const fetchPlayerId = () => {
       });
   };
 };
-export const addToQueue = ({ ref, myGender, playerId }) => {
+export const addToQueue = ({ ref, myGender, playerId }) => { //adds user to queue
   //OPS! COULD USE REGULAR SET TO EASILY KNOW THE NODE-ID, BUT PUSH GIVES BETTER PERFORMANCE
   //AND PUTS/FETCHES CHILDREN IN CHRONOLOGICAL ORDER
 
@@ -48,32 +47,6 @@ export const addToQueue = ({ ref, myGender, playerId }) => {
   const newRef = ref.push();
   //gets  the key to this location
   const key = newRef.key;
-
-  // OneSignal.registerForPushNotifications();
-  // OneSignal.push(() => {
-  //     OneSignal.on('notificationPermissionChange', (permissionChange) => {
-  //         const currentPermission = permissionChange.to;
-  //
-  //         if (currentPermission === 'granted') {
-  //             OneSignal.getUserId((userId) => {
-  //                 console.log(userId);
-  //             });
-  //         }
-  //     });
-  // });
-
-  // const status = OneSignal.getPermissionSubscriptionState();
-  // status.getPermissionStatus().getEnabled();
-  // console.log(status.getSubscriptionStatus().getUserId());
-
-
-  // OneSignal.onIds((ids) => {
-  //             console.log('getIds: ', ids);
-  //             const deviceToken = ids.pushToken;
-  //             const userId = ids.userId;
-  //             console.log(userId);
-  //             console.log(deviceToken);
-  //   });
 
   //sets a value to the retrieved location
   //saved the key to be used in next scene. sets other to initial_state

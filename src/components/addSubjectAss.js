@@ -10,47 +10,42 @@ import { fetchQueue, searchChanged, getWidth, getHeight, fetchAddSubjectQueue } 
 
 class addSubjectAss extends Component {
   constructor(props) {
-    const data = [];
+    const data = [];//initial data for listview. Not used after this
+    //creates items for listView
     const ds = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
-      super(props);
-      this.state = {
-        dataSource: ds.cloneWithRows(data),
-        modalVisible: this.props.visible,
-        height: '',
-        width: ''
-      };
-    }
-  //state = { modalVisible: this.props.visible, height: '', width: '' };
+    //
+    super(props);
+    this.state = {
+      dataSource: ds.cloneWithRows(data),
+      modalVisible: this.props.visible,
+      height: '',
+      width: ''
+    };
+  }
 
   componentWillMount() {
-     //retireves and continues to  listen(not realy nessesary) for subjects
+    //calls action () to retrieve student subjects
     const { ref } = firebase.database().ref('Subject');
     this.props.fetchQueue({ ref });
-
-    //get list for comparison in listitem.js
-    //const { compref } = firebase.database().ref('users');
-    //starts the listener for
-    //this.props.fetchAddSubjectQueue({ compref });
+    //
 
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
-    this.createDataSource(this.props);
+    //
+    this.createDataSource(this.props);//calls function below to create listView
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextprops', nextProps);
-
-    // nextProps are the next set of props that this component
-    // will be rendered with
-    // this.props is still the old set of props
-
+    // nextProps are the next set of props that this component will be rendered with
+    //calls function below to create listView in case the queue wasnt fetched before
     this.createDataSource(nextProps);
+    //
   }
 
-  createDataSource({ subjects }) {
+  createDataSource({ subjects }) { //function that creates items for ListView
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
@@ -61,17 +56,19 @@ class addSubjectAss extends Component {
      });
   }
 
-  renderRow(subject) {
+  renderRow(subject) { //function that renders each item in ListView
     return <ListItemAss subject={subject} />;
   }
 
 
-  setModalVisible() {
+  setModalVisible() { //function to make modal visable
     this.setState({ modalVisible: true });
   }
-  setModalInvisible() {
+  setModalInvisible() { //function to close modal
     this.setState({ modalVisible: false });
   }
+
+  ////////////////////thoughts of search input////////////////////////////
 /*
 onSearchChange(text) {
   this.props.searchChanged(text);
@@ -98,37 +95,22 @@ onSearchChange(text) {
      });
 }
 */
+/////////////////////////////////////////////////////////////////////
 
 renderScreen() {
-  if (this.props.loading) {
-  return <Spinner size="large" />;
-}
-
-/* experiment marre will need
-if (this.props.subjects.length) {
-  return (
-    <Text style={{ flex: 1, alignSelf: 'center', marginTop: 100 }}>
-      No subjects availible...
-    </Text>
+  if (this.props.loading) { //show spinner while loading
+    return <Spinner size="large" />;
+  }
+  return ( //show listview when done
+    <ListView
+      enableEmptySections
+      dataSource={this.state.dataSource}
+      renderRow={this.renderRow}
+    />
   );
-}*/
-return (
-  <ListView
-    enableEmptySections
-    dataSource={this.state.dataSource}
-    renderRow={this.renderRow}
-  />
-);
 }
   /* eslint-disable global-require */
   render() {
-  /*  const ar = this.props.search
-      ? this.props.subjects[1] : this.props.assets;
-      this.setState({
-         dataSource: this.state.dataSource.cloneWithRows(ar),
-       });*/
-       console.log('props', this.props);
-       console.log('subjects', this.props.subjects);
     return (
       <View>
         <Modal
@@ -167,18 +149,6 @@ return (
   }
 }
 /* eslint-enable global-require */
-/*
-<View style={{ height: 60, width: this.state.width - 40, backgroundColor: '#ffffff'}}>
-  <InputCreate
-    placeholder="Search among subject"
-    keyboardType='default'
-    maxLength={100}
-    width={this.state.width - 40}
-    value={this.props.search}
-    onChangeText={this.onSearchChange.bind(this)}
-  />
-</View>
-*/
 
 const styles = {
   wrapper: {
@@ -231,7 +201,6 @@ const styles = {
 //////   backgroundColor: 'rgba(0, 0, 0, 0.5)', gived tansparent!
 
 const mapStateToProps = state => {
-  //henter ut listen fra reduceren studassqueue
   const subjects = _.map(state.studassQueue, (val, uid) => {
     return { ...val, uid };
   });
@@ -239,6 +208,5 @@ const mapStateToProps = state => {
     const { search, loading } = state.addSubject;
   return { subjects, search, loading };
 };
- //kan skrive queue[0].name
 
 export default connect(mapStateToProps, { fetchQueue, searchChanged, getHeight, getWidth, fetchAddSubjectQueue })(addSubjectAss);

@@ -7,7 +7,7 @@ import {
 } from './types';
 
 
-export const LogOutPress = () => {
+export const LogOutPress = () => { //logs out user and sends user to login
   return (dispatch) => {
     dispatch({ type: LOGOUT });
     firebase.auth().signOut();
@@ -15,20 +15,20 @@ export const LogOutPress = () => {
   };
 };
 
-export const DeletePress = () => {
+export const DeletePress = () => { //calles deleteUser function below
   return (dispatch) => {
     DeleteUser(dispatch);
   };
 };
 
-export const cancel = () => {
+export const cancel = () => { //cancels deleting account
   return (dispatch) => {
     dispatch({ type: CANCEL });
     Actions.settings();
 };
 };
 
-const DeleteUser = (dispatch) => {
+const DeleteUser = (dispatch) => { //deletes user and send user back to login
   const { currentUser } = firebase.auth();
   dispatch({
     type: DELETE_USER

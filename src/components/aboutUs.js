@@ -14,6 +14,7 @@ class aboutUs extends Component {
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
+    //
   }
 
   setModalVisible() {
@@ -33,7 +34,7 @@ class aboutUs extends Component {
               onRequestClose={() => { console.log('MODAL CLOSED'); }}
             >
               <SwipeALot  height={this.state.height - 80} circleDefaultStyle ={styles.InactiveDot} circleActiveStyle={styles.activeDot} >
-    <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+                <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                     <View style={styles.slideWelcome}>
                       <View style={styles.slide3}>
                         <View style={{ height: 200 }} />
@@ -42,9 +43,9 @@ class aboutUs extends Component {
                       <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, Marius Alexander Løken and Magnus Knædal</Text>
                       </View>
                     </View>
-        </View>
+                </View>
 
-    <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+                <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                     <View style={styles.slideWelcome}>
                       <View style={styles.slide3}>
                       <Text style={styles.textOrange}>TEAM MEMBERS:</Text>
@@ -68,9 +69,9 @@ class aboutUs extends Component {
                     <Text style={styles.text}>NTNU, I&IKT </Text>
                     </View>
                     </View>
-        </View>
+                  </View>
 
-    <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
+                  <View style={{backgroundColor: 'rgba(0, 0, 0, 0.5)', flex: 1}}>
                     <View style={styles.slide1}>
 
 
@@ -81,7 +82,7 @@ class aboutUs extends Component {
                         </View>
 
                     </View>
-        </View>
+                  </View>
 
                 </SwipeALot>
             </Modal>
@@ -169,10 +170,10 @@ class aboutUs extends Component {
 const styles = {
   wrapper: {
   },
-  activeDot:{
+  activeDot: {
     backgroundColor: '#254552',
   },
-  InactiveDot:{
+  InactiveDot: {
      width: 10,
      height: 10,
      margin: 10,
@@ -272,12 +273,4 @@ const styles = {
   },
 };
 
-
-/*
-const mapStateToProps = ({ auth }) => {
-
-};
-
-export default connect(mapStateToProps, {  })(modal);
-*/
 export default aboutUs;
