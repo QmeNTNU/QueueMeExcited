@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { View, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { ButtonWhite, ButtonRed } from './common';
 import {
@@ -10,29 +10,25 @@ import {
 
 class Settings extends Component {
 
+
   onLogOutPress() {
-    this.props.LogOutPress();
+    this.props.LogOutPress(); //calls actions (SettingActions.js) to logout
   }
 
   onTutorialPress() {
-    Actions.welcome();
+    Actions.welcome(); //router to welcomslides
   }
 
   onCancelPress() {
-    this.props.cancel();
+    this.props.cancel(); //calls actions (SettingActions.js) to cancel delete account
   }
 
   onStudPress() {
-    Actions.aboutUs();
+    Actions.aboutUs(); // router to aboutUs slides
   }
-  onStudAssPress() {
 
-  }
   onDeletePress() {
-    this.props.DeletePress();
-  }
-  onUsPress() {
-
+    this.props.DeletePress(); //calls actions (SettingActions.js) to delete account
   }
 
   render() {

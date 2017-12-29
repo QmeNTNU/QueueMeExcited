@@ -18,33 +18,39 @@ class StudAssList extends Component {
 
 
   componentWillMount() {
+    //calls action (StudAssListActions.js) to fetch studasses in chosen subject
     const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/`);
     this.props.studAssListFetch({ ref });
-    //sets listview
-    this.createDataSource(this.props);
+    //
+
+
+    this.createDataSource(this.props); //calls function below to create ListView items.
+    //Creates listview items
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(this.props.studAssList);
+    //
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps);
+  componentWillReceiveProps(nextProps) { //called in case the list was not retireved in componentWillMount()
+    this.createDataSource(nextProps); //calls function below to create listwie items
   }
 
-  createDataSource({ studAssList }) {
+  createDataSource({ studAssList }) { //function to clone favoriteStudentSubjectList to a listview
+    //standard code for ListView
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(studAssList);
+    //
   }
 
   renderRow(studass) {
-    return <StudAssListItem studass={studass} />;
+    return <StudAssListItem studass={studass} />; //calls StudassListItem.js to render rows
   }
 
   renderEmptyImage() {
-    //eslint comments lets us retrieve image!!!
     /* eslint-disable global-require */
     return (
       <Image
@@ -52,7 +58,7 @@ class StudAssList extends Component {
       source={require('./images/nostudass3.png')}
       />
     );
-  /* eslint-enable global-require */
+    /* eslint-enable global-require */
   }
 
   renderScreen() {
@@ -60,7 +66,7 @@ class StudAssList extends Component {
     if (this.props.loading) {
     return <Spinner size="large" />;
   }
-  if (!this.props.studAssList.length) {
+  if (!this.props.studAssList.length) { //no longer loading, but no studasses retrieved
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <View style={{ height: 100 }}>
@@ -72,7 +78,7 @@ class StudAssList extends Component {
       </View>
     );
   }
-  return (
+  return ( //no longer loading, and subject retireved
     <ListView
       enableEmptySections
       dataSource={this.dataSource3}
@@ -84,14 +90,17 @@ class StudAssList extends Component {
   render() {
     return (
       <View style={styles.wholeScreen}>
+
         <View style={styles.ViewBlue}>
         <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           available studasses
           </Text>
         </View>
+
         <View style={{ flex: 8 }}>
           {this.renderScreen()}
         </View>
+
       </View>
     );
   }

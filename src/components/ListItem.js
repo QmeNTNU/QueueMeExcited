@@ -13,22 +13,17 @@ class ListItem extends Component {
 
 
   onAddPress() {
-    //checks if subject is already added. could skip this if used set, and not push when regisering
+    const { emnekode, emnenavn } = this.props.subject; //gets subject info
 
-    const { emnekode, emnenavn } = this.props.subject;
-
-    //gets user uid
+    //calls action (addSubjectAction.js) to add subject to favorite studen subject
     const userUID = firebase.auth().currentUser.uid;
-    //makes a ref for favstudsubject
     const { ref } = firebase.database().ref(`users/${userUID}/favstudsubject/${emnekode}`);
-    //adds subject to subjectlist
     this.props.addSubject({ ref, emnekode, emnenavn });
-
+    //
   }
 
 
-  checkIfAdded() {
-    //only diplays a add-button if it is not already addet to the users favorite subjects
+  checkIfAdded() { //only diplays a add-button if it is not already addet to the users favorite subjects
     const { emnekode } = this.props.subject;
     for (let i = 0; i < this.props.favoriteStudentSubjectList.length; i++) {
       if (emnekode === this.props.favoriteStudentSubjectList[i].emnekode) {
@@ -39,27 +34,27 @@ class ListItem extends Component {
 }
 
 renderImage() {
-  if (this.checkIfAdded()) {
-  return (
+  if (this.checkIfAdded()) { //alrady added so do not show add button
+    return (
+
+        <Image
+        style={{ flex: 1, height: undefined, width: undefined }}
+        resizeMode="contain"
+        source={require('./images/emptydontadd.png')}
+        />
+
+    );
+  }
+  return ( //show add button
 
       <Image
       style={{ flex: 1, height: undefined, width: undefined }}
       resizeMode="contain"
-      source={require('./images/emptydontadd.png')}
+      source={require('./images/add.png')}
       />
 
+
   );
-}
-return (
-
-    <Image
-    style={{ flex: 1, height: undefined, width: undefined }}
-    resizeMode="contain"
-    source={require('./images/add.png')}
-    />
-
-
-);
 }
 
 renderRow() {
@@ -86,8 +81,8 @@ renderRow() {
 
   render() {
     return (
-    this.renderRow()
-  );
+      this.renderRow()
+    );
   }
 }
 /* eslint-enable global-require */
@@ -130,8 +125,6 @@ const styles = {
   },
 };
 const mapStateToProps = state => {
-  //fungerer ikke å kalle på denne. vet ikke hvorfor
-  //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
   const favoriteStudentSubjectList = _.map(state.favoriteStudentSubjectList, (val, uid) => {
     return { ...val, uid };
   });

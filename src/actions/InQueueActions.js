@@ -4,23 +4,17 @@ import { Alert } from 'react-native';
 import { DELETED_ME_FROM_QUEUE, FOUND_MY_PLACE, QUIT, SHOW_NOTIFICATION, HIDE_NOTIFICATION, SHOW_NOTIFICATION_2 } from './types';
 
 
-export const deleteMeFromQueue = ({ deleteRef, ref }) => {
-
+export const deleteMeFromQueue = ({ deleteRef, ref }) => { //deletes user from queue
   return (dispatch) => {
     //to prevent WillRecieveProps to cal firstInline, and show alert!
     dispatch({ type: QUIT });
+    //
 
-    //removed value
-    ref.off();
-    deleteRef.remove()
+    ref.off();//remove listener for queue
+    deleteRef.remove()//remove user from queue
     .then(() => {
-      //SHOULD SHOW SPINNER??
-
-      //move to another scene
-      //needs to change
-      dispatch({ type: DELETED_ME_FROM_QUEUE });
-      //go to homescreen
-      Actions.home({ type: 'reset' });
+      dispatch({ type: DELETED_ME_FROM_QUEUE }); //clears the state for variables used in queue
+      Actions.home({ type: 'reset' }); //routs user to homescreen
     });
   };
 };
@@ -31,7 +25,7 @@ export const changeNotification = () => {
   };
 };
 
-export const findMyPlaceInLine = ({ ref }) => {
+export const findMyPlaceInLine = ({ ref }) => { //finds users place in line
   //takes in the queue as an array
 
 return (dispatch) => {
@@ -42,39 +36,41 @@ return (dispatch) => {
     ref.on('value', snapshot => {
   // The callback function should be called for every update in database
   console.log('findMyPlaceInLine', snapshot.val() === null);
-  //if the queue is empty ( in case studass deletes it)
+  //if the queue is empty ( in case studass deletes it) it sends user to homepage
   if (snapshot.val() === null) {
-    ref.off();
-    isDeleted();
-    return true;
+    ref.off(); //turns off listener
+    isDeleted(); //calls functions below to send user to homepage
+    return true; // ends iterations
   }
+  //
+
+  //searches the queue to find users place
   snapshot.forEach(childSnapshot => {
     count += 1;
     console.log('minUID', userUID);
     console.log(childSnapshot.val());
     console.log(count);
 
-  if (userUID === childSnapshot.val().userUID) {
-    dispatch({ type: FOUND_MY_PLACE, payload: count });
-    
+  if (userUID === childSnapshot.val().userUID) { //if user is found
+    dispatch({ type: FOUND_MY_PLACE, payload: count });  //saves users place to state
+    //ends iterations
     count = 0;
     bool = true;
     return true;
+    //
   }
   });
-  //makes sure it is deletes if it studass swipes him and there is someone behind
-  //is run if it cant find him in th equeue
+  //if user is not found in the queue call function below to send user home
   if (!bool) {
     isDeleted();
   }
-  //setting back to initial
-  bool = false;
+  //
+  bool = false;   //setting back to initial
 });
 };
 };
 
-const isDeleted = () => {
-//Getscalled when it tries to retrieve data but doesent fint it
+const isDeleted = () => { //function that sends user back to homepage
   Alert.alert(
   'Stepped out of line',
   'You have been removed from this queue. Either it has been your turn, or the student assistant has ended the queue.\n\nYou will be taken to the homescreen.',

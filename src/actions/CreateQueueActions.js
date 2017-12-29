@@ -2,22 +2,22 @@ import firebase from 'firebase';
 import { Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { AVAILABLE_CHANGED, ROOM_CHANGED, QUEUE_CREATED, QUEUE_CREATED_FAILED, LOADING_BUTTON, STUD_SUBJECT, CHECK_IF_EXIST } from './types';
-//have to add it to types as well
-//have to add it to index.js
-//have to make reducer to handele AVAILABLE_CHANGED
-// have add it to reducers/index.js
-export const availableChanged = (text) => {
+
+
+export const availableChanged = (text) => { //saves the available text to state and displays it in input
   return {
     type: AVAILABLE_CHANGED,
     payload: text
   };
 };
-export const roomChanged = (text) => {
+
+export const roomChanged = (text) => { //saves the room text to state and displays it in input
   return {
     type: ROOM_CHANGED,
     payload: text
   };
 };
+
 export const studassSubject = (text) => {
   return {
     type: STUD_SUBJECT,
@@ -25,8 +25,7 @@ export const studassSubject = (text) => {
   };
 };
 
-export const checkIfExists = (ref) => {
-// checks if the queue exists from before
+export const checkIfExists = (ref) => { //checks if the user has a queue on this ref from before
   return (dispatch) => {
     ref.once('value', snapshot => {
       dispatch({ type: CHECK_IF_EXIST, payload: snapshot.val() });
@@ -36,22 +35,24 @@ export const checkIfExists = (ref) => {
 };
 
 export const makeQueue = ({ myGender, available, room, ref, exist }) => {
-  //MUST HAVE VALIDATION////////////////////////////////////
-  if (!validateInput(available)) {
+  //calls function below to validate "available" input.
+  if (!validateInput(available)) { //if not valid --> cancel creation
     return (dispatch) => {
     dispatch({ type: QUEUE_CREATED_FAILED });
-    errorAlert();
+    errorAlert(); //calls function below to show alert
     };
   }
+  //
 
-  //gets rest of values on should push to the location
+  //gets all values needed to create the queue
   const fullname = firebase.auth().currentUser.displayName;
   const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
-  // check if the existing queue already excists
+  //
 
-  if (exist !== '' && exist !== null && exist !== undefined) {
+  // check if the user already has a queue at this ref
+  if (exist !== '' && exist !== null && exist !== undefined) { //if queue exist
     return (dispatch) => {
 
     Alert.alert(
@@ -72,8 +73,9 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
     );
   };
   }
+  //
 
-
+  //Queue doesent exist from before so we create a new one and send user to Studassqueue.js
   return (dispatch) => {
     dispatch({ type: LOADING_BUTTON });//sets spinner
 
@@ -83,8 +85,10 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
        Actions.studassQueue({ type: 'reset' });//moved to necht scene
      });
   };
+  //
 };
-/*could have.. for preformans:
+//////////////////////////////////////////////////////////////////////////////////////
+/*Thought for improving the preformans in the queuemaking:
 but is difficult because i have to keep track of key, easier to just stay with useruid
 return (dispatch) => {
   dispatch({ type: LOADING });//sets spinner
@@ -101,9 +105,9 @@ return (dispatch) => {
    });
 };
 };*/
+///////////////////////////////////////////////////////////////////////////////////////////
 
-const validateInput = (text) => {
-//gets input from the avaiable prop, and checks if it is on correct format
+const validateInput = (text) => { //gets input from the avaiable prop, and checks if it is on correct format
 if (text.length < 5) {
   return false;
 }
@@ -122,8 +126,7 @@ if (text.charAt(3) > 5) {
 return true;
 };
 
-const errorAlert = () => {
-//Getscalled when it tries to retrieve data but doesent fint it
+const errorAlert = () => { //Function that shows alert when validation fails
   Alert.alert(
     'Unvalid input',
     'Make sure you write the hourmark as 00:00.',
@@ -132,29 +135,3 @@ const errorAlert = () => {
       ]
   );
 };
-
-
-/*
-//have to add arr: [] in initial state for it to work
-export const childAdded = () => {
-  const { currentUser } = firebase.auth();
-  const commentsRef = firebase.database().ref(`/Person/${currentUser.uid}`);
-  return (dispatch) => {
-    commentsRef.on('value', snapshot => {
-      dispatch({ type: CHILD_ADDED, payload: snapshot.val() });
-    });
-  };
-};
-*/
-
-/*export const fetchQueue = () => {
-  const itemsRef = firebase.database().ref('/Person');
-  return (dispatch) => {
-    itemsRef.on('value', (snap) => {
-      snap.forEach((child) => {
-        const item = { name: child.val().name, uid: child.key };
-        dispatch({ type: QUEUE_FETCH_SUCCESS, payload: item });
-      });
-    });
-  };
-};*/

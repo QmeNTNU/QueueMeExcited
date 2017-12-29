@@ -17,30 +17,35 @@ class FavoriteStudentSubjectList extends Component {
 
 
   componentWillMount() {
-    this.props.favoriteStudentSubjectListFetch();
-    this.createDataSource(this.props);
+    this.props.favoriteStudentSubjectListFetch(); //calls action (StudentSubjectActions.js) to fetch users favorite subjects
+    this.createDataSource(this.props); //calls function below to create ListView items.
+
+    //Creates listview items
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(this.props.favoriteStudentSubjectList);
+    //
   }
+
   componentDidMount() {
-    //checks if it should display welcomeslides
-    this.checkWelcomeSlides();
+    // this.checkWelcomeSlides(); //not called becouse we did not need deletelids for this page
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps);
+  componentWillReceiveProps(nextProps) { //called in case the list was not retireved in componentWillMount()
+    this.createDataSource(nextProps); //calls function below to create listwie items
   }
 
-  createDataSource({ favoriteStudentSubjectList }) {
+  createDataSource({ favoriteStudentSubjectList }) { //function to clone favoriteStudentSubjectList to a listview
+    //standard code for ListView
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
+    //
   }
 
-///Asnc storadge functions////////////
+//NOT USED/////////////
   async checkWelcomeSlides() {
    try {
       const value = await AsyncStorage.getItem('displayDeleteSlide');
@@ -63,8 +68,8 @@ class FavoriteStudentSubjectList extends Component {
         }
   }
 //////////////////////////////////
+
 renderEmptyImage() {
-  //eslint comments lets us retrieve image!!!
   /* eslint-disable global-require */
   return (
     <Image
@@ -72,19 +77,18 @@ renderEmptyImage() {
     source={require('./images/arrowdown_listview.png')}
     />
   );
-/* eslint-enable global-require */
+  /* eslint-enable global-require */
 }
 
   renderRow(subject) {
-    return <SubjectStudListItem subject={subject} />;
+    return <SubjectStudListItem subject={subject} />; //calls SubjectStudListItem.js to render rows
   }
 
-  renderScreen() {
-    //shows either a spinner while loading or hte listview when the date is retireved
-    if (this.props.loading) {
+  renderScreen() { //shows either a spinner while loading or the listview when the date is retireved
+    if (this.props.loading) { //show spinner
     return <Spinner size="large" />;
   }
-  if(!this.props.favoriteStudentSubjectList.length){
+  if (!this.props.favoriteStudentSubjectList.length) { //no longer loading, but no subjects retrieved
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
@@ -100,7 +104,7 @@ renderEmptyImage() {
     );
   }
 
-  return (
+  return ( //no longer loading, and subject retireved
     <ListView
       enableEmptySections
       dataSource={this.dataSource3}
@@ -112,14 +116,17 @@ renderEmptyImage() {
   render() {
     return (
       <View style={styles.wholeScreen}>
+
         <View style={styles.ViewBlue}>
           <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           Your student subjects
           </Text>
         </View>
+
         <View style={{ flex: 8 }}>
           {this.renderScreen()}
         </View>
+
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
             onPress={() => Actions.addSubjectStudent()}
@@ -127,6 +134,7 @@ renderEmptyImage() {
             ADD SUBJECTS
           </ButtonBlue>
         </View>
+
       </View>
     );
   }

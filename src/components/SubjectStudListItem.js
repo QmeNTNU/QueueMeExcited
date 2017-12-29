@@ -12,18 +12,21 @@ import { setInfo, deleteSubject } from '../actions';
 class SubjectStudListItem extends Component {
 
   onAddPress() {
-    //wirtes subject to reducer for later scenes
+    //writes subject to reducer for later scenes
     this.props.setInfo({ prop: 'subject', value: this.props.subject.emnekode });
-    //moves to studasslist
-    Actions.studAssList();
+    //
+    Actions.studAssList(); //routes to studassList.js
   }
   onDeletePress() {
     //retireves uid and emnekode to delete the pressed subject
     const { emnekode } = this.props.subject;
     const userUID = firebase.auth().currentUser.uid;
-    //makes a ref for favstudsubject
+    //
+
+    //calls action (addSubjectActions.js) to delete pressed subject
     const { ref } = firebase.database().ref(`users/${userUID}/favstudsubject/${emnekode}`);
     this.props.deleteSubject({ ref });
+    //
   }
 
   /* eslint-disable global-require */
@@ -55,37 +58,38 @@ renderRow() {
   const { emnekode, emnenavn } = this.props.subject;
   const rightButtons = [
     <TouchableHighlight onPress={this.onDeletePress.bind(this)} style={{ flex: 1, width: 75, backgroundColor: 'red', padding: 30 }}>
+
       <Image
         style={{ flex: 1, height: undefined, width: undefined }}
         resizeMode="contain"
         source={require('./images/delete.png')}
       />
+
     </TouchableHighlight>
   ];
 
     return (
-        <Swipeable rightButtons={rightButtons}>
+    <Swipeable rightButtons={rightButtons}>
       <TouchableWithoutFeedback onPress={this.onAddPress.bind(this)}>
+        <View style={styles.columnStyle}>
 
-      <View style={styles.columnStyle}>
+          <View style={styles.thumbnailContainerStyle}>
+            {this.renderImage()}
+          </View>
 
-        <View style={styles.thumbnailContainerStyle}>
-          {this.renderImage()}
+          <View style={styles.headerContentStyle}>
+            <Text style={styles.headerTextStyle}>{emnenavn}</Text>
+            <Text>{emnekode}</Text>
+          </View>
+
+          <View style={styles.arrowStyle}>
+            {this.renderArrowImage()}
+          </View>
+
+
         </View>
-
-        <View style={styles.headerContentStyle}>
-          <Text style={styles.headerTextStyle}>{emnenavn}</Text>
-          <Text>{emnekode}</Text>
-        </View>
-
-        <View style={styles.arrowStyle}>
-          {this.renderArrowImage()}
-        </View>
-
-
-    </View>
-  </TouchableWithoutFeedback>
-  </Swipeable>
+      </TouchableWithoutFeedback>
+    </Swipeable>
     );
 }
 
@@ -134,13 +138,5 @@ const styles = {
 
   },
 };
-/*const mapStateToProps = state => {
-  //retireves favorite subject as a student
-  const favorites = _.map(state.addSubjectFetch, (val, uid) => {
-    return { ...val, uid };
-  });
-
-  return { favorites };
-};*/
 
 export default connect(null, { setInfo, deleteSubject })(SubjectStudListItem);

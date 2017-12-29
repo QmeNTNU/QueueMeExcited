@@ -5,64 +5,57 @@ DELETE_QUEUE, FIRST_CHANGED,
 FIRST_KEY,
 FIRST_GENDER } from './types';
 
-//brukes til å hente ut (og vise) navn i StudasList
-//KAN, MEN BRUKES IKKE:  til å hente ut (og sammenligne) uid på første i INQUEUE
-
-export const firstInLine = ({ ref }) => {
-  const emptyText = 'There are no students in line';
-
+export const firstInLine = ({ ref }) => { //retirievs info about the first person in line
+  const emptyText = 'There are no students in line'; //placeholder text if queue is empty
   return (dispatch) => {
-    let empty = false;
-      ref.on('value', snapshot => {
-    // The callback function should be called for every update in database
+    let empty = false; //initial boolean
+
+    ref.on('value', snapshot => { //retireves the queue
     console.log(snapshot.val() === null);
-    //if the queue is empty ( in case studass deletes it)
+
+    //if the queue is empty (in case studass deletes it) we stop the iteration
     if (snapshot.val() === null) {
       dispatch({ type: FIRST_CHANGED, payload: emptyText });
       empty = true;
       return true;
     }
-
+    //
+    //iterates trough only the FIRST child, retireves info and sends notification
     snapshot.forEach(childSnapshot => {
       console.log('emptyboolean', empty);
-
       console.log('firstKey', childSnapshot.key);
+
+      //retireves information
       dispatch({ type: FIRST_CHANGED, payload: childSnapshot.val().fullname });
       dispatch({ type: FIRST_KEY, payload: childSnapshot.key });
       dispatch({ type: FIRST_GENDER, payload: childSnapshot.val().userGender });
       const playerId = childSnapshot.val().id;
       const firstBoolean = childSnapshot.val().firstBoolean;
       const data = {};
+      //
 
-      /*if (playerId === null) {
-        playerId = 'edfc360f-75b6-43db-a0c3-6dd3fd866947';
-      }*/
-      console.log(playerId, 'hei tjolla hopp');
-
+      //sending notification
       if (typeof playerId !== 'undefined') {
-        if (typeof firstBoolean === 'undefined') {
-      const contents = {
-      'en': 'You are first in line!'
-    };
+        if (typeof firstBoolean === 'undefined') { //to prevent for double sending
+          const contents = {
+          'en': 'You are first in line!'
+          };
 
-      OneSignal.postNotification(contents, data, playerId);
+          OneSignal.postNotification(contents, data, playerId);
 
-      ref.child(childSnapshot.key).child('firstBoolean').set('true');
-    }
-  }
-    //send notifikasjon
-      // const contents = 'You are first in line';
-      // OneSignal.postNotification(contents, data, playerId);
-    ////
-      return true;
+          ref.child(childSnapshot.key).child('firstBoolean').set('true');//to prevent double sending
+        }
+      }
+      //
+      return true; //stop iteration
     });
+    //
   });
   };
 };
 
-//once run it will automaticly update itself
-export const fetchQueue = ({ ref }) => {
-  //henter ut employees fra database
+
+export const fetchQueue = ({ ref }) => { //retireves and saves the queue
   return (dispatch) => {
         ref.on('value', snapshot => {
           dispatch({ type: QUEUE_FETCH_SUCCESS, payload: snapshot.val() });
@@ -72,22 +65,19 @@ export const fetchQueue = ({ ref }) => {
 };
 
 
-export const deleteQueue = (deleteRef) => {
+export const deleteQueue = (deleteRef) => { //deletes queue when studass quits
   return (dispatch) => {
-    //removed value
-    deleteRef.remove()
+    deleteRef.remove() //removes the queue
     .then(() => {
-      //tells reducer to reset state to initial
-      dispatch({ type: DELETE_QUEUE });
-      //move to home creen
-      Actions.home({ type: 'reset' });
+      dispatch({ type: DELETE_QUEUE }); //tells reducer to reset state to initial
+      Actions.home({ type: 'reset' }); //routes to homepage
    });
   };
 };
 
-export const nextDelete = (nextRef) => {
+export const nextDelete = (nextRef) => { //deletes first person in line
   return () => {
-    nextRef.remove()
+    nextRef.remove() //removes first person in line
     .then(() => {
       console.log('SUCCESSNEXTDELETE');
       //find something to catch ect to secure state

@@ -13,22 +13,17 @@ class ListItemAss extends Component {
 
 
   onAddPress() {
-    //checks if subject is already added. could skip this if used set, and not push when regisering
+    const { emnekode, emnenavn } = this.props.subject; //gets subject info
 
-    const { emnekode, emnenavn } = this.props.subject;
-
-    //gets user uid
+    //calls action (addSubjectAction.js) to add subject to favorite studen subject
     const userUID = firebase.auth().currentUser.uid;
-    //makes a ref for favstudsubject
     const { ref } = firebase.database().ref(`users/${userUID}/favasssubject/${emnekode}`);
-    //adds subject to subjectlist
     this.props.addSubject({ ref, emnekode, emnenavn });
-
+    //
   }
 
 
-  checkIfAdded() {
-    //only diplays a add-button if it is not already addet to the users favorite subjects
+  checkIfAdded() { //only diplays a add-button if it is not already addet to the users favorite subjects
     console.log('favor', this.props.favoriteAssSubjectList);
     const { emnekode } = this.props.subject;
     for (let i = 0; i < this.props.favoriteAssSubjectList.length; i++) {
@@ -40,7 +35,7 @@ class ListItemAss extends Component {
 }
 
 renderImage() {
-  if (this.checkIfAdded()) {
+  if (this.checkIfAdded()) { //alrady added so do not show add button
   return (
 
       <Image
@@ -51,7 +46,7 @@ renderImage() {
 
   );
 }
-return (
+return ( //show add button
 
     <Image
     style={{ flex: 1, height: undefined, width: undefined }}
@@ -131,8 +126,6 @@ const styles = {
   },
 };
 const mapStateToProps = state => {
-  //fungerer ikke å kalle på denne. vet ikke hvorfor
-  //MARIUS MÅ UANSETT HENTE UT AVORITTFAG I EN REDUCERSÅ KAN JO BARE BRUKE DE!!!
   const favoriteAssSubjectList = _.map(state.favoriteAssSubjectList, (val, uid) => {
     return { ...val, uid };
   });

@@ -15,33 +15,36 @@ Som student: henter liste over favorittfag fra firebase og viser som en liste me
 
 class FavoriteAssSubjectList extends Component {
 
-
   componentWillMount() {
-    this.props.favoriteAssSubjectListFetch();
-    this.createDataSource(this.props);
+    this.props.favoriteAssSubjectListFetch(); //calls action (AssSubjectActions.js) to fetch users favorite subjects
+    this.createDataSource(this.props); //calls function below to create ListView items.
+
+    //Creates listview items
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(this.props.favoriteStudentSubjectList);
+    //
   }
 
   componentDidMount() {
-    //checks if it should display welcomeslides
-    this.checkWelcomeSlides();
+    // this.checkWelcomeSlides(); //not called becouse we did not need deletelids for this page
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.createDataSource(nextProps);
+  componentWillReceiveProps(nextProps) { //called in case the list was not retireved in componentWillMount()
+    this.createDataSource(nextProps);//calls function below to create listwie items
   }
 
-  createDataSource({ favoriteStudentSubjectList }) {
+  createDataSource({ favoriteStudentSubjectList }) { //function to clone favoriteStudentSubjectList to a listview
+    //standard code for ListView
     const dS = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
+    //
   }
 
-  ///Asnc storadge functions////////////
+  //NOT USED/////////////
   async checkWelcomeSlides() {
    try {
       const value = await AsyncStorage.getItem('displayDeleteSlide');
@@ -64,8 +67,8 @@ class FavoriteAssSubjectList extends Component {
         }
   }
   //////////////////////////////////
+
   renderEmptyImage() {
-    //eslint comments lets us retrieve image!!!
     /* eslint-disable global-require */
     return (
       <Image
@@ -77,7 +80,7 @@ class FavoriteAssSubjectList extends Component {
   }
 
   renderRow(subject) {
-    return <SubjectAssListItem subject={subject} />;
+    return <SubjectAssListItem subject={subject} />;//calls SubjectAssListItem.js to render rows
   }
 
   renderScreen() {
@@ -85,7 +88,7 @@ class FavoriteAssSubjectList extends Component {
     if (this.props.loading) {
     return <Spinner size="large" />;
   }
-  if(!this.props.favoriteStudentSubjectList.length){
+  if (!this.props.favoriteStudentSubjectList.length) { //no longer loading, but no subjects retrieved
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: '#213140', fontFamily: 'bebasNeue' }}>
@@ -101,7 +104,7 @@ class FavoriteAssSubjectList extends Component {
     );
   }
 
-  return (
+  return (  //no longer loading, and subject retireved
     <ListView
       enableEmptySections
       dataSource={this.dataSource3}
@@ -113,14 +116,17 @@ class FavoriteAssSubjectList extends Component {
   render() {
     return (
       <View style={styles.wholeScreen}>
+
         <View style={styles.ViewBlue}>
           <Text style={{ alignSelf: 'center', fontFamily: 'bebasNeue', color: '#213140', fontSize: 30 }}>
           Your studass subjects
           </Text>
         </View>
+
         <View style={{ flex: 8 }}>
           {this.renderScreen()}
         </View>
+
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
           <ButtonBlue
             onPress={() => Actions.addSubjectAss()}
@@ -128,6 +134,7 @@ class FavoriteAssSubjectList extends Component {
             ADD SUBJECTS
           </ButtonBlue>
         </View>
+
       </View>
     );
   }

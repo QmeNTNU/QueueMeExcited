@@ -15,15 +15,18 @@ class lock extends Component {
     //retireves dimension of screen to make sure views fits
     const { height, width } = Dimensions.get('window');
     this.setState({ height, width });
+    //
   }
 
-  onCodeChange(text) {
-    this.props.codeChanged(text);
+  onCodeChange(text) { //function that is called every time input changes
+    this.props.codeChanged(text); //calls action (StudassLockupAction.js) to save input to state
   }
 
   onButtonPress() {
+    //calls action (StudassLockupAction.js) to prosess code
     const { code } = this.props;
     this.props.addCode({ code });
+    //
   }
 
   setModalVisible() {
@@ -44,7 +47,8 @@ class lock extends Component {
      );
     /* eslint-enable global-require */
   }
-  renderScreen() {
+
+  renderScreen() { //different modal for android and ios
       if (Platform.OS === 'android') {
         return (
 
@@ -264,9 +268,7 @@ const styles = {
 
 
 const mapStateToProps = state => {
-
   const { code } = state.lock;
-
   return { code };
 };
 
