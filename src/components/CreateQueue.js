@@ -27,13 +27,13 @@ class CreateQueue extends Component {
 
 onButtonPress() { //creates/adds the student assistant to the choosen queue
   //retireves the relevant input from state
-  const { available, room, myGender, exist } = this.props;
+  const { available, room, myGender, exist, playerId } = this.props;
   const userUID = firebase.auth().currentUser.uid;
   //
 
   //calls action (CreateQueueAction.js) with ref to create/add studass to the queue
   const ref = firebase.database().ref(`Subject/${this.props.studassSubject}/studasslist/${userUID}`);
-  this.props.makeQueue({ myGender, available, room, ref, exist });
+  this.props.makeQueue({ myGender, available, room, ref, exist, playerId });
   //
 }
 
@@ -218,8 +218,10 @@ const styles = {
 const mapStateToProps = (state) => {
   const { available, room, loadingButton, error, studassSubject, exist } = state.createQueue;
   const { myGender } = state.nameRed;
+  const { playerId } = state.queueInfo;
 
-  return { available, room, loadingButton, error, studassSubject, myGender, exist };
+
+  return { available, room, loadingButton, error, studassSubject, myGender, exist, playerId };
 };
 
 export default connect(mapStateToProps, { availableChanged, roomChanged, makeQueue, checkIfExists })(CreateQueue);
