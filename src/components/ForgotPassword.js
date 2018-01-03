@@ -46,14 +46,14 @@ render() {
                   Forgot password?
                   </Text>
 
-                  <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center', marginTop: 5 }}>
+                  <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center', marginTop: 5, fontFamily: 'bebasNeue' }}>
                           Enter your registered student email
                   </Text>
 
                 <View style={styles.containerStyle}>
                   <InputSignUp
                     label={this.renderEmailImage()}
-                    placeholder="email@stud.ntnu.no"
+                    placeholder="student email"
                     onChangeText={this.onResetEmailChange.bind(this)}
                     value={this.props.resetEmail} //input verdi for email
                   />
@@ -70,7 +70,7 @@ render() {
                   onPress={() => Actions.login({ type: 'reset' })}
                   style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
               >
-                <Text style={{ color: '#ffffff', textAlign: 'center' }}>
+                <Text style={{ color: '#ffffff', textAlign: 'center', fontFamily: 'bebasNeue' }}>
                   Back to login
                 </Text>
               </TouchableOpacity>

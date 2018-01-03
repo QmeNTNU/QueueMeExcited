@@ -33,6 +33,7 @@ const styles = {
     color: '#ffffff',
     borderRadius: 5,
     fontSize: 20,
+     fontFamily: 'bebasNeue'
     //Flex er hvor mye plass som skal gå til inputStyle og labelStyle
   },
 

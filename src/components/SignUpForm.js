@@ -187,7 +187,7 @@ class SignUpForm extends Component {
             onPress={this.onPressLogin.bind(this)}
             style={{ alignItems: 'flex-start', paddingBottom: 5, paddingTop: 5}}
         >
-          <Text style={{ color: '#ffffff' }}>
+          <Text style={{ color: '#ffffff', fontFamily: 'bebasNeue' }}>
               Back to login
           </Text>
         </TouchableOpacity>
