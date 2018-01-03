@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import firebase from 'firebase';
-import { ListView, View, Text, Image } from 'react-native';
+import { ListView, View, Text, Image, Animated } from 'react-native';
 import { ButtonBlue, Spinner } from './common';
 import { studAssListFetch } from '../actions';
 import StudAssListItem from './StudAssListItem';
@@ -15,6 +15,7 @@ Som student: henter liste over favorittfag fra firebase og viser som en liste me
 
 
 class StudAssList extends Component {
+  state = { scale: new Animated.Value(1) };
 
 
   componentWillMount() {
@@ -44,6 +45,23 @@ class StudAssList extends Component {
     });
     this.dataSource3 = dS.cloneWithRows(studAssList);
     //
+    this.AnimatedPulse();
+  }
+
+  AnimatedPulse() {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(this.state.scale, {
+          toValue: 0.95,
+          duration: 1500,
+        }),
+        Animated.timing(this.state.scale, {
+          toValue: 1,
+          duration: 1500
+        })
+      ])
+
+    ).start();
   }
 
   renderRow(studass) {
@@ -53,8 +71,14 @@ class StudAssList extends Component {
   renderEmptyImage() {
     /* eslint-disable global-require */
     return (
-      <Image
-      style={styles.imageStyle}
+      <Animated.Image
+      style={[styles.imageStyle, {
+             transform: [
+               { scaleY: this.state.scale },
+               { scaleX: this.state.scale },
+
+             ]
+           }]}
       source={require('./images/nostudass3.png')}
       />
     );
