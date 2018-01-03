@@ -107,7 +107,8 @@ const selectedGenderValidation =
 
 const emailValidation =
 ({ dispatch, signupEmail, signupPassword, fullname, gender }) => {
-    if (signupEmail.includes('stud.ntnu.no')) {
+    // U can register as a student at HIOA and NTNU
+    if (signupEmail.includes('stud.ntnu.no') || signupEmail.includes('stud.hioa.no')) {
       userValidation({ dispatch, signupEmail, signupPassword, fullname, gender });
     } else {
       // CAN NOT HAVE ({}) IF EMAILERROR USES DISPATCH DIRECTLY APPERANTLY!!!!
