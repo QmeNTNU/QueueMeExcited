@@ -97,7 +97,7 @@ onSearchChange(text) {
 /////////////////////////////////////////////////
 
 renderScreen() {
-  if (this.props.loading) { //show spinner while loading
+  if (!this.props.subjects.length) { //show spinner while loading
   return <Spinner size="large" />;
   }
   return ( //show listview when done
