@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Linking, TouchableOpacity } from 'react-native';
 import { ButtonWhite, Spinner } from './common';
 import { setInfo, getCount, addToQueue } from '../actions';
 
@@ -24,6 +24,17 @@ class QueueInfo extends Component {
     const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
     this.props.addToQueue({ ref, myGender, playerId });
     //
+  }
+
+  onMazeMapPress() {
+  //mazemaps url
+  const mazemaps = 'https://use.mazemap.com/#v=1&left=-60.0549508&right=156.3247269&top=70.6742116&bottom=-36.8589261&search=';
+  //adds room string to end of url
+  const { room } = this.props;
+  const url = mazemaps + room;
+  //
+  //opens the url in safari
+  Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
 
   renderName() {
@@ -115,6 +126,13 @@ class QueueInfo extends Component {
               <Text style={styles.textStyle2}>Room: </Text>
               <Text style={styles.textStyle}>{this.props.room}</Text>
             </View>
+
+            <TouchableOpacity onPress={this.onMazeMapPress.bind(this)} style={styles.MazeMapsView}>
+              <Text style={{ color: '#fff', fontFamily: 'bebasNeue' }}>
+                Open in mazemap
+              </Text>
+            </TouchableOpacity>
+
           </View>
         </View>
 
@@ -170,6 +188,13 @@ class QueueInfo extends Component {
       alignItems: 'center',
       justifyContent: 'flex-start',
 
+    },
+    MazeMapsView: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#F58C6C',
+      height: 25,
+      borderRadius: 5,
     },
     ButtonBlueView: {
       flex: 1,

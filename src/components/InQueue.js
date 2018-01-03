@@ -2,12 +2,15 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
-import { Text, Alert, View, Image, AsyncStorage } from 'react-native';
+import { Actions } from 'react-native-router-flux';
+import { Text, Alert, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
 import { ButtonBlue } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification } from '../actions';
 import PushController from './PushController';
 
 class InQueue extends Component {
+state = { modalOpen: false };
+
 componentWillMount() {
     //calls action (CountAction.js) to retireve count in line
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
@@ -17,6 +20,11 @@ componentWillMount() {
   this.props.findMyPlaceInLine({ ref }); //calls action (inQueueAction.js) to find users place in line
   this.setRecover(); //calls function below to save variables to asynStoradge in case of crash
   }
+
+onPressInfo() {
+  this.setState({ modalOpen: !this.state.modalOpen });
+  Actions.InqueueModal();
+}
 
 onQuitPress() {
 //gets ref to users location (to know where to delete)
@@ -43,6 +51,19 @@ async setRecover() { //function that saves queue info to asyncstoradge in case o
   } catch (error) {
     console.log('--------------ERROR ASYNC SETITEM------------------');
   }
+}
+
+renderInfoImage() { //displays info image
+  /* eslint-disable global-require */
+  return (
+    <TouchableOpacity onPress={this.onPressInfo.bind(this)} style={{ marginLeft: 60 }}>
+      <Image
+      style={{ height: 35, width: 35 }}
+      source={require('./images/infobutton.png')}
+      />
+    </TouchableOpacity>
+  );
+  /* eslint-enable global-require */
 }
 
 renderImage() { //gets gender to display either girl or boy image
@@ -72,7 +93,9 @@ renderArrowDownImage() {
   render() {
     return (
       <View style={styles.wholeScreen}>
-
+        <View>
+        {this.renderInfoImage()}
+        </View>
 
         <View style={styles.imageView}>
           {this.renderImage()}

@@ -19,6 +19,7 @@ import addSubjectAss from './components/addSubjectAss';
 import deleteSlide from './components/deleteSlide';
 import lock from './components/lock';
 import aboutUs from './components/aboutUs';
+import InqueueModal from './components/InqueueModal';
 
 const RouterComponent = () => {
   /* eslint-disable global-require */
@@ -163,6 +164,12 @@ const RouterComponent = () => {
   <Scene
     key="deleteSlide"
     component={deleteSlide}
+    modal
+    sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
+  />
+  <Scene
+    key="InqueueModal"
+    component={InqueueModal}
     modal
     sceneStyle={{ paddingTop: 70, backgroundColor: '#95CAFE' }}
   />
