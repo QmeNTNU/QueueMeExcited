@@ -34,7 +34,7 @@ export const checkIfExists = (ref) => { //checks if the user has a queue on this
   };
 };
 
-export const makeQueue = ({ myGender, available, room, ref, exist }) => {
+export const makeQueue = ({ myGender, available, room, ref, exist, playerId }) => {
   //calls function below to validate "available" input.
   if (!validateInput(available)) { //if not valid --> cancel creation
     return (dispatch) => {
@@ -49,6 +49,7 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
   const userGender = myGender;
   const userUID = firebase.auth().currentUser.uid;
   const userEmail = firebase.auth().currentUser.email;
+  const userPlayerId = playerId;
   //
 
   // check if the user already has a queue at this ref
@@ -62,7 +63,7 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
           { text: 'Override', onPress: () => {
                                                 dispatch({ type: LOADING_BUTTON });//sets spinner
 
-                                                ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
+                                                ref.set({ fullname, userEmail, available, room, userUID, userGender, userPlayerId }) //sets the value
                                                 .then(() => {
                                                   dispatch({ type: QUEUE_CREATED }); //resets the input field
                                                    Actions.studassQueue({ type: 'reset' });//moved to necht scene
@@ -79,7 +80,7 @@ export const makeQueue = ({ myGender, available, room, ref, exist }) => {
   return (dispatch) => {
     dispatch({ type: LOADING_BUTTON });//sets spinner
 
-    ref.set({ fullname, userEmail, available, room, userUID, userGender }) //sets the value
+    ref.set({ fullname, userEmail, available, room, userUID, userGender, userPlayerId }) //sets the value
     .then(() => {
       dispatch({ type: QUEUE_CREATED }); //resets the input field
        Actions.studassQueue({ type: 'reset' });//moved to necht scene
