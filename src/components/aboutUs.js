@@ -76,7 +76,7 @@ class aboutUs extends Component {
 
 
                         <View style={{ height: 50, width: 200, borderRadius: 10 }}>
-                          <Button onPress={() => Actions.pop()}>
+                          <Button style={{ fontFamily: 'bebasNeue' }} onPress={() => Actions.pop()}>
                           Back to settings
                           </Button>
                         </View>
