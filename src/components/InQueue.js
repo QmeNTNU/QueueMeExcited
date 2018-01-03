@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import OneSignal from 'react-native-onesignal';
 import { Text, Alert, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
 import { ButtonBlue } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification } from '../actions';
@@ -15,6 +16,18 @@ componentWillMount() {
     //calls action (CountAction.js) to retireve count in line
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   this.props.getCount({ ref });
+  //
+  //sends notification to studass since the queue has been empty
+  const { CountBeforeEntering, studassPlayerId } = this.props;
+  const data = {};
+  if (CountBeforeEntering === 0) {
+    if (typeof studassPlayerId !== 'undefined') {
+        const contents = {
+        'en': 'You have a student in line!'
+        };
+        OneSignal.postNotification(contents, data, studassPlayerId); //sends the actual notification
+    }
+  }
   //
 
   this.props.findMyPlaceInLine({ ref }); //calls action (inQueueAction.js) to find users place in line
@@ -200,9 +213,9 @@ renderArrowDownImage() {
 const mapStateToProps = (state) => {
   const { studasscount } = state.count;
   const { myGender } = state.nameRed;
-  const { myLocation, studassLocation, subject } = state.queueInfo;
+  const { myLocation, studassLocation, subject, studassPlayerId, CountBeforeEntering } = state.queueInfo;
   const { place, firstboolean, quit, showNotification, showNotification2 } = state.inQueue;
-  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2 };
+  return { studasscount, myLocation, place, firstboolean, studassLocation, subject, quit, myGender, showNotification, showNotification2, studassPlayerId, CountBeforeEntering };
 };
 
 export default connect(mapStateToProps, { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification })(InQueue);

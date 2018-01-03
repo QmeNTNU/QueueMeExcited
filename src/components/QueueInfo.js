@@ -19,7 +19,7 @@ class QueueInfo extends Component {
     //gets user name from props (value is retireved and sat to reducer in home-scene)
     const { myGender, playerId } = this.props;
     //
-
+    this.props.setInfo({ prop: 'CountBeforeEntering', value: this.props.studasscount }); //saves CountBeforeEntering to state for use in InQueue.js
     // calls action (QueueInfoAction.js) to add user to queue
     const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
     this.props.addToQueue({ ref, myGender, playerId });
