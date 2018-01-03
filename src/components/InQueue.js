@@ -4,15 +4,23 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import OneSignal from 'react-native-onesignal';
-import { Text, Alert, View, Image, AsyncStorage, TouchableOpacity } from 'react-native';
+import { Text, Alert, View, Image, AsyncStorage, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { ButtonBlue } from './common';
 import { getCount, deleteMeFromQueue, findMyPlaceInLine, changeNotification } from '../actions';
 import PushController from './PushController';
 
 class InQueue extends Component {
-state = { modalOpen: false };
+state = { modalOpen: false,
+          height: '',
+          width: '',
+          scale: new Animated.Value(1)
+        };
 
 componentWillMount() {
+  //retireves dimension of screen to make sure views fits
+  const { height, width } = Dimensions.get('window');
+  this.setState({ height, width });
+  //
     //calls action (CountAction.js) to retireve count in line
   const { ref } = firebase.database().ref(`Subject/${this.props.subject}/studasslist/${this.props.studassLocation}/queue`);
   this.props.getCount({ ref });
@@ -32,6 +40,10 @@ componentWillMount() {
 
   this.props.findMyPlaceInLine({ ref }); //calls action (inQueueAction.js) to find users place in line
   this.setRecover(); //calls function below to save variables to asynStoradge in case of crash
+  }
+
+  componentDidMount() {
+  this.AnimatedPulse(); //starts animation function below
   }
 
 onPressInfo() {
@@ -81,7 +93,7 @@ renderInfoImage() { //displays info image
 
 renderImage() { //gets gender to display either girl or boy image
   /* eslint-disable global-require */
-  const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman3.png') : require('./images/inqueue3.png');
+  const icon = this.props.myGender === 'female' ? require('./images/inqueuewoman4.png') : require('./images/inqueue4.png');
   return (
     <Image
       style={{ flex: 1, height: undefined, width: undefined }}
@@ -103,6 +115,41 @@ renderArrowDownImage() {
   /* eslint-enable global-require */
 }
 
+renderOverlayImage() {
+  /* eslint-disable global-require */
+  const icon = this.props.place === 1 ? require('./images/bobbleTurn.png') : require('./images/bobble.png');
+
+  return (
+    <Animated.Image
+    style={[styles.imageStyle, { position: 'absolute', height: 100, width: 100, left: (this.state.width/2) + 60},{
+           transform: [
+             { scaleY: this.state.scale },
+             { scaleX: this.state.scale },
+
+           ]
+         }]}
+         source={icon}
+    />
+  );
+  /* eslint-enable global-require */
+}
+
+AnimatedPulse() {
+Animated.loop(
+  Animated.sequence([
+    Animated.timing(this.state.scale, {
+      toValue: 0.90,
+      duration: 1500,
+    }),
+    Animated.timing(this.state.scale, {
+      toValue: 1,
+      duration: 1500
+    })
+  ])
+
+).start();
+}
+
   render() {
     return (
       <View style={styles.wholeScreen}>
@@ -112,6 +159,7 @@ renderArrowDownImage() {
 
         <View style={styles.imageView}>
           {this.renderImage()}
+          {this.renderOverlayImage()}
         </View>
 
         <View style={{ flex: 1, backgroundColor: '#213140', borderRadius: 5, marginLeft: 40, marginRight: 40, marginTop: -50, paddingBottom: 10 }}>

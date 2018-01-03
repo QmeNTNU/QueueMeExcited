@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { ListView, View, Text, AsyncStorage, Image } from 'react-native';
+import { ListView, View, Text, AsyncStorage, Image, Animated, Easing } from 'react-native';
 import { ButtonBlue, Spinner } from './common';
 import { favoriteAssSubjectListFetch } from '../actions';
 import SubjectAssListItem from './SubjectAssListItem';
@@ -14,6 +14,7 @@ Som student: henter liste over favorittfag fra firebase og viser som en liste me
 
 
 class FavoriteAssSubjectList extends Component {
+  state = { height: new Animated.Value(0) }; //animation variable for emptyImage
 
   componentWillMount() {
     this.props.favoriteAssSubjectListFetch(); //calls action (AssSubjectActions.js) to fetch users favorite subjects
@@ -28,7 +29,6 @@ class FavoriteAssSubjectList extends Component {
   }
 
   componentDidMount() {
-    // this.checkWelcomeSlides(); //not called becouse we did not need deletelids for this page
   }
 
   componentWillReceiveProps(nextProps) { //called in case the list was not retireved in componentWillMount()
@@ -42,6 +42,15 @@ class FavoriteAssSubjectList extends Component {
     });
     this.dataSource3 = dS.cloneWithRows(favoriteStudentSubjectList);
     //
+    this.AnimateDown();//starts animation function below
+  }
+
+  AnimateDown() { //function that animates arrow-down animation
+    Animated.timing(this.state.height, {
+      toValue: 100,
+      duration: 1000,
+      easing: Easing.bounce
+    }).start();
   }
 
   //NOT USED/////////////
@@ -71,10 +80,19 @@ class FavoriteAssSubjectList extends Component {
   renderEmptyImage() {
     /* eslint-disable global-require */
     return (
-      <Image
-      style={styles.imageStyle}
-      source={require('./images/arrowdown_listview.png')}
+      <Animated.View
+      style={[styles.circle]}
+      >
+      <Animated.Image
+        style={[styles.imageStyle, {
+          transform: [
+            { translateY: this.state.height }
+          ]
+        }]}
+        source={require('./images/arrowdown_listview2.png')}
+
       />
+    </Animated.View>
     );
   /* eslint-enable global-require */
   }
@@ -169,10 +187,11 @@ const styles = {
       elevation: 2,
   },
   imageStyle: {
-    flex: 4,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    top: -100
   },
   ButtonBlueView: {
     justifyContent: 'center',
@@ -181,6 +200,16 @@ const styles = {
     fontSize: 30,
     fontWeight: 'bold',
     backgroundColor: '#95CAFE',
+  },
+  circle: {
+    backgroundColor: '#F58C6C',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    width: 50 * 2,
+    height: 50 * 2,
+    borderRadius: 50,
+    marginTop: 15,
+    overflow: 'hidden'
   },
 };
 
