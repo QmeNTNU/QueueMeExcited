@@ -130,7 +130,7 @@ class SignUpForm extends Component {
           <View style={styles.containerStyle}>
             <InputSignUp
               label={this.renderEmailImage()}
-              placeholder="email@stud.ntnu.no"
+              placeholder="student email"
               onChangeText={this.onSignupEmailChange.bind(this)}
               value={this.props.signupEmail} //input verdi for email
             />
