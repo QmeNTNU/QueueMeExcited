@@ -234,7 +234,7 @@ const emailError = (dispatch) => {
   });
   Alert.alert(
       'REGISTRATION FAILED',
-      'Your email must contain "stud.ntnu.no"',
+      'Your email must contain "stud.ntnu.no" or "stud.hioa.no".',
       [
         { text: 'Continue', onPress: () => Actions.signup() },
       ]
