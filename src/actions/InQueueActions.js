@@ -71,6 +71,7 @@ return (dispatch) => {
 };
 
 const isDeleted = () => { //function that sends user back to homepage
+  Actions.pop(); //pops info madal if it is open
   Alert.alert(
   'Stepped out of line',
   'You have been removed from this queue. Either it has been your turn, or the student assistant has ended the queue.\n\nYou will be taken to the homescreen.',
