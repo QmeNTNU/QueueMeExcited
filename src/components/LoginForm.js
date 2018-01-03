@@ -86,7 +86,7 @@ class LoginForm extends Component {
             <View style={styles.containerStyle}>
               <InputSignUp
                 label={this.renderEmailImage()}
-                placeholder="email@stud.ntnu.no"
+                placeholder="student email"
                 onChangeText={this.onEmailChange.bind(this)}
                 value={this.props.email} //input verdi for email
               />
@@ -111,7 +111,7 @@ class LoginForm extends Component {
                 onPress={this.onPressSignup.bind(this)}
                 style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
-              <Text style={{ color: '#ffffff' }}>
+              <Text style={{ color: '#ffffff', fontFamily: 'bebasNeue' }}>
                 Sign up
               </Text>
             </TouchableOpacity>
@@ -120,7 +120,7 @@ class LoginForm extends Component {
                 onPress={this.onPressPassword.bind(this)}
                 style={{ alignItems: 'center', paddingBottom: 5, paddingTop: 5 }}
             >
-              <Text style={{ color: '#ffffff' }}>
+              <Text style={{ color: '#ffffff', fontFamily: 'bebasNeue' }}>
                 Forgot your password?
               </Text>
             </TouchableOpacity>
@@ -145,6 +145,7 @@ const styles = {
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingBottom: 2,
+
   },
   ImageViewStyle: {
     flex: 3,
