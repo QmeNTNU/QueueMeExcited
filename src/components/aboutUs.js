@@ -40,7 +40,8 @@ class aboutUs extends Component {
                         <View style={{ height: 200 }} />
 
                       <Text style={styles.textOrange}>About us</Text>
-                      <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, Marius Alexander Løken and Magnus Knædal</Text>
+                      <Text style={styles.text}>QueueMe is created in collaboration with the Exited project. Contact us through facebook or at queuemeexited@gmail.com. Also, try out queueme.no. </Text>
+
                       </View>
                     </View>
                 </View>
@@ -106,7 +107,7 @@ class aboutUs extends Component {
                    <View style={{ height: 200 }} />
 
                  <Text style={styles.textOrange}>About us</Text>
-                 <Text style={styles.text}>QueueMe is created in collaboration with the Exited project by Anders By Kampenes, Joakim Hegg Johansen, Marius Alexander Løken and Magnus Knædal</Text>
+                 <Text style={styles.text}>QueueMe is created in collaboration with the Exited project. Contact us through facebook or at queuemeexited@gmail.com. Also, try out queueme.no. </Text>
                  </View>
                </View>
 
